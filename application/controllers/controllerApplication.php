@@ -13,6 +13,7 @@ class ControllerApplication extends ControllerBase
         $view = new ViewApplication();
         $view->setPageTitle(APPLICATION_TITLE);
         $view->addMetaTag("name=\"viewport\" content=\"width=device-width, initial-scale=1\"");
+        $view->addStyleSheet("w3.css");
         $view->setView($viewName);
         return $view;
     }
