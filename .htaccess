@@ -1,0 +1,8 @@
+RedirectMatch 403 /\.git
+RedirectMatch 403 /\.gitignore
+RedirectMatch 403 /\.logs
+
+RewriteEngine On
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteRule ^.*$ ./index.php
