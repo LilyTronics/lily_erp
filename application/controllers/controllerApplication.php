@@ -15,6 +15,7 @@ class ControllerApplication extends ControllerBase
         $view->addMetaTag("name=\"viewport\" content=\"width=device-width, initial-scale=1\"");
         $view->addStyleSheet("w3.css");
         $view->addStyleSheet("w3-theme-blue-grey.css");
+        $view->addStyleSheet("lily-erp.css");
         $view->setView($viewName);
         return $view;
     }
