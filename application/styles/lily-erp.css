@@ -2,6 +2,14 @@ body {
     font-family: sans-serif;
 }
 
+td {
+    vertical-align: middle !important;
+}
+
 .main-content {
     min-height: 600px;
+}
+
+.width-auto {
+    width: auto;
 }

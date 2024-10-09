@@ -5,6 +5,20 @@ class ControllerApplication extends ControllerBase
 
     public function executeAction($action, $level, $parameters)
     {
+        $controllerName = get_class($this);
+
+        // If not the setup controller, do a system check
+        if ($controllerName != "ControllerSetup") {
+            $redirectTo = $this->systemCheck();
+            if ($redirectTo != null)
+            {
+                DEBUG_LOG->writeMessage("Redirect to: $redirectTo");
+                $this->gotoLocation($redirectTo);
+                exit();
+            }
+        }
+
+        // No redirect so execute action
         return $this->$action($parameters);
     }
 
@@ -18,6 +32,18 @@ class ControllerApplication extends ControllerBase
         $view->addStyleSheet("lily-erp.css");
         $view->setView($viewName);
         return $view;
+    }
+
+
+    public function systemCheck()
+    {
+
+        if (!is_file(CONFIG_FILE))
+        {
+            DEBUG_LOG->writeMessage("The file: " . CONFIG_FILE . "does not exist");
+            return "setup/create-config";
+        }
+
     }
 
 }
