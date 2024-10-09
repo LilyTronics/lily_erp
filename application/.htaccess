@@ -1,0 +1,4 @@
+# Prevent loading files in a browser.
+<FilesMatch ".+\.(php|conf)$">
+Deny from all
+</FilesMatch>
