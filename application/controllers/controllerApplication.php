@@ -14,6 +14,7 @@ class ControllerApplication extends ControllerBase
         $view->setPageTitle(APPLICATION_TITLE);
         $view->addMetaTag("name=\"viewport\" content=\"width=device-width, initial-scale=1\"");
         $view->addStyleSheet("w3.css");
+        $view->addStyleSheet("w3-theme-blue-grey.css");
         $view->setView($viewName);
         return $view;
     }
