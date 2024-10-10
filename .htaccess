@@ -1,6 +1,9 @@
 RedirectMatch 403 /\.git
 RedirectMatch 403 /\.gitignore
+RedirectMatch 403 /\.gitmodules
 RedirectMatch 403 /\.logs
+RedirectMatch 403 /license\.txt
+RedirectMatch 403 /readme\.md
 
 RewriteEngine On
 RewriteCond %{SCRIPT_FILENAME} !-d
