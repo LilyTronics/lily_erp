@@ -17,8 +17,10 @@ class TestWebAccess(lily_unit_test.TestSuite):
         # All is forbidden
         expected_code = 403
         # The exceptions
-        if file_path in ["index.php", "php_framework/index.php"]:
+        if file_path in ["index.php"]:
             expected_code = 200
+        if file_path in ["php_framework/index.php"]:
+            expected_code = 404
         if file_path.startswith("application/styles/") and file_path.endswith(".css"):
             expected_code = 200
 
