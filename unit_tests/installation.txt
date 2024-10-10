@@ -1,0 +1,6 @@
+Install: python
+
+Install packages:
+
+pip install requests
+pip install lily-unit-test
