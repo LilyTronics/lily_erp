@@ -20,5 +20,5 @@ Enter the information for the administrator user in the form below.</p>
 <tr><td>Password:</td><td><input class="{INPUT}" type="password" autocomplete="new-password" /></td></tr>
 <tr><td>Repeat password:</td><td><input class="{INPUT}" type="password" autocomplete="new-password" /></td></tr>
 </table>
-<button class="{BUTTON}">Submit</button>
+<p><button class="{BUTTON}">Submit</button></p>
 </form>
