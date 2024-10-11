@@ -13,3 +13,7 @@ td {
 .width-auto {
     width: auto;
 }
+
+.width-modal {
+    max-width: 600px !important;
+}
