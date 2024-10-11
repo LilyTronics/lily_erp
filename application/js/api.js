@@ -15,7 +15,7 @@ function sendForm(action, title, callback)
     {
         data['record'][elm.id] = elm.value.trim();
     }
-    fetch(API_URI, {
+    fetch(WEB_ROOT + "api", {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {'Content-type': 'application/json; charset=utf-8'}
@@ -35,6 +35,7 @@ function sendForm(action, title, callback)
         }
         catch(error)
         {
+            console.log(text);
             throw new Error('Invalid data received:<br />' + error);
         }
         if (!data['result']) {

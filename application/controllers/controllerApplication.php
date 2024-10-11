@@ -11,7 +11,7 @@ class ControllerApplication extends ControllerBase
         $noCheckControllers = ["ControllerSetup", "ControllerApi"];
 
         if (array_search($controllerName, $noCheckControllers) === false) {
-            $redirectTo = $this->systemCheck();
+            $redirectTo = ModelSetup::checkConfiguration();
             if ($redirectTo != null)
             {
                 DEBUG_LOG->writeMessage("Redirect to: $redirectTo");
@@ -29,7 +29,7 @@ class ControllerApplication extends ControllerBase
         $view = new ViewApplication();
         $view->setPageTitle(APPLICATION_TITLE);
         $view->addMetaTag("name=\"viewport\" content=\"width=device-width, initial-scale=1\"");
-        $view->addJavascriptPreVariable("API_URI", "\"" . WEB_ROOT . "api\"");
+        $view->addJavascriptPreVariable("WEB_ROOT", "\"" . WEB_ROOT . "\"");
         $view->addJavascriptPreVariable("BUTTON", "\"{BUTTON}\"");
         $view->addStyleSheet("w3.css");
         $view->addStyleSheet("w3-theme-blue-grey.css");
@@ -38,18 +38,6 @@ class ControllerApplication extends ControllerBase
         $view->addJavaScriptFile("api.js");
         $view->setView($viewName);
         return $view;
-    }
-
-
-    public function systemCheck()
-    {
-
-        if (!is_file(CONFIG_FILE))
-        {
-            DEBUG_LOG->writeMessage("The file: " . CONFIG_FILE . "does not exist");
-            return "setup/create-config";
-        }
-
     }
 
 }

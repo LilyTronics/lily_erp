@@ -25,7 +25,12 @@
 'use strict';
 
 function processData(data) {
-    console.log(data);
+    if (!data["result"])
+    {
+        showModal('Create configuration', data["message"]);
+        return;
+    }
+    location.href = WEB_ROOT;
 }
 
 </script>
