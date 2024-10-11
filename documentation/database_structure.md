@@ -7,7 +7,7 @@ This document describes the database structure
 | Category   | Table               | Description                                 |
 |------------|---------------------|---------------------------------------------|
 | general    | user                | Users data                                  |
-|            | settings            | Application settings, defaults and per user |
+|            | setting             | Application settings, defaults and per user |
 |            |                     |                                             |
 | accounting | bank_transaction    | imported transacions from bank accounts     |
 |            | general_ledger      | general ledger accounts                     |
