@@ -7,8 +7,10 @@ class ControllerApplication extends ControllerBase
     {
         $controllerName = get_class($this);
 
-        // If not the setup controller, do a system check
-        if ($controllerName != "ControllerSetup") {
+        // If not the setup controller or API controller, do a system check
+        $noCheckControllers = ["ControllerSetup", "ControllerApi"];
+
+        if (array_search($controllerName, $noCheckControllers) === false) {
             $redirectTo = $this->systemCheck();
             if ($redirectTo != null)
             {
@@ -27,12 +29,12 @@ class ControllerApplication extends ControllerBase
         $view = new ViewApplication();
         $view->setPageTitle(APPLICATION_TITLE);
         $view->addMetaTag("name=\"viewport\" content=\"width=device-width, initial-scale=1\"");
+        $view->addJavascriptPreVariable("API_URI", "\"" . WEB_ROOT . "api\"");
+        $view->addJavascriptPreVariable("BUTTON", "\"{BUTTON}\"");
         $view->addStyleSheet("w3.css");
         $view->addStyleSheet("w3-theme-blue-grey.css");
         $view->addStyleSheet("lily-erp.css");
-        $view->addJavaScriptFile("field_descriptions.js");
         $view->addJavaScriptFile("dialogs.js");
-        $view->addJavaScriptFile("evaluator.js");
         $view->addJavaScriptFile("api.js");
         $view->setView($viewName);
         return $view;
