@@ -14,16 +14,21 @@ class ControllerApi extends ControllerApplication
             $postedData = ModelHelper::getPostedData(true);
             if (isset($postedData["action"]))
             {
-
                 // Special actions
                 if ($postedData["action"] == "create_configuration")
                 {
-                    $result = ModelSetup::createConfiguration($postedData);
+                    if (isset($postedData["record"]))
+                    {
+                        $result = ModelSetup::createConfiguration($postedData["record"], $result);
+                    }
                 }
-
-            }
-            else {
-                $result["message"] = "No action in the posted data";
+                if ($postedData["action"] == "log_in")
+                {
+                    if (isset($postedData["record"]))
+                    {
+                        $result = ModelApplicationSession::createSession($postedData["record"], $result);
+                    }
+                }
             }
         }
         catch (Exception $e)

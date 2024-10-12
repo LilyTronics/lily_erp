@@ -38,6 +38,11 @@ function sendForm(action, title, callback=null)
             console.log(text);
             throw new Error('Invalid data received:<br />' + error);
         }
+        if (data['debug'])
+        {
+            // For developement purposes, live request should not have a debug field
+            console.log(data);
+        }
         if (!data['result']) {
             showModal(title, data['message']);
             return;

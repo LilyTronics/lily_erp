@@ -2,6 +2,9 @@
 
 class ModelDatabaseTableUser extends ModelDatabaseTableBase {
 
+    public $lockMaxAttempts = 5;
+    public $lockTimeout = 30;
+
     public function __construct() {
         $fields = [];
         $fields[] = [ "Name"    => "id",
@@ -16,8 +19,16 @@ class ModelDatabaseTableUser extends ModelDatabaseTableBase {
                       "Type"    => "VARCHAR(200)" ];
         $fields[] = [ "Name"    => "access_level",
                       "Type"    => "INT" ];
+        $fields[] = [ "Name"    => "last_log_in",
+                      "Type"    => "INT" ];
+        $fields[] = [ "Name"    => "log_in_fail",
+                      "Type"    => "INT" ];
 
         parent::__construct("user", $fields);
     }
 
+    public function hash($input)
+    {
+        return hash("sha256", $input);
+    }
 }

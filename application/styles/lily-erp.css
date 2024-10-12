@@ -10,6 +10,10 @@ td {
     min-height: 600px;
 }
 
+.log-in-form {
+    max-width: 400px;
+}
+
 .width-auto {
     width: auto;
 }
