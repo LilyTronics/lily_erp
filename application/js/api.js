@@ -4,7 +4,7 @@
 
 
 /* Gather data from the form and send it */
-function sendForm(action, title, callback)
+function sendForm(action, title, callback=null)
 {
     let data = {
         "action": action,
@@ -42,7 +42,19 @@ function sendForm(action, title, callback)
             showModal(title, data['message']);
             return;
         }
-        callback(data);
+        // Callback can be function to call or an URI to go to, else just reload the page
+        if (typeof callback === 'function')
+        {
+            callback(data);
+        }
+        else if (typeof callback === 'string')
+        {
+            location.href = WEB_ROOT + callback;
+        }
+        else
+        {
+            location.reload();
+        }
     })
     .catch((error) => {
         showModal(title, error);

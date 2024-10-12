@@ -19,18 +19,4 @@
 <tr><td>Password:</td><td><input name="record_field" id="admin_password" class="{INPUT}" type="password" autocomplete="new-password" /></td></tr>
 <tr><td>Repeat password:</td><td><input name="record_field" id="admin_repeat_password" class="{INPUT}" type="password" autocomplete="new-password" /></td></tr>
 </table>
-<p><button class="{BUTTON}" onclick="sendForm('create_configuration', 'Create configuration', processData)">Submit</button></p>
-<script>
-
-'use strict';
-
-function processData(data) {
-    if (!data["result"])
-    {
-        showModal('Create configuration', data["message"]);
-        return;
-    }
-    location.href = WEB_ROOT;
-}
-
-</script>
+<p><button class="{BUTTON}" onclick="sendForm('create_configuration', 'Create configuration', '')">Submit</button></p>
