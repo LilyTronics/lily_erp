@@ -1,5 +1,8 @@
 <?php
 
+date_default_timezone_set("Europe/Amsterdam");
+
+
 define("APPLICATION_TITLE", "Lily ERP");
 
 // Use these two defines for forcing only SSL (HTTPS) URIs
