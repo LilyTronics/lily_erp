@@ -1,5 +1,5 @@
 <div id="modal-1" class="w3-modal">
-<div class="w3-modal-content width-modal">
+<div class="w3-modal-content w3-card-4 w3-round width-modal">
 <div id="modal-title" class="w3-container w3-padding-small w3-center w3-theme"></div>
 <div class="w3-container"><p id="modal-message"></p></div>
 <div class="w3-container w3-padding-16 w3-center">
