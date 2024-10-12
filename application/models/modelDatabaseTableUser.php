@@ -14,6 +14,8 @@ class ModelDatabaseTableUser extends ModelDatabaseTableBase {
                       "Type"    => "VARCHAR(200)" ];
         $fields[] = [ "Name"    => "password",
                       "Type"    => "VARCHAR(200)" ];
+        $fields[] = [ "Name"    => "access_level",
+                      "Type"    => "INT" ];
 
         parent::__construct("user", $fields);
     }
