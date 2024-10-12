@@ -5,9 +5,29 @@ class ModelSetup
 
     public static function checkConfiguration()
     {
+        # No configuration file
         if (!is_file(CONFIG_FILE))
         {
             DEBUG_LOG->writeMessage("The file: " . CONFIG_FILE . "does not exist");
+            return "setup/create-config";
+        }
+        # Check for database access
+        try
+        {
+            $user = new ModelDatabaseTableUser();
+        }
+        catch (Exception $e)
+        {
+            DEBUG_LOG->writeMessage("Database error: " . $e->getMessage());
+            return "setup/create-config";
+        }
+        # There must be at least one user
+        $records = $user->getRecords();
+        if (count($records) == 0)
+        {
+            # Delete table, when we instantiate the users table a table is created
+            $user->deleteTable();
+            DEBUG_LOG->writeMessage("No users in the user table");
             return "setup/create-config";
         }
         return null;
