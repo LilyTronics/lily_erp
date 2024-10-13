@@ -59,4 +59,8 @@ class ModelApplicationSession extends ModelSession
         return $result;
     }
 
+    public static function deleteSession() {
+        self::destroySession();
+    }
+
 }

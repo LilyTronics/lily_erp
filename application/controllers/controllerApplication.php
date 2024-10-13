@@ -24,6 +24,12 @@ class ControllerApplication extends ControllerBase
         return $this->$action($parameters);
     }
 
+    protected function logOut()
+    {
+        ModelApplicationSession::deleteSession();
+        $this->gotoLocation("");
+    }
+
     protected function createView($viewName)
     {
         $view = new ViewApplication();
