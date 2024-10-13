@@ -59,7 +59,13 @@ class ModelApplicationSession extends ModelSession
         return $result;
     }
 
-    public static function deleteSession() {
+    public static function checkSession()
+    {
+        return self::getData("user", null) != null;
+    }
+
+    public static function deleteSession()
+    {
         self::destroySession();
     }
 

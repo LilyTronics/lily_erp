@@ -20,6 +20,12 @@ class ControllerApplication extends ControllerBase
             }
         }
 
+        // Check if user is logged in
+        if ($controllerName == "ControllerShowPage" and $action != "showLogIn" and !ModelApplicationSession::checkSession()) {
+            $this->gotoLocation("log-in");
+            exit();
+        }
+
         // No redirect so execute action
         return $this->$action($parameters);
     }

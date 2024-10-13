@@ -1,5 +1,5 @@
 <div class="w3-content log-in-form">
-<h3>Log In</h3>
+<h3>Log in</h3>
 <p>Email address:</p>
 <p><input name="record_field" id="email" class="{INPUT}" type="text" /></p>
 <p>Password:</p>
