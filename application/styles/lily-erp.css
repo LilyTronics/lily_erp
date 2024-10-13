@@ -14,6 +14,14 @@ td {
     max-width: 400px;
 }
 
+.dashboard-item-content {
+    height: 200px;
+}
+
+.cursor-pointer {
+    cursor:pointer;
+}
+
 .width-auto {
     width: auto;
 }
