@@ -51,6 +51,41 @@ class ControllerShowPage extends ControllerApplication
         return $this->showPage("Dashboard", $pageData);
     }
 
+    protected function showAccounting($parameters)
+    {
+        return $this->showPage("Accounting");
+    }
+
+    protected function showInventory($parameters)
+    {
+        return $this->showPage("Inventory");
+    }
+
+    protected function showProducts($parameters)
+    {
+        return $this->showPage("Products");
+    }
+
+    protected function showPurchase($parameters)
+    {
+        return $this->showPage("Purchase");
+    }
+
+    protected function showRelations($parameters)
+    {
+        return $this->showPage("Relations");
+    }
+
+    protected function showSales($parameters)
+    {
+        return $this->showPage("Sales");
+    }
+
+    protected function showUsers($parameters)
+    {
+        return $this->showPage("Users");
+    }
+
     private function showPage($pageName, $pageData=null)
     {
         $view = $this->createView("view$pageName");
