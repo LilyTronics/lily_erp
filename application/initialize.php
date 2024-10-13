@@ -2,6 +2,10 @@
 
 date_default_timezone_set("Europe/Amsterdam");
 
+if (IS_LOCALHOST)
+{
+    define("SHOW_DEBUG", true);
+}
 
 define("APPLICATION_TITLE", "Lily ERP");
 
