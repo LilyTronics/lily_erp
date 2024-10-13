@@ -8,6 +8,11 @@ class ControllerShowPage extends ControllerApplication
         return $this->showPage("LogIn");
     }
 
+    protected function showDashboard($parameters)
+    {
+        return $this->showPage("Dashboard");
+    }
+
     private function showPage($pageName)
     {
         $view = $this->createView("view$pageName");
