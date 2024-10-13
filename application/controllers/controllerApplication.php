@@ -34,6 +34,9 @@ class ControllerApplication extends ControllerBase
         $view->addStyleSheet("w3.css");
         $view->addStyleSheet("w3-theme-blue-grey.css");
         $view->addStyleSheet("lily-erp.css");
+        $view->addStyleSheet("fontawesome/css/fontawesome.min.css");
+        $view->addStyleSheet("fontawesome/css/brands.min.css");
+        $view->addStyleSheet("fontawesome/css/solid.min.css");
         $view->addJavaScriptFile("dialogs.js");
         $view->addJavaScriptFile("api.js");
         $view->setView($viewName);
