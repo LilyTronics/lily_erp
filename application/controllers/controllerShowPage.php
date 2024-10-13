@@ -67,32 +67,50 @@ class ControllerShowPage extends ControllerApplication
 
     protected function showInventory($parameters)
     {
-        return $this->showPage("Inventory");
+        $pageData = [
+            "menu" => []
+        ];
+        return $this->showPage("Inventory", $pageData);
     }
 
     protected function showProducts($parameters)
     {
-        return $this->showPage("Products");
+        $pageData = [
+            "menu" => []
+        ];
+        return $this->showPage("Products", $pageData);
     }
 
     protected function showPurchase($parameters)
     {
-        return $this->showPage("Purchase");
+        $pageData = [
+            "menu" => []
+        ];
+        return $this->showPage("Purchase", $pageData);
     }
 
     protected function showRelations($parameters)
     {
-        return $this->showPage("Relations");
+        $pageData = [
+            "menu" => []
+        ];
+        return $this->showPage("Relations", $pageData);
     }
 
     protected function showSales($parameters)
     {
-        return $this->showPage("Sales");
+        $pageData = [
+            "menu" => []
+        ];
+        return $this->showPage("Sales", $pageData);
     }
 
     protected function showUsers($parameters)
     {
-        return $this->showPage("Users");
+        $pageData = [
+            "menu" => []
+        ];
+        return $this->showPage("Users", $pageData);
     }
 
     private function showPage($pageName, $pageData=null)
