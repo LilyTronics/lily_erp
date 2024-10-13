@@ -8,6 +8,7 @@ class ViewApplication extends HtmlPageView
         $output = "<body>\n";
         $output .= $this->getContentFromPageFile("viewHeader.php");
         $output .= "<div class=\"w3-container main-content\">\n";
+        $output .= $this->getContentFromPageFile("viewMenu.php");
         $output .= $this->getContentFromPageFile($this->pageFile);
         $output .= "</div>\n";
         $output .= $this->getContentFromPageFile("viewModal.php");

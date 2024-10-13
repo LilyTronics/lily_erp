@@ -1,9 +1,9 @@
 <div class="w3-row-padding w3-margin-top w3-margin-bottom">
 <?php
 
-$pageData = $this->getUserData("page_data", []);
+$pageData = $this->getUserData("page_data", ["items" => []]);
 
-foreach ($pageData as $itemData)
+foreach ($pageData["items"] as $itemData)
 {
     echo "<div class=\"w3-col m6 l4 w3-margin-top\">\n";
     echo "<div class=\"w3-card cursor-pointer\" onclick=\"location.href='{$itemData["uri"]}'\">\n";
