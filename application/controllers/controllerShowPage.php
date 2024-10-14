@@ -21,8 +21,18 @@ class ControllerShowPage extends ControllerApplication
 
     protected function showReport($parameters)
     {
+        if (!isset($parameters["name"]))
+        {
+            return $this->showDashboard([]);
+        }
+        $parts = explode("-", $parameters["name"]);
+        if (count($parts) < 2)
+        {
+            return $this->showDashboard([]);
+        }
+
         $pageData = [
-            "menu" => []
+            "menu" => ModelMenu::getMenuFor($parts[0])
         ];
         return $this->showPage("Report", $pageData);
     }
@@ -33,12 +43,7 @@ class ControllerShowPage extends ControllerApplication
     protected function showAccounting($parameters)
     {
         $pageData = [
-            "menu" => [
-                ["Bank", "accounting/bank"],
-                ["Reports", [
-                    ["VAT", "accounting/reports/accounting-vat"],
-                ]]
-            ]
+            "menu" => ModelMenu::getAccountingMenu(),
         ];
         return $this->showPage("Accounting", $pageData);
     }
@@ -46,7 +51,7 @@ class ControllerShowPage extends ControllerApplication
     protected function showBank($parameters)
     {
         $pageData = [
-            "menu" => []
+            "menu" => ModelMenu::getAccountingMenu(),
         ];
         return $this->showPage("Bank", $pageData);
     }
@@ -122,10 +127,6 @@ class ControllerShowPage extends ControllerApplication
 
     private function showPage($pageName, $pageData=null)
     {
-        if ($pageData !== null)
-        {
-            $pageData["page_name"] = $pageName;
-        }
         $view = $this->createView("view$pageName");
         $view->setUserData("page_data", $pageData);
         return $view->output();

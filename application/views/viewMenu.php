@@ -4,13 +4,11 @@ $pageData = $this->getUserData("page_data", []);
 
 $menuClass = "w3-bar-item w3-button w3-padding-small";
 
-if (isset($pageData["page_name"]) and isset($pageData["menu"]))
+if (isset($pageData["menu"]))
 {
     echo "<div class=\"w3-container w3-padding-small w3-border-bottom\">\n";
     // Insert link to dashboard
     echo "<a class=\"$menuClass\" href=\"" . WEB_ROOT . "dashboard\" title=\"dashboard\"><i class=\"fa-solid fa-grip\"></i></a>\n";
-    // Page name
-    echo "<span class=\"w3-bar-item w3-padding-small\">{$pageData["page_name"]}</span>\n";
     // Add menu items
     foreach ($pageData["menu"] as $menu)
     {
@@ -31,7 +29,7 @@ if (isset($pageData["page_name"]) and isset($pageData["menu"]))
         else
         {
             // Link
-            echo "<a class=\"$menuClass\" href=\"{$menu[1]}\">{$menu[0]}</a>\n";
+            echo "<a class=\"$menuClass\" href=\"" . WEB_ROOT . "{$menu[1]}\">{$menu[0]}</a>\n";
         }
 
     }
