@@ -3,6 +3,8 @@
 class ControllerShowPage extends ControllerApplication
 {
 
+    /* Generic pages */
+
     protected function showLogIn($parameters)
     {
         return $this->showPage("LogIn");
@@ -52,18 +54,41 @@ class ControllerShowPage extends ControllerApplication
         return $this->showPage("Dashboard", $pageData);
     }
 
+
+    protected function showReport($parameters)
+    {
+        $pageData = [
+            "menu" => []
+        ];
+        return $this->showPage("Report", $pageData);
+    }
+
+
+    /* Accounting pages */
+
     protected function showAccounting($parameters)
     {
         $pageData = [
             "menu" => [
                 ["Bank", "accounting/bank"],
                 ["Reports", [
-                    ["VAT", "accounting/reports/vat"],
+                    ["VAT", "accounting/reports/accounting-vat"],
                 ]]
             ]
         ];
         return $this->showPage("Accounting", $pageData);
     }
+
+    protected function showBank($parameters)
+    {
+        $pageData = [
+            "menu" => []
+        ];
+        return $this->showPage("Bank", $pageData);
+    }
+
+
+    /* Inventory pages */
 
     protected function showInventory($parameters)
     {
@@ -73,6 +98,9 @@ class ControllerShowPage extends ControllerApplication
         return $this->showPage("Inventory", $pageData);
     }
 
+
+    /* Product pages */
+
     protected function showProducts($parameters)
     {
         $pageData = [
@@ -80,6 +108,9 @@ class ControllerShowPage extends ControllerApplication
         ];
         return $this->showPage("Products", $pageData);
     }
+
+
+    /* Purchase pages */
 
     protected function showPurchase($parameters)
     {
@@ -89,6 +120,9 @@ class ControllerShowPage extends ControllerApplication
         return $this->showPage("Purchase", $pageData);
     }
 
+
+    /* Relation pages */
+
     protected function showRelations($parameters)
     {
         $pageData = [
@@ -96,6 +130,9 @@ class ControllerShowPage extends ControllerApplication
         ];
         return $this->showPage("Relations", $pageData);
     }
+
+
+    /* Sales pages */
 
     protected function showSales($parameters)
     {
@@ -105,6 +142,9 @@ class ControllerShowPage extends ControllerApplication
         return $this->showPage("Sales", $pageData);
     }
 
+
+    /* User pages */
+
     protected function showUsers($parameters)
     {
         $pageData = [
@@ -112,6 +152,9 @@ class ControllerShowPage extends ControllerApplication
         ];
         return $this->showPage("Users", $pageData);
     }
+
+
+    /* Show the  page */
 
     private function showPage($pageName, $pageData=null)
     {
