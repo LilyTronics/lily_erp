@@ -30,3 +30,7 @@ td {
 .width-modal {
     max-width: 600px !important;
 }
+
+.width-bank-upload {
+    max-width: 600px;
+}
