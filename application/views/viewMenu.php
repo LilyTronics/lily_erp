@@ -21,7 +21,7 @@ if (isset($pageData["menu"]))
             echo "<div class=\"w3-dropdown-content w3-bar-block w3-border w3-card\">\n";
             foreach ($menu[1] as $menuItem)
             {
-                echo "<a class=\"$menuClass\" href=\"{$menuItem[1]}\">{$menuItem[0]}</a>\n";
+                echo "<a class=\"$menuClass\" href=\"" . WEB_ROOT . "{$menuItem[1]}\">{$menuItem[0]}</a>\n";
             }
             echo "</div> <!-- drop down content -->\n";
             echo "</div> <!-- drop down -->\n";
