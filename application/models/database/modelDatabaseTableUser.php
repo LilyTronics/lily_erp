@@ -17,8 +17,10 @@ class ModelDatabaseTableUser extends ModelDatabaseTableBase {
                       "Type"    => "VARCHAR(200)" ];
         $fields[] = [ "Name"    => "password",
                       "Type"    => "VARCHAR(200)" ];
-        $fields[] = [ "Name"    => "access_level",
+        $fields[] = [ "Name"    => "is_admin",
                       "Type"    => "INT" ];
+        $fields[] = [ "Name"    => "access_levels",
+                      "Type"    => "VARCHAR(200)" ];
         $fields[] = [ "Name"    => "last_log_in",
                       "Type"    => "INT" ];
         $fields[] = [ "Name"    => "log_in_fail",

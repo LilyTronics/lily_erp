@@ -81,10 +81,10 @@ class ModelSetup
         // Add administrator user
         $user = new ModelDatabaseTableUser();
         $record = [
-            "email"        => $data["admin_email"],
-            "name"         => $data["admin_name"],
-            "password"     => $user->hash($data["admin_password"]),
-            "access_level" => 7
+            "email"    => $data["admin_email"],
+            "name"     => $data["admin_name"],
+            "password" => $user->hash($data["admin_password"]),
+            "is_admin" => 1
         ];
         $result["result"] = $user->insertRecord($record);
         if (!$result["result"])

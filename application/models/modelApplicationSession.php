@@ -20,7 +20,7 @@ class ModelApplicationSession extends ModelSession
         }
         $user = new ModelDatabaseTableUser();
         $records = $user->getRecords("email = '{$data["email"]}'");
-        if (count($records) != 1 or $records[0]["access_level"] == 0)
+        if (count($records) != 1)
         {
             $result["message"] = "The email address is not valid";
             return $result;
