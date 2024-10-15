@@ -10,8 +10,8 @@ This document describes the database structure
 |            | setting                | Application settings, defaults and per user |
 |            |                        |                                             |
 | accounting | bank_transaction       | imported transacions from bank accounts     |
-|            | general_ledger         | general ledger accounts                     |
-|            | journal                | journal entries                             |
+|            | accounts               | general ledger accounts                     |
+|            | journal                | general ledger journal entries              |
 |            | vat                    | VAT data                                    |
 |            |                        |                                             |
 | products   | product                | product data                                |
