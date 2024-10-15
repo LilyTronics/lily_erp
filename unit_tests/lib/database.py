@@ -2,6 +2,7 @@
 Interact with the database.
 """
 
+import hashlib
 import mysql.connector
 
 from unit_tests.lib.test_settings import TestSettings
@@ -28,7 +29,16 @@ class Database:
         cursor = cls._connection.cursor()
         cursor.execute("SHOW TABLES")
         for table in cursor:
-            cursor.execute(f"DROP TABLE {table[0]}")
+            if table[0] == "user":
+                cursor.execute(f"TRUNCATE TABLE {table[0]}")
+            else:
+                cursor.execute(f"DROP TABLE {table[0]}")
+        # Create default user
+        sql = "INSERT INTO user (email, name, password, is_admin) VALUES (%s, %s, %s, %s)"
+        val = (TestSettings.admin_email, TestSettings.admin_name,
+               hashlib.sha256(TestSettings.admin_password.encode()).hexdigest(), 1)
+        cursor.execute(sql, val)
+        cls._connection.commit()
 
 
 if __name__ == "__main__":

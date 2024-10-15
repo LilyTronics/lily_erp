@@ -11,9 +11,13 @@ class TestSettings:
     uri = "http://localhost:8080/lily_erp/"
     sql_host = "localhost"
     sql_database = "lily_erp_test"
+
     # These credentials are only used for testing, make sure these are not used in live production servers
     sql_user = "lily_test"
-    sql_password = "OnlyForTesting!"
+    sql_password = "OnlyForTest!"
+    admin_email = "tester@lily-erp.nl"
+    admin_name = "Lily Erp Tester"
+    admin_password = "LilyErp"
 
 
 if __name__ == "__main__":
