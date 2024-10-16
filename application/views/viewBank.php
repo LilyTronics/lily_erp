@@ -13,8 +13,18 @@ $pageData = $this->getUserData("page_data", []);
 <p><input class="{BUTTON}" type="submit" value="Upload File"></p>
 </form>
 </div>
+<script>
+
+'use strict';
+
+showTable('bank_transactions');
+
 <?php
+
 if (isset($pageData["upload_message"])) {
-    echo "<script>showModal('Upload', '{$pageData["upload_message"]}');</script>\n";
+    echo "showModal('Upload', '{$pageData["upload_message"]}');\n";
 }
+
 ?>
+
+</script>
