@@ -23,6 +23,12 @@ class TestWebAccess(lily_unit_test.TestSuite):
             expected_code = 404
         if file_path.startswith("application/styles/") and file_path.endswith(".css"):
             expected_code = 200
+        if file_path.startswith("application/styles/") and file_path.endswith(".ttf"):
+            expected_code = 200
+        if file_path.startswith("application/styles/") and file_path.endswith(".woff2"):
+            expected_code = 200
+        if file_path.startswith("application/js/") and file_path.endswith(".js"):
+            expected_code = 200
 
         self.log.debug(f"Check access for file: {file_path}")
         r = requests.get(TestSettings.uri + file_path)
