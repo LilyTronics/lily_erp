@@ -5,7 +5,7 @@ $pageData = $this->getUserData("page_data", ["items" => []]);
 
 foreach ($pageData["items"] as $itemData)
 {
-    echo "<div class=\"w3-col m6 l4 w3-margin-top\">\n";
+    echo "<div class=\"w3-col w3-margin-top dashboard-item\">\n";
     echo "<div class=\"w3-card cursor-pointer\" onclick=\"location.href='{$itemData["uri"]}'\">\n";
     echo "<div class=\"w3-container w3-theme\">\n";
     echo "<h5>{$itemData["title"]}</h5>\n";
