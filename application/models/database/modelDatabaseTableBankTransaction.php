@@ -29,7 +29,7 @@ class ModelDatabaseTableBankTransaction extends ModelDatabaseTableBase {
               "Type"    => "VARCHAR(200)"],
             [ "Name"    => "description",
               "Type"    => "VARCHAR(200)"],
-            [ "Name"    => "State",
+            [ "Name"    => "state",
               "Type"    => "VARCHAR(200)"]
         ];
         parent::__construct("bank_transaction", $fields, true);
