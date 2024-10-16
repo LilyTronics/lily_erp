@@ -2,6 +2,7 @@
 <p>It appears there is no configuration present in the system.</p>
 <p>Before you can create a configuration, you need to have a database setup first.</p>
 <p>Log in to the MySQL database manager and create a database.</p>
+<p>You can also use an existing database, but it must be empty. All tables must be removed ('dropped').</p>
 <p>Also create a user for accessing the database with all privileges enabled.</p>
 <p>When ready, fill out the following form and the configuration will be created for you.</p>
 <table class="{TABLE}">
