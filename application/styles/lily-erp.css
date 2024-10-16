@@ -1,3 +1,5 @@
+/* HTML overrides */
+
 body {
     font-family: sans-serif;
     font-size: 16px;
@@ -7,6 +9,9 @@ td {
     vertical-align: middle !important;
 }
 
+
+/* Containers */
+
 .main-content {
     min-height: 600px;
 }
@@ -15,24 +20,31 @@ td {
     max-width: 400px;
 }
 
-.dashboard-item-content {
-    height: 200px;
+.dashboard-item {
+    max-width: 400px;
 }
 
-.record-table {
-    font-size: 14px;
-    td {
-        padding: 4px 8px;
-    }
+.dashboard-item-content {
+    height: 200px;
 }
 
 .bank-upload {
     margin-top: 72px;
 }
 
-.cursor-pointer {
-    cursor:pointer;
+
+/* Record table */
+
+.record-table {
+    font-size: 14px;
+    width: auto;
+    td {
+        padding: 4px 8px;
+    }
 }
+
+
+/* Widths */
 
 .width-auto {
     width: auto;
@@ -44,4 +56,11 @@ td {
 
 .width-bank-upload {
     max-width: 600px;
+}
+
+
+/* Uncategorized */
+
+.cursor-pointer {
+    cursor:pointer;
 }
