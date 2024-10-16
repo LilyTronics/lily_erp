@@ -78,7 +78,17 @@ class ControllerApi extends ControllerApplication
     private function processDataFromDatabase($action, $tableName)
     {
         $result = ["result" => false, "message" => "Error reading table '$tableName'"];
-        $table = new ModelDatabaseTableBase($tableName);
+
+        switch ($tableName) {
+
+            case 'bank_transaction':
+                $table = new ModelDatabaseTableBankTransaction();
+                break;
+
+            default:
+                $result["message"] = "Invalid table name '$tableName'";
+                return $result;
+        }
 
         switch($action)
         {
