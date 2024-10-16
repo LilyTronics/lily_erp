@@ -2,15 +2,14 @@
 
 class ModelDatabaseTableBase extends ModelDatabaseTable {
 
-    public function __construct($tableName, $fields) {
+    public function __construct($tableName, $fields=null, $autoCreateTable=false, $defaultRecords=[]) {
         $config = new ModelConfiguration(CONFIG_FILE);
         $db = $config->getValue("sql", "database");
         $host = $config->getValue("sql", "host");
         $user = $config->getValue("sql", "user");
         $password = $config->getValue("sql", "password");
 
-        parent::__construct($db, $tableName, $fields, $host, $user, $password,
-                            $autoCreateTable=true, $defaultRecords=[]);
+        parent::__construct($db, $tableName, $fields, $host, $user, $password, $autoCreateTable, $defaultRecords);
     }
 
     public function getRecords($filterExpression="", $orderExpression="", $groupExpression="", $start=0, $count=0,

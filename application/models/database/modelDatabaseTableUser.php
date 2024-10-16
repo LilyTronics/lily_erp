@@ -26,7 +26,7 @@ class ModelDatabaseTableUser extends ModelDatabaseTableBase {
         $fields[] = [ "Name"    => "log_in_fail",
                       "Type"    => "INT" ];
 
-        parent::__construct("user", $fields);
+        parent::__construct("user", $fields, true);
     }
 
     public function hash($input)
