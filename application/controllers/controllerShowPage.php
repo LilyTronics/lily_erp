@@ -38,25 +38,6 @@ class ControllerShowPage extends ControllerApplication
     }
 
 
-    /* Accounting pages */
-
-    protected function showAccounting($parameters)
-    {
-        $pageData = [
-            "menu" => ModelMenu::getAccountingMenu(),
-        ];
-        return $this->showPage("Accounting", $pageData);
-    }
-
-    protected function showBank($parameters)
-    {
-        $pageData = [
-            "menu" => ModelMenu::getAccountingMenu(),
-        ];
-        return $this->showPage("Bank", $pageData);
-    }
-
-
     /* Inventory pages */
 
     protected function showInventory($parameters)
@@ -125,7 +106,7 @@ class ControllerShowPage extends ControllerApplication
 
     /* Show the  page */
 
-    private function showPage($pageName, $pageData=null)
+    protected function showPage($pageName, $pageData=null)
     {
         $view = $this->createView("view$pageName");
         $view->setUserData("page_data", $pageData);
