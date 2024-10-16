@@ -19,6 +19,17 @@ td {
     height: 200px;
 }
 
+.record-table {
+    font-size: 14px;
+    td {
+        padding: 4px 8px;
+    }
+}
+
+.bank-upload {
+    margin-top: 72px;
+}
+
 .cursor-pointer {
     cursor:pointer;
 }

@@ -3,10 +3,8 @@
 $pageData = $this->getUserData("page_data", []);
 
 ?>
-<div>
-<p>No bank transactions, import transactions by uploading a file.</p>
-</div>
-<div>
+<div class="w3-container w3-section w3-responsive" id="record-table"></div>
+<div class="w3-container w3-border-top bank-upload">
 <form action="<?php echo WEB_ROOT; ?>accounting/bank/upload" method="post" enctype="multipart/form-data">
 <p>Upload export from bank account (MT-940 format):</p>
 <p><input class="{INPUT} width-bank-upload" type="file" name="bank_upload"></p>
@@ -17,7 +15,7 @@ $pageData = $this->getUserData("page_data", []);
 
 'use strict';
 
-showTable('bank_transactions');
+showTable('bank_transaction');
 
 <?php
 
