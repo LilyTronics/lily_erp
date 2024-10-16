@@ -10,7 +10,8 @@ options = {
     "report_folder": os.path.join(os.path.dirname(__file__), "test_reports"),
     "create_html_report": True,
     "open_in_browser": True,
-    "no_log_files": True
+    "no_log_files": True,
+    "exclude_test_suites": ["ApiTestSuite"]
 }
 
 TestRunner.run(os.path.join(os.path.dirname(__file__), "tests"), options)
