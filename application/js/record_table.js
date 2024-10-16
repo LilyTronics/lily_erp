@@ -22,6 +22,7 @@ function processRecords(result)
         // Create table
         let table = document.createElement('table');
         table.classList.add('w3-table-all');
+        table.classList.add('w3-hoverable');
         table.classList.add('record-table');
         let head = table.createTHead();
         //head.classList.add('w3-theme');

@@ -40,6 +40,7 @@ td {
     width: auto;
     td {
         padding: 4px 8px;
+        cursor: pointer;
     }
 }
 
@@ -62,5 +63,5 @@ td {
 /* Uncategorized */
 
 .cursor-pointer {
-    cursor:pointer;
+    cursor: pointer;
 }
