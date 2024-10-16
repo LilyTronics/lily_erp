@@ -15,6 +15,13 @@ function sendForm(action, title, callback=null)
     {
         data['record'][elm.id] = elm.value.trim();
     }
+    doApiCall(data, title, callback);
+}
+
+
+/* Do the actual API call, this is a separate function for general usage */
+function doApiCall(data, title, callback)
+{
     fetch(WEB_ROOT + "api", {
         method: 'POST',
         body: JSON.stringify(data),
