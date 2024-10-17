@@ -12,6 +12,21 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
         parent::__construct($db, $tableName, $fields, $host, $user, $password, $autoCreateTable, $defaultRecords);
     }
 
+    public static function GetModelForTable($tableName)
+    {
+        $table = null;
+        switch ($tableName) {
+            case "bank_transaction":
+                $table = new ModelDatabaseTableBankTransaction();
+                break;
+
+            case "user":
+                $table = new ModelDatabaseTableUser();
+                break;
+        }
+        return $table;
+    }
+
     public function getRecords($filterExpression="", $orderExpression="", $groupExpression="", $start=0, $count=0,
                                $fields=["*"], $join="", $joinTable="", $joinExpression="", $joinFields=["*"])
     {

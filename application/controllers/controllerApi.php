@@ -79,15 +79,11 @@ class ControllerApi extends ControllerApplication
     {
         $result = ["result" => false, "message" => "Error reading table '$tableName'"];
 
-        switch ($tableName) {
-
-            case 'bank_transaction':
-                $table = new ModelDatabaseTableBankTransaction();
-                break;
-
-            default:
-                $result["message"] = "Invalid table name '$tableName'";
-                return $result;
+        $table = ModelDatabaseTableBase::GetModelForTable($tableName);
+        if ($table == null)
+        {
+            $result["message"] = "Invalid table name '$tableName'";
+            return $result;
         }
 
         switch($action)
