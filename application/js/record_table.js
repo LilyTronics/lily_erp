@@ -7,7 +7,7 @@ function showTable(table_name)
         let data = {
             "action": "get_" + table_name
         }
-        doApiCall(data, 'Get records', processRecords);
+        doApiCall(data, 'Get records', processRecords, table_name);
     }
 }
 
@@ -25,7 +25,6 @@ function processRecords(result)
         table.classList.add('w3-hoverable');
         table.classList.add('record-table');
         let head = table.createTHead();
-        //head.classList.add('w3-theme');
         let body = table.createTBody();
         // Add header
         let row = head.insertRow()
@@ -40,11 +39,24 @@ function processRecords(result)
         for (let record of records)
         {
             let row = body.insertRow()
+            let recordId = "";
             for (let field in record)
             {
                 let cell = row.insertCell();
                 cell.textContent = formatValue(field, record[field]);
                 formatCell(field, cell);
+                if (field == "id")
+                {
+                    recordId = record[field];
+                }
+            }
+            if (recordId != "")
+            {
+                row.addEventListener("click", function()
+                {
+                    let table_name = result["table_name"].replace("_", "-");
+                    location.href = WEB_ROOT + "show/" + table_name + "/" + recordId;
+                });
             }
         }
         // Remove old table and add new one

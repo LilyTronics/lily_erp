@@ -20,7 +20,7 @@ function sendForm(action, title, callback=null)
 
 
 /* Do the actual API call, this is a separate function for general usage */
-function doApiCall(data, title, callback)
+function doApiCall(data, title, callback, table_name)
 {
     fetch(WEB_ROOT + "api", {
         method: 'POST',
@@ -57,6 +57,7 @@ function doApiCall(data, title, callback)
         // Callback can be function to call or an URI to go to, else just reload the page
         if (typeof callback === 'function')
         {
+            data["table_name"] = table_name;
             callback(data);
         }
         else if (typeof callback === 'string')
