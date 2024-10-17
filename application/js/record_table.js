@@ -55,7 +55,7 @@ function processRecords(result)
                 row.addEventListener("click", function()
                 {
                     let table_name = result["table_name"].replace("_", "-");
-                    location.href = WEB_ROOT + "show/" + table_name + "/" + recordId;
+                    location.href = WEB_ROOT + "show-record/" + table_name + "/" + recordId;
                 });
             }
         }
