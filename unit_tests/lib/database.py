@@ -29,10 +29,12 @@ class Database:
         cursor = cls._connection.cursor()
         cursor.execute("SHOW TABLES")
         for table in cursor:
+            query = "DROP "
             if table[0] == "user":
-                cursor.execute(f"TRUNCATE TABLE {table[0]}")
-            else:
-                cursor.execute(f"DROP TABLE {table[0]}")
+                query = "TRUNCATE "
+            query += f"TABLE {table[0]}"
+            cursor.execute(query)
+        cls._connection.commit()
         # Create default user
         sql = "INSERT INTO user (email, name, password, is_admin) VALUES (%s, %s, %s, %s)"
         val = (TestSettings.admin_email, TestSettings.admin_name,
