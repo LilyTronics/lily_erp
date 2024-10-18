@@ -7,3 +7,6 @@
 </div> <!-- buttons container -->
 </div> <!-- modal content -->
 </div> <!-- modal -->
+<div id="modal-loader" class="w3-modal">
+<div class="loader"></div>
+</div> <!-- modal -->
