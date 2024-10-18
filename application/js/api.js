@@ -7,10 +7,10 @@
 function sendForm(action, title, callback=null)
 {
     let data = {
-        "action": action,
-        "record": {}
+        'action': action,
+        'record': {}
     }
-    let elms = document.getElementsByName("record_field");
+    let elms = document.getElementsByName('record_field');
     for (let elm of elms)
     {
         data['record'][elm.id] = elm.value.trim();
@@ -22,7 +22,7 @@ function sendForm(action, title, callback=null)
 /* Do the actual API call, this is a separate function for general usage */
 function doApiCall(data, title, callback, table_name)
 {
-    fetch(WEB_ROOT + "api", {
+    fetch(WEB_ROOT + 'api', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {'Content-type': 'application/json; charset=utf-8'}
@@ -42,7 +42,7 @@ function doApiCall(data, title, callback, table_name)
         }
         catch(error)
         {
-            console.log(text);
+            console.log("Invalid JSON:\n\n" + text);
             throw new Error('Invalid data received:<br />' + error);
         }
         if (data['debug'])
@@ -57,7 +57,7 @@ function doApiCall(data, title, callback, table_name)
         // Callback can be function to call or an URI to go to, else just reload the page
         if (typeof callback === 'function')
         {
-            data["table_name"] = table_name;
+            data['table_name'] = table_name;
             callback(data);
         }
         else if (typeof callback === 'string')

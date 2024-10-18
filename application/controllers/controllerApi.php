@@ -5,6 +5,8 @@ class ControllerApi extends ControllerApplication
 
     protected function processApiCall($parameters)
     {
+        $log = new ModelSystemLogger("api");
+
         $result = ["result" => false, "message" => "Server error, try again later."];
         $postedData = ModelHelper::getPostedData(true);
 
@@ -13,15 +15,19 @@ class ControllerApi extends ControllerApplication
         {
             $action = $postedData["action"];
         }
-        $result["debug"] = $action;
+        $log->writeMessage("action: {$action}");
 
-        if (ModelApplicationSession::checkSession() || $action == "log_in" || $action == "log_out") {
+        $validSession = ModelApplicationSession::checkSession();
+        $log->writeMessage("session: " . var_export(ModelApplicationSession::checkSession(), true));
+        if ($validSession || $action == "log_in" || $action == "log_out") {
             $result = $this->getResultFromApiCall($postedData, $result);
         }
         else
         {
             $result["message"] = "Unauthorized";
         }
+        $log->writeMessage("result:");
+        $log->writeDataArray($result);
         return json_encode($result, JSON_PRETTY_PRINT);
     }
 
