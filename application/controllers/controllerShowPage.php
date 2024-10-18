@@ -7,7 +7,7 @@ class ControllerShowPage extends ControllerApplication
 
     protected function showLogIn($parameters)
     {
-        return $this->showPage("LogIn");
+        return $this->showPage("viewLogIn");
     }
 
     protected function showDashboard($parameters)
@@ -15,7 +15,7 @@ class ControllerShowPage extends ControllerApplication
         $pageData = [
             "items" => ModelDashboard::getDashboardItems()
         ];
-        return $this->showPage("Dashboard", $pageData);
+        return $this->showPage("viewDashboard", $pageData);
     }
 
 
@@ -34,7 +34,7 @@ class ControllerShowPage extends ControllerApplication
         $pageData = [
             "menu" => ModelMenu::getMenuFor($parts[0])
         ];
-        return $this->showPage("Report", $pageData);
+        return $this->showPage("viewReport", $pageData);
     }
 
 
@@ -45,7 +45,7 @@ class ControllerShowPage extends ControllerApplication
         $pageData = [
             "menu" => []
         ];
-        return $this->showPage("Inventory", $pageData);
+        return $this->showPage("viewInventory", $pageData);
     }
 
 
@@ -56,7 +56,7 @@ class ControllerShowPage extends ControllerApplication
         $pageData = [
             "menu" => []
         ];
-        return $this->showPage("Products", $pageData);
+        return $this->showPage("viewProducts", $pageData);
     }
 
 
@@ -67,7 +67,7 @@ class ControllerShowPage extends ControllerApplication
         $pageData = [
             "menu" => []
         ];
-        return $this->showPage("Purchase", $pageData);
+        return $this->showPage("viewPurchase", $pageData);
     }
 
 
@@ -78,7 +78,7 @@ class ControllerShowPage extends ControllerApplication
         $pageData = [
             "menu" => []
         ];
-        return $this->showPage("Relations", $pageData);
+        return $this->showPage("viewRelations", $pageData);
     }
 
 
@@ -89,7 +89,7 @@ class ControllerShowPage extends ControllerApplication
         $pageData = [
             "menu" => []
         ];
-        return $this->showPage("Sales", $pageData);
+        return $this->showPage("viewSales", $pageData);
     }
 
 
@@ -100,7 +100,7 @@ class ControllerShowPage extends ControllerApplication
         $pageData = [
             "menu" => []
         ];
-        return $this->showPage("Users", $pageData);
+        return $this->showPage("viewUsers", $pageData);
     }
 
 
@@ -108,7 +108,7 @@ class ControllerShowPage extends ControllerApplication
 
     protected function showPage($pageName, $pageData=null)
     {
-        $view = $this->createView("view$pageName");
+        $view = $this->createView($pageName);
         $view->setUserData("page_data", $pageData);
         return $view->output();
     }

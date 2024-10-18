@@ -8,7 +8,7 @@ class ControllerAccounting extends ControllerShowPage
         $pageData = [
             "menu" => ModelMenu::getAccountingMenu(),
         ];
-        return $this->showPage("Accounting", $pageData);
+        return $this->showPage("accounting/viewAccounting", $pageData);
     }
 
     protected function showBank($parameters)
@@ -19,7 +19,7 @@ class ControllerAccounting extends ControllerShowPage
         if (isset($parameters["upload_message"])) {
             $pageData["upload_message"] = $parameters["upload_message"];
         }
-        return $this->showPage("Bank", $pageData);
+        return $this->showPage("accounting/viewBank", $pageData);
     }
 
     protected function bankUpload($parameters)
