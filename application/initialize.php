@@ -24,3 +24,6 @@ define("TEMPLATE_VALUES", [
 ]);
 
 define("DEBUG_LOG", new ModelSystemLogger("debug"));
+DEBUG_LOG->writeMessage("+----------------------------------------------------------------------+");
+DEBUG_LOG->writeMessage("+                            Start debug log                           +");
+DEBUG_LOG->writeMessage("+----------------------------------------------------------------------+");
