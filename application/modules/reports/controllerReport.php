@@ -9,7 +9,7 @@ class ControllerReport extends ControllerApplication
         $pageData = [
             "menu" => ModelMenu::getMenuFor($parts[0])
         ];
-        return $this->showPage("viewReport", $pageData);
+        return $this->showPage("reports/viewReport", $pageData);
     }
 
 }

@@ -16,6 +16,8 @@ define("APPLICATION_TITLE", "Lily ERP");
 // Config file must be outside the document root so it can never be reached by a web browser
 define("CONFIG_FILE", $_SERVER["DOCUMENT_ROOT"] . "/../lily_erp.ini");
 
+// Paths
+define("APP_MODULES_PATH", APP_PATH . "modules/");
 
 define("TEMPLATE_VALUES", [
     "{BUTTON}" => "w3-button w3-round w3-theme",
@@ -27,3 +29,6 @@ define("DEBUG_LOG", new ModelSystemLogger("debug"));
 DEBUG_LOG->writeMessage("+----------------------------------------------------------------------+");
 DEBUG_LOG->writeMessage("+                            Start debug log                           +");
 DEBUG_LOG->writeMessage("+----------------------------------------------------------------------+");
+
+// Add the modules path to the autoloader
+$_AUTOLOADER_SEARCH_PATHS[] = APP_MODULES_PATH;
