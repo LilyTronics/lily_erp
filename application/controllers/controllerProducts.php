@@ -8,7 +8,7 @@ class ControllerProducts extends ControllerApplication
         $pageData = [
             "menu" => []
         ];
-        return $this->showPage("viewProducts", $pageData);
+        return $this->showPage("products/viewProducts", $pageData);
     }
 
 }

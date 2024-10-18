@@ -8,7 +8,7 @@ class ControllerRelations extends ControllerApplication
         $pageData = [
             "menu" => []
         ];
-        return $this->showPage("viewRelations", $pageData);
+        return $this->showPage("relations/viewRelations", $pageData);
     }
 
 }

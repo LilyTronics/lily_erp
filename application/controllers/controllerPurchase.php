@@ -8,7 +8,7 @@ class ControllerPurchase extends ControllerApplication
         $pageData = [
             "menu" => []
         ];
-        return $this->showPage("viewPurchase", $pageData);
+        return $this->showPage("purchase/viewPurchase", $pageData);
     }
 
 }

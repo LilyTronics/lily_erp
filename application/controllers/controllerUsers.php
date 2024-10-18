@@ -8,7 +8,7 @@ class ControllerUsers extends ControllerApplication
         $pageData = [
             "menu" => []
         ];
-        return $this->showPage("viewUsers", $pageData);
+        return $this->showPage("users/viewUsers", $pageData);
     }
 
     protected function showMyAccount($parameters)
@@ -16,7 +16,7 @@ class ControllerUsers extends ControllerApplication
         $pageData = [
             "menu" => []
         ];
-        return $this->showPage("viewMyAccount", $pageData);
+        return $this->showPage("users/viewMyAccount", $pageData);
     }
 
 }

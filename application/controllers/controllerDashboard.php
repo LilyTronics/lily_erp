@@ -8,7 +8,7 @@ class ControllerDashboard extends ControllerApplication
         $pageData = [
             "items" => ModelDashboard::getDashboardItems()
         ];
-        return $this->showPage("viewDashboard", $pageData);
+        return $this->showPage("dashboard/viewDashboard", $pageData);
     }
 
 }

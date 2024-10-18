@@ -8,7 +8,7 @@ class ControllerInventory extends ControllerApplication
         $pageData = [
             "menu" => []
         ];
-        return $this->showPage("viewInventory", $pageData);
+        return $this->showPage("inventory/viewInventory", $pageData);
     }
 
 }
