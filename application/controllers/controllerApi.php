@@ -3,11 +3,25 @@
 class ControllerApi extends ControllerApplication
 {
 
-    protected function processApiCall($parameters)
+    protected function sendResult($result)
     {
         $log = new ModelSystemLogger("api");
+        $log->writeMessage("Result:");
+        $log->writeDataArray($result);
+        return json_encode($result, JSON_PRETTY_PRINT);
+    }
 
+    protected function processApiCall($parameters, $isConfigurationOk, $isSessionValid)
+    {
         $result = ["result" => false, "message" => "Server error, try again later."];
+
+        $log = new ModelSystemLogger("api");
+        $log->writeMessage("+----------------------------------------------------------------------+");
+        $log->writeMessage("+                             Start Api log                            +");
+        $log->writeMessage("+----------------------------------------------------------------------+");
+        $log->writeMessage("Configuration OK: " . var_export($isConfigurationOk, true));
+        $log->writeMessage("Valid session   : " . var_export($isSessionValid, true));
+
         $postedData = ModelHelper::getPostedData(true);
 
         $action = "";
@@ -15,84 +29,76 @@ class ControllerApi extends ControllerApplication
         {
             $action = $postedData["action"];
         }
-        $log->writeMessage("action: {$action}");
+        $log->writeMessage("Action          : {$action}");
 
-        $validSession = ModelApplicationSession::checkSession();
-        $log->writeMessage("session: " . var_export(ModelApplicationSession::checkSession(), true));
-        if ($validSession || $action == "log_in" || $action == "log_out") {
-            $result = $this->getResultFromApiCall($postedData, $result);
+        // If the configuration is not OK and we are not trying to create one
+        if (!$isConfigurationOk and $action != "create_configuration")
+        {
+            $result["message"] = "The configuration is invalid";
+            return $this->sendResult($result);
         }
-        else
+
+        // If the session is not OK and we are not trying to log in or log out
+        if (!$isSessionValid and $action != "log_in" and $action != "log_out")
         {
             $result["message"] = "Unauthorized";
+            return $this->sendResult($result);
         }
-        $log->writeMessage("result:");
-        $log->writeDataArray($result);
-        return json_encode($result, JSON_PRETTY_PRINT);
+
+        // All good, process the call
+        return $this->sendResult($this->getResultFromApiCall($postedData, $result));
     }
 
     private function getResultFromApiCall($postedData, $result)
     {
-        try
-        {
-            $postedData = ModelHelper::getPostedData(true);
-            if (isset($postedData["action"]))
-            {
-                // Special actions
-                if ($postedData["action"] == "create_configuration")
-                {
-                    if (isset($postedData["record"]))
-                    {
-                        $result = ModelSetup::createConfiguration($postedData["record"], $result);
-                    }
-                }
-                elseif ($postedData["action"] == "log_in")
-                {
-                    if (isset($postedData["record"]))
-                    {
-                        $result = ModelApplicationSession::createSession($postedData["record"], $result);
-                    }
-                }
-                elseif (ModelHelper::startsWith($postedData["action"], "get_"))
-                {
-                    $parts = explode("_", $postedData["action"], 2);
-                    if (count($parts) == 2) {
-                        $result = $this->processDataFromDatabase($parts[0], $parts[1]);
-                    }
-                    else
-                    {
-                        $result["message"] = "Invalid action '{$postedData["action"]}'";
-                    }
-                }
-                else
-                {
-                    $result["message"] = "Unknown action '{$postedData["action"]}'";
-                }
-            }
-            else
-            {
-                $result["message"] = "No action defined";
-            }
+        $log = new ModelSystemLogger("api");
+        if (!isset($postedData["action"])) {
+            $result["message"] = "No action defined";
+            return $result;
         }
-        catch (Exception $e)
+        $log->writeMessage("Process action: '{$postedData["action"]}'");
+
+        // Create configuration
+        if ($postedData["action"] == "create_configuration" and isset($postedData["record"]))
         {
-            $result["message"] = "Server error:<br/>" . $e->getMessage();
+            $log->writeMessage("Create configuration");
+            $result = ModelSetup::createConfiguration($postedData["record"], $result);
+            return $result;
         }
-        return $result;
-    }
 
-    private function processDataFromDatabase($action, $tableName)
-    {
-        $result = ["result" => false, "message" => "Error reading table '$tableName'"];
+        // Log in
+        if ($postedData["action"] == "log_in" and isset($postedData["record"]))
+        {
+            $log->writeMessage("Log in");
+            $result = ModelApplicationSession::createSession($postedData["record"], $result);
+            return $result;
+        }
 
-        $table = ModelDatabaseTableBase::GetModelForTable($tableName);
+        // Log_out
+        if ($postedData["action"] == "log_out")
+        {
+            $log->writeMessage("Log out");
+            ModelApplicationSession::deleteSession();
+            return ["result" => true, "message" => ""];
+        }
+
+        // Database actions
+        $parts = explode("_", $postedData["action"], 2);
+        // First part is action: get, add, update, delete
+        // Rest is table name E.G.: bank_transactions
+
+        $log->writeMessage("Database action '{$parts[0]}' from table '{$parts[1]}'");
+
+        // Check table name
+        $table = ModelDatabaseTableBase::GetModelForTable($parts[1]);
         if ($table == null)
         {
             $result["message"] = "Invalid table name '$tableName'";
             return $result;
         }
 
-        switch($action)
+        // Check the action
+        switch ($parts[0])
         {
             case "get":
                 $result["records"] = $table->getRecords();
@@ -101,7 +107,7 @@ class ControllerApi extends ControllerApplication
                 break;
 
             default:
-                $result["message"] = "Invalid table action '$action'";
+                $result["message"] = "Invalid table action '{$parts[0]}'";
         }
 
         return $result;
