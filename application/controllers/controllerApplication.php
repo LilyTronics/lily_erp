@@ -7,27 +7,32 @@ class ControllerApplication extends ControllerBase
     public function executeAction($action, $level, $parameters)
     {
         $controllerName = get_class($this);
-        DEBUG_LOG->writeMessage("controller: {$controllerName}");
+        DEBUG_LOG->writeMessage("Start execute action");
+        DEBUG_LOG->writeMessage("Controller      : {$controllerName}");
+        DEBUG_LOG->writeMessage("Action          : {$action}");
+        DEBUG_LOG->writeMessage("Parameters:");
+        DEBUG_LOG->writeDataArray($parameters);
+
+        $isConfigurationOk = ModelSetup::checkConfiguration();
+        $isSessionValid = ModelApplicationSession::checkSession();
+
+        DEBUG_LOG->writeMessage("Configuration OK: " . var_export($isConfigurationOk, true));
+        DEBUG_LOG->writeMessage("Valid session   : " . var_export($isSessionValid, true));
 
         // If not the setup controller or API controller, do a system check
-        $noCheckControllers = ["ControllerSetup", "ControllerApi"];
-
-        if (array_search($controllerName, $noCheckControllers) === false) {
-            $redirectTo = ModelSetup::checkConfiguration();
-            if ($redirectTo != null)
+        if (array_search($controllerName, ["ControllerSetup", "ControllerApi"]) === false)
+        {
+            if (!$isConfigurationOk)
             {
-                DEBUG_LOG->writeMessage("Redirect to: $redirectTo");
-                $this->gotoLocation($redirectTo);
+                DEBUG_LOG->writeMessage("Redirect to: setup/create-config");
+                $this->gotoLocation("setup/create-config");
                 exit();
             }
         }
 
-        $sessionValid = ModelApplicationSession::checkSession();
-        DEBUG_LOG->writeMessage("session: " . var_export($sessionValid, true));
-        DEBUG_LOG->writeMessage("action: {$action}");
-
         // Check if user is logged in
-        if ($controllerName != "ControllerApi" and $action != "showLogIn" and !$sessionValid) {
+        if ($isConfigurationOk and $controllerName != "ControllerApi" and
+            $action != "showLogIn" and !$sessionValid) {
             $this->gotoLocation("log-in");
             exit();
         }
