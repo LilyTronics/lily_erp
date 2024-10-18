@@ -6,27 +6,28 @@ class ModelDatabaseTableUser extends ModelDatabaseTableBase {
     public $lockTimeout = 30;
 
     public function __construct() {
-        $fields = [];
-        $fields[] = [ "Name"    => "id",
-                      "Type"    => "INT",
-                      "Options" => "AUTO_INCREMENT",
-                      "Key"     => true ];
-        $fields[] = [ "Name"    => "email",
-                      "Type"    => "VARCHAR(200)" ];
-        $fields[] = [ "Name"    => "name",
-                      "Type"    => "VARCHAR(200)" ];
-        $fields[] = [ "Name"    => "password",
-                      "Type"    => "VARCHAR(200)" ];
-        $fields[] = [ "Name"    => "is_admin",
-                      "Type"    => "INT" ];
-        $fields[] = [ "Name"    => "access_levels",
-                      "Type"    => "VARCHAR(200)" ];
-        $fields[] = [ "Name"    => "last_log_in",
-                      "Type"    => "INT" ];
-        $fields[] = [ "Name"    => "log_in_fail",
-                      "Type"    => "INT" ];
-
-        parent::__construct("user", $fields, true);
+        $tableName = "user";
+        $fields = [
+            [ "Name"    => "id",
+              "Type"    => "INT",
+              "Options" => "AUTO_INCREMENT",
+              "Key"     => true ],
+            [ "Name"    => "email",
+              "Type"    => "VARCHAR(200)" ],
+            [ "Name"    => "name",
+              "Type"    => "VARCHAR(200)" ],
+            [ "Name"    => "password",
+              "Type"    => "VARCHAR(200)" ],
+            [ "Name"    => "is_admin",
+              "Type"    => "INT" ],
+            [ "Name"    => "access_levels",
+              "Type"    => "VARCHAR(200)" ],
+            [ "Name"    => "last_log_in",
+              "Type"    => "INT" ],
+            [ "Name"    => "log_in_fail",
+              "Type"    => "INT" ],
+        ];
+        parent::__construct($tableName, $fields, true);
     }
 
     public function hash($input)

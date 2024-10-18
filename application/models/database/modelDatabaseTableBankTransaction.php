@@ -6,6 +6,7 @@ class ModelDatabaseTableBankTransaction extends ModelDatabaseTableBase {
     public $lockTimeout = 30;
 
     public function __construct() {
+        $tableName = "bank_transaction";
         $fields = [
             [ "Name"    => "id",
               "Type"    => "INT",
@@ -32,7 +33,7 @@ class ModelDatabaseTableBankTransaction extends ModelDatabaseTableBase {
             [ "Name"    => "state",
               "Type"    => "VARCHAR(200)"]
         ];
-        parent::__construct("bank_transaction", $fields, true);
+        parent::__construct($tableName, $fields, true);
     }
 
 }
