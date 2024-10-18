@@ -22,12 +22,14 @@ function sendForm(action, title, callback=null)
 /* Do the actual API call, this is a separate function for general usage */
 function doApiCall(data, title, callback, table_name)
 {
+    showModalLoader();
     fetch(WEB_ROOT + 'api', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {'Content-type': 'application/json; charset=utf-8'}
     })
     .then((response) => {
+        hideModalLoader();
         if (!response.ok)
         {
             throw new Error('Invalid response from the server received (status code: ' + response.status + ')');
