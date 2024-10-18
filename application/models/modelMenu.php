@@ -14,7 +14,7 @@ class ModelMenu
             ["Accounting", "accounting"],
             ["Bank", "accounting/bank"],
             ["Reports", [
-                ["VAT", "accounting/reports/accounting-vat"],
+                ["VAT", "show-report/accounting-vat"],
             ]]
         ];
     }

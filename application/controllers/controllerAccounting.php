@@ -1,6 +1,6 @@
 <?php
 
-class ControllerAccounting extends ControllerShowPage
+class ControllerAccounting extends ControllerApplication
 {
 
     protected function showAccounting($parameters)

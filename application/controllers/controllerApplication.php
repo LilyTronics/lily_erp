@@ -3,9 +3,11 @@
 class ControllerApplication extends ControllerBase
 {
 
+    /* Execute actions */
     public function executeAction($action, $level, $parameters)
     {
         $controllerName = get_class($this);
+        DEBUG_LOG->writeMessage("controller: {$controllerName}");
 
         // If not the setup controller or API controller, do a system check
         $noCheckControllers = ["ControllerSetup", "ControllerApi"];
@@ -20,8 +22,12 @@ class ControllerApplication extends ControllerBase
             }
         }
 
+        $sessionValid = ModelApplicationSession::checkSession();
+        DEBUG_LOG->writeMessage("session: " . var_export($sessionValid, true));
+        DEBUG_LOG->writeMessage("action: {$action}");
+
         // Check if user is logged in
-        if ($controllerName == "ControllerShowPage" and $action != "showLogIn" and !ModelApplicationSession::checkSession()) {
+        if ($controllerName != "ControllerApi" and $action != "showLogIn" and !$sessionValid) {
             $this->gotoLocation("log-in");
             exit();
         }
@@ -30,15 +36,25 @@ class ControllerApplication extends ControllerBase
         return $this->$action($parameters);
     }
 
+    /* Log in */
+    protected function showLogIn($parameters)
+    {
+        return $this->showPage("viewLogIn");
+    }
+
+    /* Log out */
     protected function logOut()
     {
         ModelApplicationSession::deleteSession();
         $this->gotoLocation("");
     }
 
-    protected function createView($viewName)
+    /* Show the  page */
+    protected function showPage($pageName, $pageData=null)
     {
         $view = new ViewApplication();
+        $view->setView($pageName);
+        $view->setUserData("page_data", $pageData);
         $view->setPageTitle(APPLICATION_TITLE);
         $view->addMetaTag("name=\"viewport\" content=\"width=device-width, initial-scale=1\"");
         $view->addJavascriptPreVariable("WEB_ROOT", "\"" . WEB_ROOT . "\"");
@@ -52,8 +68,7 @@ class ControllerApplication extends ControllerBase
         $view->addJavaScriptFile("dialogs.js");
         $view->addJavaScriptFile("api.js");
         $view->addJavaScriptFile("record_table.js");
-        $view->setView($viewName);
-        return $view;
+        return $view->output();
     }
 
 }
