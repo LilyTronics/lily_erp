@@ -6,39 +6,41 @@ class ControllerApplication extends ControllerBase
     /* Execute actions */
     public function executeAction($action, $level, $parameters)
     {
+        // $level = access level:
+        // 0 - always available
+        // 1 - setup must be OK, log in not required
+        // 2 - setup must be OK and must be logged in
+
         $controllerName = get_class($this);
         DEBUG_LOG->writeMessage("Start execute action");
         DEBUG_LOG->writeMessage("Controller      : {$controllerName}");
         DEBUG_LOG->writeMessage("Action          : {$action}");
+        DEBUG_LOG->writeMessage("Level           : {$level}");
         DEBUG_LOG->writeMessage("Parameters:");
         DEBUG_LOG->writeDataArray($parameters);
 
         $isConfigurationOk = ModelSetup::checkConfiguration();
         $isSessionValid = ModelApplicationSession::checkSession();
-
         DEBUG_LOG->writeMessage("Configuration OK: " . var_export($isConfigurationOk, true));
         DEBUG_LOG->writeMessage("Valid session   : " . var_export($isSessionValid, true));
 
-        // If not the setup controller or API controller, do a system check
-        if (array_search($controllerName, ["ControllerSetup", "ControllerApi"]) === false)
-        {
-            if (!$isConfigurationOk)
-            {
-                DEBUG_LOG->writeMessage("Redirect to: setup/create-config");
-                $this->gotoLocation("setup/create-config");
-                exit();
-            }
+        // Check the setup, only for level 1 or higher
+        if (!$isConfigurationOk and $level >= 1) {
+            DEBUG_LOG->writeMessage("Redirect to: setup/create-config");
+            $this->gotoLocation("setup/create-config");
+            exit();
         }
 
-        // Check if user is logged in
-        if ($isConfigurationOk and $controllerName != "ControllerApi" and
-            $action != "showLogIn" and !$sessionValid) {
+        // Check session, only for level 2 or higher
+        if (!$isSessionValid and $level >= 2)
+        {
+            DEBUG_LOG->writeMessage("Redirect to: log-in");
             $this->gotoLocation("log-in");
             exit();
         }
 
-        // No redirect so execute action
-        return $this->$action($parameters);
+        // Setup and log in OK
+        return $this->$action($parameters, $isConfigurationOk, $isSessionValid);
     }
 
     /* Log in */
