@@ -7,7 +7,7 @@ class ControllerReport extends ControllerApplication
     {
         $parts = explode("-", $parameters["name"]);
         $pageData = [
-            "menu" => ModelMenu::getMenuFor($parts[0])
+            "menu" => "Model{$parts[0]}"::getMenu()   // ModelMenu::getMenuFor($parts[0])
         ];
         return $this->showPage("reports/viewReport", $pageData);
     }
