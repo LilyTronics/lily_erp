@@ -7,7 +7,9 @@ class ModelAccounting
     {
         return [
             ["Accounting", "accounting"],
-            ["Bank", "accounting/bank"],
+            ["Bank transactions", "accounting/bank"],
+            ["Journal", "accounting/journal"],
+            ["Chart of Accounts", "accounting/chart-of-accounts"],
             ["Reports", [
                 ["VAT", "show-report/accounting-vat"],
             ]]
