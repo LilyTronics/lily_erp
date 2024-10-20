@@ -2,9 +2,6 @@
 
 class ModelDatabaseTableBankTransaction extends ModelDatabaseTableBase {
 
-    public $lockMaxAttempts = 5;
-    public $lockTimeout = 30;
-
     public function __construct() {
         $tableName = "bank_transaction";
         $fields = [
