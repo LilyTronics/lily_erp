@@ -1,6 +1,7 @@
 <?php
 
-date_default_timezone_set("Europe/Amsterdam");
+require_once("config.php");
+
 
 if (IS_LOCALHOST)
 {
@@ -8,13 +9,7 @@ if (IS_LOCALHOST)
 }
 
 define("APPLICATION_TITLE", "Lily ERP");
-
-// Use these two defines for forcing only SSL (HTTPS) URIs
-define("DOMAIN", "lilytronics");
 define("FORCE_SSL", true);
-
-// Config file must be outside the document root so it can never be reached by a web browser
-define("CONFIG_FILE", $_SERVER["DOCUMENT_ROOT"] . "/../lily_erp.ini");
 
 // Paths
 define("APP_MODULES_PATH", APP_PATH . "modules/");
