@@ -32,5 +32,6 @@ LilyTronics
    :maxdepth: 1
    :caption: Contents:
 
-    Home                            <self>
-    Installation                    <installation.rst>
+   Home           <self>
+   Installation   <installation.rst>
+   Setup          <setup.rst>
