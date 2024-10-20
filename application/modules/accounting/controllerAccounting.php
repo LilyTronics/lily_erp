@@ -18,6 +18,16 @@ class ControllerAccounting extends ControllerApplication
         return $this->showView("Bank", $pageData);
     }
 
+    protected function showJournal($parameters)
+    {
+        return $this->showView("Journal");
+    }
+
+    protected function showChartOfAccounts($parameters)
+    {
+        return $this->showView("ChartOfAccounts");
+    }
+
     protected function bankUpload($parameters)
     {
         // Check if the file is received OK
