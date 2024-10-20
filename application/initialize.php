@@ -10,8 +10,8 @@ if (IS_LOCALHOST)
 define("APPLICATION_TITLE", "Lily ERP");
 
 // Use these two defines for forcing only SSL (HTTPS) URIs
-// define("DOMAIN", "<domain_name>");
-// define("FORCE_SSL", true);
+define("DOMAIN", "lilytronics");
+define("FORCE_SSL", true);
 
 // Config file must be outside the document root so it can never be reached by a web browser
 define("CONFIG_FILE", $_SERVER["DOCUMENT_ROOT"] . "/../lily_erp.ini");
