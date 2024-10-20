@@ -10,7 +10,7 @@ Will be there soon
 ## Todo
 Lot's of things to do
 
-## Installation
-Will be here soon
+## Docuemntation
+Documentation available on [Read the Docs](https://lily-erp.readthedocs.io/en/latest/)
 
-Be patient, it will come.
+[![Documentation Status](https://readthedocs.org/projects/lily-erp/badge/?version=latest)](https://lily-erp.readthedocs.io/en/latest/?badge=latest)
