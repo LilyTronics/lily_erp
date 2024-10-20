@@ -1,3 +1,11 @@
+# Log files
 /.logs/*.log
+
+# Python files
 *.pyc
+
+# Test reports
 /unit_tests/test_reports/*
+
+# Document output
+/docs/_build/*
