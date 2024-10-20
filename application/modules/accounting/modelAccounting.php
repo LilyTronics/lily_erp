@@ -1,14 +1,9 @@
 <?php
 
-class ModelMenu
+class ModelAccounting
 {
 
-    public static function getMenuFor($menuName) {
-        $function = "get{$menuName}Menu";
-        return self::$function();
-    }
-
-    public static function getAccountingMenu()
+    public static function getMenu()
     {
         return [
             ["Accounting", "accounting"],

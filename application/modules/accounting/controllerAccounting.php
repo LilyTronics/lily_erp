@@ -6,7 +6,7 @@ class ControllerAccounting extends ControllerApplication
     protected function showAccounting($parameters)
     {
         $pageData = [
-            "menu" => ModelMenu::getAccountingMenu(),
+            "menu" => ModelAccounting::getMenu(),
         ];
         return $this->showPage("accounting/viewAccounting", $pageData);
     }
@@ -14,7 +14,7 @@ class ControllerAccounting extends ControllerApplication
     protected function showBank($parameters)
     {
         $pageData = [
-            "menu" => ModelMenu::getAccountingMenu(),
+            "menu" => ModelAccounting::getMenu(),
         ];
         if (isset($parameters["upload_message"])) {
             $pageData["upload_message"] = $parameters["upload_message"];
