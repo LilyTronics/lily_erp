@@ -5,21 +5,17 @@ class ControllerAccounting extends ControllerApplication
 
     protected function showAccounting($parameters)
     {
-        $pageData = [
-            "menu" => ModelAccounting::getMenu(),
-        ];
-        return $this->showPage("accounting/viewAccounting", $pageData);
+        return $this->showView("Accounting");
     }
 
     protected function showBank($parameters)
     {
-        $pageData = [
-            "menu" => ModelAccounting::getMenu(),
-        ];
-        if (isset($parameters["upload_message"])) {
+        $pageData = [];
+        if (isset($parameters["upload_message"]))
+        {
             $pageData["upload_message"] = $parameters["upload_message"];
         }
-        return $this->showPage("accounting/viewBank", $pageData);
+        return $this->showView("Bank", $pageData);
     }
 
     protected function bankUpload($parameters)
@@ -43,6 +39,12 @@ class ControllerAccounting extends ControllerApplication
             return $this->showBank(["upload_message" => "Error in uploaded file"]);
         }
         return $this->showBank([]);
+    }
+
+    private function showView($pageName, $pageData=[])
+    {
+        $pageData["menu"] = ModelAccounting::getMenu();
+        return $this->showPage("accounting/view{$pageName}", $pageData);
     }
 
 }
