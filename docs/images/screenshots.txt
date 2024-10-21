@@ -1,0 +1,4 @@
+In Chrome developer mode add a device:
+- Desktop: 1200x800
+
+Take images at zoom 75% or larger

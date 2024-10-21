@@ -97,3 +97,61 @@ Click the 'Go' button to create the user.
 
 Now all is setup correctly to continue to the final step.
 
+Create the configuration
+------------------------
+
+The configuration is created with the web interface. Open the Lily ERP web page.
+You should see the setup configuration page.
+
+.. image:: images/setup_configuration.png
+
+If you do not see this page, make sure your database is empty and delete any existing configuration files.
+
+The first part are your database settings:
+
+* Host name: the name of the MySQL server, usually 'localhost'.
+* Database name: the name of the database you just created.
+* Database user name: the user name of the user you created for the database.
+* Database user password: the password for that user.
+* Repeat database user password: the same password.
+
+The second part is the user for logging in to the Lily ERP application.
+This will be an administrator user.
+This user will also be able to add more users in the application.
+
+* Email address: users are identified by their email address.
+* Name: the name used in various pages to identify the user in a more user friendly way.
+* Password: the password for this user.
+* Repeat password: the same password.
+
+When all is filled out, click the 'Create configuration' button.
+
+If all goes well, two things will happen:
+
+* The configuration file is created at the location of the define in the 'config.php' file.
+* A user is added to the database and is able to log in.
+
+The page will reload and the log in page must show.
+
+Configuration file
+------------------
+
+Below is an example of a configuration file.
+
+.. code-block:: console
+   :linenos:
+
+   [sql]
+   host=localhost
+   database=lily_erp_test
+   user=lily_test
+   password="**********"
+
+Note that the password is stored as plain text. Anybody with access to this file, can read the password.
+Make sure to take proper security measures to protect this information.
+
+If you want to change to another database, simply edit this file and reload the web page.
+On every page load this file is read, so updates are available immediately.
+
+It is also possible to run multiple instaces of the application.
+Just make a copy of the application and use a different configuration file for each instance.
