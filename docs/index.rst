@@ -28,6 +28,9 @@ ourselves.
 Regards,
 LilyTronics
 
+For support you can send a message to: erp@lilytronics.nl
+
+
 .. toctree::
    :maxdepth: 1
    :caption: Contents:
