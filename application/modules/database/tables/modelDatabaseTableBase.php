@@ -15,7 +15,9 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
     public static function GetModelForTable($tableName)
     {
         $table = null;
-        switch ($tableName) {
+        $tableName = str_replace("-","_",$tableName);
+        switch ($tableName)
+        {
             case "bank_transaction":
                 $table = new ModelDatabaseTableBankTransaction();
                 break;
@@ -40,6 +42,8 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
         }
         return $records[1];
     }
+
+
 
 }
 
