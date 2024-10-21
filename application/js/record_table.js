@@ -1,13 +1,13 @@
 'use strict';
 
-function showTable(table_name)
+function showTable(module_name, table_name)
 {
     if (document.getElementById('record-table'))
     {
         let data = {
             "action": "get_" + table_name
         }
-        doApiCall(data, 'Get records', processRecords, table_name);
+        doApiCall(data, 'Get records', processRecords, module_name, table_name);
     }
 }
 
@@ -55,7 +55,8 @@ function processRecords(result)
                 row.addEventListener("click", function()
                 {
                     let table_name = result["table_name"].replace("_", "-");
-                    location.href = WEB_ROOT + "show-record/" + table_name + "/" + recordId;
+                    let module_name = result["module_name"];
+                    location.href = WEB_ROOT + "show-record/" + module_name + "/" + table_name + "/" + recordId;
                 });
             }
         }

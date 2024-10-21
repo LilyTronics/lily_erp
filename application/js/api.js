@@ -20,7 +20,7 @@ function sendForm(action, title, callback=null)
 
 
 /* Do the actual API call, this is a separate function for general usage */
-function doApiCall(data, title, callback, table_name)
+function doApiCall(data, title, callback, module_name, table_name)
 {
     showModalLoader();
     fetch(WEB_ROOT + 'api', {
@@ -59,6 +59,7 @@ function doApiCall(data, title, callback, table_name)
         // Callback can be function to call or an URI to go to, else just reload the page
         if (typeof callback === 'function')
         {
+            data['module_name'] = module_name;
             data['table_name'] = table_name;
             callback(data);
         }

@@ -15,7 +15,7 @@ $pageData = $this->getUserData("page_data", []);
 
 'use strict';
 
-showTable('bank_transaction');
+showTable('accounting', 'bank_transaction');
 
 <?php
 
