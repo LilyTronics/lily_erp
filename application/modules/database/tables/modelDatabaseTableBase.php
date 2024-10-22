@@ -14,18 +14,9 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
 
     public static function GetModelForTable($tableName)
     {
-        $table = null;
-        $tableName = str_replace("-","_",$tableName);
-        switch ($tableName)
-        {
-            case "bank_transaction":
-                $table = new ModelDatabaseTableBankTransaction();
-                break;
-
-            case "user":
-                $table = new ModelDatabaseTableUser();
-                break;
-        }
+        $tableName = str_replace(["-", "_"], "", $tableName);
+        $tableModel = "ModelDatabaseTable{$tableName}";
+        $table = new $tableModel();
         return $table;
     }
 
@@ -42,8 +33,6 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
         }
         return $records[1];
     }
-
-
 
 }
 

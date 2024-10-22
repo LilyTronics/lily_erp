@@ -86,13 +86,7 @@ class ControllerApi extends ControllerApplication
 
         $log->writeMessage("Database action '{$parts[0]}' from table '{$parts[1]}'");
 
-        // Check table name
         $table = ModelDatabaseTableBase::GetModelForTable($parts[1]);
-        if ($table == null)
-        {
-            $result["message"] = "Invalid table name '{$parts[1]}'";
-            return $result;
-        }
 
         // Check the action
         switch ($parts[0])
