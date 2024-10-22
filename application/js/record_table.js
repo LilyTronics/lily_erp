@@ -5,7 +5,7 @@ function showTable(module_name, table_name)
     if (document.getElementById('record-table'))
     {
         let data = {
-            "action": "get_" + table_name
+            'action': `get_${table_name}`
         }
         doApiCall(data, 'Get records', processRecords, module_name, table_name);
     }
@@ -39,25 +39,25 @@ function processRecords(result)
         for (let record of records)
         {
             let row = body.insertRow()
-            let recordId = "";
+            let recordId = '';
             for (let field in record)
             {
                 let cell = row.insertCell();
                 cell.textContent = formatValue(field, record[field]);
                 formatCell(field, cell);
-                if (field == "id")
+                if (field == 'id')
                 {
                     recordId = record[field];
                 }
             }
-            if (recordId != "")
+            if (recordId != '')
             {
-                row.addEventListener("click", function()
+                row.addEventListener('click', () =>
                 {
                     showModalLoader();
-                    let table_name = result["table_name"].replace("_", "-");
-                    let module_name = result["module_name"];
-                    location.href = WEB_ROOT + "show-record/" + module_name + "/" + table_name + "/" + recordId;
+                    let table_name = result['table_name'].replace('_', '-');
+                    let module_name = result['module_name'];
+                    location.href = `${WEB_ROOT}show-record/${module_name}/${table_name}/${recordId}`;
                 });
             }
         }
@@ -69,7 +69,7 @@ function processRecords(result)
         container.appendChild(table);
     }
     else {
-        container.innerHTML = "<p>No records in the database</p>";
+        container.innerHTML = '<p>No records in the database</p>';
     }
 }
 
@@ -82,9 +82,9 @@ function fieldToName(field)
 
 function formatValue(field, value)
 {
-    if (field == "amount")
+    if (field == 'amount')
     {
-        value = value.replace(/(\.\d{2}[^0]*)(0*)$/, "$1");
+        value = value.replace(/(\.\d{2}[^0]*)(0*)$/, '$1');
     }
     return value;
 }

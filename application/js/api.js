@@ -23,7 +23,7 @@ function sendForm(action, title, callback=null)
 function doApiCall(data, title, callback, module_name, table_name)
 {
     showModalLoader();
-    fetch(WEB_ROOT + 'api', {
+    fetch(`${WEB_ROOT}api`, {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {'Content-type': 'application/json; charset=utf-8'}
@@ -32,7 +32,7 @@ function doApiCall(data, title, callback, module_name, table_name)
         hideModalLoader();
         if (!response.ok)
         {
-            throw new Error('Invalid response from the server received (status code: ' + response.status + ')');
+            throw new Error(`Invalid response from the server received (status code: ${response.status})`);
         }
         return response.text();
     })
@@ -44,8 +44,8 @@ function doApiCall(data, title, callback, module_name, table_name)
         }
         catch(error)
         {
-            console.log("Invalid JSON:\n\n" + text);
-            throw new Error('Invalid data received:<br />' + error);
+            console.log(`Invalid JSON:\n\n${text}`);
+            throw new Error(`Invalid data received:<br />${error}`);
         }
         if (data['debug'])
         {
@@ -65,7 +65,7 @@ function doApiCall(data, title, callback, module_name, table_name)
         }
         else if (typeof callback === 'string')
         {
-            location.href = WEB_ROOT + callback;
+            location.href = `${WEB_ROOT}${callback}`;
         }
         else
         {
