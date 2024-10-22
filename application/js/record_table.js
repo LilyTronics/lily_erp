@@ -54,6 +54,7 @@ function processRecords(result)
             {
                 row.addEventListener("click", function()
                 {
+                    showModalLoader();
                     let table_name = result["table_name"].replace("_", "-");
                     let module_name = result["module_name"];
                     location.href = WEB_ROOT + "show-record/" + module_name + "/" + table_name + "/" + recordId;
