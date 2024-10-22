@@ -1,5 +1,8 @@
 /* Shows a dialog window (modal) */
 
+'use strict';
+
+
 function showModal(title, message)
 {
     document.getElementById('modal-title').innerHTML = title;
