@@ -90,7 +90,7 @@ class ControllerApi extends ControllerApplication
         $table = ModelDatabaseTableBase::GetModelForTable($parts[1]);
         if ($table == null)
         {
-            $result["message"] = "Invalid table name '$tableName'";
+            $result["message"] = "Invalid table name '{$parts[1]}'";
             return $result;
         }
 
