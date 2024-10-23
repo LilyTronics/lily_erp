@@ -15,9 +15,10 @@ define("FORCE_SSL", true);
 define("APP_MODULES_PATH", APP_PATH . "modules/");
 
 define("TEMPLATE_VALUES", [
-    "{BUTTON}" => "w3-button w3-round w3-theme",
-    "{INPUT}"  => "w3-input w3-border w3-round w3-padding-small",
-    "{TABLE}"  => "w3-table width-auto"
+    "{BUTTON}"      => "w3-button w3-round w3-theme",
+    "{INPUT}"       => "w3-input w3-border w3-round w3-padding-small",
+    "{TABLE}"       => "w3-table width-auto",
+    "{TOOL_BUTTON}" => "w3-button w3-round w3-padding-small w3-theme"
 ]);
 
 define("DEBUG_LOG", new ModelSystemLogger("debug"));
