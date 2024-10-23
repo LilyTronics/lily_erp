@@ -6,7 +6,7 @@ This installation manual will cover the following systems:
 .. toctree::
    :maxdepth: 1
 
-    Windows with XAMPP   <installation/install_windows_xampp.rst>
+    Windows with XAMPP   <install_windows_xampp.rst>
 
 
 Although the software is quite generic an can run on many other systems, we cannot test every

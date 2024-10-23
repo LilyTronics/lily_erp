@@ -103,7 +103,7 @@ Create the configuration
 The configuration is created with the web interface. Open the Lily ERP web page.
 You should see the setup configuration page.
 
-.. image:: images/setup_configuration.png
+.. image:: ../images/setup_configuration.png
 
 If you do not see this page, make sure your database is empty and delete any existing configuration files.
 

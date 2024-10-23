@@ -63,5 +63,6 @@ If you rather want direct contact: erp@lilytronics.nl
    :caption: Contents:
 
    Home           <self>
-   Installation   <installation.rst>
-   Setup          <setup.rst>
+   Installation   <installation/installation.rst>
+   Setup          <configuration/setup.rst>
+   Development    <development/development.rst>
