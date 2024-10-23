@@ -35,8 +35,8 @@ class ControllerApi extends ControllerApplication
             return $this->sendResult($result);
         }
 
-        // If the session is not OK and we are not trying to log in or log out
-        if (!$isSessionValid and $action != "log_in" and $action != "log_out")
+        // If the session is not OK and we are not trying to create a cfiguration, log in or log out
+        if (!$isSessionValid and $action != "create_configuration" and $action != "log_in" and $action != "log_out")
         {
             $result["message"] = "Unauthorized";
             return $this->sendResult($result);
