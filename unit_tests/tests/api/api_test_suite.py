@@ -12,6 +12,7 @@ class ApiTestSuite(lily_unit_test.TestSuite):
 
     def setup(self):
         Database.clear_all()
+        Database.create_default_user()
 
     def _do_api_call(self, data):
         result = Api.do_api_call(data)

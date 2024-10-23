@@ -35,7 +35,11 @@ class Database:
             query += f"TABLE {table[0]}"
             cursor.execute(query)
         cls._connection.commit()
-        # Create default user
+
+    @classmethod
+    def create_default_user(cls):
+        cls._connect()
+        cursor = cls._connection.cursor()
         sql = "INSERT INTO user (email, name, password, is_admin) VALUES (%s, %s, %s, %s)"
         val = (TestSettings.admin_email, TestSettings.admin_name,
                hashlib.sha256(TestSettings.admin_password.encode()).hexdigest(), 1)
