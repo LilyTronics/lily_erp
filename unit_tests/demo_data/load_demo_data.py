@@ -31,3 +31,5 @@ response = Api.do_api_call(data, False)
 if not response["result"]:
     print(f"Cannot create configuration: {response["message"]}")
     exit()
+
+print("Demo data is loaded")
