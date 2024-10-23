@@ -41,8 +41,8 @@ class Api:
         cls._logged_in = response["result"]
 
     @classmethod
-    def do_api_call(cls, data):
-        if not cls._logged_in:
+    def do_api_call(cls, data, check_log_in=True):
+        if check_log_in and not cls._logged_in:
             cls._log_in()
         response = cls._do_request(data)
         return response
