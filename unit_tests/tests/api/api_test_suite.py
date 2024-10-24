@@ -14,8 +14,8 @@ class ApiTestSuite(lily_unit_test.TestSuite):
         Database.clear_all()
         Database.create_default_user()
 
-    def _do_api_call(self, data):
-        result = Api.do_api_call(data)
+    def do_api_call(self, data, check_log_in=True):
+        result = Api.do_api_call(data, check_log_in)
         self.log.debug(f"Result: {result["result"]}")
         self.fail_if(not result["result"], f"Error message: {result["message"]}")
         return result
@@ -29,7 +29,7 @@ if __name__ == "__main__":
             data = {
                 "action": "get_user"
             }
-            result = self._do_api_call(data)
+            result = self.do_api_call(data)
             self.log.debug(f"Records: {len(result["records"])}")
 
     _TestApiTestSuite().run()
