@@ -33,20 +33,4 @@ class ModelDatabaseTableBankTransaction extends ModelDatabaseTableBase {
         parent::__construct($tableName, $fields, true);
     }
 
-    public function getRecordView()
-    {
-        return [
-            "reference"        => null,
-            "own_account"      => null,
-            "date"             => null,
-            "debit_credit"     => null,
-            "amount"           => null,
-            "transaction_type" => null,
-            "counter_account"  => null,
-            "counter_name"     => null,
-            "description"      => null,
-            "state"            => null
-        ];
-    }
-
 }

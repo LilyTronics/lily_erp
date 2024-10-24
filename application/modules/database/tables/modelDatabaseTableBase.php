@@ -20,6 +20,38 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
         return $table;
     }
 
+    public function getNewRecord() {
+        $record = [];
+        foreach ($this->fields as $field)
+        {
+            if ($field["Name"] != "id")
+            {
+                $record[$field["Name"]] = null;
+            }
+        }
+        return $record;
+    }
+
+    public function getRecordView()
+    {
+        $view = [];
+        foreach ($this->fields as $field)
+        {
+            if ($field["Name"] != "id")
+            {
+                if (!isset($field["Input"]))
+                {
+                    $view[$field["Name"]] = "";
+                }
+                else
+                {
+                    $view[$field["Name"]] = $field["Input"];
+                }
+            }
+        }
+        return $view;
+    }
+
     public function getRecords($filterExpression="", $orderExpression="", $groupExpression="", $start=0, $count=0,
                                $fields=["*"], $join="", $joinTable="", $joinExpression="", $joinFields=["*"])
     {
