@@ -1,9 +1,9 @@
 <?php
 
-class ModelDatabaseTableAccounts extends ModelDatabaseTableBase {
+class ModelDatabaseTableAccount extends ModelDatabaseTableBase {
 
     public function __construct() {
-        $tableName = "accounts";
+        $tableName = "account";
         $fields = [
             [ "Name"    => "id",
               "Type"    => "INT",
