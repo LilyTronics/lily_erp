@@ -57,7 +57,7 @@ function processRecords(result)
                     showModalLoader();
                     let table_name = result['table_name'].replace('_', '-');
                     let module_name = result['module_name'];
-                    location.href = `${WEB_ROOT}show-record/${module_name}/${table_name}/${recordId}`;
+                    location.href = `${WEB_ROOT}record/${module_name}/${table_name}/${recordId}`;
                 });
             }
         }
