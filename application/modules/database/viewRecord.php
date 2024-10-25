@@ -70,7 +70,7 @@ else
                     break;
 
                 case "select":
-                    $input = "<select class=\"{INPUT}\"";
+                    $input = "<select class=\"{SELECT}\"";
                     if ($width != "")
                     {
                         $input .= " style=\"width:{$width}px\"";

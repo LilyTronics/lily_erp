@@ -10,6 +10,11 @@ td {
     padding: 4px 8px !important;
 }
 
+/* There is a padding mismatch when using w3-input for text input and select
+   in combination with w3-padding-small */
+select {
+    padding: 6px 4px !important;
+}
 
 /* Containers */
 
