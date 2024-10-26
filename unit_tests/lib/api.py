@@ -8,19 +8,12 @@ import requests
 from unit_tests.lib.test_settings import TestSettings
 
 
-class Api:
+class Api(requests.Session):
 
     _api_uri = f"{TestSettings.uri}api"
-    _logged_in = False
-    _cookie = None
 
-    @classmethod
-    def _do_request(cls, data):
-        cookie = dict()
-        if cls._cookie is not None:
-            cookie = dict(PHPSESSID=cls._cookie)
-        response = requests.post(cls._api_uri, data=json.dumps(data), cookies=cookie)
-        cls._cookie = response.cookies.get("PHPSESSID")
+    def _do_request(self, data):
+        response = self.post(self._api_uri, data=json.dumps(data))
         try:
             response = response.json()
         except:
@@ -28,30 +21,55 @@ class Api:
             raise
         return response
 
-    @classmethod
-    def _log_in(cls):
+    def log_in(self, email=TestSettings.admin_email, password=TestSettings.admin_password):
         data = {
             "action": "log_in",
             "record": {
-                "email": TestSettings.admin_email,
-                "password": TestSettings.admin_password
+                "email": email,
+                "password": password
             }
         }
-        response = cls._do_request(data)
-        cls._logged_in = response["result"]
+        response = self._do_request(data)
+        if not response["result"]:
+            raise Exception(f"Could not log in: {response["message"]}")
 
-    @classmethod
-    def do_api_call(cls, data, check_log_in=True):
-        if check_log_in and not cls._logged_in:
-            cls._log_in()
-        response = cls._do_request(data)
+    def log_out(self):
+        data = {
+            "action": "log_out"
+        }
+        response = self._do_request(data)
+        if not response["result"]:
+            raise Exception(f"Could not log out: {response["message"]}")
+
+    def do_api_call(self, data, auto_log_in=True):
+        for i in range(2):
+            response = self._do_request(data)
+            if auto_log_in and i == 0 and not response["result"] and response["message"] == "Unauthorized":
+                self.log_in()
+            else:
+                break
         return response
 
 
 if __name__ == "__main__":
 
+    api = Api()
+
     post_data = {
         "action": "get_user"
     }
-    api_result = Api.do_api_call(post_data)
+
+    print("\nFirst call")
+    api_result = api.do_api_call(post_data)
+    print(api_result)
+
+    print("\nSecond call")
+    api_result = api.do_api_call(post_data, False)
+    print(api_result)
+
+    print("\nLog out")
+    api.log_out()
+
+    print("\nThird call")
+    api_result = api.do_api_call(post_data, False)
     print(api_result)
