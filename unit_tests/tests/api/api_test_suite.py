@@ -10,12 +10,15 @@ from unit_tests.lib.database import Database
 
 class ApiTestSuite(lily_unit_test.TestSuite):
 
+    _api = None
+
     def setup(self):
+        self._api = Api()
         Database.clear_all()
         Database.create_default_user()
 
     def do_api_call(self, data, check_log_in=True, check_result=True):
-        result = Api.do_api_call(data, check_log_in)
+        result =  self._api.do_api_call(data, check_log_in)
         self.log.debug(f"Result: {result["result"]}")
         self.fail_if(check_result and not result["result"], f"Error message: {result["message"]}")
         return result
