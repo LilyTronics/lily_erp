@@ -23,17 +23,24 @@ class Database:
             )
 
     @classmethod
-    def clear_all(cls):
-        # Delete all tables and start with an empty database
+    def _execute_query(cls, query):
         cls._connect()
         cursor = cls._connection.cursor()
-        cursor.execute("SHOW TABLES")
-        for table in cursor:
+        cursor.execute(query)
+        if query.startswith("SHOW"):
+            columns = [column[0] for column in cursor.description]
+            return [dict(zip(columns, row)) for row in cursor.fetchall()]
+        return None
+
+    @classmethod
+    def clear_all(cls, drop_user=False):
+        # Delete all tables and start with an empty database
+        for table in cls._execute_query("SHOW TABLES"):
             query = "DROP "
-            if table[0] == "user":
+            if not drop_user and table["Tables_in_lily_erp_test"] == "user":
                 query = "TRUNCATE "
-            query += f"TABLE {table[0]}"
-            cursor.execute(query)
+            query += f"TABLE {table["Tables_in_lily_erp_test"]}"
+            cls._execute_query(query)
         cls._connection.commit()
 
     @classmethod
@@ -50,3 +57,4 @@ class Database:
 if __name__ == "__main__":
 
     Database.clear_all()
+    Database.create_default_user()
