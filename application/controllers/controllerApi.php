@@ -5,6 +5,13 @@ class ControllerApi extends ControllerApplication
 
     protected function sendResult($result)
     {
+        $log = new ModelSystemLogger("api");
+        $log->writeMessage("Result: " . var_export($result["result"], true));
+        if (!$result["result"])
+        {
+            $log->writeMessage("Message: " . $result["message"]);
+        }
+        $result["debug"] = $_SESSION;
         return json_encode($result, JSON_PRETTY_PRINT);
     }
 
