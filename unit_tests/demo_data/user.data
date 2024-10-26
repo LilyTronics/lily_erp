@@ -1,0 +1,3 @@
+// Demo data for the user table
+email               name                password                                                            is_admin    access_levels   last_log_in     log_in_fail
+tester@lily-erp.nl  Lily Erp tester     cae88256e152c29a1f37a3315a183adc453a85f584b5585ccd8015b208d5e26a    0           ""              0               0
