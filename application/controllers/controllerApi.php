@@ -11,7 +11,6 @@ class ControllerApi extends ControllerApplication
         {
             $log->writeMessage("Message: " . $result["message"]);
         }
-        $result["debug"] = $_SESSION;
         return json_encode($result, JSON_PRETTY_PRINT);
     }
 
