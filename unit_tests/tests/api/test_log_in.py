@@ -8,7 +8,7 @@ from unit_tests.tests.api.api_test_suite import ApiTestSuite
 class TestLogIn(ApiTestSuite):
 
     PUBLIC_ACTIONS = ["create_configuration", "log_in", "log_out"]
-    UNAUTHORIZED_ACTIONS = ["get_", "add_", "updated_", "delete_"];
+    UNAUTHORIZED_ACTIONS = ["get", "add", "update", "delete"];
 
     def test_not_logged_in(self):
         self.log.debug("Test actions that should work when not logged in")
@@ -22,7 +22,7 @@ class TestLogIn(ApiTestSuite):
 
         self.log.debug("Test actions that should not work when not logged in")
         for action in self.UNAUTHORIZED_ACTIONS:
-            action += "user"
+            action += "_user"
             self.log.debug(f"Action: '{action}'")
             data = {"action": action, "record": {}}
             response = self.do_api_call(data, False, False)
