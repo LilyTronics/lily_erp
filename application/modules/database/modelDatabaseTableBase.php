@@ -82,6 +82,12 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
         return $this->updateRecord($record, $expression);
     }
 
+    public function removeRecord($record)
+    {
+        $expression = "id = {$record["id"]}";
+        return $this->deleteRecord($expression);
+    }
+
 }
 
 ?>
