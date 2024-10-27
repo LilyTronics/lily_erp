@@ -66,6 +66,13 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
         return $records[1];
     }
 
+    public function addRecord($record) {
+        if (isset($record["id"])) {
+            unset($record["id"]);
+        }
+        return $this->insertRecord($record);
+    }
+
 }
 
 ?>

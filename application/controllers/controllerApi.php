@@ -94,16 +94,38 @@ class ControllerApi extends ControllerApplication
 
         $table = ModelDatabaseTableBase::GetModelForTable($parts[1]);
 
+        // Check for record
+        $hasRecord = isset($postedData["record"]);
+        if (!$hasRecord)
+        {
+            $result["message"] = "No record data posted";
+        }
+
         // Check the action
         switch ($parts[0])
         {
             case "get":
+                $log->writeMessage("Execute get records");
                 $result["records"] = $table->getRecords();
                 $result["result"] = true;
                 $result["message"] = "";
                 break;
 
+            case "add":
+                if ($hasRecord)
+                {
+                    $log->writeMessage("Execute add record");
+                    $result["result"] = $table->addRecord($postedData["record"]);
+                    $result["message"] = "";
+                    if (!$result["result"])
+                    {
+                        $result["message"] = "Could not add record: " . $table->getError();
+                    }
+                }
+                break;
+
             default:
+                $log->writeMessage("Invalid action: '{$parts[0]}'");
                 $result["message"] = "Invalid table action '{$parts[0]}'";
         }
 
