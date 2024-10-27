@@ -25,32 +25,23 @@ class ApiTestSuite(lily_unit_test.TestSuite):
         self.fail_if(check_result and not result["result"], f"Error message: {result["message"]}")
         return result
 
-    def get_records(self):
-        data = {
-            "action": f"get_{self.table_name}",
-        }
+    def do_table_action(self, action, record=None):
+        data = {"action": f"{action}_{self.table_name}"}
+        if record is not None:
+            data["record"] = record
         return self.do_api_call(data)
+
+    def get_records(self):
+        return self.do_table_action("get")
 
     def add_record(self, record):
-        data = {
-            "action": f"add_{self.table_name}",
-            "record": record
-        }
-        return self.do_api_call(data)
+        return self.do_table_action("add", record)
 
     def update_record(self, record):
-        data = {
-            "action": f"update_{self.table_name}",
-            "record": record
-        }
-        return self.do_api_call(data)
+        return self.do_table_action("update", record)
 
     def delete_record(self, record):
-        data = {
-            "action": f"delete_{self.table_name}",
-            "record": record
-        }
-        return self.do_api_call(data)
+        return self.do_table_action("delete", record)
 
 
 if __name__ == "__main__":
