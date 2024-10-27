@@ -124,6 +124,19 @@ class ControllerApi extends ControllerApplication
                 }
                 break;
 
+            case "update":
+                if ($hasRecord)
+                {
+                    $log->writeMessage("Execute update record");
+                    $result["result"] = $table->modifyRecord($postedData["record"]);
+                    $result["message"] = "";
+                    if (!$result["result"])
+                    {
+                        $result["message"] = "Could not update record: " . $table->getError();
+                    }
+                }
+                break;
+
             default:
                 $log->writeMessage("Invalid action: '{$parts[0]}'");
                 $result["message"] = "Invalid table action '{$parts[0]}'";
