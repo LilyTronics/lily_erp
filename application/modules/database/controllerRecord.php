@@ -23,9 +23,11 @@ class ControllerRecord extends ControllerApplication
         }
 
         $pageData = [
-            "menu"   => "Model{$parameters["module"]}"::getMenu(),
-            "record" => $record,
-            "view"   => $table->getRecordView()
+            "menu"       => "Model{$parameters["module"]}"::getMenu(),
+            "record"     => $record,
+            "table"      => $parameters["table"],
+            "return_uri" => $table->getReturnUri(),
+            "view"       => $table->getRecordView()
         ];
         return $this->showPage("database/viewRecord", $pageData);
     }
