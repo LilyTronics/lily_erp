@@ -53,10 +53,6 @@ else
                     if (Count($parts) > 2 and $parts[1] == "datalist")
                     {
                         $input .= " list=\"list-{$field}\"";
-                        $items = explode(":", $parts[2]);
-                        if (Count($items) == 2) {
-                            $input .= " oninput=\"populateDataList(event, '{$items[0]}', '{$items[1]}')\"";
-                        }
                         $data = "<datalist id=\"list-{$field}\"></datalist>";
                     }
                     break;
@@ -122,22 +118,3 @@ else
 
 ?>
 </div>
-<script>
-
-'use strict';
-
-function populateDataList(event, table_name, field_name)
-{
-    let data = {
-        'action': `get_${table_name}`,
-    }
-    doApiCall(data, 'Get data', processData);
-}
-
-
-function processData(data)
-{
-    console.log(data);
-}
-
-</script>
