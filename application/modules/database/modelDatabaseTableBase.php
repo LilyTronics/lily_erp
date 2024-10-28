@@ -2,6 +2,9 @@
 
 class ModelDatabaseTableBase extends ModelDatabaseTable {
 
+    protected $returnUri = "";
+
+
     public function __construct($tableName, $fields=null, $autoCreateTable=false, $defaultRecords=[]) {
         $config = new ModelConfiguration(CONFIG_FILE);
         $db = $config->getValue("sql", "database");
@@ -18,6 +21,11 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
         $tableModel = "ModelDatabaseTable{$tableName}";
         $table = new $tableModel();
         return $table;
+    }
+
+    public function getReturnUri()
+    {
+        return $this->returnUri;
     }
 
     public function getNewRecord() {
