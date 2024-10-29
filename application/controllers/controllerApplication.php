@@ -43,6 +43,12 @@ class ControllerApplication extends ControllerBase
         return $this->$action($parameters, $isConfigurationOk, $isSessionValid);
     }
 
+    /* Set page data */
+    protected function setPageData($pageData)
+    {
+        ModelApplicationSession::setData("page_data", $pageData);
+    }
+
     /* Log in */
     protected function showLogIn($parameters)
     {
@@ -56,21 +62,20 @@ class ControllerApplication extends ControllerBase
         $this->gotoLocation("");
     }
 
-    /* Set view output */
-    protected function setViewOutput($output)
-    {
-        ModelApplicationSession::setData("view_output", $output);
-    }
-
     /* Show the  page */
     protected function showPage($pageName, $pageData=[])
     {
-        $pageData["view_output"] = ModelApplicationSession::getData("view_output", null);
-        ModelApplicationSession::clearData("view_output");
+        // Merge the page data from the parameter with any stored session data.
+        // The parameter page data will overwrite any stored session data when the keys are same.
+        $newPageData = array_merge(
+            ModelApplicationSession::getData("page_data", []),
+            $pageData
+        );
+        ModelApplicationSession::clearData("page_data");
 
         $view = new ViewApplication();
         $view->setView($pageName);
-        $view->setUserData("page_data", $pageData);
+        $view->setUserData("page_data", $newPageData);
         $view->setPageTitle(APPLICATION_TITLE);
         $view->addMetaTag("name=\"viewport\" content=\"width=device-width, initial-scale=1\"");
         $view->addJavascriptPreVariable("WEB_ROOT", "\"" . WEB_ROOT . "\"");

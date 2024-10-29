@@ -16,7 +16,7 @@ class ControllerDevelopment extends ControllerApplication
         $output .= var_export($postedData, true);
         $output .= "</pre>";
 
-        $this->setViewOutput($output);
+        $this->setPageData(["output" => $output]);
         $this->gotoLocation("development");
     }
 

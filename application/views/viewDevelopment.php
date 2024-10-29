@@ -9,9 +9,9 @@
 
 $pageData = $this->getUserData("page_data");
 
-if ($pageData["view_output"] != null)
+if (isset($pageData["output"]))
 {
     echo "<div class=\"w3-container w3-section\">\n";
-    echo $pageData["view_output"];
+    echo $pageData["output"];
     echo "</div>\n";
 }

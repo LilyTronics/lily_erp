@@ -3,6 +3,18 @@
 class ViewApplication extends HtmlPageView
 {
 
+    protected function insertShowModal($pageData) {
+        $output = "";
+        $result = isset($pageData["result"]) ? $pageData["result"] : true;
+        $message = isset($pageData["message"]) ? $pageData["message"] : "Server error, try again later";
+        $title = isset($pageData["title"]) ? $pageData["title"] : "Server message";
+        if (!$result)
+        {
+            $output ="<script>showModal('$title', '$message');</script>\n";
+        }
+        return $output;
+    }
+
     protected function insertBody()
     {
         $output = "<body>\n";

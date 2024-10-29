@@ -3,20 +3,38 @@
 class ControllerApi extends ControllerApplication
 {
 
-    protected function sendResult($result)
+    protected function processResult($result, $onSuccess, $onFailure, $record, $title)
     {
+        $redirect = null;
         $log = new ModelSystemLogger("api");
         $log->writeMessage("Result: " . var_export($result["result"], true));
-        if (!$result["result"])
+        if ($result["result"])
         {
-            $log->writeMessage("Message: " . $result["message"]);
+            $redirect = $onSuccess;
         }
+        else
+        {
+            $log->writeMessage("Message: {$result["message"]}");
+            $redirect = $onFailure;
+        }
+
+        if ($redirect  !== null)
+        {
+            $log->writeMessage("Go to location: {$redirect}");
+            // Pass result to the page
+            $result["record"] = $record;
+            $result["title"] = $title;
+            $this->setPageData($result);
+            $this->gotoLocation($redirect);
+        }
+
+        // No redirect just send the result in JSON format
         return json_encode($result, JSON_PRETTY_PRINT);
     }
 
     protected function processApiCall($parameters, $isConfigurationOk, $isSessionValid)
     {
-        $result = ["result" => false, "message" => "Server error, try again later."];
+        $result = ["result" => false, "message" => "Server error, try again later"];
 
         $log = new ModelSystemLogger("api");
         $log->writeMessage("+----------------------------------------------------------------------+");
@@ -25,137 +43,143 @@ class ControllerApi extends ControllerApplication
         $log->writeMessage("Configuration OK: " . var_export($isConfigurationOk, true));
         $log->writeMessage("Valid session   : " . var_export($isSessionValid, true));
 
-        $postedData = ModelHelper::getPostedData(true);
+        # Get things we need from the posted data
+        $postedData = ModelHelper::getPostedData();
+        $action = isset($postedData["action"]) ? $postedData["action"] : "";
+        $record = isset($postedData["record"]) ? $postedData["record"] : [];
+        $onSuccess = isset($postedData["on_success"]) ? $postedData["on_success"] : null;
+        $onFailure = isset($postedData["on_failure"]) ? $postedData["on_failure"] : null;
+        $title = isset($postedData["title"]) ? $postedData["title"] : "";
 
-        $action = "";
-        if (isset($postedData["action"]))
-        {
-            $action = $postedData["action"];
-        }
         $log->writeMessage("Action          : {$action}");
+        $log->writeMessage("Has record      : " . Count($record) > 0 ? "yes" : "no");
+        $log->writeMessage("On success      : " . $onSuccess !== null ? $onSuccess : "null");
+        $log->writeMessage("On failure      : " . $onFailure !== null ? $onFailure : "null");
+        $log->writeMessage("Dialog tile     : {$title}");
 
         // If the configuration is not OK and we are not trying to create one
         if (!$isConfigurationOk and $action != "create_configuration")
         {
             $result["message"] = "The configuration is invalid";
-            return $this->sendResult($result);
+            return $this->processResult($result, $onSuccess, $onFailure, $record, $title);
         }
 
         // If the session is not OK and we are not trying to create a cfiguration, log in or log out
         if (!$isSessionValid and $action != "create_configuration" and $action != "log_in" and $action != "log_out")
         {
             $result["message"] = "Unauthorized";
-            return $this->sendResult($result);
+            return $this->processResult($result, $onSuccess, $onFailure, $record, $title);
         }
 
-        // All good, process the call
-        return $this->sendResult($this->getResultFromApiCall($postedData, $result));
+        // Process the API action
+        $result = ["result" => false, "message" => "Invalid action: '{$action}'"];
+        switch ($action)
+        {
+            case "create_configuration":
+                $log->writeMessage("Create configuration");
+                $result = ModelSetup::createConfiguration($record, $result);
+                break;
+        }
+
+        return $this->processResult($result, $onSuccess, $onFailure, $record, $title);
     }
 
-    private function getResultFromApiCall($postedData, $result)
-    {
-        $log = new ModelSystemLogger("api");
-        if (!isset($postedData["action"])) {
-            $result["message"] = "No action defined";
-            return $result;
-        }
-        $log->writeMessage("Process action: '{$postedData["action"]}'");
+    // private function getResultFromApiCall($postedData, $result)
+    // {
+    //     $log = new ModelSystemLogger("api");
+    //     if (!isset($postedData["action"])) {
+    //         $result["message"] = "No action defined";
+    //         return $result;
+    //     }
+    //     $log->writeMessage("Process action: '{$postedData["action"]}'");
 
-        // Create configuration
-        if ($postedData["action"] == "create_configuration" and isset($postedData["record"]))
-        {
-            $log->writeMessage("Create configuration");
-            $result = ModelSetup::createConfiguration($postedData["record"], $result);
-            return $result;
-        }
+    //     // Log in
+    //     if ($postedData["action"] == "log_in" and isset($postedData["record"]))
+    //     {
+    //         $log->writeMessage("Log in");
+    //         $result = ModelApplicationSession::createSession($postedData["record"], $result);
+    //         return $result;
+    //     }
 
-        // Log in
-        if ($postedData["action"] == "log_in" and isset($postedData["record"]))
-        {
-            $log->writeMessage("Log in");
-            $result = ModelApplicationSession::createSession($postedData["record"], $result);
-            return $result;
-        }
+    //     // Log_out
+    //     if ($postedData["action"] == "log_out")
+    //     {
+    //         $log->writeMessage("Log out");
+    //         ModelApplicationSession::deleteSession();
+    //         return ["result" => true, "message" => ""];
+    //     }
 
-        // Log_out
-        if ($postedData["action"] == "log_out")
-        {
-            $log->writeMessage("Log out");
-            ModelApplicationSession::deleteSession();
-            return ["result" => true, "message" => ""];
-        }
+    //     // Database actions
+    //     $parts = explode("_", $postedData["action"], 2);
+    //     // First part is action: get, add, update, delete
+    //     // Rest is table name E.G.: bank_transactions
 
-        // Database actions
-        $parts = explode("_", $postedData["action"], 2);
-        // First part is action: get, add, update, delete
-        // Rest is table name E.G.: bank_transactions
+    //     $log->writeMessage("Database action '{$parts[0]}' from table '{$parts[1]}'");
 
-        $log->writeMessage("Database action '{$parts[0]}' from table '{$parts[1]}'");
+    //     $table = ModelDatabaseTableBase::GetModelForTable($parts[1]);
 
-        $table = ModelDatabaseTableBase::GetModelForTable($parts[1]);
+    //     // Check for record
+    //     $hasRecord = isset($postedData["record"]);
+    //     if (!$hasRecord)
+    //     {
+    //         $result["message"] = "No record data posted";
+    //     }
 
-        // Check for record
-        $hasRecord = isset($postedData["record"]);
-        if (!$hasRecord)
-        {
-            $result["message"] = "No record data posted";
-        }
+    //     // Check the action
+    //     switch ($parts[0])
+    //     {
+    //         case "get":
+    //             $log->writeMessage("Execute get records");
+    //             $result["records"] = $table->getRecords();
+    //             $result["result"] = true;
+    //             $result["message"] = "";
+    //             break;
 
-        // Check the action
-        switch ($parts[0])
-        {
-            case "get":
-                $log->writeMessage("Execute get records");
-                $result["records"] = $table->getRecords();
-                $result["result"] = true;
-                $result["message"] = "";
-                break;
+    //         case "add":
+    //             if ($hasRecord)
+    //             {
+    //                 $log->writeMessage("Execute add record");
+    //                 $result["result"] = $table->addRecord($postedData["record"]);
+    //                 $result["message"] = "";
+    //                 if (!$result["result"])
+    //                 {
+    //                     $result["message"] = "Could not add record: " . $table->getError();
+    //                 }
+    //             }
+    //             break;
 
-            case "add":
-                if ($hasRecord)
-                {
-                    $log->writeMessage("Execute add record");
-                    $result["result"] = $table->addRecord($postedData["record"]);
-                    $result["message"] = "";
-                    if (!$result["result"])
-                    {
-                        $result["message"] = "Could not add record: " . $table->getError();
-                    }
-                }
-                break;
+    //         case "update":
+    //             if ($hasRecord)
+    //             {
+    //                 $log->writeMessage("Execute update record");
+    //                 $result["result"] = $table->modifyRecord($postedData["record"]);
+    //                 $result["message"] = "";
+    //                 if (!$result["result"])
+    //                 {
+    //                     $result["message"] = "Could not update record: " . $table->getError();
+    //                 }
+    //             }
+    //             break;
 
-            case "update":
-                if ($hasRecord)
-                {
-                    $log->writeMessage("Execute update record");
-                    $result["result"] = $table->modifyRecord($postedData["record"]);
-                    $result["message"] = "";
-                    if (!$result["result"])
-                    {
-                        $result["message"] = "Could not update record: " . $table->getError();
-                    }
-                }
-                break;
+    //         case "delete":
+    //             if ($hasRecord)
+    //             {
+    //                 $log->writeMessage("Execute delete record");
+    //                 $result["result"] = $table->removeRecord($postedData["record"]);
+    //                 $result["message"] = "";
+    //                 if (!$result["result"])
+    //                 {
+    //                     $result["message"] = "Could not delete record: " . $table->getError();
+    //                 }
+    //             }
+    //             break;
 
-            case "delete":
-                if ($hasRecord)
-                {
-                    $log->writeMessage("Execute delete record");
-                    $result["result"] = $table->removeRecord($postedData["record"]);
-                    $result["message"] = "";
-                    if (!$result["result"])
-                    {
-                        $result["message"] = "Could not delete record: " . $table->getError();
-                    }
-                }
-                break;
+    //         default:
+    //             $log->writeMessage("Invalid action: '{$parts[0]}'");
+    //             $result["message"] = "Invalid table action '{$parts[0]}'";
+    //     }
 
-            default:
-                $log->writeMessage("Invalid action: '{$parts[0]}'");
-                $result["message"] = "Invalid table action '{$parts[0]}'";
-        }
-
-        return $result;
-    }
+    //     return $result;
+    // }
 
 }
