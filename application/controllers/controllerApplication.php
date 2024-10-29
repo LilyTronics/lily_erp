@@ -56,9 +56,18 @@ class ControllerApplication extends ControllerBase
         $this->gotoLocation("");
     }
 
-    /* Show the  page */
-    protected function showPage($pageName, $pageData=null)
+    /* Set view output */
+    protected function setViewOutput($output)
     {
+        ModelApplicationSession::setData("view_output", $output);
+    }
+
+    /* Show the  page */
+    protected function showPage($pageName, $pageData=[])
+    {
+        $pageData["view_output"] = ModelApplicationSession::getData("view_output", null);
+        ModelApplicationSession::clearData("view_output");
+
         $view = new ViewApplication();
         $view->setView($pageName);
         $view->setUserData("page_data", $pageData);
