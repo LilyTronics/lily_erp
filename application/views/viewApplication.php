@@ -6,6 +6,7 @@ class ViewApplication extends HtmlPageView
     protected function insertBody()
     {
         $pageData = $this->getUserData("page_data");
+
         $output = "<body>\n";
         $output .= $this->getContentFromPageFile("viewHeader.php");
         $output .= $this->getContentFromPageFile("viewModal.php");

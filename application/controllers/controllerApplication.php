@@ -3,13 +3,12 @@
 class ControllerApplication extends ControllerBase
 {
 
-    /* Execute actions */
     public function executeAction($action, $level, $parameters)
     {
         // $level = access level:
         // 0 - always available
-        // 1 - setup must be OK, log in not required
-        // 2 - setup must be OK and must be logged in
+        // 1 - configuration must be OK, log in not required
+        // 2 - configuration must be OK and must be logged in
 
         $controllerName = get_class($this);
         DEBUG_LOG->writeMessage("Start execute action");
@@ -43,26 +42,16 @@ class ControllerApplication extends ControllerBase
         return $this->$action($parameters, $isConfigurationOk, $isSessionValid);
     }
 
-    /* Set page data */
     protected function setPageData($pageData)
     {
         ModelApplicationSession::setData("page_data", $pageData);
     }
 
-    /* Log in */
     protected function showLogIn($parameters)
     {
         return $this->showPage("viewLogIn");
     }
 
-    /* Log out */
-    protected function logOut()
-    {
-        ModelApplicationSession::deleteSession();
-        $this->gotoLocation("");
-    }
-
-    /* Show the  page */
     protected function showPage($pageName, $pageData=[])
     {
         // Merge the page data from the parameter with any stored session data.
@@ -72,6 +61,8 @@ class ControllerApplication extends ControllerBase
             $pageData
         );
         ModelApplicationSession::clearData("page_data");
+
+        $newPageData["is_logged_in"] = ModelApplicationSession::checkSession();
 
         $view = new ViewApplication();
         $view->setView($pageName);
