@@ -79,8 +79,6 @@ class ControllerApplication extends ControllerBase
         $view->addStyleSheet("fontawesome/css/brands.min.css");
         $view->addStyleSheet("fontawesome/css/solid.min.css");
         $view->addJavaScriptFile("dialogs.js");
-        $view->addJavaScriptFile("api.js");
-        $view->addJavaScriptFile("record_table.js");
         return $view->output();
     }
 
