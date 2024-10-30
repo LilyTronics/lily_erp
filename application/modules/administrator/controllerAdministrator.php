@@ -10,7 +10,17 @@ class ControllerAdministrator extends ControllerApplication
 
     protected function showLogFiles($parameters)
     {
-        return $this->showView("LogFiles");
+        $pageData = [
+            "LogFiles" => ModelAdministrator::getLogFiles()
+        ];
+        if (isset($parameters["filename"]))
+        {
+            $pageData["Content"] = [
+                "Filename"    => strtolower(preg_replace("([A-Z])", " $0", $parameters["filename"])),
+                "FileContent" => ModelAdministrator::getFileContent($parameters["filename"])
+            ];
+        }
+        return $this->showView("LogFiles", $pageData);
     }
 
     protected function showDatabase($parameters)
