@@ -55,7 +55,7 @@ class ControllerApi extends ControllerApplication
         return $this->processResult($result, $onSuccess, $onFailure, $record, $title);
     }
 
-    protected function processResult($result, $onSuccess, $onFailure, $record, $title)
+    private function processResult($result, $onSuccess, $onFailure, $record, $title)
     {
         $redirect = null;
         $log = new ModelSystemLogger("api");
