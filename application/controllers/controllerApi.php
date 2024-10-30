@@ -55,6 +55,13 @@ class ControllerApi extends ControllerApplication
                 $log->writeMessage("Log in");
                 $result = ModelApplicationSession::createSession($record, $result);
                 break;
+
+            case "log_out":
+                $log->writeMessage("Log out");
+                $log->writeMessage("Log out");
+                ModelApplicationSession::deleteSession();
+                $result = ["result" => true, "message" => ""];
+                break;
         }
 
         return $this->processResult($result, $onSuccess, $onFailure, $record, $title);
@@ -89,30 +96,7 @@ class ControllerApi extends ControllerApplication
         return json_encode($result, JSON_PRETTY_PRINT);
     }
 
-    // private function getResultFromApiCall($postedData, $result)
-    // {
-    //     $log = new ModelSystemLogger("api");
-    //     if (!isset($postedData["action"])) {
-    //         $result["message"] = "No action defined";
-    //         return $result;
-    //     }
-    //     $log->writeMessage("Process action: '{$postedData["action"]}'");
-
-    //     // Log in
-    //     if ($postedData["action"] == "log_in" and isset($postedData["record"]))
-    //     {
-    //         $log->writeMessage("Log in");
-    //         $result = ModelApplicationSession::createSession($postedData["record"], $result);
-    //         return $result;
-    //     }
-
-    //     // Log_out
-    //     if ($postedData["action"] == "log_out")
-    //     {
-    //         $log->writeMessage("Log out");
-    //         ModelApplicationSession::deleteSession();
-    //         return ["result" => true, "message" => ""];
-    //     }
+    // Old actions handler
 
     //     // Database actions
     //     $parts = explode("_", $postedData["action"], 2);
@@ -185,6 +169,5 @@ class ControllerApi extends ControllerApplication
     //     }
 
     //     return $result;
-    // }
 
 }
