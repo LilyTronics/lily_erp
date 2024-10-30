@@ -4,13 +4,14 @@ class ModelDashboard
 {
 
     private static $dashboardItems = [
-        [ "fa-cash-register",       "Accounting",   "accounting",   "" ],
-        [ "fa-address-card",        "Relations",    "relations",    "" ],
-        [ "fa-shop",                "Sales",        "sales",        "" ],
-        [ "fa-basket-shopping",     "Purchase",     "purchase",     "" ],
-        [ "fa-warehouse",           "Inventory",    "inventory",    "" ],
-        [ "fa-boxes-stacked",       "Products",     "products",     "" ],
-        [ "fa-users",               "Users",        "users",        "" ]
+        [ "fa-cash-register",       "Accounting",       "accounting",       "" ],
+        [ "fa-address-card",        "Relations",        "relations",        "" ],
+        [ "fa-shop",                "Sales",            "sales",            "" ],
+        [ "fa-basket-shopping",     "Purchase",         "purchase",         "" ],
+        [ "fa-warehouse",           "Inventory",        "inventory",        "" ],
+        [ "fa-boxes-stacked",       "Products",         "products",         "" ],
+        [ "fa-users",               "Users",            "users",            "" ],
+        [ "fa-screwdriver-wrench",  "Administrator",    "administrator",    "" ]
     ];
 
 
