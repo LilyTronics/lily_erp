@@ -3,35 +3,6 @@
 class ControllerApi extends ControllerApplication
 {
 
-    protected function processResult($result, $onSuccess, $onFailure, $record, $title)
-    {
-        $redirect = null;
-        $log = new ModelSystemLogger("api");
-        $log->writeMessage("Result: " . var_export($result["result"], true));
-        if ($result["result"])
-        {
-            $redirect = $onSuccess;
-        }
-        else
-        {
-            $log->writeMessage("Message: {$result["message"]}");
-            $redirect = $onFailure;
-        }
-
-        if ($redirect  !== null)
-        {
-            $log->writeMessage("Go to location: {$redirect}");
-            // Pass result to the page
-            $result["record"] = $record;
-            $result["title"] = $title;
-            $this->setPageData($result);
-            $this->gotoLocation($redirect);
-        }
-
-        // No redirect just send the result in JSON format
-        return json_encode($result, JSON_PRETTY_PRINT);
-    }
-
     protected function processApiCall($parameters, $isConfigurationOk, $isSessionValid)
     {
         $result = ["result" => false, "message" => "Server error, try again later"];
@@ -82,6 +53,35 @@ class ControllerApi extends ControllerApplication
         }
 
         return $this->processResult($result, $onSuccess, $onFailure, $record, $title);
+    }
+
+    protected function processResult($result, $onSuccess, $onFailure, $record, $title)
+    {
+        $redirect = null;
+        $log = new ModelSystemLogger("api");
+        $log->writeMessage("Result: " . var_export($result["result"], true));
+        if ($result["result"])
+        {
+            $redirect = $onSuccess;
+        }
+        else
+        {
+            $log->writeMessage("Message: {$result["message"]}");
+            $redirect = $onFailure;
+        }
+
+        if ($redirect  !== null)
+        {
+            $log->writeMessage("Go to location: {$redirect}");
+            // Pass result to the page
+            $result["record"] = $record;
+            $result["title"] = $title;
+            $this->setPageData($result);
+            $this->gotoLocation($redirect);
+        }
+
+        // No redirect just send the result in JSON format
+        return json_encode($result, JSON_PRETTY_PRINT);
     }
 
     // private function getResultFromApiCall($postedData, $result)
