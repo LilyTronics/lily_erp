@@ -50,6 +50,11 @@ class ControllerApi extends ControllerApplication
                 $log->writeMessage("Create configuration");
                 $result = ModelSetup::createConfiguration($record, $result);
                 break;
+
+            case "log_in":
+                $log->writeMessage("Log in");
+                $result = ModelApplicationSession::createSession($record, $result);
+                break;
         }
 
         return $this->processResult($result, $onSuccess, $onFailure, $record, $title);
