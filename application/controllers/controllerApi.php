@@ -16,11 +16,11 @@ class ControllerApi extends ControllerApplication
 
         # Get things we need from the posted data
         $postedData = ModelHelper::getPostedData();
-        $action = isset($postedData["action"]) ? $postedData["action"] : "";
-        $record = isset($postedData["record"]) ? $postedData["record"] : [];
-        $onSuccess = isset($postedData["on_success"]) ? $postedData["on_success"] : null;
-        $onFailure = isset($postedData["on_failure"]) ? $postedData["on_failure"] : null;
-        $title = isset($postedData["title"]) ? $postedData["title"] : "";
+        $action = (isset($postedData["action"]) ? $postedData["action"] : "");
+        $record = (isset($postedData["record"]) ? $postedData["record"] : []);
+        $onSuccess = (isset($postedData["on_success"]) ? $postedData["on_success"] : null);
+        $onFailure = (isset($postedData["on_failure"]) ? $postedData["on_failure"] : null);
+        $title = (isset($postedData["title"]) ? $postedData["title"] : "");
 
         $log->writeMessage("Action          : {$action}");
         $log->writeMessage("Has record      : " . (count($record) > 0 ? "yes" : "no"));
@@ -44,19 +44,19 @@ class ControllerApi extends ControllerApplication
 
         // Process the API action
         $result = ["result" => false, "message" => "Invalid action: '{$action}'"];
-        switch ($action)
+        switch (true)
         {
-            case "create_configuration":
+            case ($action == "create_configuration"):
                 $log->writeMessage("Create configuration");
                 $result = ModelSetup::createConfiguration($record, $result);
                 break;
 
-            case "log_in":
+            case ($action == "log_in"):
                 $log->writeMessage("Log in");
                 $result = ModelApplicationSession::createSession($record, $result);
                 break;
 
-            case "log_out":
+            case ($action == "log_out"):
                 $log->writeMessage("Log out");
                 $log->writeMessage("Log out");
                 ModelApplicationSession::deleteSession();
