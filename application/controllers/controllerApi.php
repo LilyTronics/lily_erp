@@ -81,6 +81,11 @@ class ControllerApi extends ControllerApplication
         $parts = explode("_", $action, 2);
         $log->writeMessage("Database action '{$parts[0]}' from table '{$parts[1]}'");
         $table = ModelDatabaseTableBase::GetModelForTable($parts[1]);
+        if ($table === null)
+        {
+            $result["message"] = "Table '{$parts[1]}' does not exist";
+            return $result;
+        }
         // Check the action
         switch ($parts[0])
         {

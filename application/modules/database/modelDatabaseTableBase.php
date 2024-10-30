@@ -17,9 +17,20 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
 
     public static function GetModelForTable($tableName)
     {
+        $table = null;
+        // Check if the database file exists, else we can get a fatal error
         $tableName = str_replace(["-", "_"], "", $tableName);
         $tableModel = "ModelDatabaseTable{$tableName}";
-        $table = new $tableModel();
+        $fileMatch = strtolower(DIRECTORY_SEPARATOR . "{$tableModel}.php");
+        foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator(DOC_ROOT . APP_MODULES_PATH)) as $file)
+        {
+            if (str_ends_with(strtolower($file), $fileMatch))
+            {
+                // File exists so model must be there
+                $table = new $tableModel();
+                break;
+            }
+        }
         return $table;
     }
 
