@@ -76,6 +76,7 @@ class ControllerApi extends ControllerApplication
 
     private function processDatabaseAction($result, $action, $record)
     {
+        $log = new ModelSystemLogger("api");
         // Split up in action and table
         $parts = explode("_", $action, 2);
         $log->writeMessage("Database action '{$parts[0]}' from table '{$parts[1]}'");
