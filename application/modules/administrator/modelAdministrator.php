@@ -32,4 +32,11 @@ class ModelAdministrator
         return "The file does not exist";
     }
 
+    public static function deleteLogFile($filename)
+    {
+        $filename = SYS_LOG_PATH . "{$filename}.log";
+        if (file_exists($filename)) {
+            unlink($filename);
+        }
+    }
 }

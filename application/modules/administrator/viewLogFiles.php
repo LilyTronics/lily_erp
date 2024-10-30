@@ -28,7 +28,10 @@ if (count($logFiles) > 0)
     echo "<div class=\"w3-container w3-padding-small w3-theme\">Content";
     if (isset($pageData["Content"]["Filename"]))
     {
-        echo " of {$pageData["Content"]["Filename"]}";
+        $deleteLink = WEB_ROOT . "administrator/delete-log-file/{$pageData["Content"]["Filename"]}";
+        echo " of " . strtolower(preg_replace("([A-Z])", " $0", $pageData["Content"]["Filename"]));
+        echo "<a class=\"w3-right\" href=\"{$deleteLink}\" onclick=\"showModalLoader()\" title=\"Delete log file\">";
+        echo "<i class=\"fa-solid fa-trash-can\"></i></a>\n";
     }
     echo "</div>\n";
     if (isset($pageData["Content"]["FileContent"]))

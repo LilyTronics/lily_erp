@@ -16,11 +16,20 @@ class ControllerAdministrator extends ControllerApplication
         if (isset($parameters["filename"]))
         {
             $pageData["Content"] = [
-                "Filename"    => strtolower(preg_replace("([A-Z])", " $0", $parameters["filename"])),
+                "Filename"    => $parameters["filename"],
                 "FileContent" => ModelAdministrator::getFileContent($parameters["filename"])
             ];
         }
         return $this->showView("LogFiles", $pageData);
+    }
+
+    protected function deleteLogFile($parameters)
+    {
+        if (isset($parameters["filename"]))
+        {
+            ModelAdministrator::deleteLogFile($parameters["filename"]);
+        }
+        $this->gotoLocation("administrator/log-files");
     }
 
     protected function showDatabase($parameters)
