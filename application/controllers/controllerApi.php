@@ -23,9 +23,9 @@ class ControllerApi extends ControllerApplication
         $title = isset($postedData["title"]) ? $postedData["title"] : "";
 
         $log->writeMessage("Action          : {$action}");
-        $log->writeMessage("Has record      : " . Count($record) > 0 ? "yes" : "no");
-        $log->writeMessage("On success      : " . $onSuccess !== null ? $onSuccess : "null");
-        $log->writeMessage("On failure      : " . $onFailure !== null ? $onFailure : "null");
+        $log->writeMessage("Has record      : " . (count($record) > 0 ? "yes" : "no"));
+        $log->writeMessage("On success      : " . ($onSuccess !== null ? $onSuccess : "null"));
+        $log->writeMessage("On failure      : " . ($onFailure !== null ? $onFailure : "null"));
         $log->writeMessage("Dialog tile     : {$title}");
 
         // If the configuration is not OK and we are not trying to create one
