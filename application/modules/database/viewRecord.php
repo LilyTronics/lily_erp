@@ -1,7 +1,7 @@
 <div class="w3-container w3-section w3-padding">
 <?php
 
-$pageData = $this->getUserData("page_data", []);
+$pageData = $this->getPageData();
 $record = [];
 $view = [];
 

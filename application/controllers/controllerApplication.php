@@ -66,7 +66,7 @@ class ControllerApplication extends ControllerBase
 
         $view = new ViewApplication();
         $view->setView($pageName);
-        $view->setUserData("page_data", $newPageData);
+        $view->setPageData($newPageData);
         $view->setPageTitle(APPLICATION_TITLE);
         $view->addMetaTag("name=\"viewport\" content=\"width=device-width, initial-scale=1\"");
         $view->addJavascriptPreVariable("WEB_ROOT", "\"" . WEB_ROOT . "\"");

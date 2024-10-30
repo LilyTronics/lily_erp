@@ -1,6 +1,6 @@
 <?php
 
-$pageData = $this->getUserData("page_data", []);
+$pageData = $this->getPageData();
 
 $menuClass = "w3-bar-item w3-button w3-padding-small";
 

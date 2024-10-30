@@ -7,7 +7,7 @@
 
 <?php
 
-$pageData = $this->getUserData("page_data");
+$pageData = $this->getPageData();
 
 if (isset($pageData["output"]))
 {

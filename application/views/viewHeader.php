@@ -2,7 +2,7 @@
 <h2 class="w3-left">Lily ERP</h2>
 <?php
 
-$pageData = $this->getUserData("page_data");
+$pageData = $this->getPageData();
 
 if ($pageData["is_logged_in"])
 {

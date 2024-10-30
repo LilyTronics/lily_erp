@@ -1,6 +1,6 @@
 <?php
 
-$pageData = $this->getUserData("page_data");
+$pageData = $this->getPageData();
 
 $hostName = isset($pageData["record"]["host_name"]) ? $pageData["record"]["host_name"] : "";
 $database = isset($pageData["record"]["database"]) ? $pageData["record"]["database"] : "";
