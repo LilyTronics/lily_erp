@@ -35,7 +35,7 @@ class ViewApplication extends HtmlPageView
         $title = isset($pageData["title"]) ? $pageData["title"] : "Server message";
         if (!$result)
         {
-            $message = str_replace("'", "\\'", $message);
+            $message = htmlspecialchars($message, ENT_QUOTES);
             $output = "<script>showModal('$title', '$message');</script>\n";
         }
         return $output;
