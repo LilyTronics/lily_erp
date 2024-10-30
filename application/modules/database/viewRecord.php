@@ -117,7 +117,7 @@ else
 }
 
 echo "<p><button class=\"{BUTTON}\" ";
-echo "onclick=\"sendForm('add_{$pageData["table"]}', 'Save record', '{$pageData["return_uri"]}')\">Save</button></p>\n";
+echo ">Save</button></p>\n";
 
 ?>
 </div>
