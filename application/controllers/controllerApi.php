@@ -62,9 +62,66 @@ class ControllerApi extends ControllerApplication
                 ModelApplicationSession::deleteSession();
                 $result = ["result" => true, "message" => ""];
                 break;
+
+            case (str_starts_with($action, "get_")):
+            case (str_starts_with($action, "add_")):
+            case (str_starts_with($action, "update_")):
+            case (str_starts_with($action, "delete_")):
+                $result = $this->processDatabaseAction($result, $action, $record);
+                break;
         }
 
         return $this->processResult($result, $onSuccess, $onFailure, $record, $title);
+    }
+
+    private function processDatabaseAction($result, $action, $record)
+    {
+        // Split up in action and table
+        $parts = explode("_", $action, 2);
+        $log->writeMessage("Database action '{$parts[0]}' from table '{$parts[1]}'");
+        $table = ModelDatabaseTableBase::GetModelForTable($parts[1]);
+        // Check the action
+        switch ($parts[0])
+        {
+            case "get":
+                $log->writeMessage("Execute get records");
+                $result["records"] = $table->getRecords();
+                $result["result"] = true;
+                $result["message"] = "";
+                break;
+
+            case "add":
+                $log->writeMessage("Execute add record");
+                $result["result"] = $table->addRecord($record);
+                $result["message"] = "";
+                if (!$result["result"])
+                {
+                    $result["message"] = "Could not add record: " . $table->getError();
+                }
+                break;
+
+
+            case "update":
+                $log->writeMessage("Execute update record");
+                $result["result"] = $table->modifyRecord($record);
+                $result["message"] = "";
+                if (!$result["result"])
+                {
+                    $result["message"] = "Could not update record: " . $table->getError();
+                }
+                break;
+
+            case "delete":
+                $log->writeMessage("Execute delete record");
+                $result["result"] = $table->removeRecord($record);
+                $result["message"] = "";
+                if (!$result["result"])
+                {
+                    $result["message"] = "Could not delete record: " . $table->getError();
+                }
+                break;
+        }
+        return $result;
     }
 
     private function processResult($result, $onSuccess, $onFailure, $record, $title)
@@ -95,79 +152,5 @@ class ControllerApi extends ControllerApplication
         // No redirect just send the result in JSON format
         return json_encode($result, JSON_PRETTY_PRINT);
     }
-
-    // Old actions handler
-
-    //     // Database actions
-    //     $parts = explode("_", $postedData["action"], 2);
-    //     // First part is action: get, add, update, delete
-    //     // Rest is table name E.G.: bank_transactions
-
-    //     $log->writeMessage("Database action '{$parts[0]}' from table '{$parts[1]}'");
-
-    //     $table = ModelDatabaseTableBase::GetModelForTable($parts[1]);
-
-    //     // Check for record
-    //     $hasRecord = isset($postedData["record"]);
-    //     if (!$hasRecord)
-    //     {
-    //         $result["message"] = "No record data posted";
-    //     }
-
-    //     // Check the action
-    //     switch ($parts[0])
-    //     {
-    //         case "get":
-    //             $log->writeMessage("Execute get records");
-    //             $result["records"] = $table->getRecords();
-    //             $result["result"] = true;
-    //             $result["message"] = "";
-    //             break;
-
-    //         case "add":
-    //             if ($hasRecord)
-    //             {
-    //                 $log->writeMessage("Execute add record");
-    //                 $result["result"] = $table->addRecord($postedData["record"]);
-    //                 $result["message"] = "";
-    //                 if (!$result["result"])
-    //                 {
-    //                     $result["message"] = "Could not add record: " . $table->getError();
-    //                 }
-    //             }
-    //             break;
-
-    //         case "update":
-    //             if ($hasRecord)
-    //             {
-    //                 $log->writeMessage("Execute update record");
-    //                 $result["result"] = $table->modifyRecord($postedData["record"]);
-    //                 $result["message"] = "";
-    //                 if (!$result["result"])
-    //                 {
-    //                     $result["message"] = "Could not update record: " . $table->getError();
-    //                 }
-    //             }
-    //             break;
-
-    //         case "delete":
-    //             if ($hasRecord)
-    //             {
-    //                 $log->writeMessage("Execute delete record");
-    //                 $result["result"] = $table->removeRecord($postedData["record"]);
-    //                 $result["message"] = "";
-    //                 if (!$result["result"])
-    //                 {
-    //                     $result["message"] = "Could not delete record: " . $table->getError();
-    //                 }
-    //             }
-    //             break;
-
-    //         default:
-    //             $log->writeMessage("Invalid action: '{$parts[0]}'");
-    //             $result["message"] = "Invalid table action '{$parts[0]}'";
-    //     }
-
-    //     return $result;
 
 }
