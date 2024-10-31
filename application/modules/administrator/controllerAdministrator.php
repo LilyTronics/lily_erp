@@ -8,6 +8,8 @@ class ControllerAdministrator extends ControllerApplication
         return $this->showView("Administrator");
     }
 
+    /* Log files */
+
     protected function showLogFiles($parameters)
     {
         $pageData = [
@@ -32,10 +34,24 @@ class ControllerAdministrator extends ControllerApplication
         $this->gotoLocation("administrator/log-files");
     }
 
+    /* Database */
+
     protected function showDatabase($parameters)
     {
-        return $this->showView("Database");
+        $pageData = [
+            "Tables" => ModelAdministrator::getTables()
+        ];
+        if (isset($parameters["table"]))
+        {
+            $pageData["Content"] = [
+                "table"   => $parameters["table"],
+                "records" => ModelAdministrator::getRecords($parameters["table"])
+            ];
+        }
+        return $this->showView("Database", $pageData);
     }
+
+    /* Show view */
 
     private function showView($pageName, $pageData=[])
     {

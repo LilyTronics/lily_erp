@@ -4,13 +4,15 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
 
     protected $returnUri = "";
 
+    public $database = "";
 
-    public function __construct($tableName, $fields=null, $autoCreateTable=false, $defaultRecords=[]) {
+    public function __construct($tableName="", $fields=null, $autoCreateTable=false, $defaultRecords=[]) {
         $config = new ModelConfiguration(CONFIG_FILE);
         $db = $config->getValue("sql", "database");
         $host = $config->getValue("sql", "host");
         $user = $config->getValue("sql", "user");
         $password = $config->getValue("sql", "password");
+        $this->database = $db;
 
         parent::__construct($db, $tableName, $fields, $host, $user, $password, $autoCreateTable, $defaultRecords);
     }

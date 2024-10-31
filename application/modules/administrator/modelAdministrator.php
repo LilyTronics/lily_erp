@@ -6,11 +6,13 @@ class ModelAdministrator
     public static function getMenu()
     {
         return [
-            ["Administrator", "administrator"],
-            ["Log files", "administrator/log-files"],
-            ["Database", "adminstrator/database"]
+            ["Administrator", "administrator"          ],
+            ["Log files",     "administrator/log-files"],
+            ["Database",      "administrator/database" ]
         ];
     }
+
+    /* log files */
 
     public static function getLogFiles()
     {
@@ -39,4 +41,34 @@ class ModelAdministrator
             unlink($filename);
         }
     }
+
+    /* database */
+
+    public static function getTables()
+    {
+        $tables = [];
+        $table = new ModelDatabaseTableBase();
+        if ($table->executeQuery("USE {$table->database}"))
+        {
+            $result = $table->selectRecordsFromQuery("SHOW TABLES");
+            if ($result[0])
+            {
+                $tables = array_map(fn($x) : string => array_values($x)[0], $result[1]);
+            }
+        }
+        return $tables;
+    }
+
+    public static function getRecords($table)
+    {
+        $records = [];
+        $table = new ModelDatabaseTableBase($table);
+        $result = $table->selectRecords();
+        if ($result[0])
+        {
+            $records = $result[1];
+        }
+        return $records;
+    }
+
 }
