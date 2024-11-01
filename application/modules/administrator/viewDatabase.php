@@ -24,13 +24,13 @@ if (count($tables) > 0)
     echo "</div>\n";
     echo "</div>\n";
 
-    // Columns for the file content
+    // Column for the table content
+    $table = (isset($pageData["Content"]["table"]) ? $pageData["Content"]["table"] : "");
     echo "<div class=\"w3-rest\">\n";
-    echo "<div class=\"w3-container w3-padding-small w3-theme\">Records";
-    if (isset($pageData["Content"]["table"]))
-    {
-        echo " of {$pageData["Content"]["table"]}\n";
-    }
+    echo "<div class=\"w3-container w3-padding-small w3-theme\">Records of {$table}\n";
+    echo "</div>\n";
+    echo "<div class=\"w3-container w3-padding-small\">\n";
+    echo "<p><a class=\"{TOOL_BUTTON}\" href=\"" . WEB_ROOT . "administrator/database-record/{$table}/0\">New record</a>\n";
     echo "</div>\n";
     echo "<div class=\"w3-container w3-padding-small\">\n";
     if (isset($pageData["Content"]["records"]))
