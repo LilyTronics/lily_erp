@@ -26,29 +26,37 @@ if (count($tables) > 0)
 
     // Column for the table content
     $table = (isset($pageData["Content"]["table"]) ? $pageData["Content"]["table"] : "");
+    $records = (isset($pageData["Content"]["records"]) ? $pageData["Content"]["records"] : []);
     echo "<div class=\"w3-rest\">\n";
     echo "<div class=\"w3-container w3-padding-small w3-theme\">Records of {$table}\n";
     echo "</div>\n";
     echo "<div class=\"w3-container w3-padding-small\">\n";
-    echo "<p><a class=\"{TOOL_BUTTON}\" href=\"" . WEB_ROOT . "administrator/database-record/{$table}/0\">New record</a>\n";
+    echo "<p><a class=\"{TOOL_BUTTON}\" href=\"" . WEB_ROOT . "administrator/database-record/{$table}/0\" ";
+    echo "onclick=\"showModalLoader()\">New record</a>\n";
+    if (count($records) > 0)
+    {
+        echo "<a class=\"{TOOL_BUTTON} w3-margin-left\" href=\"" . WEB_ROOT . "administrator/database-table/{$table}/delete/0\" ";
+        echo "onclick=\"showModalLoader()\">Delete all records</a>";
+    }
+    echo "</p>\n";
     echo "</div>\n";
     echo "<div class=\"w3-container w3-padding-small\">\n";
     if (isset($pageData["Content"]["records"]))
     {
-        if (count($pageData["Content"]["records"]) > 0)
+        if (count($records) > 0)
         {
             echo "<div class=\"w3-responsive w3-margin-top\">\n";
             echo "<table class=\"w3-table-all w3-hoverable record-table\">\n";
             echo "<thead><tr class=\"w3-theme\">";
-            foreach (array_keys($pageData["Content"]["records"][0]) as $key)
+            foreach (array_keys($records[0]) as $key)
             {
                 echo "<th>{$key}</th>\n";
             }
             echo "</tr></thead>\n";
             echo "<tbody>\n";
-            foreach ($pageData["Content"]["records"] as $record)
+            foreach ($records as $record)
             {
-                $recordLink = WEB_ROOT . "administrator/database-record/{$pageData["Content"]["table"]}/{$record["id"]}";
+                $recordLink = WEB_ROOT . "administrator/database-record/{$table}/{$record["id"]}";
                 echo "<tr onclick=\"showModalLoader();location.href='{$recordLink}'\">";
                 foreach (array_keys($record) as $key)
                 {
