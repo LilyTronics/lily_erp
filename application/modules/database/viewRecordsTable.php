@@ -40,7 +40,7 @@ if (count($records) > 0)
     echo "<tbody>\n";
     foreach ($records as $record)
     {
-        $recordLink = WEB_ROOT; // . "administrator/database-record/{$table}/{$record["id"]}";
+        $recordLink = WEB_ROOT . $recordUri . $record["id"];
         echo "<tr onclick=\"showModalLoader();location.href='{$recordLink}'\">";
         foreach (array_keys($record) as $key)
         {

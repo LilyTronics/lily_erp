@@ -42,10 +42,11 @@ class ViewApplication extends HtmlPageView
         return $output;
     }
 
-    public function insertRecordTable($records)
+    public function insertRecordTable($records, $recordUri)
     {
         $variables = [
-            "records" => $records
+            "records"   => $records,
+            "recordUri" => $recordUri
         ];
         return $this->getContentFromPageFile("database/viewRecordsTable.php", APP_MODULES_PATH, $variables);
     }
