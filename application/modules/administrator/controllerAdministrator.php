@@ -39,11 +39,11 @@ class ControllerAdministrator extends ControllerApplication
     protected function showDatabase($parameters)
     {
         $pageData = [
-            "Tables" => ModelAdministrator::getTables()
+            "tables" => ModelAdministrator::getTables()
         ];
         if (isset($parameters["table"]))
         {
-            $pageData["Content"] = [
+            $pageData["content"] = [
                 "table"   => $parameters["table"],
                 "records" => ModelAdministrator::getRecords($parameters["table"])
             ];
