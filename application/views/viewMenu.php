@@ -6,7 +6,7 @@ $menuClass = "w3-bar-item w3-button w3-padding-small";
 
 if (isset($pageData["menu"]))
 {
-    echo "<div class=\"w3-container w3-padding-small w3-border-bottom\">\n";
+    echo "<div class=\"w3-container w3-padding-small w3-border-bottom w3-margin-bottom\">\n";
     // Insert link to dashboard
     echo "<a class=\"$menuClass\" href=\"" . WEB_ROOT . "dashboard\" title=\"dashboard\" onclick=\"showModalLoader()\"><i class=\"fa-solid fa-grip\"></i></a>\n";
     // Add menu items
