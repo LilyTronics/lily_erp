@@ -39,14 +39,20 @@ class ControllerAdministrator extends ControllerApplication
     protected function showDatabase($parameters)
     {
         $pageData = [
-            "tables" => ModelAdministrator::getTables()
+            "tables"  => ModelAdministrator::getTables(),
+            "content" => []
         ];
-        if (isset($parameters["table"]))
+        $table = (isset($parameters["table"]) ? $parameters["table"] : "");
+        $recordId = (isset($parameters["record_id"]) ? $parameters["record_id"] : null);
+        if ($recordId !== null and $table != "")
         {
-            $pageData["content"] = [
-                "table"   => $parameters["table"],
-                "records" => ModelAdministrator::getRecords($parameters["table"])
-            ];
+            $pageData["content"]["record"] = ModelAdministrator::getRecord($table, $recordId);
+            $pageData["content"]["inputs"] = ModelAdministrator::getInputs($table);
+        }
+        elseif ($table != "")
+        {
+            $pageData["content"]["table"] = $table;
+            $pageData["content"]["records"] = ModelAdministrator::getRecords($table);
         }
         return $this->showView("Database", $pageData);
     }

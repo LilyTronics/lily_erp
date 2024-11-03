@@ -2,9 +2,8 @@
 
 class ModelDatabaseTableBase extends ModelDatabaseTable {
 
+    public $inputs = [];
     protected $returnUri = "";
-
-    public $database = "";
 
     public function __construct($autoCreateTable=false, $defaultRecords=[]) {
         $config = new ModelConfiguration(CONFIG_FILE);
@@ -58,26 +57,6 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
             }
         }
         return $record;
-    }
-
-    public function getRecordView()
-    {
-        $view = [];
-        foreach ($this->fields as $field)
-        {
-            if ($field["Name"] != "id")
-            {
-                if (!isset($field["Input"]))
-                {
-                    $view[$field["Name"]] = "";
-                }
-                else
-                {
-                    $view[$field["Name"]] = $field["Input"];
-                }
-            }
-        }
-        return $view;
     }
 
     public function getRecords($filterExpression="", $orderExpression="", $groupExpression="", $start=0, $count=0,

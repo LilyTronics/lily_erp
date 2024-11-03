@@ -1,4 +1,3 @@
-<p>On this page you can make changes directly in the database.</p>
 <?php
 
 $pageData = $this->getPageData();
@@ -7,6 +6,7 @@ $tables = (isset($pageData["tables"]) ? $pageData["tables"] : []);
 $activeTable = (isset($pageData["content"]["table"]) ? $pageData["content"]["table"] : "");
 $records = (isset($pageData["content"]["records"]) ? $pageData["content"]["records"] : []);
 $record = (isset($pageData["content"]["record"]) ? $pageData["content"]["record"] : null);
+$inputs = (isset($pageData["content"]["inputs"]) ? $pageData["content"]["inputs"] : []);
 
 ?>
 <div class="w3-row-padding">
@@ -36,10 +36,11 @@ else
 <?php
 
 echo "<div class=\"w3-container w3-padding-small w3-theme\">";
-if ($record != null)
+if ($record !== null)
 {
     // show record
     echo "Record data for record with ID: {$record["id"]}</div>";
+    echo $this->insertRecordForm($record, $inputs);
 }
 else
 {

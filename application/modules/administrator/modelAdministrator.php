@@ -58,14 +58,25 @@ class ModelAdministrator
 
     public static function getRecords($table)
     {
-        $records = [];
         $table = ModelDatabaseTableBase::GetModelForTable($table);
-        $result = $table->selectRecords();
-        if ($result[0])
-        {
-           $records = $result[1];
+        return $table->getRecords();
+    }
+
+    public static function getRecord($table, $id)
+    {
+        $record = ["id" => $id];
+        $table = ModelDatabaseTableBase::GetModelForTable($table);
+        $records = $table->getRecords("id = $id");
+        if (count($records) == 1) {
+            $record = $records[0];
         }
-        return $records;
+        return $record;
+    }
+
+    public static function getInputs($table)
+    {
+        $table = ModelDatabaseTableBase::GetModelForTable($table);
+        return $table->inputs;
     }
 
 }
