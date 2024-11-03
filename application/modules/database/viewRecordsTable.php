@@ -1,5 +1,8 @@
 <div class="w3-container w3-padding-small"> <!-- records table -->
 <?php
+// From the view call:
+// echo $this->insertRecordTable($records, $recordUri);
+
 
 function getStyle($field)
 {
