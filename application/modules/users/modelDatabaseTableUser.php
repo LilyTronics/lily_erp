@@ -5,29 +5,16 @@ class ModelDatabaseTableUser extends ModelDatabaseTableBase {
     public $lockMaxAttempts = 5;
     public $lockTimeout = 30;
 
+
     public function __construct() {
-        $tableName = "user";
-        $fields = [
-            [ "Name"    => "id",
-              "Type"    => "INT",
-              "Options" => "AUTO_INCREMENT",
-              "Key"     => true ],
-            [ "Name"    => "email",
-              "Type"    => "VARCHAR(200)" ],
-            [ "Name"    => "name",
-              "Type"    => "VARCHAR(200)" ],
-            [ "Name"    => "password",
-              "Type"    => "VARCHAR(200)" ],
-            [ "Name"    => "is_admin",
-              "Type"    => "INT" ],
-            [ "Name"    => "access_levels",
-              "Type"    => "VARCHAR(200)" ],
-            [ "Name"    => "last_log_in",
-              "Type"    => "INT" ],
-            [ "Name"    => "log_in_fail",
-              "Type"    => "INT" ],
-        ];
-        parent::__construct($tableName, $fields, true);
+        $this->tableName = "user";
+        $this->fields[] = [ "Name" => "email",         "Type" => "VARCHAR(200)" ];
+        $this->fields[] = [ "Name" => "password",      "Type" => "VARCHAR(200)" ];
+        $this->fields[] = [ "Name" => "is_admin",      "Type" => "INT"          ];
+        $this->fields[] = [ "Name" => "access_levels", "Type" => "VARCHAR(200)" ];
+        $this->fields[] = [ "Name" => "last_log_in",   "Type" => "INT"          ];
+        $this->fields[] = [ "Name" => "log_in_fail",   "Type" => "INT"          ];
+        parent::__construct(true);
     }
 
     public function hash($input)

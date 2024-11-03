@@ -6,15 +6,22 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
 
     public $database = "";
 
-    public function __construct($tableName="", $fields=null, $autoCreateTable=false, $defaultRecords=[]) {
+    public function __construct($autoCreateTable=false, $defaultRecords=[]) {
         $config = new ModelConfiguration(CONFIG_FILE);
-        $db = $config->getValue("sql", "database");
         $host = $config->getValue("sql", "host");
         $user = $config->getValue("sql", "user");
         $password = $config->getValue("sql", "password");
-        $this->database = $db;
+        $this->database = $config->getValue("sql", "database");
 
-        parent::__construct($db, $tableName, $fields, $host, $user, $password, $autoCreateTable, $defaultRecords);
+        // Insert ID field as first field, for every table the same
+        array_unshift($this->fields, [
+            "Name"    => "id",
+            "Type"    => "INT",
+            "Options" => "AUTO_INCREMENT",
+            "Key"     => true
+        ]);
+
+        parent::__construct($host, $user, $password, $autoCreateTable, $defaultRecords);
     }
 
     public static function GetModelForTable($tableName)
