@@ -48,13 +48,10 @@ class ModelAdministrator
     {
         $tables = [];
         $table = new ModelDatabaseTableBase();
-        if ($table->executeQuery("USE {$table->database}"))
+        $result = $table->selectRecordsFromQuery("SHOW TABLES FROM {$table->database}");
+        if ($result[0])
         {
-            $result = $table->selectRecordsFromQuery("SHOW TABLES");
-            if ($result[0])
-            {
-                $tables = array_map(fn($x) : string => array_values($x)[0], $result[1]);
-            }
+            $tables = array_map(fn($x) : string => array_values($x)[0], $result[1]);
         }
         return $tables;
     }
@@ -62,11 +59,11 @@ class ModelAdministrator
     public static function getRecords($table)
     {
         $records = [];
-        $table = new ModelDatabaseTableBase($table);
+        $table = ModelDatabaseTableBase::GetModelForTable($table);
         $result = $table->selectRecords();
         if ($result[0])
         {
-            $records = $result[1];
+           $records = $result[1];
         }
         return $records;
     }
