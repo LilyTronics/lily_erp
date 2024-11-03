@@ -3,6 +3,16 @@
 class ModelRecord
 {
 
+    public static function formatFieldName($field, $ucFirst=false)
+    {
+        $name = str_replace("_", " ", $field);
+        if ($ucFirst)
+        {
+            $name = ucfirst($name);
+        }
+        return $name;
+    }
+
     public static function formatValue($field, $value)
     {
         if ($field == "amount")

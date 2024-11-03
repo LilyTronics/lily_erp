@@ -1,16 +1,6 @@
 <div class="w3-container w3-padding-small"> <!-- records table -->
 <?php
 
-function formatValue($field, $value)
-{
-    if ($field == "amount")
-    {
-        $value = preg_replace("/(\.\d{2}[^0]*)(0*)$/", "$1", $value);
-    }
-    return $value;
-}
-
-
 function getStyle($field)
 {
     $style = "";
@@ -32,7 +22,7 @@ if (count($records) > 0)
     {
         if ($key != "id")
         {
-            $label = ucfirst(str_replace("_", " ", $key));
+            $label = ModelRecord::formatFieldName($key, true);
             echo "<th style=\"white-space:nowrap\">{$label}</th>\n";
         }
     }
@@ -46,7 +36,7 @@ if (count($records) > 0)
         {
             if ($key != "id")
             {
-                $value = formatValue($key, $record[$key]);
+                $value = ModelRecord::formatValue($key, $record[$key]);
                 echo "<td";
                 $style = getStyle($key);
                 if ($style !== "")
