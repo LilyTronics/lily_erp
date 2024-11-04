@@ -47,8 +47,8 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
         return $this->returnUri;
     }
 
-    public function getNewRecord() {
-        $record = [];
+    public function generateNewRecord() {
+        $record = ["id" => 0];
         foreach ($this->fields as $field)
         {
             if ($field["Name"] != "id")

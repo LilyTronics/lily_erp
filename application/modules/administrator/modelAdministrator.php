@@ -64,8 +64,8 @@ class ModelAdministrator
 
     public static function getRecord($table, $id)
     {
-        $record = ["id" => $id];
         $table = ModelDatabaseTableBase::GetModelForTable($table);
+        $record = $table->generateNewRecord();
         $records = $table->getRecords("id = $id");
         if (count($records) == 1) {
             $record = $records[0];
