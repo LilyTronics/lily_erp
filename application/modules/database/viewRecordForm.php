@@ -36,8 +36,7 @@ function createInputFor($field, $value, $input)
     return $output;
 }
 
-
-if (count($record) == 0)
+if (count($record) <= 1)
 {
     echo "<p>Invalid record data</p>\n";
 }
