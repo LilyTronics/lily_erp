@@ -9,6 +9,6 @@
 <p><input name="record[email]" class="{INPUT}" type="text" /></p>
 <p>Password:</p>
 <p><input name="record[password]" class="{INPUT}" type="password" /></p>
-<p class="w3-center"><button class="{BUTTON}" onclick="showModalLoader()">Log in</button></p>
+<p class="form-buttons w3-center"><button class="{BUTTON}" onclick="showModalLoader()">Log in</button></p>
 </form>
 </div>
