@@ -11,7 +11,7 @@ class ModelAccounting
             ["Journal", "accounting/journal"],
             ["Chart of Accounts", "accounting/chart-of-accounts"],
             ["Reports", [
-                ["VAT", "report/accounting-vat"],
+                ["VAT", "accounting/reports/vat"],
             ]]
         ];
     }

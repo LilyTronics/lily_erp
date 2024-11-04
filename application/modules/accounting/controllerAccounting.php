@@ -51,6 +51,11 @@ class ControllerAccounting extends ControllerApplication
         return $this->showBank([]);
     }
 
+    protected function showReport($parameters)
+    {
+        return $this->showView("Report");
+    }
+
     private function showView($pageName, $pageData=[])
     {
         $pageData["menu"] = ModelAccounting::getMenu();

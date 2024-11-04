@@ -42,11 +42,6 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
         return $table;
     }
 
-    public function getReturnUri()
-    {
-        return $this->returnUri;
-    }
-
     public function generateNewRecord() {
         $record = ["id" => 0];
         foreach ($this->fields as $field)
