@@ -34,6 +34,10 @@ select {
     height: 200px;
 }
 
+.form-buttons {
+    margin-top: 32px;
+}
+
 /* Record table */
 
 .record-table {
