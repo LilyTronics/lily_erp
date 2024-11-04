@@ -42,7 +42,7 @@ if ($record !== null)
     echo "Record data for record with ID: {$record["id"]}</div>";
     echo $this->insertRecordForm($record, $inputs);
 }
-else
+elseif ($activeTable != "")
 {
     echo "Records of {$activeTable}</div>";
     echo "<div class=\"w3-container w3-padding-small\">\n";
@@ -56,6 +56,10 @@ else
     echo "</p>\n";
     echo "</div>\n";
     echo $this->insertRecordTable($records,  "administrator/database-record/{$activeTable}/");
+}
+else
+{
+    echo "&nbsp;</div>\n";
 }
 
 ?>
