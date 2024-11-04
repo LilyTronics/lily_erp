@@ -50,7 +50,7 @@ elseif ($activeTable != "")
     echo "onclick=\"showModalLoader()\">New record</a>\n";
     if (count($records) > 0)
     {
-        echo "<a class=\"{TOOL_BUTTON} w3-margin-left\" href=\"" . WEB_ROOT . "administrator/database-table/{$activeTable}/delete/0\" ";
+        echo "<a class=\"{TOOL_BUTTON_RED} w3-margin-left\" href=\"" . WEB_ROOT . "administrator/database-table/{$activeTable}/delete/0\" ";
         echo "onclick=\"showModalLoader()\">Delete all records</a>";
     }
     echo "</p>\n";
