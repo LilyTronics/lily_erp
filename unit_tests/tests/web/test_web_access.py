@@ -2,14 +2,13 @@
 Test which files can be accessed by HTTP requests.
 """
 
-import lily_unit_test
 import os
-import requests
 
 from unit_tests.lib.test_settings import TestSettings
+from unit_tests.lib.test_suite import TestSuite
 
 
-class TestWebAccess(lily_unit_test.TestSuite):
+class TestWebAccess(TestSuite):
 
     def _check_web_access(self, file_path):
         file_path = file_path.replace("\\", "/")
@@ -31,7 +30,7 @@ class TestWebAccess(lily_unit_test.TestSuite):
             expected_code = 200
 
         self.log.debug(f"Check access for file: {file_path}")
-        r = requests.get(TestSettings.uri + file_path)
+        r = self.http_request.do_get(file_path)
         self.log.debug(f"Request response code: {r.status_code}")
         self.fail_if(r.status_code != expected_code,
                      f"Wrong response code, expected: {expected_code}")

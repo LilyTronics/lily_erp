@@ -8,6 +8,7 @@ import os
 class TestSettings:
 
     root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
+    ini_filename = os.path.abspath(os.path.join(root_path, "../../lily_erp.ini"))
     uri = "http://localhost:8080/lily_erp/"
     sql_host = "localhost"
     sql_database = "lily_erp_test"
@@ -24,3 +25,4 @@ if __name__ == "__main__":
 
     print(TestSettings.root_path)
     print(TestSettings.uri)
+    print(TestSettings.ini_filename)
