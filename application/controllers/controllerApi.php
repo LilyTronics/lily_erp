@@ -18,8 +18,11 @@ class ControllerApi extends ControllerApplication
         $postedData = ModelHelper::getPostedData();
         $action = (isset($postedData["action"]) ? $postedData["action"] : "");
         $record = (isset($postedData["record"]) ? $postedData["record"] : []);
+        // Return URIs, if only one is set, copy to the other
         $onSuccess = (isset($postedData["on_success"]) ? $postedData["on_success"] : null);
         $onFailure = (isset($postedData["on_failure"]) ? $postedData["on_failure"] : null);
+        $onSuccess = ($onSuccess === null ? $onFailure : $onSuccess);
+        $onFailure = ($onFailure === null ? $onSuccess : $onFailure);
         $title = (isset($postedData["title"]) ? $postedData["title"] : "");
 
         $log->writeMessage("Action          : {$action}");
