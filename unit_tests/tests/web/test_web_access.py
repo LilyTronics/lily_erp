@@ -5,10 +5,10 @@ Test which files can be accessed by HTTP requests.
 import os
 
 from unit_tests.lib.test_settings import TestSettings
-from unit_tests.lib.test_suite import TestSuite
+from unit_tests.lib.test_suite_base import TestSuiteBase
 
 
-class TestWebAccess(TestSuite):
+class TestWebAccess(TestSuiteBase):
 
     def _check_web_access(self, file_path):
         file_path = file_path.replace("\\", "/")
