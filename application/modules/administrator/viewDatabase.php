@@ -40,7 +40,7 @@ if ($record !== null)
 {
     // show record
     echo "Record data for record with ID: {$record["id"]}</div>";
-    echo $this->insertRecordForm($record, $inputs);
+    echo $this->insertRecordForm($record, $inputs, $activeTable);
 }
 elseif ($activeTable != "")
 {
