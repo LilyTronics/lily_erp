@@ -1,6 +1,9 @@
 RedirectMatch 403 /\.git
 RedirectMatch 403 /\.gitignore
 RedirectMatch 403 /\.gitmodules
+RedirectMatch 403 /\.idea
+RedirectMatch 403 /\.venv
+
 RedirectMatch 403 /\.readthedocs\.yaml
 RedirectMatch 403 /license\.txt
 RedirectMatch 403 /readme\.md
