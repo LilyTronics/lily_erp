@@ -1,7 +1,7 @@
 <div class="w3-container w3-section w3-padding">
 <?php
 // From the view call:
-// echo $this->insertRecordForm($record);
+// echo $this->insertRecordForm($record, $inputs, $table);
 
 
 function createInputFor($field, $value, $input)
@@ -13,11 +13,11 @@ function createInputFor($field, $value, $input)
     switch ($type)
     {
         case "text":
-            $output = "<input type=\"text\" class=\"{INPUT}\" name=\"{$field}\" value=\"{$value}\" />";
+            $output = "<input type=\"text\" class=\"{INPUT}\" name=\"record[{$field}]\" value=\"{$value}\" />";
             break;
 
         case "select":
-            $output = "<select class=\"{SELECT} width-auto\" name=\"{$field}\">\n";
+            $output = "<select class=\"{SELECT} width-auto\" name=\"record[{$field}]\">\n";
             foreach ($data as $dataValue)
             {
                 $output .= "<option";
@@ -36,6 +36,7 @@ function createInputFor($field, $value, $input)
     return $output;
 }
 
+
 if (count($record) <= 1)
 {
     echo "<p>Invalid record data</p>\n";
@@ -43,6 +44,9 @@ if (count($record) <= 1)
 else
 {
     echo "<div class=\"w3-responsive\">\n";
+    echo "<form action=\"" . WEB_ROOT . "api\" method=\"post\">\n";
+    echo "<input type=\"hidden\" name=\"record[id]\" value=\"{$record["id"]}\" />\n";
+    echo "<input type=\"hidden\" name=\"on_success\" value=\"" . REQUEST_URI . "\" />\n";
     echo "<table class=\"w3-table width-auto\">\n";
     foreach ($record as $field => $value)
     {
@@ -66,8 +70,14 @@ else
     }
     echo "</table>\n";
     echo "</div>\n";
-    echo "<p class=\"form-buttons\"><button class=\"{BUTTON} w3-margin-left\">Save</button>\n";
-    echo "<button class=\"{BUTTON_RED} w3-margin-left\">Delete</button></p>\n";
+    echo "<p class=\"form-buttons\">\n";
+    echo "<button class=\"{BUTTON} w3-margin-left\" type=\"submit\" name=\"action\" value=\"update_{$table}\" onclick=\"showModalLoader()\">Save</button>\n";
+    if ($record["id"] > 0)
+    {
+        echo "<button class=\"{BUTTON_RED} w3-margin-left\" type=\"submit\" name=\"action\" value=\"delete_{$table}\" onclick=\"showModalLoader()\">Delete</button>\n";
+    }
+    echo "</p>\n";
+    echo "</form>\n";
 }
 
 ?>
