@@ -51,9 +51,9 @@ class ControllerAdministrator extends ControllerApplication
         }
         elseif ($table != "")
         {
-            $pageData["content"]["table"] = $table;
             $pageData["content"]["records"] = ModelAdministrator::getRecords($table);
         }
+        $pageData["content"]["table"] = $table;
         return $this->showView("Database", $pageData);
     }
 
