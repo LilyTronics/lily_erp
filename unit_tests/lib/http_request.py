@@ -17,4 +17,4 @@ if __name__ == "__main__":
 
     http_request = HttpRequest()
 
-    http_request.load_page()
+    print(http_request.do_get())
