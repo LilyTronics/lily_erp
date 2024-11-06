@@ -46,7 +46,10 @@ else
     echo "<div class=\"w3-responsive\">\n";
     echo "<form action=\"" . WEB_ROOT . "api\" method=\"post\">\n";
     echo "<input type=\"hidden\" name=\"record[id]\" value=\"{$record["id"]}\" />\n";
-    echo "<input type=\"hidden\" name=\"on_success\" value=\"" . REQUEST_URI . "\" />\n";
+    echo "<input type=\"hidden\" name=\"on_save\" value=\"{$onSuccessUri}\" />\n";
+    echo "<input type=\"hidden\" name=\"on_delete\" value=\"{$onFailureUri}}\" />\n";
+    echo "<input type=\"hidden\" name=\"on_delete\" value=\"{$onDeleteUri}\" />\n";
+
     echo "<table class=\"w3-table width-auto\">\n";
     foreach ($record as $field => $value)
     {
@@ -71,7 +74,16 @@ else
     echo "</table>\n";
     echo "</div>\n";
     echo "<p class=\"form-buttons\">\n";
-    echo "<button class=\"{BUTTON} w3-margin-left\" type=\"submit\" name=\"action\" value=\"update_{$table}\" onclick=\"showModalLoader()\">Save</button>\n";
+    echo "<button class=\"{BUTTON} w3-margin-left\" type=\"submit\" name=\"action\" value=\"";
+    if ($record["id"] > 0)
+    {
+        echo "update_{$table}";
+    }
+    else
+    {
+        echo "add_{$table}";
+    }
+    echo "\" onclick=\"showModalLoader()\">Save</button>\n";
     if ($record["id"] > 0)
     {
         echo "<button class=\"{BUTTON_RED} w3-margin-left\" type=\"submit\" name=\"action\" value=\"delete_{$table}\" onclick=\"showModalLoader()\">Delete</button>\n";

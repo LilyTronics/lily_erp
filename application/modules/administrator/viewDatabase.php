@@ -3,10 +3,14 @@
 $pageData = $this->getPageData();
 
 $tables = (isset($pageData["tables"]) ? $pageData["tables"] : []);
-$activeTable = (isset($pageData["content"]["table"]) ? $pageData["content"]["table"] : "");
-$records = (isset($pageData["content"]["records"]) ? $pageData["content"]["records"] : []);
-$record = (isset($pageData["content"]["record"]) ? $pageData["content"]["record"] : null);
-$inputs = (isset($pageData["content"]["inputs"]) ? $pageData["content"]["inputs"] : []);
+$activeTable = (isset($pageData["table"]) ? $pageData["table"] : "");
+$records = (isset($pageData["records"]) ? $pageData["records"] : []);
+$record = (isset($pageData["record"]) ? $pageData["record"] : null);
+$inputs = (isset($pageData["inputs"]) ? $pageData["inputs"] : []);
+
+$onSuccessUri = (isset($pageData["on_success_uri"]) ? $pageData["on_success_uri"] : "");
+$onFailureUri = (isset($pageData["on_failure_uri"]) ? $pageData["on_failure_uri"] : "");
+$onDeleteUri = (isset($pageData["on_delete_uri"]) ? $pageData["on_delete_uri"] : "");
 
 ?>
 <div class="w3-row-padding">
@@ -40,7 +44,7 @@ if ($record !== null)
 {
     // show record
     echo "Record data for record with ID: {$record["id"]}</div>";
-    echo $this->insertRecordForm($record, $inputs, $activeTable);
+    echo $this->insertRecordForm($record, $inputs, $activeTable, $onSuccessUri, $onFailureUri, $onDeleteUri);
 }
 elseif ($activeTable != "")
 {

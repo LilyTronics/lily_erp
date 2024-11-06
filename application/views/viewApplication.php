@@ -52,13 +52,16 @@ class ViewApplication extends HtmlPageView
         return $this->getContentFromPageFile("database/viewRecordsTable.php", APP_MODULES_PATH, $variables);
     }
 
-    public function insertRecordForm($record, $inputs, $table)
+    public function insertRecordForm($record, $inputs, $table, $onSuccessUri, $onFailureUri, $onDeleteUri)
     {
         // Key must be same as varable name (without $)
         $variables = [
-            "record" => $record,
-            "inputs" => $inputs,
-            "table"  => $table
+            "record"       => $record,
+            "inputs"       => $inputs,
+            "table"        => $table,
+            "onSuccessUri" => $onSuccessUri,
+            "onFailureUri" => $onFailureUri,
+            "onDeleteUri"  => $onDeleteUri
         ];
         return $this->getContentFromPageFile("database/viewRecordForm.php", APP_MODULES_PATH, $variables);
     }
