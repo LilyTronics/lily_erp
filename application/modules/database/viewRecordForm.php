@@ -46,8 +46,8 @@ else
     echo "<div class=\"w3-responsive\">\n";
     echo "<form action=\"" . WEB_ROOT . "api\" method=\"post\">\n";
     echo "<input type=\"hidden\" name=\"record[id]\" value=\"{$record["id"]}\" />\n";
-    echo "<input type=\"hidden\" name=\"on_save\" value=\"{$onSuccessUri}\" />\n";
-    echo "<input type=\"hidden\" name=\"on_delete\" value=\"{$onFailureUri}}\" />\n";
+    echo "<input type=\"hidden\" name=\"on_success\" value=\"{$onSuccessUri}\" />\n";
+    echo "<input type=\"hidden\" name=\"on_failure\" value=\"{$onFailureUri}\" />\n";
     echo "<input type=\"hidden\" name=\"on_delete\" value=\"{$onDeleteUri}\" />\n";
 
     echo "<table class=\"w3-table width-auto\">\n";
