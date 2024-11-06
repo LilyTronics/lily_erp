@@ -47,6 +47,9 @@ class ControllerAdministrator extends ControllerApplication
         {
             $pageData["record"] = ModelAdministrator::getRecord($table, $recordId);
             $pageData["inputs"] = ModelAdministrator::getInputs($table);
+            $pageData["on_success_uri"] = REQUEST_URI;
+            $pageData["on_failure_uri"] = REQUEST_URI;
+            $pageData["on_delete_uri"] = "/administrator/database-table/{$table}";
         }
         elseif ($table != "")
         {

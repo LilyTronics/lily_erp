@@ -70,6 +70,10 @@ class ControllerApi extends ControllerApplication
             case (str_starts_with($action, "add_")):
             case (str_starts_with($action, "update_")):
             case (str_starts_with($action, "delete_")):
+                if (str_starts_with($action, "delete_"))
+                {
+                    $onSuccess = $onDelete;
+                }
                 $result = $this->processDatabaseAction($result, $action, $record);
                 break;
         }
@@ -151,8 +155,6 @@ class ControllerApi extends ControllerApplication
         if ($redirect  !== null)
         {
             $log->writeMessage("Go to location: {$redirect}");
-            // Pass result to the page
-            $result["record"] = $record;
             $result["title"] = $title;
             $this->setPageData($result);
             $this->gotoLocation($redirect);
