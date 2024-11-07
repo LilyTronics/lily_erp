@@ -16,7 +16,13 @@ class TestSuiteBase(TestSuite):
     def setup(self, drop_user=False):
         self.http_request = HttpRequest()
         Database.clear_all(drop_user)
-        Database.create_default_user()
+        if not drop_user:
+            Database.create_default_user()
+
+    def get_web_page(self, uri=""):
+        r = self.http_request.do_get(uri)
+        self.fail_if(r.status_code != 200, f"Invalid response status code: {r.status_code}")
+        return r
 
     def get_records(self):
         response = self.http_request.get_records(self.table_name)
