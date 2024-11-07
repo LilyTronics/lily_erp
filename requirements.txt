@@ -1,2 +1,3 @@
 lily-unit-test
 requests
+mysql-connector-python
