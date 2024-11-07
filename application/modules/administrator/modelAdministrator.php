@@ -46,6 +46,9 @@ class ModelAdministrator
 
     public static function getTables()
     {
+        // Make sure all tables are created
+        ModelDatabaseTableBase::createTables();
+
         $tables = [];
         $table = new ModelDatabaseTableBase();
         $result = $table->selectRecordsFromQuery("SHOW TABLES FROM {$table->database}");

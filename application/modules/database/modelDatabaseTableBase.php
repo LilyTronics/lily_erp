@@ -90,6 +90,30 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
         return $this->deleteRecord($expression);
     }
 
+    public static function createTables()
+    {
+        $tableModels = self::getTableModels();
+        foreach ($tableModels as $tableModel)
+        {
+            $dummy = new $tableModel();
+        }
+    }
+
+    private static function getTableModels()
+    {
+        $tableModels = [];
+        $fileMatch = strtolower(DIRECTORY_SEPARATOR . "modelDatabaseTable");
+        foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator(DOC_ROOT . APP_MODULES_PATH)) as $file)
+        {
+            $pos = strpos(strtolower($file), $fileMatch);
+            if ($pos !== false and !str_contains($file, "Base") and !str_contains($file, "Template"))
+            {
+                $tableModels[] = substr($file, $pos + 1, strlen($file) - $pos - 5);
+            }
+        }
+        return $tableModels;
+    }
+
 }
 
 ?>
