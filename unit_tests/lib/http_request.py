@@ -59,6 +59,13 @@ class HttpRequest(requests.Session):
         }
         return self.do_api_call(data)
 
+    def add_record(self, table, record):
+        data = {
+            "action": f"add_{table}",
+            "record": record
+        }
+        return self.do_api_call(data)
+
 
 if __name__ == "__main__":
 

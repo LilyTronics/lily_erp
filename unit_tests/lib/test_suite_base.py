@@ -24,6 +24,11 @@ class TestSuiteBase(TestSuite):
         self.fail_if("records" not in response, "No records in the response")
         return response
 
+    def add_record(self, record):
+        response = self.http_request.add_record(self.table_name, record)
+        self.fail_if(not response["result"], response["message"])
+        return response
+
     def test_http_request(self):
         r = self.http_request.do_get()
         self.fail_if(r.status_code != 200, f"Invalid response status code: {r.status_code}")
