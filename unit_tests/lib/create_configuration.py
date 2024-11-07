@@ -2,11 +2,11 @@
 Script for creating the configuration.
 """
 
-from unit_tests.lib.api import Api
+from unit_tests.lib.http_request import HttpRequest
 from unit_tests.lib.test_settings import TestSettings
 
 
-api = Api()
+http = HttpRequest()
 
 post_data = {
     "action": "create_configuration",
@@ -23,5 +23,5 @@ post_data = {
     }
 }
 
-result = api.do_api_call(post_data)
+result = http.do_api_call(post_data)
 print(result)
