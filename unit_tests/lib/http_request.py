@@ -53,6 +53,12 @@ class HttpRequest(requests.Session):
             raise Exception(f"Could not log out: {response["message"]}")
         return response
 
+    def get_records(self, table):
+        data = {
+            "action": f"get_{table}"
+        }
+        return self.do_api_call(data)
+
 
 if __name__ == "__main__":
 
