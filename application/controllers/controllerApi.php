@@ -18,14 +18,17 @@ class ControllerApi extends ControllerApplication
         $postedData = ModelHelper::getPostedData();
         $action = (isset($postedData["action"]) ? $postedData["action"] : "");
         $record = (isset($postedData["record"]) ? $postedData["record"] : []);
+        // Return URIs, if only one is set, copy to the other
         $onSuccess = (isset($postedData["on_success"]) ? $postedData["on_success"] : null);
         $onFailure = (isset($postedData["on_failure"]) ? $postedData["on_failure"] : null);
+        $onDelete = (isset($postedData["on_delete"]) ? $postedData["on_delete"] : null);
         $title = (isset($postedData["title"]) ? $postedData["title"] : "");
 
-        $log->writeMessage("Action          : {$action}");
+        $log->writeMessage("Action          : " . var_export($action, true));
         $log->writeMessage("Has record      : " . (count($record) > 0 ? "yes" : "no"));
-        $log->writeMessage("On success      : " . ($onSuccess !== null ? $onSuccess : "null"));
-        $log->writeMessage("On failure      : " . ($onFailure !== null ? $onFailure : "null"));
+        $log->writeMessage("On success      : " . var_export($onSuccess, true));
+        $log->writeMessage("On failure      : " . var_export($onFailure, true));
+        $log->writeMessage("On delete       : " . var_export($onDelete, true));
         $log->writeMessage("Dialog tile     : {$title}");
 
         // If the configuration is not OK and we are not trying to create one
@@ -67,6 +70,10 @@ class ControllerApi extends ControllerApplication
             case (str_starts_with($action, "add_")):
             case (str_starts_with($action, "update_")):
             case (str_starts_with($action, "delete_")):
+                if (str_starts_with($action, "delete_"))
+                {
+                    $onSuccess = $onDelete;
+                }
                 $result = $this->processDatabaseAction($result, $action, $record);
                 break;
         }
@@ -148,8 +155,6 @@ class ControllerApi extends ControllerApplication
         if ($redirect  !== null)
         {
             $log->writeMessage("Go to location: {$redirect}");
-            // Pass result to the page
-            $result["record"] = $record;
             $result["title"] = $title;
             $this->setPageData($result);
             $this->gotoLocation($redirect);

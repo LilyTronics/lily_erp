@@ -40,20 +40,22 @@ class ControllerAdministrator extends ControllerApplication
     {
         $pageData = [
             "tables"  => ModelAdministrator::getTables(),
-            "content" => []
         ];
         $table = (isset($parameters["table"]) ? $parameters["table"] : "");
         $recordId = (isset($parameters["record_id"]) ? $parameters["record_id"] : null);
         if ($recordId !== null and $table != "")
         {
-            $pageData["content"]["record"] = ModelAdministrator::getRecord($table, $recordId);
-            $pageData["content"]["inputs"] = ModelAdministrator::getInputs($table);
+            $pageData["record"] = ModelAdministrator::getRecord($table, $recordId);
+            $pageData["inputs"] = ModelAdministrator::getInputs($table);
+            $pageData["on_success_uri"] = REQUEST_URI;
+            $pageData["on_failure_uri"] = REQUEST_URI;
+            $pageData["on_delete_uri"] = "/administrator/database-table/{$table}";
         }
         elseif ($table != "")
         {
-            $pageData["content"]["table"] = $table;
-            $pageData["content"]["records"] = ModelAdministrator::getRecords($table);
+            $pageData["records"] = ModelAdministrator::getRecords($table);
         }
+        $pageData["table"] = $table;
         return $this->showView("Database", $pageData);
     }
 

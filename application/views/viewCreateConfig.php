@@ -17,7 +17,6 @@ $adminName = isset($pageData["record"]["admin_name"]) ? $pageData["record"]["adm
 <p>Also create a MySQL user for accessing the database with all privileges enabled.</p>
 <p>When ready, fill out the following form and the configuration will be created for you.</p>
 <form action="<?php echo WEB_ROOT; ?>api" method="post">
-<input type="hidden" name="action" value="create_configuration" />
 <input type="hidden" name="on_success" value="" />
 <input type="hidden" name="on_failure" value="setup/create-config" />
 <input type="hidden" name="title" value="Create configuration" />
@@ -36,5 +35,5 @@ $adminName = isset($pageData["record"]["admin_name"]) ? $pageData["record"]["adm
 <tr><td>Password:</td><td><input name="record[admin_password]" class="{INPUT}" type="password" autocomplete="new-password" /></td></tr>
 <tr><td>Repeat password:</td><td><input name="record[admin_repeat_password]" class="{INPUT}" type="password" autocomplete="new-password" /></td></tr>
 </table>
-<p class="form-buttons"><button class="{BUTTON}" onclick="showModalLoader()">Create configuration</button></p>
+<p class="form-buttons"><button class="{BUTTON}" type="submit" name="action" value="create_configuration" onclick="showModalLoader()">Create configuration</button></p>
 </form>
