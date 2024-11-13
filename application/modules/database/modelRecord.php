@@ -19,7 +19,7 @@ class ModelRecord
         {
             $value = preg_replace("/(\.\d{2}[^0]*)(0*)$/", "$1", $value);
         }
-        return $value;
+        return htmlentities($value);
     }
 
 }

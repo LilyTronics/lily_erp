@@ -56,6 +56,7 @@ else
         if ($field != "id")
         {
             $label = ModelRecord::formatFieldName($field, true);
+            $value = ModelRecord::formatValue($field, $value);
             echo "<tr>\n";
             echo "<td style=\"white-space:nowrap\">{$label}:</td>\n";
             echo "<td>";
