@@ -7,25 +7,6 @@ The Lily ERP software is free ERP software for self-employed or small companies 
 just accounting software. You can find a lot of cheap accounting software but most of them lack in
 ERP and PLM functionality (ERP: enterprise resource planning; PLM: product lifecycle management).
 
-The following modules are available:
-
-* Accounting (chart of accounts, journal, bank transactions)
-* Relations (customers, suppliers)
-* purchasing
-* Sales
-* Product management
-* Inventory management
-* User management
-* Administrative tools
-
-With the product management module you can define your products, who supplies your products,
-your bill of materials (hierachical), cost prices through the bill of materials, your sales price
-and sales margin target. Also you can manage the life time of the products and the replacements.
-
-With the inventory management module you can set stock levels for your products and materials.
-When a product is low on stock, purchase orders (drafts) can be created from the inventory module using
-the product bill of materials.
-
 This documentation will guide you through the setup and usage of the ERP system.
 
 Before we start, just a note:
@@ -65,4 +46,3 @@ If you rather want direct contact: erp@lilytronics.nl
    Home           <self>
    Installation   <installation/installation.rst>
    Setup          <configuration/setup.rst>
-   Development    <development/development.rst>
