@@ -14,7 +14,7 @@ define("FORCE_SSL", true);
 // Paths
 define("APP_MODULES_PATH", APP_PATH . "modules/");
 
-define("TEMPLATE_VALUES", [
+$GLOBALS["TEMPLATE_VALUES"] = [
     "{BUTTON}"          => "w3-button w3-round w3-theme",
     "{BUTTON_RED}"      => "w3-button w3-round w3-red",
     "{INPUT}"           => "w3-input w3-border w3-round w3-padding-small",
@@ -22,7 +22,7 @@ define("TEMPLATE_VALUES", [
     "{TABLE}"           => "w3-table width-auto",
     "{TOOL_BUTTON}"     => "w3-button w3-round w3-padding-small w3-theme",
     "{TOOL_BUTTON_RED}" => "w3-button w3-round w3-padding-small w3-red"
-]);
+];
 
 define("DEBUG_LOG", new ModelSystemLogger("debug"));
 DEBUG_LOG->writeMessage("+----------------------------------------------------------------------+");
