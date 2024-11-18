@@ -14,10 +14,11 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
 
         // Insert ID field as first field, for every table the same
         array_unshift($this->fields, [
-            "Name"    => "id",
-            "Type"    => "INT",
-            "Options" => "AUTO_INCREMENT",
-            "Key"     => true
+            "Name"     => "id",
+            "Type"     => "INT",
+            "Options"  => "AUTO_INCREMENT",
+            "Key"      => true,
+            "Required" => false
         ]);
 
         parent::__construct($host, $user, $password, $autoCreateTable, $defaultRecords);
@@ -68,13 +69,22 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
         return $records[1];
     }
 
-    public function addRecord($record)
+    public function addRecord($record, $result)
     {
         if (isset($record["id"]))
         {
             unset($record["id"]);
         }
-        return $this->insertRecord($record);
+        $result = $this->checkRequiredFields($record, $result);
+        if ($result["result"])
+        {
+            $result["result"] = $this->insertRecord($record);
+            if (!$result["result"])
+            {
+                $result["message"] = "Could not add record: " . $this->getError();
+            }
+        }
+        return $result;
     }
 
     public function modifyRecord($record)
@@ -97,6 +107,22 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
         {
             $dummy = new $tableModel();
         }
+    }
+
+    private function checkRequiredFields($record, $result)
+    {
+        $result["result"] = true;
+        $result["message"] = "";
+        foreach ($this->fields as $field)
+        {
+            if ($field["Required"] and !isset($record[$field["Name"]]))
+            {
+                $result["result"] = false;
+                $result["message"] = "The field {$field["Name"]} is required";
+                break;
+            }
+        }
+        return $result;
     }
 
     private static function getTableModels()

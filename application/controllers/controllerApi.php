@@ -105,12 +105,7 @@ class ControllerApi extends ControllerApplication
 
             case "add":
                 $log->writeMessage("Execute add record");
-                $result["result"] = $table->addRecord($record);
-                $result["message"] = "";
-                if (!$result["result"])
-                {
-                    $result["message"] = "Could not add record: " . $table->getError();
-                }
+                $result = $table->addRecord($record, $result);
                 break;
 
 
