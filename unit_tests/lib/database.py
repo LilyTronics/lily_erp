@@ -23,11 +23,11 @@ class Database:
             )
 
     @classmethod
-    def _execute_query(cls, query):
+    def _execute_query(cls, query, val=None):
         cls._connect()
         cursor = cls._connection.cursor()
-        cursor.execute(query)
-        if query.startswith("SHOW"):
+        cursor.execute(query, val)
+        if query.startswith("SHOW") or query.startswith("SELECT"):
             columns = [column[0] for column in cursor.description]
             return [dict(zip(columns, row)) for row in cursor.fetchall()]
         return None
@@ -45,16 +45,24 @@ class Database:
 
     @classmethod
     def create_default_user(cls):
-        cls._connect()
-        cursor = cls._connection.cursor()
-        sql = "INSERT INTO user (email, name, password, is_admin) VALUES (%s, %s, %s, %s)"
+        query = "INSERT INTO user (email, name, password, is_admin) VALUES (%s, %s, %s, %s)"
         val = (TestSettings.admin_email, TestSettings.admin_name,
                hashlib.sha256(TestSettings.admin_password.encode()).hexdigest(), 1)
-        cursor.execute(sql, val)
+        cls._execute_query(query, val)
         cls._connection.commit()
+
+    @classmethod
+    def get_records(cls, table_name):
+        return cls._execute_query(f"SELECT * FROM {table_name}")
+
+    @classmethod
+    def get_table_columns(cls, table_name):
+        return list(map(lambda x: x["Field"], cls._execute_query(f"SHOW COLUMNS FROM {table_name}")))
 
 
 if __name__ == "__main__":
 
     Database.clear_all()
     Database.create_default_user()
+    print(Database.get_records("user"))
+    print(Database.get_table_columns("user"))
