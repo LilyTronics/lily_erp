@@ -8,13 +8,13 @@ class ModelDatabaseTableUser extends ModelDatabaseTableBase {
 
     public function __construct() {
         $this->tableName = "user";
-        $this->fields[] = [ "Name" => "email",         "Type" => "VARCHAR(200)" ];
-        $this->fields[] = [ "Name" => "name",          "Type" => "VARCHAR(200)" ];
-        $this->fields[] = [ "Name" => "password",      "Type" => "VARCHAR(200)" ];
-        $this->fields[] = [ "Name" => "is_admin",      "Type" => "INT"          ];
-        $this->fields[] = [ "Name" => "access_levels", "Type" => "VARCHAR(200)" ];
-        $this->fields[] = [ "Name" => "last_log_in",   "Type" => "INT"          ];
-        $this->fields[] = [ "Name" => "log_in_fail",   "Type" => "INT"          ];
+        $this->fields[] = [ "name" => "email",         "type" => "VARCHAR(200)" ];
+        $this->fields[] = [ "name" => "name",          "type" => "VARCHAR(200)" ];
+        $this->fields[] = [ "name" => "password",      "type" => "VARCHAR(200)" ];
+        $this->fields[] = [ "name" => "is_admin",      "type" => "INT"          ];
+        $this->fields[] = [ "name" => "access_levels", "type" => "VARCHAR(200)" ];
+        $this->fields[] = [ "name" => "last_log_in",   "type" => "INT"          ];
+        $this->fields[] = [ "name" => "log_in_fail",   "type" => "INT"          ];
 
         $this->inputs["email"] = ["type" => "text"];
         $this->inputs["name"] =  ["type" => "text"];

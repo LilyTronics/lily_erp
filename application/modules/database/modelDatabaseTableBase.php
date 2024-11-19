@@ -14,11 +14,11 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
 
         // Insert ID field as first field, for every table the same
         array_unshift($this->fields, [
-            "Name"     => "id",
-            "Type"     => "INT",
-            "Options"  => "AUTO_INCREMENT",
-            "Key"      => true,
-            "Required" => false
+            "name"     => "id",
+            "type"     => "INT",
+            "options"  => "AUTO_INCREMENT",
+            "key"      => true,
+            "required" => false
         ]);
 
         parent::__construct($host, $user, $password, $autoCreateTable, $defaultRecords);
@@ -47,9 +47,9 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
         $record = ["id" => 0];
         foreach ($this->fields as $field)
         {
-            if ($field["Name"] != "id")
+            if ($field["name"] != "id")
             {
-                $record[$field["Name"]] = null;
+                $record[$field["name"]] = null;
             }
         }
         return $record;
@@ -115,10 +115,10 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
         $result["message"] = "";
         foreach ($this->fields as $field)
         {
-            if ($field["Required"] and !isset($record[$field["Name"]]))
+            if ($field["required"] and !isset($record[$field["name"]]))
             {
                 $result["result"] = false;
-                $result["message"] = "The field {$field["Name"]} is required";
+                $result["message"] = "The field {$field["name"]} is required";
                 break;
             }
         }
