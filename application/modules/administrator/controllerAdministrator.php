@@ -17,10 +17,8 @@ class ControllerAdministrator extends ControllerApplication
         ];
         if (isset($parameters["filename"]))
         {
-            $pageData["Content"] = [
-                "Filename"    => $parameters["filename"],
-                "FileContent" => ModelAdministrator::getFileContent($parameters["filename"])
-            ];
+            $pageData["Filename"] = $parameters["filename"];
+            $pageData["FileContent"] = ModelAdministrator::getFileContent($parameters["filename"]);
         }
         return $this->showView("LogFiles", $pageData);
     }
