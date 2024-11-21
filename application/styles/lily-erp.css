@@ -1,46 +1,68 @@
 /* HTML overrides */
 
+@font-face {
+    font-family: noto-sans;
+    src: url('noto-sans.ttf') format('truetype');
+}
+
 body {
-    font-family: sans-serif;
+    font-family: noto-sans;
     font-size: 16px;
+    font-weight: 300;
 }
 
-td {
-    vertical-align: middle !important;
-    padding: 4px 8px !important;
-}
-
-/* There is a padding mismatch when using w3-input for text input and select
-   in combination with w3-padding-small */
-select {
-    padding: 6px 4px !important;
+footer {
+    font-size: 0.8em;
 }
 
 /* Containers */
 
 .main-content {
-    min-height: 600px;
+    min-height: 700px;
 }
 
 .log-in-form {
     max-width: 400px;
 }
 
-.dashboard-item {
-    max-width: 400px;
+.form-buttons {
+    margin-top: 32px;
 }
+
+.dashboard-item {
+    width: 400px;
+    height: 200px;
+}
+
+/* Uncategorized */
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+
+
+/*
+
+a.no-link-color:link {color: inherit !important}
+a.no-link-color:visited {color: inherit !important}
+a.no-link-color:hover {color: inherit !important}
+a.no-link-color:active {color: inherit !important}
+
+td {
+    vertical-align: middle !important;
+    padding: 4px 8px !important;
+}
+
+
 
 .dashboard-item-content {
     height: 200px;
 }
 
-.form-buttons {
-    margin-top: 32px;
-}
-
 /* Record table */
 
-.record-table {
+/* .record-table {
     font-size: 14px;
     width: auto;
     td {
@@ -51,7 +73,7 @@ select {
 
 /* Widths */
 
-.width-auto {
+/*.width-auto {
     width: auto;
 }
 
@@ -63,9 +85,4 @@ select {
     max-width: 600px;
 }
 
-
-/* Uncategorized */
-
-.cursor-pointer {
-    cursor: pointer;
-}
+*/

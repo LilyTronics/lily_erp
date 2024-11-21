@@ -1,0 +1,37 @@
+/* Color theme */
+
+.theme-bg {background-color: #0066aa !important; color: #fff !important}
+
+.theme-btn-hover:hover {color:#fff !important; background-color:#0099ff !important}
+
+a:link {color: #0066aa !important}
+a:visited {color: #0066aa !important}
+a:hover {color: #0099ff !important}
+a:active {color: #0066aa !important}
+
+.loader {border-top-color: #0066aa !important};
+
+/*
+100%    #ffffff
+95%     #e6f5ff
+90%     #ccebff
+85%     #b3e0ff
+80%     #99d6ff
+75%     #80ccff
+70%     #66c2ff
+65%     #4db8ff
+60%     #33adff
+55%     #1aa3ff
+50%     #0099ff
+45%     #008ae6
+40%     #007acc
+35%     #006bb3
+33%     #0066aa
+30%     #005c99
+25%     #004d80
+20%     #003d66
+15%     #002e4d
+10%     #001f33
+5%      #000f1a
+0%      #000000
+*/

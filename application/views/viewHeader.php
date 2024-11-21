@@ -1,5 +1,5 @@
-<header class="w3-theme w3-container">
-<h2 class="w3-left">Lily ERP</h2>
+<header class="{CONTAINER} clearfix theme-bg">
+<h2 class="float-start">Lily ERP</h2>
 <?php
 
 $pageData = $this->getPageData();

@@ -9,13 +9,3 @@ function showModal(title, message)
     document.getElementById('modal-message').innerHTML = message;
     document.getElementById('modal-1').style.display = 'block';
 }
-
-function showModalLoader()
-{
-    document.getElementById('modal-loader').style.display = 'block';
-}
-
-function hideModalLoader()
-{
-    document.getElementById('modal-loader').style.display = 'none';
-}

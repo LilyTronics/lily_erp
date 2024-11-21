@@ -1,4 +1,4 @@
-<div class="w3-container w3-section w3-padding">
+<div class="">
 <?php
 // From the view call:
 // echo $this->insertRecordForm($record, $inputs, $table);
@@ -43,14 +43,14 @@ if (count($record) <= 1)
 }
 else
 {
-    echo "<div class=\"w3-responsive\">\n";
+    echo "<div class=\"\">\n";
     echo "<form action=\"" . WEB_ROOT . "api\" method=\"post\">\n";
     echo "<input type=\"hidden\" name=\"record[id]\" value=\"{$record["id"]}\" />\n";
     echo "<input type=\"hidden\" name=\"on_success\" value=\"{$onSuccessUri}\" />\n";
     echo "<input type=\"hidden\" name=\"on_failure\" value=\"{$onFailureUri}\" />\n";
     echo "<input type=\"hidden\" name=\"on_delete\" value=\"{$onDeleteUri}\" />\n";
 
-    echo "<table class=\"w3-table width-auto\">\n";
+    echo "<table class=\"\">\n";
     foreach ($record as $field => $value)
     {
         if ($field != "id")
@@ -75,7 +75,7 @@ else
     echo "</table>\n";
     echo "</div>\n";
     echo "<p class=\"form-buttons\">\n";
-    echo "<button class=\"{BUTTON} w3-margin-left\" type=\"submit\" name=\"action\" value=\"";
+    echo "<button class=\"{BUTTON}\" type=\"submit\" name=\"action\" value=\"";
     if ($record["id"] > 0)
     {
         echo "update_{$table}";
@@ -84,10 +84,10 @@ else
     {
         echo "add_{$table}";
     }
-    echo "\" onclick=\"showModalLoader()\">Save</button>\n";
+    echo "\" {SHOW_LOADER}>Save</button>\n";
     if ($record["id"] > 0)
     {
-        echo "<button class=\"{BUTTON_RED} w3-margin-left\" type=\"submit\" name=\"action\" value=\"delete_{$table}\" onclick=\"showModalLoader()\">Delete</button>\n";
+        echo "<button class=\"{BUTTON_RED}\" type=\"submit\" name=\"action\" value=\"delete_{$table}\" {SHOW_LOADER}>Delete</button>\n";
     }
     echo "</p>\n";
     echo "</form>\n";

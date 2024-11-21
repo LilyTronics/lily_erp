@@ -1,14 +1,24 @@
+<!-- <nav class="nav">
+  <a class="nav-link active" aria-current="page" href="#">Active</a>
+  <a class="nav-link" href="#">Link</a>
+  <a class="nav-link" href="#">Link</a>
+  <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+</nav> -->
+
 <?php
 
 $pageData = $this->getPageData();
 
-$menuClass = "w3-bar-item w3-button w3-padding-small";
+$menuClass = "btn p-1 px-2 m-1 theme-btn-hover";
+$itemClass = "dropdown-item theme-btn-hover";
 
 if (isset($pageData["menu"]))
 {
-    echo "<div class=\"w3-container w3-padding-small w3-border-bottom w3-margin-bottom\">\n";
+    echo "<nav class=\"nav\">\n";
     // Insert link to dashboard
-    echo "<a class=\"$menuClass\" href=\"" . WEB_ROOT . "dashboard\" title=\"dashboard\" onclick=\"showModalLoader()\"><i class=\"fa-solid fa-grip\"></i></a>\n";
+    $link = WEB_ROOT . "dashboard";
+    echo "<button class=\"$menuClass\" title=\"dashboard\" onclick=\"location.href='{$link}'\" {SHOW_LOADER}>";
+    echo "<i class=\"fa-solid fa-grip\"></i></button>\n";
     // Add menu items
     foreach ($pageData["menu"] as $menu)
     {
@@ -16,22 +26,23 @@ if (isset($pageData["menu"]))
         if (is_array($menu[1]))
         {
             // Drop down
-            echo "<div class=\"w3-dropdown-hover\">\n";
-            echo "<button class=\"$menuClass\">{$menu[0]} <i class=\"fa-solid fa-caret-down\"></i></button>\n";
-            echo "<div class=\"w3-dropdown-content w3-bar-block w3-border w3-card\">\n";
+            echo "<button class=\"{$menuClass} dropdown-toggle\" data-bs-toggle=\"dropdown\">{$menu[0]}</button>\n";
+            echo "<ul class=\"dropdown-menu\">\n";
             foreach ($menu[1] as $menuItem)
             {
-                echo "<a class=\"$menuClass\" href=\"" . WEB_ROOT . "{$menuItem[1]}\" onclick=\"showModalLoader()\">{$menuItem[0]}</a>\n";
+                $link = WEB_ROOT . $menuItem[1];
+                echo "<li><button class=\"$itemClass\" onclick=\"location.href='{$link}'\" {SHOW_LOADER}>";
+                echo "{$menuItem[0]}</button></li>\n";
             }
-            echo "</div> <!-- drop down content -->\n";
-            echo "</div> <!-- drop down -->\n";
+            echo "</ul>\n";
         }
         else
         {
             // Link
-            echo "<a class=\"$menuClass\" href=\"" . WEB_ROOT . "{$menu[1]}\" onclick=\"showModalLoader()\">{$menu[0]}</a>\n";
+            $link = WEB_ROOT . $menu[1];
+            echo "<button class=\"$menuClass\" onclick=\"location.href='{$link}'\" {SHOW_LOADER}>{$menu[0]}</button>\n";
         }
 
     }
-    echo "</div> <!-- menu bar -->\n";
+    echo "</nav>\n";
 }

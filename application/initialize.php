@@ -15,13 +15,15 @@ define("FORCE_SSL", true);
 define("APP_MODULES_PATH", APP_PATH . "modules/");
 
 $GLOBALS["TEMPLATE_VALUES"] = [
-    "{BUTTON}"          => "w3-button w3-round w3-theme",
-    "{BUTTON_RED}"      => "w3-button w3-round w3-red",
-    "{INPUT}"           => "w3-input w3-border w3-round w3-padding-small",
-    "{SELECT}"          => "w3-input w3-border w3-round",
-    "{TABLE}"           => "w3-table width-auto",
-    "{TOOL_BUTTON}"     => "w3-button w3-round w3-padding-small w3-theme",
-    "{TOOL_BUTTON_RED}" => "w3-button w3-round w3-padding-small w3-red"
+    "{CONTAINER}"       => "container-fluid p-3",
+    "{BUTTON}"          => "btn theme-bg theme-btn-hover",
+    // "{BUTTON_RED}"      => "",
+    "{INPUT}"           => "form-control",
+    // "{SELECT}"          => "",
+    // "{TABLE}"           => "",
+    // "{TOOL_BUTTON}"     => "",
+    // "{TOOL_BUTTON_RED}" => ""
+    "{SHOW_LOADER}" => "data-bs-toggle=\"modal\" data-bs-target=\"#modal-loader\""
 ];
 
 define("DEBUG_LOG", new ModelSystemLogger("debug"));

@@ -1,4 +1,4 @@
-<div class="w3-container w3-section w3-border-top">
+<div class="">
 <form action="<?php echo WEB_ROOT; ?>accounting/bank/upload" method="post" enctype="multipart/form-data">
 <p>Upload export from bank account (MT-940 format):</p>
 <p><input class="{INPUT} width-bank-upload" type="file" name="bank_upload"></p>

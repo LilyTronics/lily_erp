@@ -21,7 +21,7 @@ class ModelDashboard
         foreach (self::$dashboardItems as $item)
         {
             $newItem = [
-                "title"   => "<i class=\"fa-solid {$item[0]} w3-margin-right\"></i>{$item[1]}",
+                "title"   => "<i class=\"fa-solid {$item[0]}\"></i> {$item[1]}",
                 "uri"     => WEB_ROOT . $item[2],
                 "content" => $item[3]
             ];

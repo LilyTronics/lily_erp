@@ -1,4 +1,4 @@
-<div class="w3-container w3-padding-small"> <!-- records table -->
+<div class=""> <!-- records table -->
 <?php
 // From the view call:
 // echo $this->insertRecordTable($records, $recordUri);
@@ -18,9 +18,9 @@ function getStyle($field)
 
 if (count($records) > 0)
 {
-    echo "<div class=\"w3-responsive\"> <!-- responsive -->\n";
-    echo "<table class=\"w3-table-all w3-hoverable record-table\">\n";
-    echo "<thead><tr class=\"w3-theme\">";
+    echo "<div class=\"\"> <!-- responsive -->\n";
+    echo "<table class=\"\">\n";
+    echo "<thead><tr class=\"\">";
     foreach (array_keys($records[0]) as $key)
     {
         if ($key != "id")
@@ -34,7 +34,7 @@ if (count($records) > 0)
     foreach ($records as $record)
     {
         $recordLink = WEB_ROOT . $recordUri . $record["id"];
-        echo "<tr onclick=\"showModalLoader();location.href='{$recordLink}'\">";
+        echo "<tr onclick=\"location.href='{$recordLink}'\" {SHOW_LOADER}>";
         foreach (array_keys($record) as $key)
         {
             if ($key != "id")

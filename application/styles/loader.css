@@ -2,13 +2,13 @@
 
 .loader {
     position: absolute;
+    top: 20%;
     left: 50%;
-    top: 30%;
     width: 100px;
     height: 100px;
     margin: -50px 0 0 -50px;
     border: 12px solid #eee;
-    border-top: 12px solid #607d8b;
+    border-top: 12px solid #00c;
     border-radius: 50%;
     animation: spin 2s linear infinite;
   }

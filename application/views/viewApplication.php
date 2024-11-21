@@ -10,10 +10,8 @@ class ViewApplication extends HtmlPageView
         $output = "<body>\n";
         $output .= $this->getContentFromPageFile("viewHeader.php");
         $output .= $this->getContentFromPageFile("viewModal.php");
-        $output .= "<div class=\"w3-container\">\n";
         $output .= $this->getContentFromPageFile("viewMenu.php");
-        $output .= "</div>\n";
-        $output .= "<div class=\"w3-container w3-padding main-content\">\n";
+        $output .= "<div class=\"{CONTAINER} main-content\">\n";
         if (str_contains($this->pageFile, "/"))
         {
             $output .= $this->getContentFromPageFile($this->pageFile, APP_MODULES_PATH);
