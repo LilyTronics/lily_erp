@@ -33,13 +33,11 @@ if (isset($pageData["Filename"]))
 echo "</div>\n";
 if (isset($pageData["FileContent"]))
 {
-    echo "<pre class=\"p-3\">\n";
+    echo "<div class=\"{CONTAINER}\">\n";
+    echo "<pre>\n";
     echo $pageData["FileContent"];
     echo "</pre>\n";
-}
-else
-{
-    echo "<p class=\"p-2\">No file content</p>\n";
+    echo "</div>\n";
 }
 echo "</div> <!-- col -->\n";
 echo "</div> <!-- row -->\n";
