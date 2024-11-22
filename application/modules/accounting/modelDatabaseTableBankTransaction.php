@@ -5,16 +5,16 @@ class ModelDatabaseTableBankTransaction extends ModelDatabaseTableBase {
     public function __construct() {
         $this->tableName = "bank_transaction";
 
-        $this->fields[] = [ "Name" => "reference",        "Type" => "VARCHAR(200)"  ];
-        $this->fields[] = [ "Name" => "own_account",      "Type" => "VARCHAR(200)"  ];
-        $this->fields[] = [ "Name" => "date",             "Type" => "DATE"          ];
-        $this->fields[] = [ "Name" => "debit_credit",     "Type" => "VARCHAR(1)"    ];
-        $this->fields[] = [ "Name" => "amount",           "Type" => "DECIMAL(18,5)" ];
-        $this->fields[] = [ "Name" => "transaction_type", "Type" => "VARCHAR(200)"  ];
-        $this->fields[] = [ "Name" => "counter_account",  "Type" => "VARCHAR(200)"  ];
-        $this->fields[] = [ "Name" => "counter_name",     "Type" => "VARCHAR(200)"  ];
-        $this->fields[] = [ "Name" => "description",      "Type" => "VARCHAR(200)"  ];
-        $this->fields[] = [ "Name" => "state",            "Type" => "VARCHAR(200)"  ];
+        $this->fields[] = [ "name" => "reference",        "type" => "VARCHAR(200)"  ];
+        $this->fields[] = [ "name" => "own_account",      "type" => "VARCHAR(200)"  ];
+        $this->fields[] = [ "name" => "date",             "type" => "DATE"          ];
+        $this->fields[] = [ "name" => "debit_credit",     "type" => "VARCHAR(1)"    ];
+        $this->fields[] = [ "name" => "amount",           "type" => "DECIMAL(18,5)" ];
+        $this->fields[] = [ "name" => "transaction_type", "type" => "VARCHAR(200)"  ];
+        $this->fields[] = [ "name" => "counter_account",  "type" => "VARCHAR(200)"  ];
+        $this->fields[] = [ "name" => "counter_name",     "type" => "VARCHAR(200)"  ];
+        $this->fields[] = [ "name" => "description",      "type" => "VARCHAR(200)"  ];
+        $this->fields[] = [ "name" => "state",            "type" => "VARCHAR(200)"  ];
 
         // $this->inputs["field_name"] = ["type" => "text"];
 
