@@ -16,13 +16,12 @@ define("APP_MODULES_PATH", APP_PATH . "modules/");
 
 $GLOBALS["TEMPLATE_VALUES"] = [
     "{CONTAINER}"       => "container-fluid p-3",
-    "{BUTTON}"          => "btn theme-bg theme-btn-hover",
+    "{BUTTON}"          => "btn theme-btn",
     // "{BUTTON_RED}"      => "",
     "{INPUT}"           => "form-control",
     // "{SELECT}"          => "",
-    // "{TABLE}"           => "",
-    // "{TOOL_BUTTON}"     => "",
-    // "{TOOL_BUTTON_RED}" => ""
+    "{TOOL_BUTTON}"     => "btn btn-sm theme-btn",
+    "{TOOL_BUTTON_RED}" => "btn btn-sm btn-danger",
     "{SHOW_LOADER}" => "data-bs-toggle=\"modal\" data-bs-target=\"#modal-loader\""
 ];
 

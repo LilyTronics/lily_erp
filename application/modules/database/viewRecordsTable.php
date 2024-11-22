@@ -1,4 +1,4 @@
-<div class=""> <!-- records table -->
+<div class="{CONTAINER}"> <!-- records table -->
 <?php
 // From the view call:
 // echo $this->insertRecordTable($records, $recordUri);
@@ -18,15 +18,15 @@ function getStyle($field)
 
 if (count($records) > 0)
 {
-    echo "<div class=\"\"> <!-- responsive -->\n";
-    echo "<table class=\"\">\n";
-    echo "<thead><tr class=\"\">";
+    echo "<div class=\"table-responsive\">\n";
+    echo "<table class=\"table-bordered theme-table-striped theme-table-hover\">\n";
+    echo "<thead><tr>\n";
     foreach (array_keys($records[0]) as $key)
     {
         if ($key != "id")
         {
             $label = ModelRecord::formatFieldName($key, true);
-            echo "<th style=\"white-space:nowrap\">{$label}</th>\n";
+            echo "<th class=\"theme-bg-l1\" style=\"white-space:nowrap\">{$label}</th>\n";
         }
     }
     echo "</tr></thead>\n";
@@ -34,7 +34,7 @@ if (count($records) > 0)
     foreach ($records as $record)
     {
         $recordLink = WEB_ROOT . $recordUri . $record["id"];
-        echo "<tr onclick=\"location.href='{$recordLink}'\" {SHOW_LOADER}>";
+        echo "<tr class=\"cursor-pointer\" onclick=\"location.href='{$recordLink}'\" {SHOW_LOADER}>";
         foreach (array_keys($record) as $key)
         {
             if ($key != "id")

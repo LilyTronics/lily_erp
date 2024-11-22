@@ -1,16 +1,9 @@
-<!-- <nav class="nav">
-  <a class="nav-link active" aria-current="page" href="#">Active</a>
-  <a class="nav-link" href="#">Link</a>
-  <a class="nav-link" href="#">Link</a>
-  <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-</nav> -->
-
 <?php
 
 $pageData = $this->getPageData();
 
-$menuClass = "btn p-1 px-2 m-1 theme-btn-hover";
-$itemClass = "dropdown-item theme-btn-hover";
+$menuClass = "btn p-1 px-2 m-1 theme-hover";
+$itemClass = "dropdown-item theme-hover";
 
 if (isset($pageData["menu"]))
 {

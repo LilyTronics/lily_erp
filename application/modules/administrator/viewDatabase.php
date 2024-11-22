@@ -11,52 +11,41 @@ $onSuccessUri = (isset($pageData["on_success_uri"]) ? $pageData["on_success_uri"
 $onFailureUri = (isset($pageData["on_failure_uri"]) ? $pageData["on_failure_uri"] : "");
 $onDeleteUri = (isset($pageData["on_delete_uri"]) ? $pageData["on_delete_uri"] : "");
 
-?>
-<div class="">
-<div class="" style="width:200px"> <!-- col tables -->
-<div class="">Tables</div>
-<?php
-
-if (count($tables) > 0)
+echo "<div class=\"row g-1\">\n";
+// Colomn for table list
+echo "<div class=\"col-md-auto\">\n";
+echo "<div class=\"p-2 theme-bg-l1\">Tables</div>\n";
+echo "<ul class=\"nav flex-column\">\n";
+foreach ($tables as $table)
 {
-    echo "<div class=\"\">\n";
-    foreach ($tables as $table)
-    {
-        $link = WEB_ROOT . "administrator/database-table/$table";
-        echo "<a href=\"{$link}\" class=\"\"";
-        echo " {SHOW_LOADER}>{$table}</a>\n";
-    }
-    echo "</div>\n";
+    $link = WEB_ROOT . "administrator/database-table/$table";
+    echo "<li class=\"nav-item\"><button class=\"dropdown-item p-1 px-2 theme-hover\"";
+    echo "onclick=\"location.href='{$link}'\" {SHOW_LOADER}>{$table}</button></li>\n";
 }
-else
-{
-    echo "<p class=\"\">No tables</p>\n";
-}
-
-?>
-</div> <!-- col tables -->
-<div class=""> <!-- col records -->
-<?php
-
-echo "<div class=\"\">";
+echo "</ul>\n";
+echo "</div> <!-- col -->\n";
+// Column for the records
+echo "<div class=\"col\">\n";
+echo "<div class=\"p-2 theme-bg-l1 clearfix\">";
 if ($record !== null)
 {
-    // show record
+    // Show record
     echo "Record data for record with ID: {$record["id"]}</div>";
     echo $this->insertRecordForm($record, $inputs, $activeTable, $onSuccessUri, $onFailureUri, $onDeleteUri);
 }
 elseif ($activeTable != "")
 {
+    $link = WEB_ROOT . "administrator/database-record/{$activeTable}/0";
     echo "Records of {$activeTable}</div>";
-    echo "<div class=\"\">\n";
-    echo "<p><a class=\"{TOOL_BUTTON}\" href=\"" . WEB_ROOT . "administrator/database-record/{$activeTable}/0\" ";
-    echo "{SHOW_LOADER}>New record</a>\n";
+    echo "<div class=\"{CONTAINER}\">\n";
+    echo "<button class=\"{TOOL_BUTTON}\" onclick=\"location.href='{$link}'\" ";
+    echo "{SHOW_LOADER}>New record</button>\n";
     if (count($records) > 0)
     {
-        echo "<a class=\"{TOOL_BUTTON_RED}\" href=\"" . WEB_ROOT . "administrator/database-table/{$activeTable}/delete/0\" ";
-        echo "{SHOW_LOADER}>Delete all records</a>";
+        $link = WEB_ROOT . "administrator/database-table/{$activeTable}/delete/0";
+        echo "<button class=\"{TOOL_BUTTON_RED}\" onclick=\"location.href='{$link}'\" ";
+        echo "{SHOW_LOADER}>Delete all records</button>";
     }
-    echo "</p>\n";
     echo "</div>\n";
     echo $this->insertRecordTable($records,  "administrator/database-record/{$activeTable}/");
 }
@@ -64,7 +53,8 @@ else
 {
     echo "&nbsp;</div>\n";
 }
+echo "</div> <!-- col -->\n";
+echo "</div> <!-- row -->\n";
+echo "</div> <!-- container -->\n";
 
 ?>
-</div> <!-- col records -->
-</div> <!-- row -->
