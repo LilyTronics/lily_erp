@@ -1,5 +1,5 @@
 <div class="dropdown float-end">
-<h5 class="mt-2 me-4 cursor-pointer" data-bs-toggle="dropdown"><i class="fa-solid fa-user"></i></h5>
+<span class="mt-2 me-4 cursor-pointer fs-5" data-bs-toggle="dropdown"><i class="fa-solid fa-user"></i></span>
 <ul class="dropdown-menu">
     <li><button class="dropdown-item theme-btn-hover" onclick="location.href='<?php echo WEB_ROOT; ?>my-account'" {SHOW_LOADER}>My account</button></li>
     <li><form action="<?php echo WEB_ROOT; ?>api" method="post">
