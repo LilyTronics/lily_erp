@@ -1,46 +1,20 @@
 /* HTML overrides */
 
-@font-face {
-    font-family: noto-sans;
-    src: url('noto-sans.ttf') format('truetype');
-}
-
-body {
-    font-family: noto-sans;
-    font-size: 16px;
-    font-weight: 300;
-}
-
-footer {
-    font-size: 0.8em;
-}
+@font-face { font-family: noto-sans; src: url('noto-sans.ttf') format('truetype') }
+body { font-family: noto-sans; font-size: 16px; font-weight: 300 }
+footer { font-size: 0.8em }
+td, th { padding: 4px 8px }
 
 /* Containers */
 
-.main-content {
-    min-height: 700px;
-}
-
-.log-in-form {
-    max-width: 400px;
-}
-
-.form-buttons {
-    margin-top: 32px;
-}
-
-.dashboard-item {
-    width: 400px;
-    height: 200px;
-}
+.main-content { min-height: 700px }
+.log-in-form { max-width: 400px }
+.form-buttons { margin-top: 32px }
+.dashboard-item { width: 400px; height: 200px }
 
 /* Uncategorized */
 
-.cursor-pointer {
-    cursor: pointer;
-}
-
-
+.cursor-pointer { cursor: pointer }
 
 /*
 
@@ -49,27 +23,7 @@ a.no-link-color:visited {color: inherit !important}
 a.no-link-color:hover {color: inherit !important}
 a.no-link-color:active {color: inherit !important}
 
-td {
-    vertical-align: middle !important;
-    padding: 4px 8px !important;
-}
-
-
-
-.dashboard-item-content {
-    height: 200px;
-}
-
 /* Record table */
-
-/* .record-table {
-    font-size: 14px;
-    width: auto;
-    td {
-        cursor: pointer;
-    }
-}
-
 
 /* Widths */
 
