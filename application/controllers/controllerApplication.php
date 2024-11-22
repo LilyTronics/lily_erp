@@ -52,6 +52,14 @@ class ControllerApplication extends ControllerBase
         return $this->showPage("viewLogIn");
     }
 
+    protected function showDashboard($parameters)
+    {
+        $pageData = [
+            "items" => ModelDashboard::getDashboardItems()
+        ];
+        return $this->showPage("viewDashboard", $pageData);
+    }
+
     protected function showPage($pageName, $pageData=[])
     {
         // Merge the page data from the parameter with any stored session data.

@@ -3,6 +3,17 @@
 class ModelAdministrator
 {
 
+    public function getDashboard()
+    {
+        return [
+            "order"   => 10,
+            "title"   => "Administrator",
+            "icon"    => "fa-solid fa-screwdriver-wrench",
+            "link"    => "administrator",
+            "content" => "to do"
+        ];
+    }
+
     public static function getMenu()
     {
         return [

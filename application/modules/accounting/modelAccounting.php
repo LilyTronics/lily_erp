@@ -3,6 +3,17 @@
 class ModelAccounting
 {
 
+    public function getDashboard()
+    {
+        return [
+            "order"   => 1,
+            "title"   => "Accounting",
+            "icon"    => "fa-solid fa-cash-register",
+            "link"    => "accounting",
+            "content" => "to do"
+        ];
+    }
+
     public static function getMenu()
     {
         return [
