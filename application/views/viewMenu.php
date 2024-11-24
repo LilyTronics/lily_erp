@@ -7,7 +7,7 @@ $itemClass = "dropdown-item theme-hover";
 
 if (isset($pageData["menu"]))
 {
-    echo "<nav class=\"nav\">\n";
+    echo "<nav class=\"nav border-bottom\">\n";
     // Insert link to dashboard
     $link = WEB_ROOT . "dashboard";
     echo "<button class=\"$menuClass\" title=\"dashboard\" onclick=\"location.href='{$link}'\" {SHOW_LOADER}>";
