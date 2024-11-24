@@ -17,9 +17,8 @@ define("APP_MODULES_PATH", APP_PATH . "modules/");
 $GLOBALS["TEMPLATE_VALUES"] = [
     "{CONTAINER}"       => "container-fluid p-3",
     "{BUTTON}"          => "btn theme-btn",
-    // "{BUTTON_RED}"      => "",
+    "{BUTTON_RED}"      => "btn btn-danger",
     "{INPUT}"           => "form-control",
-    // "{SELECT}"          => "",
     "{TOOL_BUTTON}"     => "btn btn-sm theme-btn",
     "{TOOL_BUTTON_RED}" => "btn btn-sm btn-danger",
     "{SHOW_LOADER}" => "data-bs-toggle=\"modal\" data-bs-target=\"#modal-loader\""
