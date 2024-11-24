@@ -2,10 +2,10 @@
 
 $pageData = $this->getPageData();
 
-// echo $this->insertRecordTable($pageData["records"], $pageData["record_uri"]);
+echo $this->insertRecordTable($pageData["records"], $pageData["record_uri"]);
 
 ?>
-<div class="{CONTAINER}">
+<div class="{CONTAINER} border-top">
 <form action="{API_URI}" method="post" enctype="multipart/form-data">
 <input type="hidden" name="on_success" value="accounting/bank" />
 <input type="hidden" name="on_failure" value="accounting/bank" />
