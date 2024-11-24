@@ -76,17 +76,20 @@ else
     }
     echo "</table>\n";
     echo "<p class=\"form-buttons\">\n";
-    echo "<button class=\"{BUTTON} m-2\" type=\"submit\" name=\"action\" value=\"";
-    if ($record["id"] > 0)
+    if ($onSuccessUri != "" && $onFailureUri != "")
     {
-        echo "update_{$table}";
+        echo "<button class=\"{BUTTON} m-2\" type=\"submit\" name=\"action\" value=\"";
+        if ($record["id"] > 0)
+        {
+            echo "update_{$table}";
+        }
+        else
+        {
+            echo "add_{$table}";
+        }
+        echo "\" {SHOW_LOADER}>Save</button>\n";
     }
-    else
-    {
-        echo "add_{$table}";
-    }
-    echo "\" {SHOW_LOADER}>Save</button>\n";
-    if ($record["id"] > 0)
+    if ($onDeleteUri != "" && $onFailureUri != "" && $record["id"] > 0)
     {
         echo "<button class=\"{BUTTON_RED} m-2\" type=\"submit\" name=\"action\" value=\"delete_{$table}\" {SHOW_LOADER}>Delete</button>\n";
     }
