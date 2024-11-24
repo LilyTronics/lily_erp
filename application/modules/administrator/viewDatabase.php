@@ -40,12 +40,6 @@ elseif ($activeTable != "")
     echo "<div class=\"{CONTAINER}\">\n";
     echo "<button class=\"{TOOL_BUTTON} m-1\" onclick=\"location.href='{$link}'\" ";
     echo "{SHOW_LOADER}>New record</button>\n";
-    if (count($records) > 0)
-    {
-        $link = WEB_ROOT . "administrator/database-table/{$activeTable}/delete/0";
-        echo "<button class=\"{TOOL_BUTTON_RED} m-1\" onclick=\"location.href='{$link}'\" ";
-        echo "{SHOW_LOADER}>Delete all records</button>";
-    }
     echo "</div>\n";
     echo $this->insertRecordTable($records,  "administrator/database-record/{$activeTable}/");
 }
