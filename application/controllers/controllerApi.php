@@ -66,6 +66,10 @@ class ControllerApi extends ControllerApplication
                 $result = ["result" => true, "message" => ""];
                 break;
 
+            case ($action == "bank_upload"):
+                $result = ModelBank::processUpload($result);
+                break;
+
             case (str_starts_with($action, "get_")):
             case (str_starts_with($action, "add_")):
             case (str_starts_with($action, "update_")):
