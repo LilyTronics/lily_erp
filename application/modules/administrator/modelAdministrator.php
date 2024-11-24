@@ -72,13 +72,13 @@ class ModelAdministrator
 
     public static function getRecords($table)
     {
-        $table = ModelDatabaseTableBase::GetModelForTable($table);
+        $table = ModelDatabaseTableBase::getModelForTable($table);
         return $table->getRecords();
     }
 
     public static function getRecord($table, $id)
     {
-        $table = ModelDatabaseTableBase::GetModelForTable($table);
+        $table = ModelDatabaseTableBase::getModelForTable($table);
         $record = $table->generateNewRecord();
         $records = $table->getRecords("id = $id");
         if (count($records) == 1) {
@@ -89,7 +89,7 @@ class ModelAdministrator
 
     public static function getInputs($table)
     {
-        $table = ModelDatabaseTableBase::GetModelForTable($table);
+        $table = ModelDatabaseTableBase::getModelForTable($table);
         return $table->inputs;
     }
 
