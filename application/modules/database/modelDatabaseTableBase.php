@@ -55,6 +55,16 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
         return $record;
     }
 
+    public function getRecordById($id)
+    {
+        $records = $this->getRecords("id = {$id}");
+        if (count($records) == 1)
+        {
+            return $records[0];
+        }
+        return [];
+    }
+
     public function getRecords($filterExpression="", $orderExpression="", $groupExpression="", $start=0, $count=0,
                                $fields=["*"], $join="", $joinTable="", $joinExpression="", $joinFields=["*"])
     {
