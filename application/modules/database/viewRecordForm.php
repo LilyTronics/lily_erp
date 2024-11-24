@@ -1,7 +1,7 @@
 <div class="{CONTAINER}">
 <?php
 // From the view call:
-// echo $this->insertRecordForm($record, $inputs, $table);
+// echo $this->insertRecordForm();
 
 
 $labelStyle = "style=\"width:150px;white-space:nowrap\"";

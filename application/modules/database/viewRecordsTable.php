@@ -1,7 +1,7 @@
 <div class="{CONTAINER}"> <!-- records table -->
 <?php
 // From the view call:
-// echo $this->insertRecordTable($records, $recordUri);
+// echo $this->insertRecordTable();
 
 
 function getStyle($field)
@@ -57,7 +57,7 @@ if (count($records) > 0)
 }
 else
 {
-    echo "<p>No records</p>";
+    echo "<p>No records</p>\n";
 }
 
 ?>
