@@ -24,7 +24,7 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
         parent::__construct($host, $user, $password, $autoCreateTable, $defaultRecords);
     }
 
-    public static function GetModelForTable($tableName)
+    public static function getModelForTable($tableName)
     {
         $table = null;
         // Check if the database file exists, else we can get a fatal error
