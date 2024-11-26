@@ -79,6 +79,10 @@ class ControllerApi extends ControllerApplication
                     $onSuccess = $onDelete;
                 }
                 $result = $this->processDatabaseAction($result, $action, $record);
+                if (str_starts_with($action, "delete_") and $result["result"])
+                {
+                    $record = null;
+                }
                 break;
         }
 
@@ -155,7 +159,10 @@ class ControllerApi extends ControllerApplication
         {
             $log->writeMessage("Go to location: {$redirect}");
             $result["title"] = $title;
-            $result["record"] = $record;
+            if ($record !== null)
+            {
+                $result["record"] = $record;
+            }
             $this->setPageData($result);
             $this->gotoLocation($redirect);
         }
