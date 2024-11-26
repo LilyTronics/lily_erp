@@ -49,7 +49,7 @@ class ControllerAccounting extends ControllerApplication
     {
         $id = (isset($parameters["id"]) ? $parameters["id"] : 0);
         $table = new ModelDatabaseTableAccount();
-        $failUri = "chart-of-accounts/account/{$id}";
+        $failUri = "accounting/chart-of-accounts/account/{$id}";
         if ($id > 0)
         {
             $record = $table->getRecordById($id);
