@@ -3,16 +3,6 @@
 class ModelDashboard
 {
 
-    // private static $dashboardItems = [
-    //     [ "fa-address-card",        "Relations",        "relations",        "" ],
-    //     [ "fa-shop",                "Sales",            "sales",            "" ],
-    //     [ "fa-basket-shopping",     "Purchase",         "purchase",         "" ],
-    //     [ "fa-warehouse",           "Inventory",        "inventory",        "" ],
-    //     [ "fa-boxes-stacked",       "Products",         "products",         "" ],
-    //     [ "fa-users",               "Users",            "users",            "" ],
-    // ];
-
-
     public static function getDashboardItems()
     {
         // Automatically search the modules folder.
