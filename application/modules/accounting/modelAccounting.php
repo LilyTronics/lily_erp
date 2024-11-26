@@ -6,7 +6,7 @@ class ModelAccounting
     public function getDashboard()
     {
         return [
-            "order"   => 1,
+            "order"   => 7,
             "title"   => "Accounting",
             "icon"    => "fa-solid fa-cash-register",
             "link"    => "accounting",

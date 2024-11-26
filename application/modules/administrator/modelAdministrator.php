@@ -6,7 +6,7 @@ class ModelAdministrator
     public function getDashboard()
     {
         return [
-            "order"   => 10,
+            "order"   => 9,
             "title"   => "Administrator",
             "icon"    => "fa-solid fa-screwdriver-wrench",
             "link"    => "administrator",
