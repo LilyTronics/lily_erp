@@ -32,7 +32,7 @@ a:visited   {color: #0066aa !important; text-decoration: none !important}
 a:hover     {color: #0099ff !important; text-decoration: none !important}
 a:active    {color: #0066aa !important; text-decoration: none !important}
 
-.theme-table-striped tbody tr:nth-child(even)   {background-color: #ccebff !important}
+.theme-table-striped tbody tr:nth-child(even)   {background-color: #e6f5ff !important}
 .theme-table-hover tbody tr:hover               {background-color: #99d6ff !important; cursor: pointer}
 
 .loader {border-top-color: #0066aa !important};
