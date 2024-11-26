@@ -18,7 +18,7 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
             "type"     => "INT",
             "options"  => "AUTO_INCREMENT",
             "key"      => true,
-            "required" => false
+            "required" => true
         ]);
 
         parent::__construct($host, $user, $password, $autoCreateTable, $defaultRecords);
@@ -81,13 +81,13 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
 
     public function addRecord($record, $result)
     {
-        if (isset($record["id"]))
-        {
-            unset($record["id"]);
-        }
         $result = $this->checkRequiredFields($record, $result);
         if ($result["result"])
         {
+            if (isset($record["id"]))
+            {
+                unset($record["id"]);
+            }
             $result["result"] = $this->insertRecord($record);
             if (!$result["result"])
             {
@@ -125,11 +125,44 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
         $result["message"] = "";
         foreach ($this->fields as $field)
         {
-            if ($field["required"] and !isset($record[$field["name"]]))
+            if ($field["required"])
             {
-                $result["result"] = false;
-                $result["message"] = "The field {$field["name"]} is required";
-                break;
+                $fieldName = $field["name"];
+                $friendlyName = str_replace("_", " ", $fieldName);
+                $fieldType = $field["type"];
+                $fieldValue = (isset($record[$fieldName]) ? $record[$fieldName] : null);
+                switch (true)
+                {
+                    case ($fieldValue === null):
+                        $result["result"] = false;
+                        $result["message"] = "The field {$friendlyName} can not be empty";
+                        break;
+
+                    case ($fieldType == "INT"):
+                        if (!is_numeric($fieldValue))
+                        {
+                            $result["result"] = false;
+                            $result["message"] = "The field {$friendlyName} must be numeric";
+                            break;
+                        }
+                        break;
+
+                    case (str_starts_with($fieldType, "VARCHAR")):
+                        if (!is_string($fieldValue) or $fieldValue == "")
+                        {
+                            $result["result"] = false;
+                            $result["message"] = "The field {$friendlyName} can not be empty";
+                        }
+                        break;
+
+                    default:
+                        $result["result"] = false;
+                        $result["message"] = "Could not process field {$friendlyName} of type {$fieldType}";
+                }
+                if (!$result["result"])
+                {
+                    break;
+                }
             }
         }
         return $result;
