@@ -62,19 +62,16 @@ class ControllerApplication extends ControllerBase
 
     protected function showPage($pageName, $pageData=[])
     {
-        // Merge the page data from the parameter with any stored session data.
-        // The parameter page data will overwrite any stored session data when the keys are same.
-        $newPageData = array_merge(
-            ModelApplicationSession::getData("page_data", []),
-            $pageData
-        );
+        // Merge the page data from the parameter page data with any stored session page data.
+        // Data from the previous session overrides the parameter data
+        $pageData = array_merge($pageData, ModelApplicationSession::getData("page_data", []));
         ModelApplicationSession::clearData("page_data");
 
-        $newPageData["is_logged_in"] = ModelApplicationSession::checkSession();
+        $pageData["is_logged_in"] = ModelApplicationSession::checkSession();
 
         $view = new ViewApplication();
         $view->setView($pageName);
-        $view->setPageData($newPageData);
+        $view->setPageData($pageData);
         $view->setPageTitle(APPLICATION_TITLE);
         $view->addMetaTag("name=\"viewport\" content=\"width=device-width, initial-scale=1\"");
         $view->addJavascriptPreVariable("WEB_ROOT", "\"" . WEB_ROOT . "\"");
