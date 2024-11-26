@@ -155,6 +155,7 @@ class ControllerApi extends ControllerApplication
         {
             $log->writeMessage("Go to location: {$redirect}");
             $result["title"] = $title;
+            $result["record"] = $record;
             $this->setPageData($result);
             $this->gotoLocation($redirect);
         }
