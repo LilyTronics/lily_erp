@@ -10,7 +10,7 @@ class ModelAdministrator
             "title"   => "Administrator",
             "icon"    => "fa-solid fa-screwdriver-wrench",
             "link"    => "administrator",
-            "content" => "to do"
+            "content" => $this->getDashboardContent()
         ];
     }
 
@@ -91,6 +91,14 @@ class ModelAdministrator
     {
         $table = ModelDatabaseTableBase::getModelForTable($table);
         return $table->inputs;
+    }
+
+    private static function getDashboardContent() {
+        return [
+            ["{ICON_INFO}", "change applications settings"],
+            ["{ICON_INFO}", "check the log files"],
+            ["{ICON_INFO}", "check the database data"]
+        ];
     }
 
 }

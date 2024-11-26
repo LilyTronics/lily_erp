@@ -10,7 +10,14 @@ class ModelPurchase
             "title"   => "Purchase",
             "icon"    => "fa-solid fa-basket-shopping",
             "link"    => "purchase",
-            "content" => "to do"
+            "content" => $this->getDashboardContent()
+        ];
+    }
+
+    private static function getDashboardContent() {
+        return [
+            ["{ICON_INFO}", "2 purchase orders in draft"],
+            ["{ICON_EXCLAMATION}", "6 purchase orders not yet confirmed"]
         ];
     }
 

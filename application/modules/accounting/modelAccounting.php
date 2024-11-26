@@ -10,7 +10,7 @@ class ModelAccounting
             "title"   => "Accounting",
             "icon"    => "fa-solid fa-cash-register",
             "link"    => "accounting",
-            "content" => "to do"
+            "content" => $this->getDashboardContent()
         ];
     }
 
@@ -24,6 +24,13 @@ class ModelAccounting
             ["Reports", [
                 ["VAT", "accounting/reports/vat"],
             ]]
+        ];
+    }
+
+    private static function getDashboardContent() {
+        return [
+            ["{ICON_EXCLAMATION}", "3 open bank transactions require attention"],
+            ["{ICON_CHECK_OK}",    "the balance sheet looks good"]
         ];
     }
 

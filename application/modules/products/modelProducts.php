@@ -10,7 +10,14 @@ class ModelProducts
             "title"   => "Products",
             "icon"    => "fa-solid fa-boxes-stacked",
             "link"    => "products",
-            "content" => "to do"
+            "content" => $this->getDashboardContent()
+        ];
+    }
+
+    private static function getDashboardContent() {
+        return [
+            ["{ICON_CHECK_OK}", "142 active products"],
+            ["{ICON_EXCLAMATION}", "3 products are end of life and need replacements"]
         ];
     }
 

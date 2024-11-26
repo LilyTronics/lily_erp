@@ -13,7 +13,16 @@ if (isset($pageData["items"]))
         echo "<i class=\"{$itemData["icon"]} mx-2\"></i>{$itemData["title"]}\n";
         echo "</div> <!-- header -->\n";
         echo "<div class=\"p-2\">\n";
-        echo $itemData["content"];
+        // Content should be an array with items (icon, message)
+        if (count($itemData["content"]) > 0)
+        {
+            echo "<ul class=\"fa-ul\" style=\"margin-left:1.5em\">\n";
+            foreach ($itemData["content"] as $item)
+            {
+                echo "<li><span class=\"fa-li\">{$item[0]}</span> {$item[1]}\n";
+            }
+            echo "</ul>\n";
+        }
         echo "</div> <!-- content -->\n";
         echo "</div> <!-- card -->\n";
     }
