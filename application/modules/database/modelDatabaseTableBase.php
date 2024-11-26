@@ -72,7 +72,7 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
                                         $fields, $join, $joinTable, $joinExpression, $joinFields);
         if (!$records[0])
         {
-            DEBUG_LOG->writeMessage("Error getting records for table: {$this->tableName}");
+            DEBUG_LOG->writeMessage("Error getting records for table: {$this->tableName}.");
             DEBUG_LOG->writeMessage($this->getError());
             return [];
         }
@@ -81,7 +81,7 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
 
     public function addRecord($record, $result)
     {
-        $result = $this->checkRequiredFields($record, $result);
+        $result = $this->checkRecord($record, $result);
         if ($result["result"])
         {
             if (isset($record["id"]))
@@ -91,7 +91,7 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
             $result["result"] = $this->insertRecord($record);
             if (!$result["result"])
             {
-                $result["message"] = "Could not add record: " . $this->getError();
+                $result["message"] = "Could not add record: " . $this->getError() . ".";
             }
         }
         return $result;
@@ -119,6 +119,20 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
         }
     }
 
+    private function checkRecord($record, $result) {
+        $result = $this->checkRequiredFields($record, $result);
+        if ($result["result"])
+        {
+            $result["result"] = false;
+            $result["message"] = "No field values were checked.";
+            if (method_exists($this, "checkFieldValues"))
+            {
+                $result = $this->checkFieldValues($record, $result);
+            }
+        }
+        return $result;
+    }
+
     private function checkRequiredFields($record, $result)
     {
         $result["result"] = true;
@@ -135,14 +149,14 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
                 {
                     case ($fieldValue === null):
                         $result["result"] = false;
-                        $result["message"] = "The field {$friendlyName} can not be empty";
+                        $result["message"] = "The {$friendlyName} can not be empty.";
                         break;
 
                     case ($fieldType == "INT"):
                         if (!is_numeric($fieldValue))
                         {
                             $result["result"] = false;
-                            $result["message"] = "The field {$friendlyName} must be numeric";
+                            $result["message"] = "The {$friendlyName} must be numeric.";
                             break;
                         }
                         break;
@@ -151,13 +165,13 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
                         if (!is_string($fieldValue) or $fieldValue == "")
                         {
                             $result["result"] = false;
-                            $result["message"] = "The field {$friendlyName} can not be empty";
+                            $result["message"] = "The {$friendlyName} can not be empty.";
                         }
                         break;
 
                     default:
                         $result["result"] = false;
-                        $result["message"] = "Could not process field {$friendlyName} of type {$fieldType}";
+                        $result["message"] = "Could not process {$friendlyName} of type {$fieldType}.";
                 }
                 if (!$result["result"])
                 {
