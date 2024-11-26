@@ -54,6 +54,8 @@ else
     echo "<input type=\"hidden\" name=\"on_success\" value=\"{$onSuccessUri}\" />\n";
     echo "<input type=\"hidden\" name=\"on_failure\" value=\"{$onFailureUri}\" />\n";
     echo "<input type=\"hidden\" name=\"on_delete\" value=\"{$onDeleteUri}\" />\n";
+    echo "<input type=\"hidden\" name=\"title\" value=\"Save record\" />\n";
+
 
     echo "<table class=\"width-max\">\n";
     foreach ($record as $field => $value)
