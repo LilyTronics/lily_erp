@@ -45,6 +45,35 @@ class ControllerAccounting extends ControllerApplication
         return $this->showView("ChartOfAccounts");
     }
 
+    protected function showAccount($parameters)
+    {
+        $id = (isset($parameters["id"]) ? $parameters["id"] : 0);
+        $table = new ModelDatabaseTableAccount();
+        $failUri = "chart-of-accounts/account/{$id}";
+        if ($id > 0)
+        {
+            $record = $table->getRecordById($id);
+            $successUri = "accounting/chart-of-accounts/account/{$id}";
+            $deleteUri = "accounting/chart-of-accounts";
+        }
+        else
+        {
+            $record = $table->generateNewRecord();
+            $successUri = "accounting/chart-of-accounts";
+            $deleteUri = "";
+        }
+        $pageData = [
+            "record"         => $record,
+            "inputs"         => $table->inputs,
+            "table"          => $table->tableName,
+            "on_success_uri" => $successUri,
+            "on_failure_uri" => $failUri,
+            "on_delete_uri"  => $deleteUri
+        ];
+        return $this->showView("Account", $pageData);
+    }
+
+
     /* Reports */
 
     protected function showReport($parameters)

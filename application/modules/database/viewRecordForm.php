@@ -11,16 +11,18 @@ function createInputFor($field, $value, $input)
 {
     $type = (isset($input["type"]) ? $input["type"] : null);
     $data = (isset($input["data"]) ? $input["data"] : []);
+    $width = (isset($input["width"]) ? $input["width"] : "default");
 
     $output = "";
     switch ($type)
     {
         case "text":
-            $output = "<input type=\"text\" class=\"{INPUT}\" name=\"record[{$field}]\" value=\"{$value}\" />";
+            $output = "<input type=\"text\" class=\"{INPUT} width-input-{$width}\" name=\"record[{$field}]\" value=\"{$value}\" />";
             break;
 
         case "select":
             $output = "<select class=\"{INPUT} width-auto\" name=\"record[{$field}]\">\n";
+            $output .= "<option></option>\n";
             foreach ($data as $dataValue)
             {
                 $output .= "<option";
@@ -34,6 +36,7 @@ function createInputFor($field, $value, $input)
             break;
 
         default:
+            // Read only, no input box, but same size
             $output = "<input type=\"text\" class=\"form-control-plaintext\" value=\"{$value}\" readonly />";
     }
     return $output;

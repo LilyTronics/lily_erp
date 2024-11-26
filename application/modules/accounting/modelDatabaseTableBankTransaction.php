@@ -16,8 +16,6 @@ class ModelDatabaseTableBankTransaction extends ModelDatabaseTableBase {
         $this->fields[] = [ "name" => "description",      "type" => "VARCHAR(200)"  ];
         $this->fields[] = [ "name" => "state",            "type" => "VARCHAR(200)"  ];
 
-        // $this->inputs["field_name"] = ["type" => "text"];
-
         parent::__construct(true);
     }
 

@@ -11,7 +11,11 @@ class ModelDatabaseTableAccount extends ModelDatabaseTableBase {
         $this->fields[] = [ "name" => "debit_credit", "type" => "VARCHAR(1)"  , "required" => true  ];
         $this->fields[] = [ "name" => "category",     "type" => "VARCHAR(200)", "required" => false ];
 
-        // $this->inputs["field_name"] = ["type" => "text"];
+        $this->inputs["parent_id"]    = ["type" => "text", "width" => "small"];
+        $this->inputs["number"]       = ["type" => "text", "width" => "small"];
+        $this->inputs["name"]         = ["type" => "text"];
+        $this->inputs["debit_credit"] = ["type" => "select", "data" => ["D", "C"] ];
+        $this->inputs["category"]     = ["type" => "text"];
 
         parent::__construct(true);
     }
