@@ -12,7 +12,6 @@ class TestAccount(TestSuiteBase):
     table_fields = []
 
     record_test_values = {
-        "parent_id": (0, ),
         "number": ("", ),
         "name": ("", ),
         "debit_credit": ("", ),
