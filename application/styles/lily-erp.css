@@ -26,13 +26,4 @@ a.no-link-color:link {color: inherit !important}
 a.no-link-color:visited {color: inherit !important}
 a.no-link-color:hover {color: inherit !important}
 a.no-link-color:active {color: inherit !important}
-
-.width-modal {
-    max-width: 600px !important;
-}
-
-.width-bank-upload {
-    max-width: 600px;
-}
-
 */
