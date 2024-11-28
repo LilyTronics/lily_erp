@@ -13,9 +13,9 @@ td, th               {padding: 4px 8px}
 /* Widths */
 .width-auto          {width: auto !important}
 .width-max           {width: 99.9% !important}
-.width-input-small   {max-width: 120px !important}
-.width-input-default {max-width: 400px !important}
-.width-input-large   {max-width: 600px !important}
+.max-width-small   {max-width: 120px !important}
+.max-width-default {max-width: 400px !important}
+.max-width-large   {max-width: 600px !important}
 
 /* Uncategorized */
 .cursor-pointer      {cursor: pointer}

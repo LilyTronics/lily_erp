@@ -17,7 +17,7 @@ function createInputFor($field, $value, $input)
     switch ($type)
     {
         case "text":
-            $output = "<input type=\"text\" class=\"{INPUT} width-input-{$width}\" name=\"record[{$field}]\" value=\"{$value}\" />";
+            $output = "<input type=\"text\" class=\"{INPUT} max-width-{$width}\" name=\"record[{$field}]\" value=\"{$value}\" />";
             break;
 
         case "select":
