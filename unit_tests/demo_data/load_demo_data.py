@@ -6,12 +6,12 @@ This script loads the demo data into the test database.
 
 import os
 
-from unit_tests.lib.api import Api
 from unit_tests.lib.database import Database
+from unit_tests.lib.http_request import HttpRequest
 from unit_tests.lib.test_settings import TestSettings
 
 
-def create_configuration(api):
+def create_configuration(http):
     # Create from scratch
     Database.clear_all(True)
     data = {
@@ -28,13 +28,13 @@ def create_configuration(api):
             "admin_repeat_password": TestSettings.admin_password
         }
     }
-    response = api.do_api_call(data, False)
+    response = http.do_api_call(data, False)
     if not response["result"]:
         print(f"Cannot create configuration: {response["message"]}")
         exit()
 
 
-def load_demo_data(api, path):
+def load_demo_data(http, path):
     for filename in filter(lambda x: x.endswith(".data"), os.listdir(path)):
         print(f"Load data from: {filename}")
         columns = []
@@ -60,11 +60,13 @@ def load_demo_data(api, path):
                               f"is not the same as the number of columns ({len(columns)})")
                     table = filename.split(".")[0]
                     record = dict(zip(columns, values))
+                    # Add id = 0
+                    record["id"] = 0
                     data = {
                         "action": f"add_{table}",
                         "record": record
                     }
-                    response = api.do_api_call(data)
+                    response = http.do_api_call(data)
                     if not response["result"]:
                         print(f"Cannot add record: {response["message"]}")
                         print(data)
@@ -76,9 +78,9 @@ if __name__ == "__main__":
 
     DEMO_PATH = os.path.dirname(__file__)
 
-    _api = Api()
+    _http = HttpRequest()
 
-    create_configuration(_api)
-    load_demo_data(_api, DEMO_PATH)
+    create_configuration(_http)
+    load_demo_data(_http, DEMO_PATH)
 
     print("Demo data is loaded")
