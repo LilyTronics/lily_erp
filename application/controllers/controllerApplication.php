@@ -62,6 +62,8 @@ class ControllerApplication extends ControllerBase
 
     protected function showPage($pageName, $pageData=[])
     {
+        $controllerName = get_class($this);
+
         // Merge the page data from the parameter page data with any stored session page data.
         // Data from the previous session overrides the parameter data
         $pageData = array_merge($pageData, ModelApplicationSession::getData("page_data", []));
@@ -84,7 +86,10 @@ class ControllerApplication extends ControllerBase
         $view->addStyleSheet("fontawesome/css/brands.min.css");
         $view->addStyleSheet("fontawesome/css/solid.min.css");
         $view->addJavaScriptFile("bootstrap.bundle.js");
-        $view->addJavaScriptFile("color-theme.js");
+        if ($controllerName == "ControllerAdministrator")
+        {
+            $view->addJavaScriptFile("color-theme.js");
+        }
         return $view->output();
     }
 
