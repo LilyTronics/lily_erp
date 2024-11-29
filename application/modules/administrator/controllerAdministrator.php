@@ -5,7 +5,11 @@ class ControllerAdministrator extends ControllerApplication
 
     protected function showAdministrator($parameters)
     {
-        return $this->showView("Administrator");
+        $table = new ModelDatabaseTableSetting();
+        $pageData = [
+            "settings" => $table->getSettings()
+        ];
+        return $this->showView("Administrator", $pageData);
     }
 
     /* Log files */
