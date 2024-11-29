@@ -119,22 +119,12 @@ class ControllerApi extends ControllerApplication
 
             case "update":
                 $log->writeMessage("Execute update record");
-                $result["result"] = $table->modifyRecord($record);
-                $result["message"] = "";
-                if (!$result["result"])
-                {
-                    $result["message"] = "Could not update record: " . $table->getError();
-                }
+                $result = $table->modifyRecord($record, $result);
                 break;
 
             case "delete":
                 $log->writeMessage("Execute delete record");
-                $result["result"] = $table->removeRecord($record);
-                $result["message"] = "";
-                if (!$result["result"])
-                {
-                    $result["message"] = "Could not delete record: " . $table->getError();
-                }
+                $result = $table->removeRecord($record, $result);
                 break;
         }
         return $result;

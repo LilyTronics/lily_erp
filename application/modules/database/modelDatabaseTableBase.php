@@ -100,17 +100,27 @@ class ModelDatabaseTableBase extends ModelDatabaseTable
         return $result;
     }
 
-    public function modifyRecord($record)
+    public function modifyRecord($record, $result)
     {
-        $expression = "id = {$record["id"]}";
-        unset($record["id"]);
-        return $this->updateRecord($record, $expression);
+        $result = $this->checkRecord($record, $result);
+        if ($result["result"])
+        {
+            $expression = "id = {$record["id"]}";
+            unset($record["id"]);
+            $result["result"] = $this->updateRecord($record, $expression);
+            if (!$result["result"])
+            {
+                $result["message"] = "Could not update record: " . $this->getError() . ".";
+            }
+        }
+        return $result;
     }
 
-    public function removeRecord($record)
+    public function removeRecord($record, $result)
     {
         $expression = "id = {$record["id"]}";
-        return $this->deleteRecord($expression);
+        $this->deleteRecord($expression);
+        return $result;
     }
 
     public static function createTables()
@@ -122,7 +132,7 @@ class ModelDatabaseTableBase extends ModelDatabaseTable
         }
     }
 
-    private function checkRecord($record, $result)
+    private function checkRecord(&$record, $result)
     {
         $result = $this->checkRequiredFields($record, $result);
         if ($result["result"])
