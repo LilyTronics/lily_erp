@@ -84,6 +84,7 @@ class ControllerApplication extends ControllerBase
         $view->addStyleSheet("fontawesome/css/brands.min.css");
         $view->addStyleSheet("fontawesome/css/solid.min.css");
         $view->addJavaScriptFile("bootstrap.bundle.js");
+        $view->addJavaScriptFile("color-theme.js");
         return $view->output();
     }
 
