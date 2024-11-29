@@ -8,7 +8,7 @@
 <div id="modal-message" class="modal" data-bs-backdrop="static">
 <div class="modal-dialog" style="top:200px">
 <div class="modal-content">
-<div class="modal-header p-2 theme-bg-l1">
+<div class="modal-header p-2 theme-bg-light">
 <span id="modal-message-title" class="modal-title"></span>
 </div>
 <div id="modal-message-body" class="modal-body"></div>

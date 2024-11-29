@@ -7,7 +7,7 @@ $logFiles = (isset($pageData["LogFiles"]) ? $pageData["LogFiles"] : []);
 echo "<div class=\"row g-1\">\n";
 // Colomn for file list
 echo "<div class=\"col-md-auto\">\n";
-echo "<div class=\"p-2 theme-bg-l1\">Log files</div>\n";
+echo "<div class=\"p-2 theme-bg-light\">Log files</div>\n";
 echo "<ul class=\"nav flex-column\">\n";
 foreach ($logFiles as $filename)
 {
@@ -21,7 +21,7 @@ echo "</ul>\n";
 echo "</div> <!-- col -->\n";
 // Column for the file contents
 echo "<div class=\"col\">\n";
-echo "<div class=\"p-2 theme-bg-l1 clearfix\">Content";
+echo "<div class=\"p-2 theme-bg-light clearfix\">Content";
 if (isset($pageData["Filename"]))
 {
     $deleteLink = WEB_ROOT . "administrator/delete-log-file/{$pageData["Filename"]}";

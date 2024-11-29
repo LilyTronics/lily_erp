@@ -14,7 +14,7 @@ $onDeleteUri = (isset($pageData["on_delete_uri"]) ? $pageData["on_delete_uri"] :
 echo "<div class=\"row g-1\">\n";
 // Colomn for table list
 echo "<div class=\"col-md-auto\">\n";
-echo "<div class=\"p-2 theme-bg-l1\">Tables</div>\n";
+echo "<div class=\"p-2 theme-bg-light\">Tables</div>\n";
 echo "<ul class=\"nav flex-column\">\n";
 foreach ($tables as $table)
 {
@@ -26,7 +26,7 @@ echo "</ul>\n";
 echo "</div> <!-- col -->\n";
 // Column for the records
 echo "<div class=\"col\">\n";
-echo "<div class=\"p-2 theme-bg-l1 clearfix\">";
+echo "<div class=\"p-2 theme-bg-light clearfix\">";
 if ($record !== null)
 {
     // Show record

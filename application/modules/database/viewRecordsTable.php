@@ -26,7 +26,7 @@ if (count($records) > 0)
         if ($key != "id")
         {
             $label = ModelRecord::formatFieldName($key, true);
-            echo "<th class=\"theme-bg-l1\" style=\"white-space:nowrap\">{$label}</th>\n";
+            echo "<th class=\"theme-bg-light\" style=\"white-space:nowrap\">{$label}</th>\n";
         }
     }
     echo "</tr></thead>\n";
