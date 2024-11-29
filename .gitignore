@@ -11,3 +11,6 @@
 
 # Document output
 /docs/_build/*
+
+# Color theme is generated
+/application/styles/color-theme.css
