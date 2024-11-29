@@ -1,38 +1,38 @@
 /* Color theme */
 
-.theme-bg-d3    {background-color: #000f1a !important; color: #fff !important}
-.theme-bg-d2    {background-color: #002e4d !important; color: #fff !important}
-.theme-bg-d1    {background-color: #004d80 !important; color: #fff !important}
-.theme-bg       {background-color: #0066aa !important; color: #fff !important}
-.theme-bg-l1    {background-color: #007acc !important; color: #fff !important}
-.theme-bg-l2    {background-color: #0099ff !important; color: #fff !important}
-.theme-bg-l3    {background-color: #33adff !important; color: #000 !important}
-.theme-bg-l4    {background-color: #66c2ff !important; color: #000 !important}
-.theme-bg-l5    {background-color: #99d6ff !important; color: #000 !important}
-.theme-bg-l6    {background-color: #ccebff !important; color: #000 !important}
+.theme-bg-d3    {background-color: #000f1a !important; color: #fff !important} /*  5% */
+.theme-bg-d2    {background-color: #002e4d !important; color: #fff !important} /* 15% */
+.theme-bg-d1    {background-color: #004d80 !important; color: #fff !important} /* 25% */
+.theme-bg       {background-color: #0066aa !important; color: #fff !important} /* 33% */
+.theme-bg-l1    {background-color: #007acc !important; color: #fff !important} /* 40% */
+.theme-bg-l2    {background-color: #0099ff !important; color: #fff !important} /* 50% */
+.theme-bg-l3    {background-color: #33adff !important; color: #000 !important} /* 60% */
+.theme-bg-l4    {background-color: #66c2ff !important; color: #000 !important} /* 70% */
+.theme-bg-l5    {background-color: #99d6ff !important; color: #000 !important} /* 80% */
+.theme-bg-l6    {background-color: #ccebff !important; color: #000 !important} /* 90% */
 
-.theme-text-d3  {color: #000f1a !important}
-.theme-text-d2  {color: #002e4d !important}
-.theme-text-d1  {color: #004d80 !important}
-.theme-text     {color: #0066aa !important}
-.theme-text-l1  {color: #007acc !important}
-.theme-text-l2  {color: #0099ff !important}
-.theme-text-l3  {color: #33adff !important}
-.theme-text-l4  {color: #66c2ff !important}
-.theme-text-l5  {color: #99d6ff !important}
-.theme-text-l6  {color: #ccebff !important}
+.theme-text-d3  {color: #000f1a !important} /*  5% */
+.theme-text-d2  {color: #002e4d !important} /* 15% */
+.theme-text-d1  {color: #004d80 !important} /* 25% */
+.theme-text     {color: #0066aa !important} /* 33% */
+.theme-text-l1  {color: #007acc !important} /* 40% */
+.theme-text-l2  {color: #0099ff !important} /* 50% */
+.theme-text-l3  {color: #33adff !important} /* 60% */
+.theme-text-l4  {color: #66c2ff !important} /* 70% */
+.theme-text-l5  {color: #99d6ff !important} /* 80% */
+.theme-text-l6  {color: #ccebff !important} /* 90% */
 
-.theme-hover:hover  {color:#fff !important; background-color:#66c2ff !important; color: #000 !important}
+.theme-hover:hover  {color:#fff !important; background-color:#66c2ff !important; color: #000 !important} /* 70% */
 
-.theme-btn          {color:#fff !important; background-color:#0066aa !important}
-.theme-btn:hover    {color:#fff !important; background-color:#0099ff !important}
+.theme-btn          {color:#fff !important; background-color:#0066aa !important} /* 33% */
+.theme-btn:hover    {color:#fff !important; background-color:#0099ff !important} /* 50% */
 
-a:link      {color: #0066aa !important; text-decoration: none !important}
-a:visited   {color: #0066aa !important; text-decoration: none !important}
-a:hover     {color: #0099ff !important; text-decoration: none !important}
-a:active    {color: #0066aa !important; text-decoration: none !important}
+a:link      {color: #0066aa !important; text-decoration: none !important} /* 33% */
+a:visited   {color: #0066aa !important; text-decoration: none !important} /* 33% */
+a:hover     {color: #66c2ff !important; text-decoration: none !important} /* 70% */
+a:active    {color: #0066aa !important; text-decoration: none !important} /* 33% */
 
-.theme-table-striped tbody tr:nth-child(even)   {background-color: #e6f5ff !important}
-.theme-table-hover tbody tr:hover               {background-color: #99d6ff !important; cursor: pointer}
+.theme-table-striped tbody tr:nth-child(even)   {background-color: #e6f5ff !important} /* 95% */
+.theme-table-hover tbody tr:hover               {background-color: #99d6ff !important; cursor: pointer} /* 80% */
 
-.loader {border-top-color: #0066aa !important};
+.loader {border-top-color: #0066aa !important}; /* 33% */
