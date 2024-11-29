@@ -71,6 +71,8 @@ class ControllerApplication extends ControllerBase
 
         $pageData["is_logged_in"] = ModelApplicationSession::checkSession();
 
+        ModelColorTheme::generateTheme();
+
         $view = new ViewApplication();
         $view->setView($pageName);
         $view->setPageData($pageData);
