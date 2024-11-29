@@ -134,7 +134,7 @@ class ColorTheme
         l = l / 100;
         if (s == 0)
         {
-            r = 255 * l / 100;
+            r = 255 * l;
             g = r;
             b = r;
         }
@@ -164,11 +164,11 @@ class ColorTheme
     {
         if (value > 1)
         {
-            return value - 1;
+            value--;
         }
         if (value < 0)
         {
-            return value + 1;
+            value++;
         }
         return value;
     }
@@ -179,11 +179,11 @@ class ColorTheme
         {
             return t2 + (t1 - t2) * 6 * value;
         }
-        else if (2 * value < 1)
+        if (2 * value < 1)
         {
             return t1;
         }
-        else if (3 * value < 2)
+        if (3 * value < 2)
         {
             return t2 + (t1 - t2) * ((2 / 3) - value) * 6;
         }
@@ -208,7 +208,7 @@ class ColorTheme
         this.#s = 0;
         if (min != max)
         {
-            if (this.#l / 100 > 0.5)
+            if (this.#l > 0.5)
             {
                 this.#s = diff / (2 - sum);
             }
@@ -232,5 +232,9 @@ class ColorTheme
         this.#h = Math.round(60 * this.#h);
         this.#s = Math.round(100 * this.#s);
         this.#l = Math.round(100 * this.#l);
+        if (this.#h < 0)
+        {
+            this.#h += 360;
+        }
     }
 }
