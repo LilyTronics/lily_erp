@@ -1,11 +1,13 @@
 <?php
 
-class ModelDatabaseTableBase extends ModelDatabaseTable {
+class ModelDatabaseTableBase extends ModelDatabaseTable
+{
 
     public $inputs = [];
     protected $returnUri = "";
 
-    public function __construct($autoCreateTable=false, $defaultRecords=[]) {
+    public function __construct($autoCreateTable=false, $defaultRecords=[])
+    {
         $config = new ModelConfiguration(CONFIG_FILE);
         $host = $config->getValue("sql", "host");
         $user = $config->getValue("sql", "user");
@@ -43,7 +45,8 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
         return $table;
     }
 
-    public function generateNewRecord() {
+    public function generateNewRecord()
+    {
         $record = ["id" => 0];
         foreach ($this->fields as $field)
         {
@@ -119,7 +122,8 @@ class ModelDatabaseTableBase extends ModelDatabaseTable {
         }
     }
 
-    private function checkRecord($record, $result) {
+    private function checkRecord($record, $result)
+    {
         $result = $this->checkRequiredFields($record, $result);
         if ($result["result"])
         {

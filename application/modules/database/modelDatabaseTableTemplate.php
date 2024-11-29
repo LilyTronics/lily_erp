@@ -1,8 +1,10 @@
 <?php
 
-class ModelDatabaseTableTemplate extends ModelDatabaseTableBase {
+class ModelDatabaseTableTemplate extends ModelDatabaseTableBase
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->tableName = "template";
 
         // $this->fields[] = [ "name" => "field_name", "type" => "field_type", "required" => true ];
