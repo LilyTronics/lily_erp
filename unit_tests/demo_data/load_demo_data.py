@@ -38,16 +38,15 @@ def load_demo_data(http, path):
     for filename in filter(lambda x: x.endswith(".data"), os.listdir(path)):
         print(f"Load data from: {filename}")
         columns = []
-        line_nr = 1
+        line_nr = 0
         with open(os.path.join(path, filename), "r") as fp:
             for line in fp.readlines():
-                if line.startswith("//") or line == "":
-                    line_nr += 1
+                line_nr += 1
+                if line.strip().startswith("//") or line.strip() == "":
                     continue
                 if len(columns) == 0:
                     # First line must define the columns, columns cannot have spaces
                     columns = list(filter(lambda x: x != "", line.strip().split(" ")))
-                    line_nr += 1
                 else:
                     # Split values, values can have spaces, values must therefore be separated with at least two spaces
                     values = filter(lambda x: x != "", line.strip().split("  "))
@@ -58,6 +57,8 @@ def load_demo_data(http, path):
                     if len(values) != len(columns):
                         print(f"Error on line {line_nr}: number of values ({len(values)}) "
                               f"is not the same as the number of columns ({len(columns)})")
+                        print(columns)
+                        print(line.strip())
                     table = filename.split(".")[0]
                     record = dict(zip(columns, values))
                     # Add id = 0
