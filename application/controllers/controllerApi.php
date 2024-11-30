@@ -101,6 +101,11 @@ class ControllerApi extends ControllerApplication
             $result["message"] = "Table '{$parts[1]}' does not exist";
             return $result;
         }
+        // On setting table add is not allowed, execute update instead
+        if ($table->tableName == "setting" and $parts[0] == "add")
+        {
+            $parts[0] = "update";
+        }
         // Check the action
         switch ($parts[0])
         {
