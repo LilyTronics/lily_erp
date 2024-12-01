@@ -84,9 +84,23 @@ class ControllerApplication extends ControllerBase
         $controllerName = get_class($this);
 
         // Merge the page data from the parameter page data with any stored session page data.
-        // Data from the previous session overrides the parameter data
-        $pageData = array_merge($pageData, ModelApplicationSession::getData("page_data", []));
+        // The record must be merged separately, else we lose data
+        $sessionData = ModelApplicationSession::getData("page_data", []);
         ModelApplicationSession::clearData("page_data");
+
+        $recordData = [];
+        if (isset($sessionData["record"]))
+        {
+            $recordData = $sessionData["record"];
+            unset($sessionData["record"]);
+        }
+        // Merge page data without record
+        $pageData = array_merge($pageData, $sessionData);
+        // Merge record if needed
+        if (isset($pageData["record"]) and count($recordData) > 0)
+        {
+            $pageData["record"] = array_merge($pageData["record"], $recordData);
+        }
 
         $pageData["is_logged_in"] = ModelApplicationSession::checkSession();
 
