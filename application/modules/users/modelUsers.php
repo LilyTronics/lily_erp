@@ -3,6 +3,13 @@
 class ModelUsers
 {
 
+    public static function getMenu()
+    {
+        return [
+            ["Users", "users"]
+        ];
+    }
+
     public function getDashboard()
     {
         return [
@@ -14,7 +21,7 @@ class ModelUsers
         ];
     }
 
-    private static function getDashboardContent() {
+    private function getDashboardContent() {
         return [
             ["{ICON_CHECK_OK}", "25 actve users in this month"],
             ["{ICON_INFO}", "3 users deactivated"],
