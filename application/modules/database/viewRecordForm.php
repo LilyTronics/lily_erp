@@ -49,13 +49,22 @@ if (count($record) <= 1)
 }
 else
 {
-    echo "<form action=\"" . WEB_ROOT . "api\" method=\"post\">\n";
+    echo "<form id=\"record-form\" action=\"" . WEB_ROOT . "api\" method=\"post\">\n";
     echo "<input type=\"hidden\" name=\"record[id]\" value=\"{$record["id"]}\" />\n";
     echo "<input type=\"hidden\" name=\"on_success\" value=\"{$onSuccessUri}\" />\n";
     echo "<input type=\"hidden\" name=\"on_failure\" value=\"{$onFailureUri}\" />\n";
     echo "<input type=\"hidden\" name=\"on_delete\" value=\"{$onDeleteUri}\" />\n";
     echo "<input type=\"hidden\" name=\"title\" value=\"Save record\" />\n";
-
+    echo "<input id=\"form-action\" type=\"hidden\" name=\"action\" value=\"";
+    if ($record["id"] > 0)
+    {
+        echo "update_{$table}";
+    }
+    else
+    {
+        echo "add_{$table}";
+    }
+    echo "\" />\n";
 
     echo "<table class=\"width-max\">\n";
     foreach ($record as $field => $value)
@@ -83,20 +92,12 @@ else
     echo "<p class=\"form-buttons\">\n";
     if ($onSuccessUri != "" && $onFailureUri != "")
     {
-        echo "<button class=\"{BUTTON} m-2\" type=\"submit\" name=\"action\" value=\"";
-        if ($record["id"] > 0)
-        {
-            echo "update_{$table}";
-        }
-        else
-        {
-            echo "add_{$table}";
-        }
-        echo "\" {SHOW_LOADER}>Save</button>\n";
+        echo "<button class=\"{BUTTON} m-2\" type=\"submit\" {SHOW_LOADER}>Save</button>\n";
     }
     if ($onDeleteUri != "" && $onFailureUri != "" && $record["id"] > 0)
     {
-        echo "<button class=\"{BUTTON_RED} m-2\" type=\"submit\" name=\"action\" value=\"delete_{$table}\" {SHOW_LOADER}>Delete</button>\n";
+        // Add with type=button, so it does not submit the form
+        echo "<button class=\"{BUTTON_RED} m-2\" type=\"button\" onclick=\"showConfirm('Delete', 'Delete {$table}?', deleteCallback)\">Delete</button>\n";
     }
     echo "</p>\n";
     echo "</form>\n";
@@ -104,3 +105,14 @@ else
 
 ?>
 </div>
+<script>
+
+'use strict';
+
+function deleteCallback(evt)
+{
+    document.getElementById('form-action').value = "delete_<?php echo $table; ?>";
+    document.getElementById("record-form").submit();
+}
+
+</script>
