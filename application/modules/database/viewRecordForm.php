@@ -37,7 +37,7 @@ function createInputFor($field, $value, $input)
 
         default:
             // Read only, no input box, but same size
-            $output = "<input type=\"text\" class=\"form-control-plaintext\" value=\"{$value}\" readonly />";
+            $output = "<input type=\"text\" class=\"form-control-plaintext\" name=\"record[{$field}]\" value=\"{$value}\" readonly />";
     }
     return $output;
 }
