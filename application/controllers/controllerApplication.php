@@ -47,6 +47,18 @@ class ControllerApplication extends ControllerBase
         ModelApplicationSession::setData("page_data", $pageData);
     }
 
+    protected function showLandingPage($parameters)
+    {
+        $table = new ModelDatabaseTableSetting();
+        $settings = $table->getSettings();
+        if (isset($settings["landing_page"])) {
+            $this->gotoLocation($settings["landing_page"]);
+        }
+        // If not set, something in the configuration is wrong
+        DEBUG_LOG->writeMessage("No landing page defined, redirect to: log-in");
+        $this->gotoLocation("setup/create-config");
+    }
+
     protected function showLogIn($parameters)
     {
         return $this->showPage("viewLogIn");
