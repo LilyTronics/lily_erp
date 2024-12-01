@@ -1,0 +1,18 @@
+// Demo data for the account table
+number  name                    debit_credit    category
+
+1000    Assets                  D               Assets
+
+2000    Liabilities             C               Liabilities
+
+3000    Equity                  C               Equity
+
+4000    Revenues                C               Income
+
+5000    Cost of goods sold      D               Expenses
+
+6000    Expenses                D               Excenses
+
+7000    Non-operating income    C               Income
+
+8000    Non-operating expenses  D               Excenses
