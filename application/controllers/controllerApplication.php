@@ -60,6 +60,13 @@ class ControllerApplication extends ControllerBase
         return $this->showPage("viewDashboard", $pageData);
     }
 
+
+    protected function showMyAccount($parameters)
+    {
+        $pageData = [];
+        return $this->showPage("viewMyAccount", $pageData);
+    }
+
     protected function showPage($pageName, $pageData=[])
     {
         $controllerName = get_class($this);

@@ -9,12 +9,6 @@ class ControllerUsers extends ControllerApplication
         return $this->showView("Users", $pageData);
     }
 
-    protected function showMyAccount($parameters)
-    {
-        $pageData = [];
-        return $this->showView("MyAccount", $pageData);
-    }
-
     /* Show the view */
 
     private function showView($pageName, $pageData=[])
