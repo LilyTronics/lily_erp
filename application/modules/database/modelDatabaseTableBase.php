@@ -91,6 +91,7 @@ class ModelDatabaseTableBase extends ModelDatabaseTable
             {
                 unset($record["id"]);
             }
+            $result["message"] = "";
             $result["result"] = $this->insertRecord($record);
             if (!$result["result"])
             {
@@ -107,6 +108,7 @@ class ModelDatabaseTableBase extends ModelDatabaseTable
         {
             $expression = "id = {$record["id"]}";
             unset($record["id"]);
+            $result["message"] = "";
             $result["result"] = $this->updateRecord($record, $expression);
             if (!$result["result"])
             {
@@ -118,8 +120,21 @@ class ModelDatabaseTableBase extends ModelDatabaseTable
 
     public function removeRecord($record, $result)
     {
-        $expression = "id = {$record["id"]}";
-        $this->deleteRecord($expression);
+        $result["result"] = isset($record["id"]);
+        if (!$result["result"])
+        {
+            $result["message"] = "The id field is required";
+        }
+        else
+        {
+            $expression = "id = {$record["id"]}";
+            $result["message"] = "";
+            $result["result"] = $this->deleteRecord($expression);
+            if (!$result["result"])
+            {
+                $result["message"] = "Could not update record: " . $this->getError() . ".";
+            }
+        }
         return $result;
     }
 
