@@ -3,17 +3,6 @@
 class ModelAccounting
 {
 
-    public function getDashboard()
-    {
-        return [
-            "order"   => 7,
-            "title"   => "Accounting",
-            "icon"    => "fa-solid fa-cash-register",
-            "link"    => "accounting",
-            "content" => $this->getDashboardContent()
-        ];
-    }
-
     public static function getMenu()
     {
         return [
@@ -27,7 +16,18 @@ class ModelAccounting
         ];
     }
 
-    private static function getDashboardContent() {
+    public function getDashboard()
+    {
+        return [
+            "order"   => 7,
+            "title"   => "Accounting",
+            "icon"    => "fa-solid fa-cash-register",
+            "link"    => "accounting",
+            "content" => $this->getDashboardContent()
+        ];
+    }
+
+    private function getDashboardContent() {
         return [
             ["{ICON_EXCLAMATION}", "3 open bank transactions require attention"],
             ["{ICON_CHECK_OK}",    "the balance sheet looks good"]
