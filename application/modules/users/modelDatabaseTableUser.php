@@ -1,6 +1,28 @@
 <?php
+/* User table
+
+Access levels: a string of hexadecimal values containing access levels for each table.
+This is determined by the constant: ACCESS_INDEX in the database table model.
+This user table has ACCESS_INDEX = 1, meaning the first character defines the access level.
+Possible access levels:
+
+0x0 = no access
+0x1 = read access
+0x2 = write access (create/modify records)
+0x4 = delete access
+0x8 = not used
+
+Access levels can be combined:
+0x3 = 0x1 + 0x2             = read and write access
+0x7 = 0x1 + 0x2 + 0x4       = read, write and delete access
+0xF = 0x1 + 0x2 + 0x4 + 0x8 = all access levels
+
+*/
+
 
 class ModelDatabaseTableUser extends ModelDatabaseTableBase {
+
+    public const ACCESS_INDEX = 1;
 
     public $lockMaxAttempts = 5;
     public $lockTimeout = 30;
@@ -11,6 +33,7 @@ class ModelDatabaseTableUser extends ModelDatabaseTableBase {
         $this->fields[] = [ "name" => "email",         "type" => "VARCHAR(200)", "required" => true  ];
         $this->fields[] = [ "name" => "name",          "type" => "VARCHAR(200)", "required" => true  ];
         $this->fields[] = [ "name" => "password",      "type" => "VARCHAR(200)", "required" => true  ];
+        $this->fields[] = [ "name" => "is_active",     "type" => "INT",          "required" => true  ];
         $this->fields[] = [ "name" => "is_admin",      "type" => "INT",          "required" => false ];
         $this->fields[] = [ "name" => "access_levels", "type" => "VARCHAR(200)", "required" => false ];
         $this->fields[] = [ "name" => "last_log_in",   "type" => "INT",          "required" => false ];
@@ -19,6 +42,7 @@ class ModelDatabaseTableUser extends ModelDatabaseTableBase {
         $this->inputs["email"] = ["type" => "text"];
         $this->inputs["name"] =  ["type" => "text"];
         $this->inputs["password"] = [];
+        $this->inputs["is_active"] = ["type" => "select", "data" => [0, 1] ];
         $this->inputs["is_admin"] = ["type" => "select", "data" => [0, 1] ];
         $this->inputs["access_levels"] = [];
 
