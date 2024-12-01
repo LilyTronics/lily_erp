@@ -13,7 +13,7 @@ class ModelUsers
     public function getDashboard()
     {
         return [
-            "order"   => 8,
+            "order"   => 99,
             "title"   => "Users",
             "icon"    => "fa-solid fa-users",
             "link"    => "users",
