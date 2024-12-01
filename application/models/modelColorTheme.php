@@ -23,7 +23,8 @@ class ModelColorTheme
 
         // Generate output
         $output = "/* Auto generated CSS for the color theme. Manual changes will be overwritten.\n";
-        $output .= "  The color is set by the database setting. Color setting: {$color}.\n";
+        $output .= "   The color is set in the database setting table.\n";
+        $output .= "   Color setting from the database: {$color}.\n";
         $output .= "*/\n";
         $output .= "\n";
         $output .= ".theme-text                                   {color:{$color}!important}\n";
