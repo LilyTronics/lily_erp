@@ -46,7 +46,7 @@ if (count($records) > 0)
                 {
                     echo " {$style}";
                 }
-                echo "><a class=\"no-link-color\" href=\"{$recordLink}\" {LNK_SHOW_LOADER>{$value}</a></td>\n";
+                echo "><a class=\"no-link-color\" href=\"{$recordLink}\" {LNK_SHOW_LOADER}>{$value}</a></td>\n";
             }
         }
         echo "</tr>\n";
