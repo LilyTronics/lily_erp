@@ -38,7 +38,7 @@ class ControllerApplication extends ControllerBase
             exit();
         }
 
-        // Setup and log in OK
+        DEBUG_LOG->writeMessage("Execute action: {$action}");
         return $this->$action($parameters, $isConfigurationOk, $isSessionValid);
     }
 
@@ -81,10 +81,12 @@ class ControllerApplication extends ControllerBase
 
     protected function showPage($pageName, $pageData=[])
     {
+        DEBUG_LOG->writeMessage("Show page: {$pageName}");
         $controllerName = get_class($this);
 
         // Merge the page data from the parameter page data with any stored session page data.
         // The record must be merged separately, else we lose data
+        DEBUG_LOG->writeMessage("Merge page data");
         $sessionData = ModelApplicationSession::getData("page_data", []);
         ModelApplicationSession::clearData("page_data");
 
@@ -104,8 +106,10 @@ class ControllerApplication extends ControllerBase
 
         $pageData["is_logged_in"] = ModelApplicationSession::checkSession();
 
+        DEBUG_LOG->writeMessage("Generate theme");
         ModelColorTheme::generateTheme();
 
+        DEBUG_LOG->writeMessage("Create view");
         $view = new ViewApplication();
         $view->setView($pageName);
         $view->setPageData($pageData);
@@ -125,6 +129,7 @@ class ControllerApplication extends ControllerBase
         {
             $view->addJavaScriptFile("color-theme.js");
         }
+        DEBUG_LOG->writeMessage("Output view");
         return $view->output();
     }
 
