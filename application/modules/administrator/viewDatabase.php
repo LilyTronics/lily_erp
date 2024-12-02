@@ -19,8 +19,8 @@ echo "<ul class=\"nav flex-column\">\n";
 foreach ($tables as $table)
 {
     $link = WEB_ROOT . "administrator/database-table/$table";
-    echo "<li class=\"nav-item\"><button class=\"dropdown-item p-1 px-2 theme-hover\"";
-    echo "onclick=\"location.href='{$link}'\" {SHOW_LOADER}>{$table}</button></li>\n";
+    echo "<li class=\"nav-item\"><a class=\"dropdown-item p-1 px-2 theme-hover\"";
+    echo "href=\"{$link}\" {LNK_SHOW_LOADER}>{$table}</a></li>\n";
 }
 echo "</ul>\n";
 echo "</div> <!-- col -->\n";
@@ -38,8 +38,7 @@ elseif ($activeTable != "")
     $link = WEB_ROOT . "administrator/database-record/{$activeTable}/0";
     echo "Records of {$activeTable}</div>";
     echo "<div class=\"{CONTAINER}\">\n";
-    echo "<button class=\"{TOOL_BUTTON} m-1\" onclick=\"location.href='{$link}'\" ";
-    echo "{SHOW_LOADER}>New record</button>\n";
+    echo "<a class=\"{TOOL_BUTTON} m-1\" href=\"{$link}\" {LNK_SHOW_LOADER}>New record</a>\n";
     echo "</div>\n";
     echo $this->insertRecordTable($records,  "administrator/database-record/{$activeTable}/");
 }

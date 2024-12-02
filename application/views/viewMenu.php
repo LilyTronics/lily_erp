@@ -2,16 +2,16 @@
 
 $pageData = $this->getPageData();
 
-$menuClass = "btn p-1 px-2 m-1 theme-hover";
-$itemClass = "dropdown-item theme-hover";
+$menuClass = "btn p-1 px-2 m-1 theme-hover no-link-color";
+$itemClass = "dropdown-item theme-hover no-link-color";
 
 if (isset($pageData["menu"]))
 {
     echo "<nav class=\"nav border-bottom\">\n";
     // Insert link to dashboard
     $link = WEB_ROOT . "dashboard";
-    echo "<button class=\"$menuClass\" title=\"dashboard\" onclick=\"location.href='{$link}'\" {SHOW_LOADER}>";
-    echo "<i class=\"fa-solid fa-grip\"></i></button>\n";
+    echo "<a class=\"$menuClass\" title=\"dashboard\" href=\"{$link}\" {LNK_SHOW_LOADER}>";
+    echo "<i class=\"fa-solid fa-grip\"></i></a>\n";
     // Add menu items
     foreach ($pageData["menu"] as $menu)
     {
@@ -24,8 +24,7 @@ if (isset($pageData["menu"]))
             foreach ($menu[1] as $menuItem)
             {
                 $link = WEB_ROOT . $menuItem[1];
-                echo "<li><button class=\"$itemClass\" onclick=\"location.href='{$link}'\" {SHOW_LOADER}>";
-                echo "{$menuItem[0]}</button></li>\n";
+                echo "<li><a class=\"$itemClass\" href=\"{$link}\" {LNK_SHOW_LOADER}>{$menuItem[0]}</a></li>\n";
             }
             echo "</ul>\n";
         }
@@ -33,7 +32,7 @@ if (isset($pageData["menu"]))
         {
             // Link
             $link = WEB_ROOT . $menu[1];
-            echo "<button class=\"$menuClass\" onclick=\"location.href='{$link}'\" {SHOW_LOADER}>{$menu[0]}</button>\n";
+            echo "<a class=\"$menuClass\" href=\"{$link}\" {LNK_SHOW_LOADER}>{$menu[0]}</a>\n";
         }
 
     }

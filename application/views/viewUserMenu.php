@@ -1,7 +1,7 @@
 <div class="dropdown float-end">
 <span class="mt-2 me-4 cursor-pointer fs-5" data-bs-toggle="dropdown">{ICON_USER}</span>
 <ul class="dropdown-menu">
-    <li><button class="dropdown-item theme-hover" onclick="location.href='<?php echo WEB_ROOT; ?>my-account'" {SHOW_LOADER}>My account</button></li>
+    <li><a class="dropdown-item theme-hover no-link-color" href="{WEB_ROOT}my-account" {LNK_SHOW_LOADER}>My account</a></li>
     <li><form action="<?php echo WEB_ROOT; ?>api" method="post">
     <input type="hidden" name="on_success" value="" />
     <input type="hidden" name="on_failure" value="" />

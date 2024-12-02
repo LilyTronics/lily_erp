@@ -12,10 +12,10 @@ echo "<ul class=\"nav flex-column\">\n";
 foreach ($logFiles as $filename)
 {
     $link = WEB_ROOT . "administrator/log-file/$filename";
-    echo "<li class=\"nav-item\"><button class=\"dropdown-item p-1 px-2 theme-hover\"";
-    echo "onclick=\"location.href='{$link}'\" {SHOW_LOADER}>";
+    echo "<li class=\"nav-item\"><a class=\"dropdown-item p-1 px-2 theme-hover\"";
+    echo "href=\"{$link}\" {LNK_SHOW_LOADER}>";
     echo strtolower(preg_replace("([A-Z])", " $0", $filename));
-    echo "</button></li>\n";
+    echo "</a></li>\n";
 }
 echo "</ul>\n";
 echo "</div> <!-- col -->\n";
@@ -26,9 +26,9 @@ if (isset($pageData["Filename"]))
 {
     $deleteLink = WEB_ROOT . "administrator/delete-log-file/{$pageData["Filename"]}";
     echo " of " . strtolower(preg_replace("([A-Z])", " $0", $pageData["Filename"]));
-    echo "<button class=\"btn btn-sm float-end theme-bg mx-3 p-0 \" title=\"Delete log file\" ";
-    echo "onclick=\"location.href='{$deleteLink}'\" {SHOW_LOADER}>";
-    echo "<i class=\"fa-solid fa-trash-can\"></i></button>\n";
+    echo "<a class=\"btn btn-sm float-end theme-bg-light mx-3 p-0 \" title=\"Delete log file\" ";
+    echo "href=\"{$deleteLink}\" {LNK_SHOW_LOADER}>";
+    echo "<i class=\"fa-solid fa-trash-can\"></i></a>\n";
 }
 echo "</div>\n";
 if (isset($pageData["FileContent"]))
