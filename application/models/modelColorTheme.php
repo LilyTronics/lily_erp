@@ -5,9 +5,14 @@ class ModelColorTheme
 
     public static function generateTheme()
     {
-        $table = new ModelDatabaseTableSetting();
-        $settings = $table->getSettings();
-        $color = (isset($settings["theme_color"]) ? $settings["theme_color"] : "#0066aa");
+        // In case the configuration is not created yet, we cannot create a theme from the database
+        $color = DEFAULT_COLOR;
+        if (ModelSetup::checkConfiguration(true))
+        {
+            $table = new ModelDatabaseTableSetting();
+            $settings = $table->getSettings();
+            $color = (isset($settings["theme_color"]) ? $settings["theme_color"] : $color);
+        }
 
         // Generate colors
         $hsl = self::calculateHsl($color);
@@ -44,7 +49,7 @@ class ModelColorTheme
         $output .= "a:hover                                       {color:{$colorHover}!important;text-decoration:none!important}\n";
         $output .= "a:active                                      {color:{$color}!important;text-decoration:none!important}\n";
         $output .= "\n";
-        $output .= ".loader                                      {border-top-color:{$color}!important}\n";
+        $output .= ".loader                                       {border-top-color:{$color}!important}\n";
 
         // Write to file
         file_put_contents(DOC_ROOT . APP_STYLES_PATH . "color-theme.css", $output);
