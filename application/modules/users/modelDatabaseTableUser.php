@@ -41,7 +41,7 @@ class ModelDatabaseTableUser extends ModelDatabaseTableBase {
 
         $this->inputs["email"] = ["type" => "text"];
         $this->inputs["name"] =  ["type" => "text"];
-        $this->inputs["password"] = [];
+        $this->inputs["password"] = ["type" => "password"];
         $this->inputs["is_active"] = ["type" => "select", "data" => [0, 1] ];
         $this->inputs["is_admin"] = ["type" => "select", "data" => [0, 1] ];
         $this->inputs["access_levels"] = [];
@@ -49,7 +49,7 @@ class ModelDatabaseTableUser extends ModelDatabaseTableBase {
         parent::__construct(true);
     }
 
-    public function checkFieldValues($record, $result)
+    public function checkFieldValues(&$record, $result)
     {
         $result["result"] = false;
         $result["message"] = "Field value check failed.";
@@ -67,6 +67,17 @@ class ModelDatabaseTableUser extends ModelDatabaseTableBase {
         {
             $result["message"] = "The name must be unique.";
             return $result;
+        }
+
+        if ($record["id"] == 0)
+        {
+            // New record, hash the password
+            $record["password"] = $this->hash($record["password"]);
+        }
+        else
+        {
+            // Existing record, remove password
+            unset($record["password"]);
         }
 
         if (isset($record["last_log_in"]))

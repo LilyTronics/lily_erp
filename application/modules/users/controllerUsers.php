@@ -25,6 +25,10 @@ class ControllerUsers extends ControllerApplication
             $record = $table->getRecordById($id);
             $inputs = $table->inputs;
             $tableName = $table->tableName;
+            if ($id == 0)
+            {
+                $record["password"] = "";
+            }
         }
         $pageData = [
             "sub_title"      => "User [{$id}]",

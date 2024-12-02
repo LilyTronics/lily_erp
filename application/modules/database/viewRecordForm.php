@@ -17,7 +17,8 @@ function createInputFor($field, $value, $input)
     switch ($type)
     {
         case "text":
-            $output = "<input type=\"text\" class=\"{INPUT} max-width-{$width}\" name=\"record[{$field}]\" value=\"{$value}\" />";
+        case "password":
+            $output = "<input type=\"{$type}\" class=\"{INPUT} max-width-{$width}\" name=\"record[{$field}]\" value=\"{$value}\" autocomplete=\"new-{$type}\" />";
             break;
 
         case "select":
@@ -49,7 +50,7 @@ if (count($record) <= 1)
 }
 else
 {
-    echo "<form id=\"record-form\" action=\"" . WEB_ROOT . "api\" method=\"post\">\n";
+    echo "<form id=\"record-form\" action=\"" . WEB_ROOT . "api\" method=\"post\" autocomplete=\"off\">\n";
     echo "<input type=\"hidden\" name=\"record[id]\" value=\"{$record["id"]}\" />\n";
     echo "<input type=\"hidden\" name=\"on_success\" value=\"{$onSuccessUri}\" />\n";
     echo "<input type=\"hidden\" name=\"on_failure\" value=\"{$onFailureUri}\" />\n";
