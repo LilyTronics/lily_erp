@@ -3,12 +3,15 @@
 class ModelSetup
 {
 
-    public static function checkConfiguration()
+    public static function checkConfiguration($silent=false)
     {
         # No configuration file
         if (!is_file(CONFIG_FILE))
         {
-            DEBUG_LOG->writeMessage("The file: " . CONFIG_FILE . "does not exist");
+            if (!$silent)
+            {
+                DEBUG_LOG->writeMessage("The file: " . CONFIG_FILE . "does not exist");
+            }
             return false;
         }
         # Check for database access
@@ -18,16 +21,22 @@ class ModelSetup
         }
         catch (Exception $e)
         {
-            DEBUG_LOG->writeMessage("Database error: " . $e->getMessage());
+            if (!$silent)
+            {
+                DEBUG_LOG->writeMessage("Database error: " . $e->getMessage());
+            }
             return false;
         }
-        # There must be at least one user
-        $records = $user->getRecords();
+        # There must be at least one admin user who is active
+        $records = $user->getRecords("is_admin = 1 AND is_active = 1");
         if (count($records) == 0)
         {
             # Delete table, when we instantiate the users table a table is created
             $user->deleteTable();
-            DEBUG_LOG->writeMessage("No users in the user table");
+            if (!$silent)
+            {
+                DEBUG_LOG->writeMessage("No users in the user table");
+            }
             return false;
         }
         return true;
