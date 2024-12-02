@@ -35,5 +35,5 @@ $adminName = isset($pageData["record"]["admin_name"]) ? $pageData["record"]["adm
 <tr><td>Password:</td><td><input name="record[admin_password]" class="{INPUT}" type="password" autocomplete="new-password" /></td></tr>
 <tr><td>Repeat password:</td><td><input name="record[admin_repeat_password]" class="{INPUT}" type="password" autocomplete="new-password" /></td></tr>
 </table>
-<p class="form-buttons"><button class="{BUTTON}" type="submit" name="action" value="create_configuration" {SHOW_LOADER}>Create configuration</button></p>
+<p class="form-buttons"><button class="{BUTTON}" type="submit" name="action" value="create_configuration" {BTN_SHOW_LOADER}>Create configuration</button></p>
 </form>

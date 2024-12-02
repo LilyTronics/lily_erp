@@ -8,6 +8,6 @@
 <p><input name="record[email]" class="{INPUT}" type="text" /></p>
 <p>Password:</p>
 <p><input name="record[password]" class="{INPUT}" type="password" /></p>
-<p class="text-center form-buttons"><button class="{BUTTON}" type="submit" name="action" value="log_in" {SHOW_LOADER}>Log in</button></p>
+<p class="text-center form-buttons"><button class="{BUTTON}" type="submit" name="action" value="log_in" {BTN_SHOW_LOADER}>Log in</button></p>
 </form>
 </div>

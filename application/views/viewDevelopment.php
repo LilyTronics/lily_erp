@@ -2,7 +2,7 @@
 <form action="<?php echo WEB_ROOT; ?>development/post" method="post">
 <input type="hidden" name="action" value="development" />
 <p><input class="{INPUT}" type="text" name="record[name]" /></p>
-<p><button class="{BUTTON}" {SHOW_LOADER}>Submit</button></p>
+<p><button class="{BUTTON}" {BTN_SHOW_LOADER}>Submit</button></p>
 </form>
 
 <?php

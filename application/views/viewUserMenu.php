@@ -6,7 +6,7 @@
     <input type="hidden" name="on_success" value="" />
     <input type="hidden" name="on_failure" value="" />
     <input type="hidden" name="title" value="Log out" />
-    <button class="dropdown-item theme-hover" type="submit" name="action" value="log_out" {SHOW_LOADER}>Log out</button>
+    <button class="dropdown-item theme-hover" type="submit" name="action" value="log_out" {BTN_SHOW_LOADER}>Log out</button>
     </form></li>
 </ul>
 </div>

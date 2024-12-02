@@ -92,7 +92,7 @@ else
     echo "<p class=\"form-buttons\">\n";
     if ($onSuccessUri != "" && $onFailureUri != "")
     {
-        echo "<button class=\"{BUTTON} m-2\" type=\"submit\" {SHOW_LOADER}>Save</button>\n";
+        echo "<button class=\"{BUTTON} m-2\" type=\"submit\" {BTN_SHOW_LOADER}>Save</button>\n";
     }
     if ($onDeleteUri != "" && $onFailureUri != "" && $record["id"] > 0)
     {
@@ -111,6 +111,7 @@ else
 
 function deleteCallback(evt)
 {
+    showLoader();
     document.getElementById('form-action').value = "delete_<?php echo $table; ?>";
     document.getElementById("record-form").submit();
 }

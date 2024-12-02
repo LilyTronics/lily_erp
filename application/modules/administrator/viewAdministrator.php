@@ -58,7 +58,7 @@ When you are happy with the color click the apply button and it will be applied 
 <input type="hidden" name="record[id]" value="0" />
 <input type="hidden" name="record[setting_name]" value="theme_color" />
 <input type="hidden" id="record-color" name="record[setting_value]" value="" />
-<p><button class="{TOOL_BUTTON}" type="submit" name="action" value="update_setting" {SHOW_LOADER}>Apply color</button></p>
+<p><button class="{TOOL_BUTTON}" type="submit" name="action" value="update_setting" {BTN_SHOW_LOADER}>Apply color</button></p>
 </form>
 <script>
 
