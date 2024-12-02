@@ -2,7 +2,7 @@
 
 $pageData = $this->getPageData();
 
-$logFiles = (isset($pageData["LogFiles"]) ? $pageData["LogFiles"] : []);
+$logFiles = (isset($pageData["log_files"]) ? $pageData["log_files"] : []);
 
 echo "<div class=\"row g-1\">\n";
 // Colomn for file list
@@ -22,20 +22,20 @@ echo "</div> <!-- col -->\n";
 // Column for the file contents
 echo "<div class=\"col\">\n";
 echo "<div class=\"p-2 theme-bg-light clearfix\">Content";
-if (isset($pageData["Filename"]))
+if (isset($pageData["filename"]))
 {
-    $deleteLink = WEB_ROOT . "administrator/delete-log-file/{$pageData["Filename"]}";
-    echo " of " . strtolower(preg_replace("([A-Z])", " $0", $pageData["Filename"]));
+    $deleteLink = WEB_ROOT . "administrator/delete-log-file/{$pageData["filename"]}";
+    echo " of " . strtolower(preg_replace("([A-Z])", " $0", $pageData["filename"]));
     echo "<a class=\"btn btn-sm float-end theme-bg-light mx-3 p-0 \" title=\"Delete log file\" ";
     echo "href=\"{$deleteLink}\" {LNK_SHOW_LOADER}>";
     echo "<i class=\"fa-solid fa-trash-can\"></i></a>\n";
 }
 echo "</div>\n";
-if (isset($pageData["FileContent"]))
+if (isset($pageData["file_content"]))
 {
     echo "<div class=\"{CONTAINER}\">\n";
     echo "<pre>\n";
-    echo $pageData["FileContent"];
+    echo $pageData["file_content"];
     echo "</pre>\n";
     echo "</div>\n";
 }

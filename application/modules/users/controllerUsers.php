@@ -7,7 +7,8 @@ class ControllerUsers extends ControllerApplication
     {
         $table = new ModelDatabaseTableUser();
         $pageData = [
-            "records" => $table->getRecords()
+            "sub_title" => "Users",
+            "records"   => $table->getRecords()
         ];
         return $this->showView("Users", $pageData);
     }
@@ -17,20 +18,21 @@ class ControllerUsers extends ControllerApplication
         $record = [];
         $inputs = [];
         $tableName = "";
-        $recordId = (isset($parameters["id"]) ? $parameters["id"] : null);
-        if ($recordId != null)
+        $id = (isset($parameters["id"]) ? $parameters["id"] : null);
+        if ($id != null)
         {
             $table = new ModelDatabaseTableUser();
-            $record = $table->getRecordById($recordId);
+            $record = $table->getRecordById($id);
             $inputs = $table->inputs;
             $tableName = $table->tableName;
         }
         $pageData = [
+            "sub_title"      => "User [{$id}]",
             "record"         => $record,
             "inputs"         => $inputs,
             "table"          => $tableName,
-            "on_success_uri" => "users/user/{$recordId}",
-            "on_failure_uri" => "users/user/{$recordId}",
+            "on_success_uri" => "users/user/{$id}",
+            "on_failure_uri" => "users/user/{$id}",
             "on_delete_uri"  => "users"
         ];
         return $this->showView("User", $pageData);

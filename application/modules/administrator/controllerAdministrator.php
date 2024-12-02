@@ -7,7 +7,8 @@ class ControllerAdministrator extends ControllerApplication
     {
         $table = new ModelDatabaseTableSetting();
         $pageData = [
-            "settings" => $table->getSettings()
+            "sub_title" => "Application settings",
+            "settings"  => $table->getSettings()
         ];
         return $this->showView("Administrator", $pageData);
     }
@@ -17,12 +18,14 @@ class ControllerAdministrator extends ControllerApplication
     protected function showLogFiles($parameters)
     {
         $pageData = [
-            "LogFiles" => ModelAdministrator::getLogFiles()
+            "sub_title" => "Log files",
+            "log_files" => ModelAdministrator::getLogFiles()
         ];
         if (isset($parameters["filename"]))
         {
-            $pageData["Filename"] = $parameters["filename"];
-            $pageData["FileContent"] = ModelAdministrator::getFileContent($parameters["filename"]);
+            $pageData["sub_title"]    = "Log file {$parameters["filename"]}";
+            $pageData["filename"]     = $parameters["filename"];
+            $pageData["file_content"] = ModelAdministrator::getFileContent($parameters["filename"]);
         }
         return $this->showView("LogFiles", $pageData);
     }
@@ -41,13 +44,15 @@ class ControllerAdministrator extends ControllerApplication
     protected function showDatabase($parameters)
     {
         $pageData = [
-            "tables"  => ModelAdministrator::getTables(),
+            "sub_title" => "Database",
+            "tables"    => ModelAdministrator::getTables(),
         ];
         $table = (isset($parameters["table"]) ? $parameters["table"] : "");
-        $recordId = (isset($parameters["record_id"]) ? $parameters["record_id"] : null);
-        if ($recordId !== null and $table != "")
+        $id = (isset($parameters["id"]) ? $parameters["id"] : null);
+        if ($id !== null and $table != "")
         {
-            $pageData["record"] = ModelAdministrator::getRecord($table, $recordId);
+            $pageData["sub_title"] = "Record [{$id}] from {$table}";
+            $pageData["record"] = ModelAdministrator::getRecord($table, $id);
             $pageData["inputs"] = ModelAdministrator::getInputs($table);
             $pageData["on_success_uri"] = REQUEST_URI;
             $pageData["on_failure_uri"] = REQUEST_URI;
@@ -55,6 +60,7 @@ class ControllerAdministrator extends ControllerApplication
         }
         elseif ($table != "")
         {
+            $pageData["sub_title"] = "Records from {$table}";
             $pageData["records"] = ModelAdministrator::getRecords($table);
         }
         $pageData["table"] = $table;

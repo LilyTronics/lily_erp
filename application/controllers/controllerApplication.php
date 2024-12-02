@@ -61,13 +61,17 @@ class ControllerApplication extends ControllerBase
 
     protected function showLogIn($parameters)
     {
-        return $this->showPage("viewLogIn");
+        $pageData = [
+            "sub_title" => "Log in"
+        ];
+        return $this->showPage("viewLogIn", $pageData);
     }
 
     protected function showDashboard($parameters)
     {
         $pageData = [
-            "items" => ModelDashboard::getDashboardItems()
+            "sub_title" => "Dashboard",
+            "items"     => ModelDashboard::getDashboardItems()
         ];
         return $this->showPage("viewDashboard", $pageData);
     }
@@ -75,7 +79,9 @@ class ControllerApplication extends ControllerBase
 
     protected function showMyAccount($parameters)
     {
-        $pageData = [];
+        $pageData = [
+            "sub_title" => "My account"
+        ];
         return $this->showPage("viewMyAccount", $pageData);
     }
 
@@ -110,10 +116,11 @@ class ControllerApplication extends ControllerBase
         ModelColorTheme::generateTheme();
 
         DEBUG_LOG->writeMessage("Create view");
+        $subTitle = (isset($pageData["sub_title"]) ? " - " . $pageData["sub_title"] : "");
         $view = new ViewApplication();
         $view->setView($pageName);
         $view->setPageData($pageData);
-        $view->setPageTitle(APPLICATION_TITLE);
+        $view->setPageTitle(APPLICATION_TITLE . $subTitle);
         $view->addMetaTag("name=\"viewport\" content=\"width=device-width, initial-scale=1\"");
         $view->addJavascriptPreVariable("WEB_ROOT", "\"" . WEB_ROOT . "\"");
         $view->addJavascriptPreVariable("BUTTON", "\"{BUTTON}\"");

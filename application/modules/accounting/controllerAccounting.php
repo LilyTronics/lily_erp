@@ -5,7 +5,10 @@ class ControllerAccounting extends ControllerApplication
 
     protected function showAccounting($parameters)
     {
-        return $this->showView("Accounting");
+        $pageData =[
+            "sub_title" => "Accounting"
+        ];
+        return $this->showView("Accounting", $pageData);
     }
 
     /* Bank transactions */
@@ -14,7 +17,8 @@ class ControllerAccounting extends ControllerApplication
     {
         $table = new ModelDatabaseTableBankTransaction();
         $pageData = [
-            "records" => $table->getRecords(),
+            "sub_title"  => "Bank transactions",
+            "records"    => $table->getRecords(),
             "record_uri" => "accounting/bank/transaction/",
         ];
         return $this->showView("Bank", $pageData);
@@ -25,8 +29,9 @@ class ControllerAccounting extends ControllerApplication
         $id = (isset($parameters["id"]) ? $parameters["id"] : 0);
         $table = new ModelDatabaseTableBankTransaction();
         $pageData = [
-            "record" => $table->getRecordById($id),
-            "table" => $table->tableName
+            "sub_title" => "Bank transaction [{$id}]",
+            "record"    => $table->getRecordById($id),
+            "table"     => $table->tableName
         ];
         return $this->showView("BankTransaction", $pageData);
     }
@@ -35,14 +40,20 @@ class ControllerAccounting extends ControllerApplication
 
     protected function showJournal($parameters)
     {
-        return $this->showView("Journal");
+        $pageData = [
+            "sub_title" => "Journal"
+        ];
+        return $this->showView("Journal", $pageData);
     }
 
     /* Chart of accounts */
 
     protected function showChartOfAccounts($parameters)
     {
-        return $this->showView("ChartOfAccounts");
+        $pageData = [
+            "sub_title" => "Chart of accounts"
+        ];
+        return $this->showView("ChartOfAccounts", $pageData);
     }
 
     protected function showAccount($parameters)
@@ -63,6 +74,7 @@ class ControllerAccounting extends ControllerApplication
             $deleteUri = "";
         }
         $pageData = [
+            "sub_title"      => "Account [{$id}]",
             "record"         => $record,
             "inputs"         => $table->inputs,
             "table"          => $table->tableName,
@@ -78,7 +90,10 @@ class ControllerAccounting extends ControllerApplication
 
     protected function showReport($parameters)
     {
-        return $this->showView("Report");
+        $pageData = [
+            "sub_title" => "Report <name>"
+        ];
+        return $this->showView("Report", $pageData);
     }
 
     /* Show the view */

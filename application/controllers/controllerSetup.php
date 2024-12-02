@@ -5,7 +5,10 @@ class ControllerSetup extends ControllerApplication
 
     protected function showCreateConfig($parameters)
     {
-        return $this->showPage("viewCreateConfig");
+        $pageData = [
+            "sub_title" => "Create configuration"
+        ];
+        return $this->showPage("viewCreateConfig", $pageData);
     }
 
 }
