@@ -60,12 +60,20 @@ class ModelDatabaseTableBase extends ModelDatabaseTable
 
     public function getRecordById($id)
     {
-        $records = $this->getRecords("id = {$id}");
-        if (count($records) == 1)
+        $record = $this->generateNewRecord();
+        if ($id > 0)
         {
-            return $records[0];
+            $records = $this->getRecords("id = {$id}");
+            if (count($records) == 1)
+            {
+                $record =  $records[0];
+            }
+            else
+            {
+                $record = [];
+            }
         }
-        return [];
+        return $record;
     }
 
     public function getRecords($filterExpression="", $orderExpression="", $groupExpression="", $start=0, $count=0,
