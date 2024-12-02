@@ -44,10 +44,11 @@ class ModelColorTheme
         $output .= ".theme-table-striped tbody tr:nth-child(even) {background-color:{$colorTableStriped}!important}\n";
         $output .= ".theme-table-hover tbody tr:hover             {background-color:{$colorHover}!important;cursor:pointer}\n";
         $output .= "\n";
-        $output .= "a:link                                        {color:{$color}!important;text-decoration:none!important}\n";
-        $output .= "a:visited                                     {color:{$color}!important;text-decoration:none!important}\n";
-        $output .= "a:hover                                       {color:{$colorHover}!important;text-decoration:none!important}\n";
-        $output .= "a:active                                      {color:{$color}!important;text-decoration:none!important}\n";
+        // No important used here for text color. That will not work if a link is styled as button.
+        $output .= "a:link                                        {color:{$color};text-decoration:none!important}\n";
+        $output .= "a:visited                                     {color:{$color};text-decoration:none!important}\n";
+        $output .= "a:hover                                       {color:{$colorHover};text-decoration:none!important}\n";
+        $output .= "a:active                                      {color:{$color};text-decoration:none!important}\n";
         $output .= "\n";
         $output .= ".loader                                       {border-top-color:{$color}!important}\n";
 
