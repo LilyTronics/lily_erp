@@ -53,7 +53,8 @@ class ModelApplicationSession extends ModelSession
         // Log in passed, update record and create session
         $user->updateRecord(["last_log_in" => time()], $filter);
         $user->updateRecord(["log_in_fail" => 0], $filter);
-        self::setData("user", $record["email"]);
+        unset($record["password"]);
+        self::setData("user", $record);
         $result["result"] = true;
         $result["message"] = "";
         return $result;
