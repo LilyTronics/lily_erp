@@ -18,6 +18,7 @@ class ControllerUsers extends ControllerApplication
         $record = [];
         $inputs = [];
         $tableName = "";
+        $deleteUri = "users";
         $id = (isset($parameters["id"]) ? $parameters["id"] : null);
         if ($id != null)
         {
@@ -29,6 +30,17 @@ class ControllerUsers extends ControllerApplication
             {
                 $inputs["password"] = [];
             }
+            $activeUser = ModelApplicationSession::getData("user");
+            if ($id == $activeUser["id"])
+            {
+                // You cannot delete yourself
+                $deleteUri = "";
+                // You cannot deactivate yourself
+                $inputs["is_active"] = [];
+                // You cannot change your own access rights
+                $inputs["is_admin"] = [];
+                $inputs["access_levels"] = [];
+            }
         }
         $pageData = [
             "sub_title"      => "User [{$id}]",
@@ -37,7 +49,7 @@ class ControllerUsers extends ControllerApplication
             "table"          => $tableName,
             "on_success_uri" => "users/user/{$id}",
             "on_failure_uri" => "users/user/{$id}",
-            "on_delete_uri"  => "users"
+            "on_delete_uri"  => $deleteUri
         ];
         return $this->showView("User", $pageData);
     }
