@@ -10,7 +10,8 @@ $GLOBALS["TEMPLATE_VALUES"] = [
     "{INPUT}"               => "form-control",
     "{TOOL_BUTTON}"         => "btn btn-sm theme-btn",
     "{TOOL_BUTTON_RED}"     => "btn btn-sm btn-danger",
-    "{SHOW_LOADER}"         => "data-bs-toggle=\"modal\" data-bs-target=\"#modal-loader\"",
+    "{BTN_SHOW_LOADER}"     => "data-bs-toggle=\"modal\" data-bs-target=\"#modal-loader\"",
+    "{LNK_SHOW_LOADER}"     => "onclick=\"showLoader()\"",
 
     // Icons
     "{ICON_CHECK_OK}"       => "<i class=\"fa-solid fa-circle-check text-success\"></i>",
