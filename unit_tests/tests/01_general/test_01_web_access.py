@@ -22,8 +22,6 @@ class TestWebAccess(TestSuiteBase):
             expected_code = 404
         if file_path.startswith("application/styles/") and file_path.endswith(".css"):
             expected_code = 200
-        if file_path.startswith("application/styles/") and file_path.endswith(".html"):
-            expected_code = 200
         if file_path.startswith("application/styles/") and file_path.endswith(".ttf"):
             expected_code = 200
         if file_path.startswith("application/styles/") and file_path.endswith(".woff2"):
