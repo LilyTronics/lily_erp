@@ -35,6 +35,14 @@
 </div>
 <script>
 
+'use strict';
+
+
+function showLoader()
+{
+    new bootstrap.Modal('#modal-loader').show();
+}
+
 function showMessage(title, message)
 {
     document.getElementById('modal-message-title').innerHTML = title;
