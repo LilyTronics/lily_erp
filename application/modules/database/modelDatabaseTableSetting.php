@@ -13,9 +13,9 @@ class ModelDatabaseTableSetting extends ModelDatabaseTableBase
         $this->inputs["setting_value"] = ["type" => "text"];
 
         $defaultRecords = [
-            [ "setting_name" => "database_version", "setting_value" => "0.1"       ],
-            [ "setting_name" => "landing_page",     "setting_value" => "dashboard" ],
-            [ "setting_name" => "theme_color",      "setting_value" => "#0066aa"   ]
+            [ "setting_name" => "database_version", "setting_value" => DATABASE_VERSION     ],
+            [ "setting_name" => "landing_page",     "setting_value" => DEFAULT_LANDING_PAGE ],
+            [ "setting_name" => "theme_color",      "setting_value" => DEFAULT_COLOR        ]
         ];
 
         parent::__construct(true, $defaultRecords);
