@@ -34,7 +34,7 @@ if (count($records) > 0)
     foreach ($records as $record)
     {
         $recordLink = WEB_ROOT . $recordUri . $record["id"];
-        echo "<tr class=\"cursor-pointer\" onclick=\"location.href='{$recordLink}'\" {SHOW_LOADER}>";
+        echo "<tr>";
         foreach (array_keys($record) as $key)
         {
             if ($key != "id")
@@ -46,7 +46,7 @@ if (count($records) > 0)
                 {
                     echo " {$style}";
                 }
-                echo ">{$value}</td>\n";
+                echo "><a class=\"no-link-color\" href=\"{$recordLink}\" {LNK_SHOW_LOADER>{$value}</a></td>\n";
             }
         }
         echo "</tr>\n";
