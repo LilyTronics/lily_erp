@@ -1,29 +1,30 @@
 /* HTML overrides */
-@font-face          {font-family: noto-sans; src: url('fonts/noto-sans.ttf') format('truetype')}
-body                {font-family: noto-sans; font-size: 16px; font-weight: 300}
-footer              {font-size: 0.8em}
-td, th              {padding: 4px 8px}
+@font-face              {font-family: noto-sans; src: url('fonts/noto-sans.ttf') format('truetype')}
+body                    {font-family: noto-sans; font-size: 16px; font-weight: 300}
+footer                  {font-size: 0.8em}
+td, th                  {padding: 4px 8px}
+
+/* Mak links in table cells cover the whole cell */
+td a                    {display: block}
 
 /* Containers */
-.main-content       {min-height: 700px}
-.log-in-form        {max-width: 400px}
-.form-buttons       {margin-top: 32px}
-.dashboard-item     {width: 400px; height: 200px}
+.main-content           {min-height: 700px}
+.log-in-form            {max-width: 400px}
+.form-buttons           {margin-top: 32px}
+.dashboard-item         {width: 400px; height: 200px}
 
 /* Widths */
-.width-auto         {width: auto !important}
-.width-max          {width: 99.9% !important}
-.max-width-small    {max-width: 120px !important}
-.max-width-default  {max-width: 400px !important}
-.max-width-large    {max-width: 600px !important}
+.width-auto             {width: auto !important}
+.width-max              {width: 99.9% !important}
+.max-width-small        {max-width: 120px !important}
+.max-width-default      {max-width: 400px !important}
+.max-width-large        {max-width: 600px !important}
 
 /* Uncategorized */
-.cursor-pointer     {cursor: pointer}
-.text-small         {font-size: 0.8em}
+.cursor-pointer         {cursor: pointer}
+.text-small             {font-size: 0.8em}
 
-/*
-a.no-link-color:link {color: inherit !important}
+a.no-link-color:link    {color: inherit !important}
 a.no-link-color:visited {color: inherit !important}
-a.no-link-color:hover {color: inherit !important}
-a.no-link-color:active {color: inherit !important}
-*/
+a.no-link-color:hover   {color: inherit !important}
+a.no-link-color:active  {color: inherit !important}

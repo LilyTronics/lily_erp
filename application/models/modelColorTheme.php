@@ -50,11 +50,6 @@ class ModelColorTheme
         $output .= "a:hover                                       {color:{$colorHover};text-decoration:none!important}\n";
         $output .= "a:active                                      {color:{$color};text-decoration:none!important}\n";
         $output .= "\n";
-        $output .= "a.no-link-color:link                          {color:inherit;text-decoration:none!important}\n";
-        $output .= "a.no-link-color:visited                       {color:inherit;text-decoration:none!important}\n";
-        $output .= "a.no-link-color:hover                         {color:inherit;text-decoration:none!important}\n";
-        $output .= "a.no-link-color:active                        {color:inherit;text-decoration:none!important}\n";
-        $output .= "\n";
         $output .= ".loader                                       {border-top-color:{$color}!important}\n";
 
         // Write to file
