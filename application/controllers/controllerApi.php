@@ -61,8 +61,7 @@ class ControllerApi extends ControllerApplication
 
             case ($action == "log_out"):
                 $log->writeMessage("Log out");
-                $log->writeMessage("Log out");
-                ModelApplicationSession::deleteSession();
+                ModelApplicationSession::destroySession();
                 $result = ["result" => true, "message" => ""];
                 break;
 
@@ -152,7 +151,7 @@ class ControllerApi extends ControllerApplication
 
         if ($redirect  !== null)
         {
-            $log->writeMessage("Go to location: {$redirect}");
+            $log->writeMessage("Go to location: '{$redirect}'");
             $result["title"] = $title;
             if ($record !== null)
             {
