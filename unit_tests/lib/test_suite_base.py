@@ -20,9 +20,9 @@ class TestSuiteBase(TestSuite):
             Database.create_default_user()
 
     def get_web_page(self, uri=""):
-        r = self.http_request.do_get(uri)
-        self.fail_if(r.status_code != 200, f"Invalid response status code: {r.status_code}")
-        return r
+        response = self.http_request.do_get(uri)
+        self.fail_if(response.status_code != 200, f"Invalid response status code: {response.status_code}")
+        return response
 
     def get_records(self):
         response = self.http_request.get_records(self.table_name)
@@ -36,8 +36,8 @@ class TestSuiteBase(TestSuite):
         return response
 
     def test_http_request(self):
-        r = self.http_request.do_get()
-        self.fail_if(r.status_code != 200, f"Invalid response status code: {r.status_code}")
+        response = self.http_request.do_get()
+        self.fail_if(response.status_code != 200, f"Invalid response status code: {response.status_code}")
 
 
 if __name__ == "__main__":
