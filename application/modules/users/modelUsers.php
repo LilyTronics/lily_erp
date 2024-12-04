@@ -22,11 +22,7 @@ class ModelUsers
     }
 
     private function getDashboardContent() {
-        return [
-            ["{ICON_CHECK_OK}", "25 actve users in this month"],
-            ["{ICON_INFO}", "3 users deactivated"],
-            ["{ICON_EXCLAMATION}", "1 user is locked out"],
-        ];
+        return [];
     }
 
 }

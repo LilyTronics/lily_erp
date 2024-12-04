@@ -94,11 +94,7 @@ class ModelAdministrator
     }
 
     private static function getDashboardContent() {
-        return [
-            ["{ICON_INFO}", "change applications settings"],
-            ["{ICON_INFO}", "check the log files"],
-            ["{ICON_INFO}", "check the database data"]
-        ];
+        return [];
     }
 
 }

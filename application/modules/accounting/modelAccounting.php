@@ -28,10 +28,25 @@ class ModelAccounting
     }
 
     private function getDashboardContent() {
-        return [
-            ["{ICON_EXCLAMATION}", "3 open bank transactions require attention"],
-            ["{ICON_CHECK_OK}",    "the balance sheet looks good"]
-        ];
+        $messages = [];
+        $table = new ModelDatabaseTableBankTransaction();
+        $records = $table->getRecords("state = 'open'");
+        if (count($records) == 0)
+        {
+            $messages[] = [
+                "icon"    => "{ICON_CHECK_OK}",
+                "message" => "No open bank transactions",
+                "link"    => ""];
+        }
+        else
+        {
+            $messages[] = [
+                "icon"    => "{ICON_EXCLAMATION}",
+                "message" => count($records) . " bank transactions require attention",
+                "link"    => "accounting/bank"
+            ];
+        }
+        return $messages;
     }
 
 }
