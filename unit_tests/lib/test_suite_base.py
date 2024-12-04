@@ -6,6 +6,7 @@ from lily_unit_test import TestSuite
 
 from unit_tests.lib.database import Database
 from unit_tests.lib.http_request import HttpRequest
+from unit_tests.lib.web_page import WebPage
 
 
 class TestSuiteBase(TestSuite):
@@ -22,7 +23,7 @@ class TestSuiteBase(TestSuite):
     def get_web_page(self, uri=""):
         response = self.http_request.do_get(uri)
         self.fail_if(response.status_code != 200, f"Invalid response status code: {response.status_code}")
-        return response
+        return WebPage(response.text)
 
     def get_records(self):
         response = self.http_request.get_records(self.table_name)

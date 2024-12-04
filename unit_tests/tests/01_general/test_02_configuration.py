@@ -17,15 +17,15 @@ class TestConfiguration(TestSuiteBase):
             os.remove(TestSettings.ini_filename)
 
     def test_empty_configuration(self):
-       response = self.get_web_page()
-       self.fail_if("<h3>Setup configuration</h3>" not in response.text, "Invalid page received, expected setup configuration")
+       web_page = self.get_web_page()
+       self.fail_if(web_page.page_header != "Setup configuration", "Invalid page received, expected setup configuration")
 
     def test_create_configuration(self):
         response = create_configuration()
         self.fail_if(not response["result"], response["message"])
-        response = self.get_web_page()
-        self.fail_if("<h3>Setup configuration</h3>" in response.text, "Invalid page received (setup configuration)")
-        self.fail_if("<h3>Log in</h3>" not in response.text, "Invalid page received, expected log in")
+        web_page = self.get_web_page()
+        self.fail_if(web_page.page_header == "Setup configuration", "Invalid page received ({web_page.page_header})")
+        self.fail_if(web_page.page_header != "Log in", f"Invalid page received ({web_page.page_header})")
 
 
 if __name__ == "__main__":
