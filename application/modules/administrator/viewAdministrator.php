@@ -32,7 +32,7 @@ When you are happy with the color click the apply button and it will be applied 
 <span class="float-end me-2">{ICON_USER}</span>
 </div>
 <!-- body with table and stuff -->
-<div class="p-2 text-small">
+<div class="p-2 small">
 <p>Some random page content that has no meaning at all.</p>
 <table id="preview-table" class="table-bordered">
 <thead><tr><th>first name</th><th>last name</th><th>city</th><th>country</th></tr></thead>

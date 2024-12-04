@@ -14,7 +14,7 @@ if (isset($pageData["items"]))
         echo "<i class=\"{$itemData["icon"]} mx-2\"></i>{$itemData["title"]}\n";
         echo "</a>\n";
         echo "</div> <!-- header -->\n";
-        echo "<div class=\"p-2\">\n";
+        echo "<div class=\"p-2 small\">\n";
         // Content should be an array with items (icon, message)
         if (count($itemData["content"]) > 0)
         {
