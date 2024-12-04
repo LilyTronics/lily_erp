@@ -67,7 +67,7 @@ else
     }
     echo "\" />\n";
 
-    echo "<table class=\"width-max\">\n";
+    echo "<table class=\"w-100\">\n";
     foreach ($record as $field => $value)
     {
         if ($field != "id")

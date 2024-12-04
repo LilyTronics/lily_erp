@@ -13,7 +13,6 @@ td a                    {display: block}
 .dashboard-item         {width: 300px; height: 200px}
 
 /* Widths */
-.width-max              {width: 99.9% !important}
 .max-width-small        {max-width: 120px !important}
 .max-width-default      {max-width: 400px !important}
 .max-width-large        {max-width: 600px !important}
