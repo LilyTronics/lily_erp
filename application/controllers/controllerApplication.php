@@ -30,6 +30,14 @@ class ControllerApplication extends ControllerBase
             exit();
         }
 
+        // If there is a configuration and create-config is called, redirect to home
+        if ($isConfigurationOk and $controllerName == "ControllerSetup")
+        {
+            DEBUG_LOG->writeMessage("Redirect to: /");
+            $this->gotoLocation("");
+            exit();
+        }
+
         // Check session, only for level 2 or higher
         if (!$isSessionValid and $level >= 2)
         {
