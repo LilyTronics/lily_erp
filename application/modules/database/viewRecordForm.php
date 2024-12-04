@@ -22,7 +22,7 @@ function createInputFor($field, $value, $input)
             break;
 
         case "select":
-            $output = "<select class=\"{INPUT} width-auto\" name=\"record[{$field}]\">\n";
+            $output = "<select class=\"{INPUT} w-auto\" name=\"record[{$field}]\">\n";
             $output .= "<option></option>\n";
             foreach ($data as $dataValue)
             {
