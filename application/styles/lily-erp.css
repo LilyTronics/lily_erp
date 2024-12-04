@@ -1,6 +1,7 @@
 /* HTML overrides */
 @font-face              {font-family: noto-sans; src: url('fonts/noto-sans.ttf') format('truetype')}
-body                    {font-family: noto-sans; font-size: 16px; font-weight: 300}
+body                    {font-family: noto-sans; font-size: 16px; font-weight: 320}
+table                   {margin-bottom: 16px}
 td, th                  {padding: 4px 8px}
 
 /* Mak links in table cells cover the whole cell */
