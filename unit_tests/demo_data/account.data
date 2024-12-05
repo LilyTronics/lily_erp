@@ -11,8 +11,8 @@ number  name                    debit_credit    category
 
 5000    Cost of goods sold      D               Expenses
 
-6000    Expenses                D               Excenses
+6000    Expenses                D               Expenses
 
 7000    Non-operating income    C               Income
 
-8000    Non-operating expenses  D               Excenses
+8000    Non-operating expenses  D               Expenses
