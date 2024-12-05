@@ -3,6 +3,11 @@
 class ViewApplication extends HtmlPageView
 {
 
+    public function getData($key, $default)
+    {
+        return (isset($this->pageData[$key]) ? $this->pageData[$key] : $default);
+    }
+
     protected function insertBody()
     {
         $pageData = $this->getPageData();
