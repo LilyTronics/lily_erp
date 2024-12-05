@@ -25,6 +25,10 @@ class ModelRecord
         $value = ($value === null ? "" : $value);
         if ($field == "amount" or $field == "debit" or $field == "credit")
         {
+            if (!is_string($value))
+            {
+                $value = number_format($value, 5);
+            }
             $value = preg_replace("/(\.\d{2}[^0]*)(0*)$/", "$1", $value);
         }
         return htmlentities($value);
