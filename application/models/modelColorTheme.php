@@ -41,6 +41,7 @@ class ModelColorTheme
         $output .= "\n";
         $output .= ".theme-hover:hover                            {background-color:{$colorHover}!important;}\n";
         $output .= "\n";
+        $output .= ".theme-stripe                                 {background-color:{$colorTableStriped}!important}\n";
         $output .= ".theme-table-striped tbody tr:nth-child(even) {background-color:{$colorTableStriped}!important}\n";
         $output .= ".theme-table-hover tbody tr:hover             {background-color:{$colorHover}!important;cursor:pointer}\n";
         $output .= "\n";
