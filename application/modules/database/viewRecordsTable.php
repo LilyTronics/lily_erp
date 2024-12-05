@@ -34,7 +34,7 @@ if (count($records) > 0)
     foreach ($records as $record)
     {
         $recordLink = WEB_ROOT . $recordUri . $record["id"];
-        echo "<tr>";
+        echo "<tr>\n";
         foreach (array_keys($record) as $key)
         {
             if ($key != "id")
