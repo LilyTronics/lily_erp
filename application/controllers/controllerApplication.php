@@ -88,7 +88,8 @@ class ControllerApplication extends ControllerBase
     protected function showMyAccount($parameters)
     {
         $pageData = [
-            "sub_title" => "My account"
+            "sub_title" => "My account",
+            "menu" => [["My account", "my-account"]]
         ];
         return $this->showPage("viewMyAccount", $pageData);
     }
