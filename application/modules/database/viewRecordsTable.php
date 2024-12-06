@@ -1,4 +1,3 @@
-<div class="{CONTAINER}"> <!-- records table -->
 <?php
 // From the view call:
 // echo $this->insertRecordTable();
@@ -16,6 +15,15 @@ function getStyle($field)
 }
 
 
+$recordLink = ModelHelper::createLinkTo($recordUri);
+if ($itemName != "")
+{
+    echo "<div class=\"{CONTAINER}\">\n";
+    echo "<a class=\"{BUTTON}\" href=\"{$recordLink}0\" {LNK_SHOW_LOADER}>New {$itemName}</a>\n";
+    echo "</div>\n";
+}
+
+echo "<div class=\"{CONTAINER}\">\n";
 if (count($records) > 0)
 {
     echo "<div class=\"table-responsive\">\n";
@@ -33,7 +41,6 @@ if (count($records) > 0)
     echo "<tbody>\n";
     foreach ($records as $record)
     {
-        $recordLink = WEB_ROOT . $recordUri . $record["id"];
         echo "<tr>\n";
         foreach (array_keys($record) as $key)
         {
@@ -46,7 +53,7 @@ if (count($records) > 0)
                 {
                     echo " {$style}";
                 }
-                echo "><a class=\"no-link-color\" href=\"{$recordLink}\" {LNK_SHOW_LOADER}>{$value}</a></td>\n";
+                echo "><a class=\"no-link-color\" href=\"{$recordLink}{$record["id"]}\" {LNK_SHOW_LOADER}>{$value}</a></td>\n";
             }
         }
         echo "</tr>\n";
@@ -59,6 +66,4 @@ else
 {
     echo "<p>No records</p>\n";
 }
-
-?>
-</div> <!-- records table -->
+echo "</div>\n";

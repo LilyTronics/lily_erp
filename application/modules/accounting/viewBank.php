@@ -1,8 +1,10 @@
 <?php
 
-$pageData = $this->getPageData();
+$records = $this->getData("records", []);
+$recordUri = $this->getData("record_uri", "");
+$itemName = $this->getData("item_name", "");
 
-echo $this->insertRecordTable($pageData["records"], $pageData["record_uri"]);
+echo $this->insertRecordTable($records, $recordUri, $itemName);
 
 ?>
 <div class="{CONTAINER} border-top">

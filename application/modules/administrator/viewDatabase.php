@@ -37,7 +37,7 @@ elseif ($activeTable != "")
 {
     $link = WEB_ROOT . "administrator/database-record/{$activeTable}/0";
     echo "Records of {$activeTable}</div>";
-    echo $this->insertRecordTable($records,  "administrator/database-record/{$activeTable}/");
+    echo $this->insertRecordTable($records,  "administrator/database-record/{$activeTable}/", "record");
 }
 else
 {
