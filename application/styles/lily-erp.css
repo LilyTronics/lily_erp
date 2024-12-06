@@ -12,7 +12,7 @@ td a                    {display: block}
 .main-content           {min-height: 700px}
 .log-in-form            {max-width: 400px}
 .form-buttons           {margin-top: 32px}
-.dashboard-item         {width: 250px; height: 150px}
+.dashboard-item         {width: 300px; height: 160px}
 
 /* Widths */
 .max-width-small        {max-width: 120px !important}
