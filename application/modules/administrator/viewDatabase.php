@@ -37,9 +37,6 @@ elseif ($activeTable != "")
 {
     $link = WEB_ROOT . "administrator/database-record/{$activeTable}/0";
     echo "Records of {$activeTable}</div>";
-    echo "<div class=\"{CONTAINER}\">\n";
-    echo "<a class=\"{TOOL_BUTTON} m-1\" href=\"{$link}\" {LNK_SHOW_LOADER}>New record</a>\n";
-    echo "</div>\n";
     echo $this->insertRecordTable($records,  "administrator/database-record/{$activeTable}/");
 }
 else
