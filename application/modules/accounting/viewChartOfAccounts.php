@@ -86,6 +86,8 @@ if (count($accounts) > 0)
                 echo $value;
             }
             echo "</td>\n";
+            $totalDebit += $record["debit"];
+            $totalCredit += $record["credit"];
         }
         echo "</tr>\n";
         $stripe++;
@@ -93,6 +95,8 @@ if (count($accounts) > 0)
     // Add total
     echo "<tr><td colspan=\"{$nCols}\"></td></tr>\n";
     $nCols -= 2;
+    $totalDebit = ModelRecord::formatValue("debit", $totalDebit);
+    $totalCredit = ModelRecord::formatValue("credit", $totalCredit);
     echo "<tr><td colspan=\"{$nCols}\">Total</td><td>{$totalDebit}</td><td>{$totalCredit}</td></tr>\n";
     echo "</table>\n";
 }
