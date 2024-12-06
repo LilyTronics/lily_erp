@@ -36,7 +36,8 @@ class ModelAccounting
             $messages[] = [
                 "icon"    => "{ICON_CHECK_OK}",
                 "message" => "No open bank transactions",
-                "link"    => "accounting/bank"];
+                "link"    => "accounting/bank"
+            ];
         }
         else
         {
