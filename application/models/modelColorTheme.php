@@ -85,17 +85,20 @@ class ModelColorTheme
                 $s = $diff / $sum;
             }
         }
-        if ($r == $max)
+        if ($diff != 0)
         {
-            $h = ($g - $b) / $diff;
-        }
-        if ($g == $max)
-        {
-            $h = 2 + ($b - $r) / $diff;
-        }
-        if ($b == $max)
-        {
-            $h = 4 + ($r - $g) / $diff;
+            if ($r == $max)
+            {
+                $h = ($g - $b) / $diff;
+            }
+            if ($g == $max)
+            {
+                $h = 2 + ($b - $r) / $diff;
+            }
+            if ($b == $max)
+            {
+                $h = 4 + ($r - $g) / $diff;
+            }
         }
         $h = intval(round(60 * $h));
         $s = intval(round(100 * $s));
@@ -137,11 +140,11 @@ class ModelColorTheme
             $r = self::normalize($h + 1 / 3);
             $g = $h;
             $b = self::normalize($h - 1 / 3);
-            $r = intval(round(255 * self::convertChannel($r, $t1, $t2)));
-            $g = intval(round(255 * self::convertChannel($g, $t1, $t2)));
-            $b = intval(round(255 * self::convertChannel($b, $t1, $t2)));
+            $r = 255 * self::convertChannel($r, $t1, $t2);
+            $g = 255 * self::convertChannel($g, $t1, $t2);
+            $b = 255 * self::convertChannel($b, $t1, $t2);
         }
-        return [$r, $g, $b];
+        return [intval(round($r)), intval(round($g)), intval(round($b))];
     }
 
     private static function normalize($value)
