@@ -19,7 +19,7 @@ class ControllerAccounting extends ControllerApplication
         $pageData = [
             "sub_title"  => "Bank transactions",
             "records"    => $table->getRecords(),
-            "record_uri" => "accounting/bank/transaction/",
+            "record_uri" => "accounting/bank/transaction/"
         ];
         return $this->showView("Bank", $pageData);
     }
@@ -40,8 +40,11 @@ class ControllerAccounting extends ControllerApplication
 
     protected function showJournal($parameters)
     {
+        $table = new ModelDatabaseTableJournal();
         $pageData = [
-            "sub_title" => "Journal"
+            "sub_title" => "Journal",
+            "records" => $table->getRecords(),
+            "item_name" => "entry"
         ];
         return $this->showView("Journal", $pageData);
     }
