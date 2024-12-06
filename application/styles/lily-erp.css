@@ -1,17 +1,18 @@
 /* HTML overrides */
 @font-face              {font-family: noto-sans; src: url('fonts/noto-sans.ttf') format('truetype')}
-body                    {font-family: noto-sans; font-size: 16px; font-weight: 320}
+/* Font must be defined in HTML tag because of the use of rem units */
+html                    {font-family: noto-sans; font-size: 14px; font-weight: 360}
 table                   {margin-bottom: 16px}
 td, th                  {padding: 4px 8px}
 
-/* Mak links in table cells cover the whole cell */
+/* Make links in table cells cover the whole cell */
 td a                    {display: block}
 
 /* Containers */
 .main-content           {min-height: 700px}
 .log-in-form            {max-width: 400px}
 .form-buttons           {margin-top: 32px}
-.dashboard-item         {width: 300px; height: 200px}
+.dashboard-item         {width: 250px; height: 150px}
 
 /* Widths */
 .max-width-small        {max-width: 120px !important}

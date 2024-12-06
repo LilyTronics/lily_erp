@@ -1,5 +1,5 @@
 <header class="{CONTAINER} clearfix theme-bg">
-<span class="float-start fs-4">Lily ERP</span>
+<span class="float-start fs-5">Lily ERP</span>
 <?php
 
 $pageData = $this->getPageData();

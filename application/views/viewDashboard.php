@@ -9,7 +9,7 @@ if (isset($pageData["items"]))
     {
         $link = WEB_ROOT . $itemData["link"];
         echo "<div class=\"card shadow-sm float-start dashboard-item m-3\">\n";
-        echo "<div class=\"theme-bg p-2 rounded-top fs-5\">\n";
+        echo "<div class=\"theme-bg p-1 rounded-top fs-5\">\n";
         echo "<a class=\"no-link-color d-block\" href=\"{$link}\" {LNK_SHOW_LOADER}>";
         echo "<i class=\"{$itemData["icon"]} mx-2\"></i>{$itemData["title"]}\n";
         echo "</a>\n";
