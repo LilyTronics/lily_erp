@@ -42,7 +42,7 @@ class ModelAdministrator
         if (file_exists($filename)) {
             return file_get_contents($filename);
         }
-        return "The file does not exist";
+        return "";
     }
 
     public static function deleteLogFile($filename)
@@ -94,7 +94,25 @@ class ModelAdministrator
     }
 
     private static function getDashboardContent() {
-        return [];
+        $messages = [];
+        $errors = self::getFileContent("errorHandler");
+        if ($errors == "")
+        {
+            $messages[] = [
+                "icon"    => "{ICON_CHECK_OK}",
+                "message" => "No errors in the log file",
+                "link"    => "administrator/log-files"
+            ];
+        }
+        else
+        {
+            $messages[] = [
+                "icon"    => "{ICON_EXCLAMATION}",
+                "message" => "There are error messages in the log file",
+                "link"    => "administrator/log-file/errorHandler"
+            ];
+        }
+        return $messages;
     }
 
 }
