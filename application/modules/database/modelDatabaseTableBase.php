@@ -7,8 +7,9 @@ class ModelDatabaseTableBase extends ModelDatabaseTable
     // 18,6: max amount: 999 999 999 999.999 999 (up to 1 trillion)
     const TYPE_DECIMAL = "DECIMAL(18,6)";
 
+    public $defaultOrder = "";
     public $inputs = [];
-    protected $returnUri = "";
+    protected $returnUri = "";  // TODO: where used?
 
     public function __construct($autoCreateTable=false, $defaultRecords=[])
     {
@@ -83,6 +84,10 @@ class ModelDatabaseTableBase extends ModelDatabaseTable
     public function getRecords($filterExpression="", $orderExpression="", $groupExpression="", $start=0, $count=0,
                                $fields=["*"], $join="", $joinTable="", $joinExpression="", $joinFields=["*"])
     {
+        if ($orderExpression == "")
+        {
+            $orderExpression = $this->defaultOrder;
+        }
         $records = $this->selectRecords($filterExpression, $orderExpression, $groupExpression, $start, $count,
                                         $fields, $join, $joinTable, $joinExpression, $joinFields);
         if (!$records[0])

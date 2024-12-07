@@ -18,6 +18,8 @@ class ModelDatabaseTableAccount extends ModelDatabaseTableBase {
         $this->inputs["debit_credit"] = ["type" => "select", "data" => ["D", "C"]];
         $this->inputs["category"]     = ["type" => "select", "data" => $this->categories];
 
+        $this->defaultOrder = "number";
+
         parent::__construct(true);
     }
 
