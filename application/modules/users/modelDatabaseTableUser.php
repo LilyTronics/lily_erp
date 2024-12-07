@@ -45,6 +45,8 @@ class ModelDatabaseTableUser extends ModelDatabaseTableBase {
         $this->inputs["is_active"] = ["type" => "select", "data" => [0, 1] ];
         $this->inputs["is_admin"] = ["type" => "select", "data" => [0, 1] ];
         $this->inputs["access_levels"] = [];
+        $this->inputs["last_log_in"] = [];
+        $this->inputs["log_in_fail"] = [];
 
         parent::__construct(true);
     }
