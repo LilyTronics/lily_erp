@@ -12,6 +12,13 @@ $records = $this->getData("records", []);
 $newRecord = $this->getData("record", []);
 $result = $this->getData("result", true);
 
+$hasInputs = false;
+foreach ($inputs as $input)
+{
+    $hasInputs = isset($input["type"]);
+    if ($hasInputs) break;
+}
+
 
 function getStyle($field)
 {
@@ -27,7 +34,7 @@ function getStyle($field)
 
 $recordLink = ModelHelper::createLinkTo($recordUri);
 echo "<div class=\"{CONTAINER}\">\n";
-if ($itemName != "")
+if ($itemName != "" && $hasInputs)
 {
     echo "<p><button type=\"button\" class=\"{BUTTON}\" onclick=\"showNewRecord()\">New {$itemName}</button></p>\n";
 }
@@ -42,31 +49,34 @@ foreach (array_keys($inputs) as $key)
 echo "<th style=\"width:80px\"></th>\n";
 echo "</tr></thead>\n";
 echo "<tbody>\n";
-// Start with new record part, will only be shown if the new record button is clicked
-$colspan = "colspan=\"" . count($inputs) + 1 . "\"";
-$link = ModelHelper::createLinkTo("api");
-echo "<form action=\"{$link}\" method=\"post\" autocomplete=\"off\">\n";
-echo "<input type=\"hidden\" name=\"action\" value=\"add_{$table}\" />\n";
-echo "<input type=\"hidden\" name=\"record[id]\" value=\"0\" />\n";
-echo "<input type=\"hidden\" name=\"on_success\" value=\"{$onSuccessUri}\" />\n";
-echo "<input type=\"hidden\" name=\"on_failure\" value=\"{$onFailureUri}\" />\n";
-echo "<input type=\"hidden\" name=\"title\" value=\"Save {$itemName}\" />\n";
-echo "<tr id=\"new-record\"";
-if ($result)
+if ($itemName != "" && $hasInputs)
 {
-    echo " style=\"display:none\"";
+    // Start with new record part, will only be shown if the new record button is clicked
+    $colspan = "colspan=\"" . count($inputs) + 1 . "\"";
+    $link = ModelHelper::createLinkTo("api");
+    echo "<form action=\"{$link}\" method=\"post\" autocomplete=\"off\">\n";
+    echo "<input type=\"hidden\" name=\"action\" value=\"add_{$table}\" />\n";
+    echo "<input type=\"hidden\" name=\"record[id]\" value=\"0\" />\n";
+    echo "<input type=\"hidden\" name=\"on_success\" value=\"{$onSuccessUri}\" />\n";
+    echo "<input type=\"hidden\" name=\"on_failure\" value=\"{$onFailureUri}\" />\n";
+    echo "<input type=\"hidden\" name=\"title\" value=\"Save {$itemName}\" />\n";
+    echo "<tr id=\"new-record\"";
+    if ($result)
+    {
+        echo " style=\"display:none\"";
+    }
+    echo ">\n";
+    foreach (array_keys($inputs) as $i => $key)
+    {
+        $value = (!$result && isset($newRecord[$key]) ? $newRecord[$key] : "");
+        echo "<td>";
+        echo ModelRecord::createInputFor($key, $value, $inputs[$key]);
+        echo "</td>\n";
+    }
+    echo "<td><button type=\"submit\" class=\"{BUTTON_SMALL}\" title=\"save\">{ICON_CHECK}</button>\n";
+    echo "<button type=\"button\" class=\"{BUTTON_SMALL} ms-1\" title=\"cancel\" onclick=\"showNewRecord('none')\">{ICON_XMARK}</button></td>\n";
+    echo "</tr></form>\n";
 }
-echo ">\n";
-foreach (array_keys($inputs) as $i => $key)
-{
-    $value = (!$result && isset($newRecord[$key]) ? $newRecord[$key] : "");
-    echo "<td>";
-    echo ModelRecord::createInputFor($key, $value, $inputs[$key]);
-    echo "</td>\n";
-}
-echo "<td><button type=\"submit\" class=\"{BUTTON_SMALL}\" title=\"save\">{ICON_CHECK}</button>\n";
-echo "<button type=\"button\" class=\"{BUTTON_SMALL} ms-1\" title=\"cancel\" onclick=\"showNewRecord('none')\">{ICON_XMARK}</button></td>\n";
-echo "</tr></form>\n";
 // Add records if there are any
 if (count($records) > 0)
 {
