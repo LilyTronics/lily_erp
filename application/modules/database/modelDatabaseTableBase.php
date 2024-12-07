@@ -4,7 +4,7 @@ class ModelDatabaseTableBase extends ModelDatabaseTable
 {
 
     // So we use the same precision every where for the amounts of money
-    // 18,6: max amount: 999 999 999 999,999 999 (up to 1 trillion)
+    // 18,6: max amount: 999 999 999 999.999 999 (up to 1 trillion)
     const TYPE_DECIMAL = "DECIMAL(18,6)";
 
     public $inputs = [];
