@@ -30,7 +30,7 @@ class ModelColorTheme
         $output .= ".theme-btn                                    {color:#fff!important;background-color:{$color}!important}\n";
         $output .= ".theme-btn:hover                              {color:#fff!important;background-color:{$result["theme_btn_hover"]}!important}\n";
         $output .= "\n";
-        $output .= ".theme-hover:hover                            {background-color:{$result["theme_hover"]}!important;}\n";
+        $output .= ".theme-hover:hover                            {background-color:{$result["theme_hover"]}!important}\n";
         $output .= "\n";
         // No important used here for text color. That will not work if a link is styled as button.
         $output .= "a:link                                        {color:{$color};text-decoration:none!important}\n";
