@@ -20,43 +20,6 @@ foreach ($inputs as $input)
 $labelStyle = "style=\"width:150px;white-space:nowrap\"";
 
 
-function createInputFor($field, $value, $input)
-{
-    $type = (isset($input["type"]) ? $input["type"] : null);
-    $data = (isset($input["data"]) ? $input["data"] : []);
-    $width = (isset($input["width"]) ? $input["width"] : "default");
-
-    $output = "";
-    switch ($type)
-    {
-        case "text":
-        case "password":
-            $output = "<input type=\"{$type}\" class=\"{INPUT} max-width-{$width}\" name=\"record[{$field}]\" value=\"{$value}\" autocomplete=\"new-{$type}\" />";
-            break;
-
-        case "select":
-            $output = "<select class=\"{INPUT} w-auto\" name=\"record[{$field}]\">\n";
-            $output .= "<option></option>\n";
-            foreach ($data as $dataValue)
-            {
-                $output .= "<option";
-                if ($dataValue == $value)
-                {
-                    $output .=  " selected";
-                }
-                $output .=  ">{$dataValue}</option>\n";
-            }
-            $output .= "</select>\n";
-            break;
-
-        default:
-            // Read only, no input box, but same size
-            $output = "<input type=\"text\" class=\"form-control-plaintext\" name=\"record[{$field}]\" value=\"{$value}\" readonly />";
-    }
-    return $output;
-}
-
-
 if (count($record) <= 1)
 {
     echo "<p>Invalid record data</p>\n";
@@ -82,7 +45,7 @@ else
             echo "<td>";
             if (array_search($field, array_keys($inputs)) !== false)
             {
-                echo createInputFor($field, $value, $inputs[$field]);
+                echo ModelRecord::createInputFor($field, $value, $inputs[$field]);
             }
             else
             {

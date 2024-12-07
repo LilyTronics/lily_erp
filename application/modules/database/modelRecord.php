@@ -64,7 +64,7 @@ class ModelRecord
                 break;
 
             case "date":
-                $output = "<input type=\"{$type}\" class=\"{INPUT}\" name=\"record[{$field}]\" value=\"{$value}\" />";
+                $output = "<input type=\"{$type}\" class=\"{INPUT} w-auto\" name=\"record[{$field}]\" value=\"{$value}\" />";
                 break;
 
             default:
