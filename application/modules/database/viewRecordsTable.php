@@ -1,6 +1,16 @@
 <?php
 // From the view call:
-// echo $this->insertRecordTable();
+// echo $this->getContentFromPageFile("database/viewRecordsTable.php", APP_MODULES_PATH);
+
+$recordUri = $this->getData("record_uri", "");
+$itemName = $this->getData("item_name", "");
+$inputs = $this->getData("inputs", "");
+$table = $this->getData("table", "");
+$onSuccessUri = $this->getData("on_success_uri", "");
+$onFailureUri = $this->getData("on_failure_uri", "");
+$records = $this->getData("records", []);
+$newRecord = $this->getData("record", []);
+$result = $this->getData("result", true);
 
 
 function getStyle($field)
@@ -16,29 +26,51 @@ function getStyle($field)
 
 
 $recordLink = ModelHelper::createLinkTo($recordUri);
+echo "<div class=\"{CONTAINER}\">\n";
 if ($itemName != "")
 {
-    echo "<div class=\"{CONTAINER}\">\n";
-    echo "<a class=\"{BUTTON}\" href=\"{$recordLink}0\" {LNK_SHOW_LOADER}>New {$itemName}</a>\n";
-    echo "</div>\n";
+    echo "<p><button type=\"button\" class=\"{BUTTON}\" onclick=\"showNewRecord()\">New {$itemName}</button></p>\n";
 }
-
-echo "<div class=\"{CONTAINER}\">\n";
+echo "<div class=\"table-responsive\">\n";
+echo "<table class=\"table table-striped table-hover\">\n";
+echo "<thead><tr>\n";
+foreach (array_keys($inputs) as $key)
+{
+    $label = ModelRecord::formatFieldName($key, true);
+    echo "<th style=\"white-space:nowrap\">{$label}</th>\n";
+}
+echo "<th style=\"width:80px\"></th>\n";
+echo "</tr></thead>\n";
+echo "<tbody>\n";
+// Start with new record part, will only be shown if the new record button is clicked
+$colspan = "colspan=\"" . count($inputs) + 1 . "\"";
+$link = ModelHelper::createLinkTo("api");
+echo "<form action=\"{$link}\" method=\"post\" autocomplete=\"off\">\n";
+echo "<input type=\"hidden\" name=\"action\" value=\"add_{$table}\" />\n";
+echo "<input type=\"hidden\" name=\"record[id]\" value=\"0\" />\n";
+echo "<input type=\"hidden\" name=\"on_success\" value=\"{$onSuccessUri}\" />\n";
+echo "<input type=\"hidden\" name=\"on_failure\" value=\"{$onFailureUri}\" />\n";
+echo "<input type=\"hidden\" name=\"title\" value=\"Save {$itemName}\" />\n";
+echo "<tr id=\"new-record\"";
+if ($result)
+{
+    echo " style=\"display:none\"";
+}
+echo ">\n";
+foreach (array_keys($inputs) as $i => $key)
+{
+    $value = (!$result && isset($newRecord[$key]) ? $newRecord[$key] : "");
+    echo "<td>";
+    echo ModelRecord::createInputFor($key, $value, $inputs[$key]);
+    echo "</td>\n";
+}
+echo "<td><button type=\"submit\" class=\"{BUTTON_SMALL}\" title=\"save\">{ICON_CHECK}</button>\n";
+echo "<button type=\"button\" class=\"{BUTTON_SMALL} ms-1\" title=\"cancel\" onclick=\"showNewRecord('none')\">{ICON_XMARK}</button></td>\n";
+echo "</tr></form>\n";
+// Add records if there are any
 if (count($records) > 0)
 {
-    echo "<div class=\"table-responsive\">\n";
-    echo "<table class=\"table table-striped table-hover\">\n";
-    echo "<thead><tr>\n";
-    foreach (array_keys($records[0]) as $key)
-    {
-        if ($key != "id")
-        {
-            $label = ModelRecord::formatFieldName($key, true);
-            echo "<th style=\"white-space:nowrap\">{$label}</th>\n";
-        }
-    }
-    echo "</tr></thead>\n";
-    echo "<tbody>\n";
+
     foreach ($records as $record)
     {
         echo "<tr>\n";
@@ -56,14 +88,27 @@ if (count($records) > 0)
                 echo "><a class=\"no-link-color\" href=\"{$recordLink}{$record["id"]}\" {LNK_SHOW_LOADER}>{$value}</a></td>\n";
             }
         }
+        echo "<td></td>\n";
         echo "</tr>\n";
     }
-    echo "</tbody>\n";
-    echo "</table>\n";
-    echo "</div> <!-- responsive -->\n";
 }
-else
+echo "</tbody>\n";
+echo "</table>\n";
+echo "</div> <!-- responsive -->\n";
+if (count($records) == 0)
 {
     echo "<p>No records</p>\n";
 }
 echo "</div>\n";
+
+?>
+<script>
+
+'use strict'
+
+function showNewRecord(display='')
+{
+    document.getElementById('new-record').style.display = display;
+}
+
+</script>
