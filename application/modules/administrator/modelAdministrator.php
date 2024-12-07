@@ -90,7 +90,7 @@ class ModelAdministrator
     public static function getInputs($table)
     {
         $table = ModelDatabaseTableBase::getModelForTable($table);
-        return $table->inputs;
+        return ($table != null ? $table->inputs : []);
     }
 
     private static function getDashboardContent() {
