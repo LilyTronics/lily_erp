@@ -113,10 +113,14 @@ class ControllerApplication extends ControllerBase
         }
         // Merge page data without record
         $pageData = array_merge($pageData, $sessionData);
-        // Merge record if needed
+        // Merge record data, or add record data
         if (isset($pageData["record"]) and count($recordData) > 0)
         {
             $pageData["record"] = array_merge($pageData["record"], $recordData);
+        }
+        elseif (count($recordData) > 0)
+        {
+            $pageData["record"] = $recordData;
         }
 
         $pageData["is_logged_in"] = ModelApplicationSession::checkSession();
