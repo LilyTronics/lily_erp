@@ -27,14 +27,14 @@ echo "<div class=\"{CONTAINER}\">\n";
 if (count($records) > 0)
 {
     echo "<div class=\"table-responsive\">\n";
-    echo "<table class=\"table-bordered theme-table-striped theme-table-hover\">\n";
+    echo "<table class=\"table table-striped table-hover\">\n";
     echo "<thead><tr>\n";
     foreach (array_keys($records[0]) as $key)
     {
         if ($key != "id")
         {
             $label = ModelRecord::formatFieldName($key, true);
-            echo "<th class=\"theme-bg-light\" style=\"white-space:nowrap\">{$label}</th>\n";
+            echo "<th style=\"white-space:nowrap\">{$label}</th>\n";
         }
     }
     echo "</tr></thead>\n";

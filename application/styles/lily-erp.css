@@ -4,6 +4,7 @@
 html                    {font-family: noto-sans; font-size: 14px; font-weight: 360}
 table                   {margin-bottom: 16px}
 td, th                  {padding: 4px 8px}
+th                      {border-bottom-width: 2px !important; border-top: 1px solid var(--bs-border-color) !important}
 
 /* Make links in table cells cover the whole cell */
 td a                    {display: block}
