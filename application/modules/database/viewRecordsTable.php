@@ -32,7 +32,7 @@ if ($itemName != "")
     echo "<p><button type=\"button\" class=\"{BUTTON}\" onclick=\"showNewRecord()\">New {$itemName}</button></p>\n";
 }
 echo "<div class=\"table-responsive\">\n";
-echo "<table class=\"table table-striped table-hover\">\n";
+echo "<table class=\"table table-striped table-hover border\">\n";
 echo "<thead><tr>\n";
 foreach (array_keys($inputs) as $key)
 {
