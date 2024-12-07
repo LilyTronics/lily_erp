@@ -63,6 +63,10 @@ class ModelRecord
                 $output .= "</select>\n";
                 break;
 
+            case "date":
+                $output = "<input type=\"{$type}\" class=\"{INPUT}\" name=\"record[{$field}]\" value=\"{$value}\" />";
+                break;
+
             default:
                 // Read only, no input box, but same size
                 $output = "<input type=\"text\" class=\"form-control-plaintext\" name=\"record[{$field}]\" value=\"{$value}\" readonly />";
