@@ -1,6 +1,7 @@
 <?php
 
-$pageData = $this->getPageData();
-$records = (isset($pageData["records"]) ? $pageData["records"] : []);
+$records = $this->getData("records", []);
+$recordUri = $this->getData("record_uri", "");
+$itemName = $this->getData("item_name", "");
 
-echo $this->insertRecordTable($records,  "users/user/");
+echo $this->insertRecordTable($records,  $recordUri, $itemName);

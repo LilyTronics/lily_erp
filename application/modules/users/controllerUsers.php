@@ -7,8 +7,10 @@ class ControllerUsers extends ControllerApplication
     {
         $table = new ModelDatabaseTableUser();
         $pageData = [
-            "sub_title" => "Users",
-            "records"   => $table->getRecords()
+            "sub_title"  => "Users",
+            "records"    => $table->getRecords(),
+            "record_uri" => "users/user/",
+            "item_name"  => "user"
         ];
         return $this->showView("Users", $pageData);
     }
