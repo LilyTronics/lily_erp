@@ -29,6 +29,7 @@ if ($mode == "table")
 else if ($mode == "record")
 {
     echo "Record data for record with ID: {$record["id"]}</div>";
+    echo $this->getContentFromPageFile("database/viewRecordForm.php", APP_MODULES_PATH);
 }
 else
 {

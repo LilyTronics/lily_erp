@@ -1,8 +1,14 @@
 <div class="{CONTAINER}">
 <?php
 // From the view call:
-// echo $this->insertRecordForm();
+// echo $this->getContentFromPageFile("database/viewRecordForm.php", APP_MODULES_PATH);
 
+$record = $this->getData("record", []);
+$onSuccessUri = $this->getData("on_success_uri", "");
+$onFailureUri = $this->getData("on_failure_uri", "");
+$onDeleteUri = $this->getData("on_delete_uri", "");
+$inputs = $this->getData("inputs", []);
+$table = $this->getData("table", "");
 
 $labelStyle = "style=\"width:150px;white-space:nowrap\"";
 
