@@ -10,6 +10,13 @@ $onDeleteUri = $this->getData("on_delete_uri", "");
 $inputs = $this->getData("inputs", []);
 $table = $this->getData("table", "");
 
+$hasInputs = false;
+foreach ($inputs as $input)
+{
+    $hasInputs = isset($input["type"]);
+    if ($hasInputs) break;
+}
+
 $labelStyle = "style=\"width:150px;white-space:nowrap\"";
 
 
@@ -62,17 +69,7 @@ else
     echo "<input type=\"hidden\" name=\"on_failure\" value=\"{$onFailureUri}\" />\n";
     echo "<input type=\"hidden\" name=\"on_delete\" value=\"{$onDeleteUri}\" />\n";
     echo "<input type=\"hidden\" name=\"title\" value=\"Save record\" />\n";
-    echo "<input id=\"form-action\" type=\"hidden\" name=\"action\" value=\"";
-    if ($record["id"] > 0)
-    {
-        echo "update_{$table}";
-    }
-    else
-    {
-        echo "add_{$table}";
-    }
-    echo "\" />\n";
-
+    echo "<input id=\"form-action\" type=\"hidden\" name=\"action\" value=\"update_{$table}\" />\n";
     echo "<table class=\"w-100\">\n";
     foreach ($record as $field => $value)
     {
@@ -97,7 +94,7 @@ else
     }
     echo "</table>\n";
     echo "<p class=\"form-buttons\">\n";
-    if ($onSuccessUri != "" && $onFailureUri != "")
+    if ($onSuccessUri != "" && $onFailureUri != "" && $hasInputs)
     {
         echo "<button class=\"{BUTTON} m-2\" type=\"submit\" {BTN_SHOW_LOADER}>Save</button>\n";
     }
