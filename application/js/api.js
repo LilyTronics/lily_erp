@@ -30,8 +30,7 @@ function apiPost(data, callback, dialog_title)
         .catch ((error) => {
             if (showMessage)
             {
-                let message = 'Failed to get the color theme:<br />' + escapeHtml(error.message);
-                showMessage(dialog_title, message);
+                showMessage(dialog_title, escapeHtml(error.message));
             }
             else
             {
