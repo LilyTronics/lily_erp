@@ -207,7 +207,7 @@ class ModelDatabaseTableBase extends ModelDatabaseTable
                         }
                         break;
 
-                    case (str_starts_with($fieldType, "VARCHAR")):
+                    case ($fieldType == "DATE" or str_starts_with($fieldType, "VARCHAR")):
                         if (!is_string($fieldValue) or $fieldValue == "")
                         {
                             $result["result"] = false;
