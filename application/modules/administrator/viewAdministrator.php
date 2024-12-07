@@ -34,7 +34,7 @@ When you are happy with the color click the apply button and it will be applied 
 <!-- body with table and stuff -->
 <div class="p-2 small">
 <p>Some random page content that has no meaning at all.</p>
-<table id="preview-table" class="table-bordered">
+<table id="preview-table" class="table table-striped table-hover">
 <thead><tr><th>first name</th><th>last name</th><th>city</th><th>country</th></tr></thead>
 <tbody>
 <tr class="cursor-pointer"><td>George</td><td>Corral</td><td>Manchester</td><td>United Kingdom</td></tr>
@@ -64,29 +64,64 @@ When you are happy with the color click the apply button and it will be applied 
 
 'use strict';
 
-function watchColorPicker(event)
+function onColorChange(event)
 {
     document.getElementById('color-value').innerHTML = event.target.value;
-    applyColorToExample();
+    getColorTheme(event.target.value);
 }
 
-function applyColorToExample()
+function getColorTheme(color)
 {
-    let color = document.getElementById('color-picker').value;
-    let c = new ColorTheme(color);
-    // Apply theme
-    c.setDivBgColor('preview-header');
-    c.setTableColors('preview-table');
-    c.setButtonColors('preview-button');
-    c.setLoaderColor('preview-loader');
-    c.setLinkColor('preview-link');
-    // Set color for storing
-    document.getElementById('record-color').value = color;
+    let data = {
+        "action": "get_color_theme",
+        "color" : color
+    };
+    apiPost(data, applyColorToExample, 'Get color theme');
+}
+
+function applyColorToExample(response)
+{
+    console.log(response);
+    if (response.result)
+    {
+        // Div background
+        let elm = document.getElementById('preview-header');
+        elm.style.backgroundColor = response.theme_bg;
+        elm.style.color = '#fff';
+        // Button colors
+        elm = document.getElementById('preview-button');
+        elm.style.backgroundColor = response.theme_bg;
+        elm.style.color = '#fff';
+        elm.addEventListener('mouseenter', (evt) =>
+        {
+            evt.target.style.backgroundColor = response.theme_btn_hover;
+        });
+        elm.addEventListener('mouseleave', (evt) =>
+        {
+            evt.target.style.backgroundColor = response.theme_bg;
+        });
+        // Loader color
+        elm = document.getElementById('preview-loader');
+        elm.style.borderTopColor = response.theme_bg;
+        // Link colors
+        elm = document.getElementById('preview-link');
+        elm.style.color = response.theme_bg;
+        elm.addEventListener('mouseenter', (evt) =>
+        {
+            evt.target.style.color = response.theme_hover;
+        });
+        elm.addEventListener('mouseleave', (evt) =>
+        {
+            evt.target.style.color = response.theme_bg;
+        });
+        // Set color for storing in the database
+        document.getElementById('record-color').value = response.bg_theme;
+    }
 }
 
 let elm = document.getElementById('color-picker');
-elm.addEventListener('change', watchColorPicker, false);
+elm.addEventListener('change', onColorChange, false);
 document.getElementById('color-value').innerHTML = elm.value;
-applyColorToExample();
+getColorTheme(elm.value);
 
 </script>

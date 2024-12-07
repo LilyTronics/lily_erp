@@ -15,16 +15,7 @@ class ModelColorTheme
         }
 
         // Generate colors
-        $hsl = self::calculateHsl($color);
-        $l5 = intval(floor(5 * floor($hsl[2] / 5)));
-        $hsl[2] = $l5 + 10;
-        $colorBgLight = self::toColorString(self::calculateRgb($hsl));
-        $hsl[2] = $l5 + 20;
-        $colorBtnHover = self::toColorString(self::calculateRgb($hsl));
-        $hsl[2] = 70;
-        $colorHover = self::toColorString(self::calculateRgb($hsl));
-        $hsl[2] = 95;
-        $colorTableStriped = self::toColorString(self::calculateRgb($hsl));
+        $result = self::getThemeColors($color);
 
         // Generate output
         $output = "/* Auto generated CSS for the color theme. Manual changes will be overwritten.\n";
@@ -34,19 +25,17 @@ class ModelColorTheme
         $output .= "\n";
         $output .= ".theme-text                                   {color:{$color}!important}\n";
         $output .= ".theme-bg                                     {color:#fff!important;background-color:{$color}!important}\n";
-        $output .= ".theme-bg-light                               {color:#fff!important;background-color:{$colorBgLight}!important}\n";
+        $output .= ".theme-bg-light                               {color:#fff!important;background-color:{$result["theme_bg_light"]}!important}\n";
         $output .= "\n";
         $output .= ".theme-btn                                    {color:#fff!important;background-color:{$color}!important}\n";
-        $output .= ".theme-btn:hover                              {color:#fff!important;background-color:{$colorBtnHover}!important}\n";
+        $output .= ".theme-btn:hover                              {color:#fff!important;background-color:{$result["theme_btn_hover"]}!important}\n";
         $output .= "\n";
-        $output .= ".theme-hover:hover                            {background-color:{$colorHover}!important;}\n";
-        $output .= "\n";
-        $output .= ".theme-stripe                                 {background-color:{$colorTableStriped}!important}\n";
+        $output .= ".theme-hover:hover                            {background-color:{$result["theme_hover"]}!important;}\n";
         $output .= "\n";
         // No important used here for text color. That will not work if a link is styled as button.
         $output .= "a:link                                        {color:{$color};text-decoration:none!important}\n";
         $output .= "a:visited                                     {color:{$color};text-decoration:none!important}\n";
-        $output .= "a:hover                                       {color:{$colorHover};text-decoration:none!important}\n";
+        $output .= "a:hover                                       {color:{$result["theme_hover"]};text-decoration:none!important}\n";
         $output .= "a:active                                      {color:{$color};text-decoration:none!important}\n";
         $output .= "\n";
         $output .= ".loader                                       {border-top-color:{$color}!important}\n";
@@ -55,12 +44,50 @@ class ModelColorTheme
         file_put_contents(DOC_ROOT . APP_STYLES_PATH . "color-theme.css", $output);
     }
 
-    private static function calculateHsl($color)
+    public static function getThemeColors($color)
     {
+        $result = ["result" => false, "message" => "No color specified"];
+        if ($color == "")
+        {
+            return $result;
+        }
         if (str_starts_with($color, "#"))
         {
             $color = substr($color, 1);
         }
+        $result = ["result" => false, "message" => "Invalid color specified: '{$color}'"];
+        if (strlen($color) != 6)
+        {
+            return $result;
+        }
+        if (preg_match_all("/[^a-f0-9]/i", $color) > 0)
+        {
+            return $result;
+        }
+        $result = ["result" => false, "message" => "Conversion failed"];
+        try
+        {
+            $result["theme_bg"] = "#{$color}";
+            $hsl = self::calculateHsl($color);
+            $l5 = intval(floor(5 * floor($hsl[2] / 5)));
+            $hsl[2] = $l5 + 10;
+            $result["theme_bg_light"] = self::toColorString(self::calculateRgb($hsl));
+            $hsl[2] = $l5 + 20;
+            $result["theme_btn_hover"] = self::toColorString(self::calculateRgb($hsl));
+            $hsl[2] = 70;
+            $result["theme_hover"] = self::toColorString(self::calculateRgb($hsl));
+            $result["result"] = true;
+            $result["message"] = "";
+        }
+        catch (Exception $e)
+        {
+            $result["message"] = "Conversion failed: " . $e->getMessage();
+        }
+        return $result;
+    }
+
+    private static function calculateHsl($color)
+    {
         $r = hexdec(substr($color, 0, 2)) / 255;
         $g = hexdec(substr($color, 2, 2)) / 255;
         $b = hexdec(substr($color, 4, 2)) / 255;

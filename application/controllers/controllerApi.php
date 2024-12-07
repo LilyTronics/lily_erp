@@ -47,8 +47,15 @@ class ControllerApi extends ControllerApplication
 
         // Process the API action
         $result = ["result" => false, "message" => "Invalid action: '{$action}'"];
+        // TODO: do we need to pass the result to every funtion?
         switch (true)
         {
+            case ($action == "get_color_theme"):
+                $log->writeMessage("Get color theme");
+                $color = (isset($postedData["color"]) ? $postedData["color"] : "");
+                $result = ModelColorTheme::getThemeColors($color);
+                break;
+
             case ($action == "create_configuration"):
                 $log->writeMessage("Create configuration");
                 $result = ModelSetup::createConfiguration($record, $result);

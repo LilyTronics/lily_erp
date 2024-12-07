@@ -132,7 +132,6 @@ class ControllerApplication extends ControllerBase
         $view->setPageTitle(APPLICATION_TITLE . $subTitle);
         $view->addMetaTag("name=\"viewport\" content=\"width=device-width, initial-scale=1\"");
         $view->addJavascriptPreVariable("WEB_ROOT", "\"" . WEB_ROOT . "\"");
-        $view->addJavascriptPreVariable("BUTTON", "\"{BUTTON}\"");
         $view->addStyleSheet("bootstrap.css");
         $view->addStyleSheet("lily-erp.css");
         $view->addStyleSheet("loader.css");
@@ -141,10 +140,7 @@ class ControllerApplication extends ControllerBase
         $view->addStyleSheet("fontawesome/css/brands.min.css");
         $view->addStyleSheet("fontawesome/css/solid.min.css");
         $view->addJavaScriptFile("bootstrap.bundle.js");
-        if ($controllerName == "ControllerAdministrator")
-        {
-            $view->addJavaScriptFile("color-theme.js");
-        }
+        $view->addJavaScriptFile("api.js");
         DEBUG_LOG->writeMessage("Output view");
         return $view->output();
     }
