@@ -43,27 +43,53 @@ class ControllerAdministrator extends ControllerApplication
 
     protected function showDatabase($parameters)
     {
-        $pageData = [
-            "sub_title" => "Database",
-            "tables"    => ModelAdministrator::getTables(),
-        ];
         $table = (isset($parameters["table"]) ? $parameters["table"] : "");
         $id = (isset($parameters["id"]) ? $parameters["id"] : null);
-        if ($id !== null and $table != "")
+        $mode = "database";
+        if ($table != "")
         {
-            $pageData["sub_title"] = "Record [{$id}] from {$table}";
-            $pageData["record"] = ModelAdministrator::getRecord($table, $id);
-            $pageData["inputs"] = ModelAdministrator::getInputs($table);
-            $pageData["on_success_uri"] = REQUEST_URI;
-            $pageData["on_failure_uri"] = REQUEST_URI;
-            $pageData["on_delete_uri"] = "/administrator/database-table/{$table}";
+            $mode = "table";
         }
-        elseif ($table != "")
+        if ($id !== null)
+        {
+            $mode = "record";
+        }
+
+        $pageData = [
+            "mode"      => $mode,
+            "sub_title" => "Database",
+            "tables"    => ModelAdministrator::getTables()
+        ];
+        if ($mode == "table")
         {
             $pageData["sub_title"] = "Records from {$table}";
+            $pageData["record_uri"] = "administrator/database-record/{$table}/";
+            $pageData["item_name"] = "record";
+            $pageData["inputs"] = ModelAdministrator::getInputs($table);
+            $pageData["table"] = $table;
+            $pageData["on_success_uri"] = "administrator/database-table/{$table}";
+            $pageData["on_failure_uri"] = "administrator/database-table/{$table}";
             $pageData["records"] = ModelAdministrator::getRecords($table);
         }
-        $pageData["table"] = $table;
+
+        // $pageData = [
+        //     "sub_title" => "Database",
+        //     "tables"    => ModelAdministrator::getTables()
+        // ];
+
+        // if ($id !== null and $table != "")
+        // {
+        //     $pageData["sub_title"] = "Record [{$id}] from {$table}";
+        //     $pageData["record"] = ModelAdministrator::getRecord($table, $id);
+        //     $pageData["inputs"] = ModelAdministrator::getInputs($table);
+        //     $pageData["on_success_uri"] = REQUEST_URI;
+        //     $pageData["on_failure_uri"] = REQUEST_URI;
+        //     $pageData["on_delete_uri"] = "/administrator/database-table/{$table}";
+        // }
+        // elseif ($table != "")
+        // {
+
+        // }
         return $this->showView("Database", $pageData);
     }
 

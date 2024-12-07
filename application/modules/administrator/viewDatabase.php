@@ -1,15 +1,9 @@
 <?php
 
-$pageData = $this->getPageData();
-
-$tables = (isset($pageData["tables"]) ? $pageData["tables"] : []);
-$activeTable = (isset($pageData["table"]) ? $pageData["table"] : "");
-$records = (isset($pageData["records"]) ? $pageData["records"] : []);
-$record = (isset($pageData["record"]) ? $pageData["record"] : null);
-$inputs = (isset($pageData["inputs"]) ? $pageData["inputs"] : []);
-$onSuccessUri = (isset($pageData["on_success_uri"]) ? $pageData["on_success_uri"] : "");
-$onFailureUri = (isset($pageData["on_failure_uri"]) ? $pageData["on_failure_uri"] : "");
-$onDeleteUri = (isset($pageData["on_delete_uri"]) ? $pageData["on_delete_uri"] : "");
+$mode = $this->getData("mode", "");
+$tables = $this->getData("tables", []);
+$record = $this->getData("record", null);
+$activeTable = $this->getData("table", "");
 
 echo "<div class=\"row g-1\">\n";
 // Colomn for table list
@@ -27,17 +21,14 @@ echo "</div> <!-- col -->\n";
 // Column for the records
 echo "<div class=\"col\">\n";
 echo "<div class=\"p-2 theme-bg-light clearfix\">";
-if ($record !== null)
+if ($mode == "table")
 {
-    // Show record
-    echo "Record data for record with ID: {$record["id"]}</div>";
-    echo $this->insertRecordForm($record, $inputs, $activeTable, $onSuccessUri, $onFailureUri, $onDeleteUri);
-}
-elseif ($activeTable != "")
-{
-    $link = WEB_ROOT . "administrator/database-record/{$activeTable}/0";
     echo "Records of {$activeTable}</div>";
-    echo $this->insertRecordTable($records,  "administrator/database-record/{$activeTable}/", "record");
+    echo $this->getContentFromPageFile("database/viewRecordsTable.php", APP_MODULES_PATH);
+}
+else if ($mode == "record")
+{
+    echo "Record data for record with ID: {$record["id"]}</div>";
 }
 else
 {
