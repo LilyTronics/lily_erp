@@ -81,7 +81,6 @@ function getColorTheme(color)
 
 function applyColorToExample(response)
 {
-    console.log(response);
     if (response.result)
     {
         // Div background
@@ -115,7 +114,7 @@ function applyColorToExample(response)
             evt.target.style.color = response.theme_bg;
         });
         // Set color for storing in the database
-        document.getElementById('record-color').value = response.bg_theme;
+        document.getElementById('record-color').value = response.theme_bg;
     }
 }
 
