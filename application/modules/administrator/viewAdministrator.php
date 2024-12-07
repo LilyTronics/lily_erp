@@ -34,7 +34,7 @@ When you are happy with the color click the apply button and it will be applied 
 <!-- body with table and stuff -->
 <div class="p-2 small">
 <p>Some random page content that has no meaning at all.</p>
-<table id="preview-table" class="table table-striped table-hover">
+<table id="preview-table" class="table table-striped table-hover border">
 <thead><tr><th>first name</th><th>last name</th><th>city</th><th>country</th></tr></thead>
 <tbody>
 <tr class="cursor-pointer"><td>George</td><td>Corral</td><td>Manchester</td><td>United Kingdom</td></tr>
