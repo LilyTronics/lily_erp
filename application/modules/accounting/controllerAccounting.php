@@ -49,7 +49,7 @@ class ControllerAccounting extends ControllerApplication
             "sub_title"      => "Journal",
             "inputs"         => $table->inputs,
             "records"        => $table->getRecords(),
-            "record_uri"     => "accounting/journal/enty/",
+            "record_uri"     => "accounting/journal/entry/",
             "item_name"      => "entry",
             "table"          => $table->tableName,
             "on_success_uri" => REQUEST_URI,
@@ -92,7 +92,7 @@ class ControllerAccounting extends ControllerApplication
         $id = (isset($parameters["id"]) ? $parameters["id"] : 0);
         $table = new ModelDatabaseTableAccount();
         $pageData = [
-            "sub_title"      => "Journal entry [{$id}]",
+            "sub_title"      => "Account [{$id}]",
             "record"         => $table->getRecordById($id),
             "table"          => $table->tableName,
             "inputs"         => $table->inputs,
