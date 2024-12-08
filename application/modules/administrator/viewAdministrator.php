@@ -1,9 +1,14 @@
 <?php
 
-$pageData = $this->getPageData();
-$settings = (isset($pageData["settings"]) ? $pageData["settings"] : []);
-
+$settings = $this->getData("settings", []);
 $themeColor = (isset($settings["theme_color"]) ? $settings["theme_color"] : "");
+
+
+function getSetting($settings, $setting)
+{
+    $value = (isset($settings[$setting]) ? $settings[$setting] : "");
+    return $value;
+}
 
 ?>
 <div class="{CONTAINER}">
@@ -11,6 +16,19 @@ $themeColor = (isset($settings["theme_color"]) ? $settings["theme_color"] : "");
 and make changes directly in the database.</p>
 <p>Note that this can break the application or make your
 data unusable. Only change something if you know what you are doing.</p>
+</div>
+<div class="{CONTAINER} border-top">
+<h4>General settings</h4>
+<form>
+<table class="table table-borderless">
+<tr><td>Database version</td><td><?php echo getSetting($settings, "database_version"); ?></td>
+<td>The database version cannot be changed.</td></tr>
+<tr><td>Landing page</td><td><select class="{INPUT}">
+<option <?php echo (getSetting($settings, "landing_page") == "dashboard" ? "selected" : ""); ?>>dashboard</option>
+</select></td>
+<td>The default landing page when navigating to the root of the web site.</td></tr>
+</table>
+</form>
 </div>
 <div class="{CONTAINER} border-top">
 <h4>Color theme</h4>
