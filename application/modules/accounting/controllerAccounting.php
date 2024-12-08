@@ -78,11 +78,21 @@ class ControllerAccounting extends ControllerApplication
 
     protected function showChartOfAccounts($parameters)
     {
-        $expandTo = (isset($parameters["number"]) ? $parameters["number"] : "");
+        $expand = (isset($parameters["number"]) ? $parameters["number"] : "");
         $table = new ModelDatabaseTableAccount();
         $pageData = [
-            "sub_title" => "Chart of accounts",
-            "accounts"  => $table->getAccounts($expandTo)
+            "sub_title"     => "Chart of accounts",
+            // For the overview
+            "accounts"       => $table->getAccounts($expand),
+            // For the record table
+            "records"        => $table->getRecords(),
+            "inputs"         => $table->inputs,
+            "record_uri"     => "accounting/chart-of-accounts/account/",
+            "item_name"      => "account",
+            "table"          => $table->tableName,
+            "on_success_uri" => REQUEST_URI,
+            "on_failure_uri" => REQUEST_URI
+
         ];
         return $this->showView("ChartOfAccounts", $pageData);
     }

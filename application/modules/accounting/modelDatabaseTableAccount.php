@@ -62,7 +62,7 @@ class ModelDatabaseTableAccount extends ModelDatabaseTableBase {
         return $result;
     }
 
-    public function getAccounts($expandTo)
+    public function getAccounts($expand)
     {
         $records = [];
         // Check length of the account number
@@ -72,28 +72,46 @@ class ModelDatabaseTableAccount extends ModelDatabaseTableBase {
         if ($result[0] and count($result[1]) == 1)
         {
             $max = intval($result[1][0]["max_length"]);
-            // Create filters
-            $query = "";
-            // Create lowest filter
-            $filter = str_replace("0", "", $expandTo) . "_";
-            $count = $max - strlen($filter);
-            if ($count > 0)
+            // Default query
+            $query = "number LIKE '_" . str_repeat("0", $max - 1) . "'";
+            if ($expand != "")
             {
-                $filter .= str_repeat("0", $count);
-            }
-            $query = "number LIKE '{$filter}'";
-            // Create filters for one up until top is reached
-            $pos = strpos($filter, "_");
-            while ($pos > 0)
-            {
-                $filter = substr($filter, 0, $pos - 1) . "_";
-                $count = $max - strlen($filter);
-                if ($count > 0)
+                // Expand determines the filters
+                //   Expand | filters
+                //  --------+------------------
+                //   x000   | x0%, x_00
+                //   xy00   | xy0%, xy_0, x_00,
+                //   xyz0   | xyz_, xy_0, x_00
+
+                // Find position of ending zeros
+                // 1000 -> 1
+                // 0100 -> 2
+                // 1010 -> 3
+                $zeros = "0";
+                $pos = 0;
+                while (strlen($zeros) < $max)
                 {
-                    $filter .= str_repeat("0", $count);
+                    if (str_ends_with($expand, $zeros))
+                    {
+                        $pos = strlen($expand) - strlen($zeros);
+                    }
+                    $zeros .= "0";
                 }
-                $query .= " or number LIKE '{$filter}'";
-                $pos = strpos($filter, "_");
+                if ($pos > 0)
+                {
+                    if ($pos < $max - 1)
+                    {
+                        $filter = substr($expand, 0, $pos + 1) . "%";
+                        $query .= " OR number LIKE '{$filter}'";
+                    }
+                    while ($pos > 0)
+                    {
+                        $filter = substr($expand, 0, $pos) . "_";
+                        $filter .= str_repeat("0", $max - $pos - 1);
+                        $query .= " OR number LIKE '{$filter}'";
+                        $pos--;
+                    }
+                }
             }
             $records = $this->getRecords($query, "number");
             for ($i = 0; $i < count($records); $i++)

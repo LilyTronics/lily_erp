@@ -1,18 +1,18 @@
 // Demo data for the account table
 number  name                    debit_credit    category
 
-1000    Assets                  D               Assets
+1000    Assets                  D               assets
 
-2000    Liabilities             C               Liabilities
+2000    Liabilities             C               liabilities
 
-3000    Equity                  C               Equity
+3000    Equity                  C               equity
 
-4000    Revenues                C               Income
+4000    Revenues                C               income
 
-5000    Cost of goods sold      D               Expenses
+5000    Cost of goods sold      D               expenses
 
-6000    Expenses                D               Expenses
+6000    Expenses                D               expenses
 
-7000    Non-operating income    C               Income
+7000    Non-operating income    C               income
 
-8000    Non-operating expenses  D               Expenses
+8000    Non-operating expenses  D               expenses

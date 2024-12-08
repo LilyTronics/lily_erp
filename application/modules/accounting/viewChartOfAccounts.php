@@ -1,5 +1,5 @@
 <div class="{CONTAINER}">
-<a class="{BUTTON}" href="{WEB_ROOT}accounting/chart-of-accounts/account/0" {LNK_SHOW_LOADER}>New account</a>
+<h4>Overview</h4>
 </div>
 <div class="{CONTAINER}">
 <?php
@@ -12,17 +12,18 @@ if (count($accounts) > 0)
 {
     $nDigits = strlen($accounts[0]["number"]);
     $nCols = count($keys);
-    echo "<table class=\"table-bordered\">\n";
+    echo "<div class=\"table-responsive\">\n";
+    echo "<table class=\"table table-hover border\">\n";
     echo "<thead><tr>\n";
     foreach ($keys as $key)
     {
         $label = ModelRecord::formatFieldName($key, true);
-        echo "<th class=\"theme-bg-light";
+        echo "<th";
         if ($key == "name")
         {
-            echo " w-50";
+            echo " class=\"w-50\"";
         }
-        echo "\" style=\"white-space:nowrap\">{$label}</th>\n";
+        echo " style=\"white-space:nowrap\">{$label}</th>\n";
     }
     echo "</tr></thead>\n";
     echo "<tbody>\n";
@@ -30,8 +31,7 @@ if (count($accounts) > 0)
     $totalCredit = 0;
     foreach ($accounts as $record)
     {
-        $numberLink = ModelHelper::createLinkTo("accounting/chart-of-accounts/expand/{$record["number"]}");
-        $nameLink = ModelHelper::createLinkTo("accounting/chart-of-accounts/account/{$record["id"]}");
+        $accountLink = ModelHelper::createLinkTo("accounting/chart-of-accounts/expand/{$record["number"]}");
         $amountLink = ModelHelper::createLinkTo("accounting/journal/account/{$record["number"]}");
         $level = $nDigits - 1;
         $zeros = "0";
@@ -47,14 +47,8 @@ if (count($accounts) > 0)
         if ($level == 0)
         {
             echo "<tr><td colspan=\"{$nCols}\"></td></tr>\n";
-            $stripe = 0;
         }
-        echo "<tr";
-        if ($stripe % 2 == 0)
-        {
-            echo " class=\"theme-stripe\"";
-        }
-        echo ">\n";
+        echo "<tr>\n";
         foreach ($keys as $key)
         {
             $link = "";
@@ -66,13 +60,14 @@ if (count($accounts) > 0)
                 {
                     $value = str_repeat("&nbsp;", $level * 3) . $value;
                 }
-                $link = $numberLink;
-                $title = "expand category";
             }
-            if ($key == "name")
+            if ($key == "number" or $key == "name")
             {
-                $link = $nameLink;
-                $title = "edit account";
+                if (str_ends_with($record["number"], "0"))
+                {
+                    $link = $accountLink;
+                    $title = "expand category";
+                }
             }
             if ($key == "debit" or $key == "credit")
             {
@@ -93,7 +88,6 @@ if (count($accounts) > 0)
             $totalCredit += $record["credit"];
         }
         echo "</tr>\n";
-        $stripe++;
     }
     // Add total
     echo "<tr><td colspan=\"{$nCols}\"></td></tr>\n";
@@ -102,6 +96,7 @@ if (count($accounts) > 0)
     $totalCredit = ModelRecord::formatValue("credit", $totalCredit);
     echo "<tr><td colspan=\"{$nCols}\">Total</td><td>{$totalDebit}</td><td>{$totalCredit}</td></tr>\n";
     echo "</table>\n";
+    echo "</div> <!-- responsive -->\n";
 }
 else
 {
@@ -110,3 +105,7 @@ else
 
 ?>
 </div>
+<div class="{CONTAINER} border-top">
+<h4>Accounts</h4>
+</div>
+<?php echo $this->getContentFromPageFile("database/viewRecordsTable.php", APP_MODULES_PATH); ?>
