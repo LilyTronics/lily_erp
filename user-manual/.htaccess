@@ -1,0 +1,3 @@
+# Prevent loading files in a browser.
+RedirectMatch 403 /\.buildinfo
+RedirectMatch 403 /objects.inv
