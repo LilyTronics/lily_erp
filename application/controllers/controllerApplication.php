@@ -19,7 +19,11 @@ class ControllerApplication extends ControllerBase
         DEBUG_LOG->writeDataArray($parameters);
 
         $isConfigurationOk = ModelSetup::checkConfiguration();
-        $isSessionValid = ModelApplicationSession::checkSession();
+        $isSessionValid = false;
+        if ($isConfigurationOk)
+        {
+            $isSessionValid = ModelApplicationSession::checkSession();
+        }
         DEBUG_LOG->writeMessage("Configuration OK: " . var_export($isConfigurationOk, true));
         DEBUG_LOG->writeMessage("Valid session   : " . var_export($isSessionValid, true));
 
@@ -123,7 +127,11 @@ class ControllerApplication extends ControllerBase
             $pageData["record"] = $recordData;
         }
 
-        $pageData["is_logged_in"] = ModelApplicationSession::checkSession();
+        $pageData["is_logged_in"] = false;
+        if (ModelSetup::checkConfiguration())
+        {
+            $pageData["is_logged_in"] = ModelApplicationSession::checkSession();
+        }
 
         DEBUG_LOG->writeMessage("Generate theme");
         ModelColorTheme::generateTheme();
