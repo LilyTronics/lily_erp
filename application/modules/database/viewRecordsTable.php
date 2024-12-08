@@ -2,13 +2,16 @@
 // From the view call:
 // echo $this->getContentFromPageFile("database/viewRecordsTable.php", APP_MODULES_PATH);
 
+// Mandatory
+$inputs = $this->getData("inputs", []);
+$records = $this->getData("records", []);
 $recordUri = $this->getData("record_uri", "");
+
+// Optional
 $itemName = $this->getData("item_name", "");
-$inputs = $this->getData("inputs", "");
 $table = $this->getData("table", "");
 $onSuccessUri = $this->getData("on_success_uri", "");
 $onFailureUri = $this->getData("on_failure_uri", "");
-$records = $this->getData("records", []);
 $newRecord = $this->getData("record", []);
 $result = $this->getData("result", true);
 

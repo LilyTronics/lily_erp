@@ -18,8 +18,10 @@ class ControllerAccounting extends ControllerApplication
         $table = new ModelDatabaseTableBankTransaction();
         $pageData = [
             "sub_title"  => "Bank transactions",
+            "inputs"     => $table->inputs,
             "records"    => $table->getRecords(),
             "record_uri" => "accounting/bank/transaction/"
+
         ];
         return $this->showView("Bank", $pageData);
     }
