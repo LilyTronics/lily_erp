@@ -62,7 +62,10 @@ if (count($accounts) > 0)
             $value = ModelRecord::formatValue($key, $record[$key]);
             if ($key == "number")
             {
-                $value = str_repeat("&nbsp;", $level * 3) . $value;
+                if ($level > 0)
+                {
+                    $value = str_repeat("&nbsp;", $level * 3) . $value;
+                }
                 $link = $numberLink;
                 $title = "expand category";
             }

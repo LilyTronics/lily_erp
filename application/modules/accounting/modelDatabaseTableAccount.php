@@ -76,14 +76,22 @@ class ModelDatabaseTableAccount extends ModelDatabaseTableBase {
             $query = "";
             // Create lowest filter
             $filter = str_replace("0", "", $expandTo) . "_";
-            $filter .= str_repeat("0", $max - strlen($filter));
+            $count = $max - strlen($filter);
+            if ($count > 0)
+            {
+                $filter .= str_repeat("0", $count);
+            }
             $query = "number LIKE '{$filter}'";
             // Create filters for one up until top is reached
             $pos = strpos($filter, "_");
             while ($pos > 0)
             {
                 $filter = substr($filter, 0, $pos - 1) . "_";
-                $filter .= str_repeat("0", $max - strlen($filter));
+                $count = $max - strlen($filter);
+                if ($count > 0)
+                {
+                    $filter .= str_repeat("0", $count);
+                }
                 $query .= " or number LIKE '{$filter}'";
                 $pos = strpos($filter, "_");
             }
