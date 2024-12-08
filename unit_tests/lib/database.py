@@ -45,9 +45,9 @@ class Database:
 
     @classmethod
     def create_default_user(cls):
-        query = "INSERT INTO user (email, name, password, is_admin) VALUES (%s, %s, %s, %s)"
+        query = "INSERT INTO user (email, name, password, is_active, is_admin) VALUES (%s, %s, %s, %s, %s)"
         val = (TestSettings.admin_email, TestSettings.admin_name,
-               hashlib.sha256(TestSettings.admin_password.encode()).hexdigest(), 1)
+               hashlib.sha256(TestSettings.admin_password.encode()).hexdigest(), 1, 1)
         cls._execute_query(query, val)
         cls._connection.commit()
 
