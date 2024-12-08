@@ -7,13 +7,16 @@ $inputs = $this->getData("inputs", []);
 $records = $this->getData("records", []);
 $recordUri = $this->getData("record_uri", "");
 
-// Optional
+// Optional, for adding new records from the table
 $itemName = $this->getData("item_name", "");
 $table = $this->getData("table", "");
 $onSuccessUri = $this->getData("on_success_uri", "");
 $onFailureUri = $this->getData("on_failure_uri", "");
+
+// Automatically set by application
 $newRecord = $this->getData("record", []);
 $result = $this->getData("result", true);
+
 
 $hasInputs = false;
 foreach ($inputs as $input)

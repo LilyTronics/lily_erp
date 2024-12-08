@@ -6,12 +6,16 @@
 // Mandatory
 $record = $this->getData("record", []);
 
-// Optional
-$onSuccessUri = $this->getData("on_success_uri", "");
-$onFailureUri = $this->getData("on_failure_uri", "");
-$onDeleteUri = $this->getData("on_delete_uri", "");
-$inputs = $this->getData("inputs", []);
+// For edit and delete
 $table = $this->getData("table", "");
+$onFailureUri = $this->getData("on_failure_uri", "");
+
+// For editing
+$inputs = $this->getData("inputs", []);
+$onSuccessUri = $this->getData("on_success_uri", "");
+
+// For delete
+$onDeleteUri = $this->getData("on_delete_uri", "");
 
 
 $hasInputs = false;
