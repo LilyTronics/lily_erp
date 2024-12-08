@@ -31,10 +31,14 @@ class ControllerAccounting extends ControllerApplication
         $id = (isset($parameters["id"]) ? $parameters["id"] : 0);
         $table = new ModelDatabaseTableBankTransaction();
         $pageData = [
-            "sub_title" => "Bank transaction [{$id}]",
-            "record"    => $table->getRecordById($id),
-            "table"     => $table->tableName
+            "sub_title"      => "Bank transaction [{$id}]",
+            "record"         => $table->getRecordById($id),
+            "table"          => $table->tableName,
+            "inputs"         => $table->inputs,
+            "on_delete_uri"  => "accounting/bank",
+            "on_failure_uri" => "accounting/bank/transaction/{$id}"
         ];
+
         return $this->showView("BankTransaction", $pageData);
     }
 

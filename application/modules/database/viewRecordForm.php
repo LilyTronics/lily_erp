@@ -3,12 +3,16 @@
 // From the view call:
 // echo $this->getContentFromPageFile("database/viewRecordForm.php", APP_MODULES_PATH);
 
+// Mandatory
 $record = $this->getData("record", []);
+
+// Optional
 $onSuccessUri = $this->getData("on_success_uri", "");
 $onFailureUri = $this->getData("on_failure_uri", "");
 $onDeleteUri = $this->getData("on_delete_uri", "");
 $inputs = $this->getData("inputs", []);
 $table = $this->getData("table", "");
+
 
 $hasInputs = false;
 foreach ($inputs as $input)
