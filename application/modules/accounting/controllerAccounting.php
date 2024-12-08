@@ -34,11 +34,9 @@ class ControllerAccounting extends ControllerApplication
             "sub_title"      => "Bank transaction [{$id}]",
             "record"         => $table->getRecordById($id),
             "table"          => $table->tableName,
-            "inputs"         => $table->inputs,
             "on_delete_uri"  => "accounting/bank",
             "on_failure_uri" => "accounting/bank/transaction/{$id}"
         ];
-
         return $this->showView("BankTransaction", $pageData);
     }
 
@@ -49,8 +47,13 @@ class ControllerAccounting extends ControllerApplication
         $table = new ModelDatabaseTableJournal();
         $pageData = [
             "sub_title" => "Journal",
+            "inputs"    => $table->inputs,
             "records" => $table->getRecords(),
-            "item_name" => "entry"
+            "record_uri" => "accounting/journal/enty/",
+            "item_name" => "entry",
+            "table" => $table->tableName,
+            "on_success_uri" => REQUEST_URI,
+            "on_failure_uri" => REQUEST_URI
         ];
         return $this->showView("Journal", $pageData);
     }
