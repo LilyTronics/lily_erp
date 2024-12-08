@@ -91,7 +91,7 @@ class ModelSetup
             "id"        => 0,
             "email"     => $data["admin_email"],
             "name"      => $data["admin_name"],
-            "password"  => $user->hash($data["admin_password"]),
+            "password"  => $data["admin_password"],
             "is_active" => 1,
             "is_admin"  => 1
         ];
