@@ -3,7 +3,7 @@
 /* Font must be defined in HTML tag because of the use of rem units */
 html                    {font-family: noto-sans; font-size: 14px; font-weight: 360}
 table                   {margin-bottom: 16px}
-td, th                  {padding: 4px 8px}
+td, th                  {padding: 4px 8px; vertical-align: middle}
 th                      {border-bottom-width: 2px !important}
 
 /* Make links in table cells cover the whole cell */
