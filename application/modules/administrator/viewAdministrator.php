@@ -19,16 +19,15 @@ data unusable. Only change something if you know what you are doing.</p>
 </div>
 <div class="{CONTAINER} border-top">
 <h4>General settings</h4>
-<form>
 <table class="table table-borderless">
 <tr><td>Database version</td><td><?php echo getSetting($settings, "database_version"); ?></td>
 <td>The database version cannot be changed.</td></tr>
-<tr><td>Landing page</td><td><select class="{INPUT}">
+<tr><td>Landing page</td><td><select name="database_setting" id="landing_page" class="{INPUT}">
 <option <?php echo (getSetting($settings, "landing_page") == "dashboard" ? "selected" : ""); ?>>dashboard</option>
 </select></td>
 <td>The default landing page when navigating to the root of the web site.</td></tr>
 </table>
-</form>
+<p><button type="button" class="{BUTTON}" onclick="storeSettings()">Store settings</button></p>
 </div>
 <div class="{CONTAINER} border-top">
 <h4>Color theme</h4>
@@ -90,11 +89,10 @@ function onColorChange(event)
 
 function getColorTheme(color)
 {
-    let data = {
-        "action": "get_color_theme",
-        "color" : color
-    };
-    apiPost(data, applyColorToExample, 'Get color theme');
+    let data = {};
+    data.action = "get_color_theme";
+    data.color =  color;
+    apiPost(data, 'Get color theme', applyColorToExample);
 }
 
 function applyColorToExample(response)
@@ -135,6 +133,22 @@ function applyColorToExample(response)
         document.getElementById('record-color').value = response.theme_bg;
     }
 }
+
+function storeSettings()
+{
+    let elms = document.getElementsByName('database_setting');
+    for (let elm of elms)
+    {
+        let data = {};
+        data.action = "update_setting";
+        data.record = {}
+        data.record.id = 0;
+        data.record.setting_name = elm.id;
+        data.record.setting_value = elm.value;
+        apiPost(data, 'Store setting');
+    }
+}
+
 
 let elm = document.getElementById('color-picker');
 elm.addEventListener('change', onColorChange, false);

@@ -3,8 +3,11 @@
 'use strict';
 
 
-function apiPost(data, callback, dialog_title)
+function apiPost(data, dialog_title, callback)
 {
+    let loader = new bootstrap.Modal('#modal-loader')
+    loader.show();
+
     let request = new Request(WEB_ROOT + 'api', {
         method: 'POST',
         body: JSON.stringify(data),
@@ -25,9 +28,13 @@ function apiPost(data, callback, dialog_title)
             {
                 throw new Error(response.message);
             }
-            callback(response);
+            if (callback)
+            {
+                callback(response);
+            }
         })
         .catch ((error) => {
+
             if (showMessage)
             {
                 showMessage(dialog_title, escapeHtml(error.message));
@@ -36,6 +43,9 @@ function apiPost(data, callback, dialog_title)
             {
                 console.log(error);
             }
+        })
+        .then(() => {
+            loader.hide();
         });
 }
 
