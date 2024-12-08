@@ -46,16 +46,32 @@ class ControllerAccounting extends ControllerApplication
     {
         $table = new ModelDatabaseTableJournal();
         $pageData = [
-            "sub_title" => "Journal",
-            "inputs"    => $table->inputs,
-            "records" => $table->getRecords(),
-            "record_uri" => "accounting/journal/enty/",
-            "item_name" => "entry",
-            "table" => $table->tableName,
+            "sub_title"      => "Journal",
+            "inputs"         => $table->inputs,
+            "records"        => $table->getRecords(),
+            "record_uri"     => "accounting/journal/enty/",
+            "item_name"      => "entry",
+            "table"          => $table->tableName,
             "on_success_uri" => REQUEST_URI,
             "on_failure_uri" => REQUEST_URI
         ];
         return $this->showView("Journal", $pageData);
+    }
+
+    protected function showJournalEntry($parameters)
+    {
+        $id = (isset($parameters["id"]) ? $parameters["id"] : 0);
+        $table = new ModelDatabaseTableJournal();
+        $pageData = [
+            "sub_title"      => "Journal entry [{$id}]",
+            "record"         => $table->getRecordById($id),
+            "table"          => $table->tableName,
+            "inputs"         => $table->inputs,
+            "on_delete_uri"  => "accounting/journal",
+            "on_success_uri" => "accounting/journal/entry/{$id}",
+            "on_failure_uri" => "accounting/journal/entry/{$id}"
+        ];
+        return $this->showView("JournalEntry", $pageData);
     }
 
     /* Chart of accounts */
@@ -75,27 +91,14 @@ class ControllerAccounting extends ControllerApplication
     {
         $id = (isset($parameters["id"]) ? $parameters["id"] : 0);
         $table = new ModelDatabaseTableAccount();
-        $failUri = "accounting/chart-of-accounts/account/{$id}";
-        if ($id > 0)
-        {
-            $record = $table->getRecordById($id);
-            $successUri = "accounting/chart-of-accounts/account/{$id}";
-            $deleteUri = "accounting/chart-of-accounts";
-        }
-        else
-        {
-            $record = $table->generateNewRecord();
-            $successUri = "accounting/chart-of-accounts";
-            $deleteUri = "";
-        }
         $pageData = [
-            "sub_title"      => "Account [{$id}]",
-            "record"         => $record,
-            "inputs"         => $table->inputs,
+            "sub_title"      => "Journal entry [{$id}]",
+            "record"         => $table->getRecordById($id),
             "table"          => $table->tableName,
-            "on_success_uri" => $successUri,
-            "on_failure_uri" => $failUri,
-            "on_delete_uri"  => $deleteUri
+            "inputs"         => $table->inputs,
+            "on_delete_uri"  => "accounting/chart-of-accounts",
+            "on_success_uri" => "accounting/chart-of-accounts/account/{$id}",
+            "on_failure_uri" => "accounting/chart-of-accounts/account/{$id}"
         ];
         return $this->showView("Account", $pageData);
     }
