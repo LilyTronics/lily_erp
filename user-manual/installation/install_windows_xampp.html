@@ -1,0 +1,139 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installation on Windows with XAMPP &mdash; Lily ERP</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Setup and configuration" href="../configuration/setup.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            lily-erp
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="installation.html">Installation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#"> Windows with XAMPP</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-xampp">Install XAMPP</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration/setup.html">Setup</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">lily-erp</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="installation.html">Installation</a></li>
+      <li class="breadcrumb-item active">Installation on Windows with XAMPP</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="installation-on-windows-with-xampp">
+<h1>Installation on Windows with XAMPP<a class="headerlink" href="#installation-on-windows-with-xampp" title="Link to this heading"></a></h1>
+<p>XAMPP is a hassle free web server running MySQL and PHP (and more, but we do not use that).</p>
+<section id="install-xampp">
+<h2>Install XAMPP<a class="headerlink" href="#install-xampp" title="Link to this heading"></a></h2>
+<p>Download XAMPP from: <a class="reference external" href="https://sourceforge.net/projects/xampp/files/">https://sourceforge.net/projects/xampp/files/</a>.</p>
+<p>You can choose for an installer or a portable version. Both should work.
+Download and install XAMPP.</p>
+<p>Make sure the Apache and MySQL services are running.</p>
+<p>Check the Windows Services app and look for the Apache and MySQL services.
+If they are not there, you can install them manually.</p>
+<p>To install the services open a command window as administrator and go to the
+folder where XAMPP is installed.</p>
+<p>To install the Apache service, run: <code class="docutils literal notranslate"><span class="pre">apache/bin/httpd</span> <span class="pre">-k</span> <span class="pre">install</span></code></p>
+<p>To install the MySQL service, run: <code class="docutils literal notranslate"><span class="pre">mysql/bin/mysqld</span> <span class="pre">--install</span></code></p>
+<p>Check the Windows Services app again (you may need to refresh the app).
+Make sure the services are running, if not, start them manually using the Windows Services app.</p>
+<p>If both services are running, check the following web pages.</p>
+<p>Test if the XAMPP web page is available at: <a class="reference external" href="http://localhost">http://localhost</a></p>
+<p>Test if the MySQL database manager is available at: <a class="reference external" href="http://localhost/phpmyadmin">http://localhost/phpmyadmin</a></p>
+<p>If XAMPP is working as expected, remove all files from the web server folder called <code class="docutils literal notranslate"><span class="pre">htdocs</span></code>.</p>
+<p>Copy or clone the files from the lily_erp repository to <code class="docutils literal notranslate"><span class="pre">htdocs</span></code></p>
+<p>Open: <a class="reference external" href="http://localhost">http://localhost</a></p>
+<p>If everything is OK, you should see the setup configuration page.</p>
+<p>If you need to run it on another port, check the Apache manual on how to setup the port.</p>
+<p>If you need to run SSL, check the Apache manual for setting up SSL.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../configuration/setup.html" class="btn btn-neutral float-right" title="Setup and configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, LilyTronics.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

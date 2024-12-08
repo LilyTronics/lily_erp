@@ -33,3 +33,6 @@ goto end
 
 :end
 popd
+
+echo Build done, copy output to the manual folder
+robocopy _build\html ..\user-manual /E

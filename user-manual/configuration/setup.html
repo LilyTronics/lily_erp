@@ -1,0 +1,228 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Setup and configuration &mdash; Lily ERP</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Installation on Windows with XAMPP" href="../installation/install_windows_xampp.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            lily-erp
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setup-the-web-page">Setup the web page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-a-database">Create a database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-the-configuration">Create the configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-file">Configuration file</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">lily-erp</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Setup and configuration</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="setup-and-configuration">
+<h1>Setup and configuration<a class="headerlink" href="#setup-and-configuration" title="Link to this heading"></a></h1>
+<p>The setup and configuration is pretty straightforward.</p>
+<section id="setup-the-web-page">
+<h2>Setup the web page<a class="headerlink" href="#setup-the-web-page" title="Link to this heading"></a></h2>
+<p>The web page is setup by an configuration file. This file is located in <code class="docutils literal notranslate"><span class="pre">application/config.php</span></code>.</p>
+<p>Be carefull when modifying this file, it can break the web pages.</p>
+<p>The contens of the file is shown below:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="cp">&lt;?php</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="nb">date_default_timezone_set</span><span class="p">(</span><span class="s2">&quot;Europe/Amsterdam&quot;</span><span class="p">);</span>
+<span class="linenos">4</span>
+<span class="linenos">5</span><span class="c1">// Define your domain name here to make SSL work properly</span>
+<span class="linenos">6</span><span class="nb">define</span><span class="p">(</span><span class="s2">&quot;DOMAIN&quot;</span><span class="p">,</span> <span class="s2">&quot;lilytronics&quot;</span><span class="p">);</span>
+<span class="linenos">7</span>
+<span class="linenos">8</span><span class="c1">// Config file must be outside the document root so it can never be reached by a web browser</span>
+<span class="linenos">9</span><span class="nb">define</span><span class="p">(</span><span class="s2">&quot;CONFIG_FILE&quot;</span><span class="p">,</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s2">&quot;DOCUMENT_ROOT&quot;</span><span class="p">]</span> <span class="o">.</span> <span class="s2">&quot;/../lily_erp.ini&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>On line 3 the time zone is set, you can change this to one of the values from this page:
+<a class="reference external" href="https://www.php.net/manual/en/timezones.php">https://www.php.net/manual/en/timezones.php</a></p>
+<p>For example the value for America, New York is: <code class="docutils literal notranslate"><span class="pre">America/New_York</span></code>.</p>
+<p>The time zone determines the representation of the dates and times in the system.</p>
+<p>On line 6 the domain name is defined. This is required to make sure the application is served from the correct server.
+This is part of the force SSL feature. If the domain is not setup properly, forcing SSL is not working.</p>
+<p>On line 9 is the location to the configuration file defined.
+The default value is <code class="docutils literal notranslate"><span class="pre">$_SERVER[&quot;DOCUMENT_ROOT&quot;]</span> <span class="pre">.</span> <span class="pre">&quot;/../lily_erp.ini</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">$_SERVER[&quot;DOCUMENT_ROOT&quot;]</span></code> represents the folder where the web pages are hosted from.
+The other part is the actual file name. In this case we go one folder up (<code class="docutils literal notranslate"><span class="pre">/../</span></code>) and the
+name of the file is <code class="docutils literal notranslate"><span class="pre">lily_erp.ini</span></code>.
+In this case the configuration file is one level outside of the web server folder.
+This is important to make sure that this file cannot be accessed from the outside world using a HTTP request.</p>
+<p>To change the location to an absolute path:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">define(&quot;CONFIG_FILE&quot;, &quot;C:/path/to/config_file.ini&quot;);</span>
+</pre></div>
+</div>
+<p>Because this file is automatically created by the application, the web server must have write access
+to this location.</p>
+<p>The web site is setup properly. The next step is create a database.</p>
+</section>
+<section id="create-a-database">
+<h2>Create a database<a class="headerlink" href="#create-a-database" title="Link to this heading"></a></h2>
+<p>Usually a database can only be created from the server itself. You need to log in to the server
+and browse to <a class="reference external" href="http://localhost/phpmyadmin">http://localhost/phpmyadmin</a>. This is the management application for MySQL.
+When logged in to the management application, create a new database. You can create as many as you
+want, but the one being used is set in the configuration file.</p>
+<p>At the left you find a link called ‘New’. Click this link to create a new database.
+Under ‘Create database’ you can type the name of the database. You can choose any name you like,
+but we advice you to use some logic name. You also need to choose a collation.
+This is done with the drop down box next to the name.
+From the application point of view there is no specific collation required.
+For more information about collations you can check the MySQL manual.
+A generic collation that works in most cases is: <code class="docutils literal notranslate"><span class="pre">utfmb4_general_ci</span></code>.
+It is adviced to use a <code class="docutils literal notranslate"><span class="pre">_ci</span></code> collation (case-insensitive).
+This makes searching in records case insensitive and therefor easier.</p>
+<p>Click the ‘Create’ button to create a database.</p>
+<p>Once the database is created it should appear on the left in the list with databases.
+If not, refresh the page.</p>
+<p>Next is to setup a user for the database. This is a user that the application uses to access the database.
+This is not a user that has access to the ERP application. Those users are setup later.</p>
+<p>Select the database. At the top bar click ‘Privileges’. Click ‘Add user account’ below the table of users.</p>
+<p>For the user name, use the text field and type a name for the user.
+For the hostname, use local. We do not want this user to have access from outside the server.
+For the password, use the text field or generate a password.
+Make sure to remember the credentials, because you will need them later.</p>
+<p>Under ‘Database for user account’, make sure the checkbox before ‘Grant all privileges on database …’
+is checked (’…’ is the name of your database).</p>
+<p>Do not give this user any global privileges.</p>
+<p>Click the ‘Go’ button to create the user.</p>
+<p>Now all is setup correctly to continue to the final step.</p>
+</section>
+<section id="create-the-configuration">
+<h2>Create the configuration<a class="headerlink" href="#create-the-configuration" title="Link to this heading"></a></h2>
+<p>The configuration is created with the web interface. Open the Lily ERP web page.
+You should see the setup configuration page.</p>
+<img alt="../_images/setup_configuration.png" src="../_images/setup_configuration.png" />
+<p>If you do not see this page, make sure your database is empty and delete any existing configuration files.</p>
+<p>The first part are your database settings:</p>
+<ul class="simple">
+<li><p>Host name: the name of the MySQL server, usually ‘localhost’.</p></li>
+<li><p>Database name: the name of the database you just created.</p></li>
+<li><p>Database user name: the user name of the user you created for the database.</p></li>
+<li><p>Database user password: the password for that user.</p></li>
+<li><p>Repeat database user password: the same password.</p></li>
+</ul>
+<p>The second part is the user for logging in to the Lily ERP application.
+This will be an administrator user.
+This user will also be able to add more users in the application.</p>
+<ul class="simple">
+<li><p>Email address: users are identified by their email address.</p></li>
+<li><p>Name: the name used in various pages to identify the user in a more user friendly way.</p></li>
+<li><p>Password: the password for this user.</p></li>
+<li><p>Repeat password: the same password.</p></li>
+</ul>
+<p>When all is filled out, click the ‘Create configuration’ button.</p>
+<p>If all goes well, two things will happen:</p>
+<ul class="simple">
+<li><p>The configuration file is created at the location of the define in the ‘config.php’ file.</p></li>
+<li><p>A user is added to the database and is able to log in.</p></li>
+</ul>
+<p>The page will reload and the log in page must show.</p>
+</section>
+<section id="configuration-file">
+<h2>Configuration file<a class="headerlink" href="#configuration-file" title="Link to this heading"></a></h2>
+<p>Below is an example of a configuration file.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">[sql]</span>
+<span class="linenos">2</span><span class="go">host=localhost</span>
+<span class="linenos">3</span><span class="go">database=lily_erp_test</span>
+<span class="linenos">4</span><span class="go">user=lily_test</span>
+<span class="linenos">5</span><span class="go">password=&quot;**********&quot;</span>
+</pre></div>
+</div>
+<p>Note that the password is stored as plain text. Anybody with access to this file, can read the password.
+Make sure to take proper security measures to protect this information.</p>
+<p>If you want to change to another database, simply edit this file and reload the web page.
+On every page load this file is read, so updates are available immediately.</p>
+<p>It is also possible to run multiple instaces of the application.
+Just make a copy of the application and use a different configuration file for each instance.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../installation/install_windows_xampp.html" class="btn btn-neutral float-left" title="Installation on Windows with XAMPP" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, LilyTronics.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
