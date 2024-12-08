@@ -34,13 +34,18 @@ if (count($record) <= 1)
 }
 else
 {
+    $action = "update";
+    if ($record["id"] == 0)
+    {
+        $action = "add";
+    }
     echo "<form id=\"record-form\" action=\"" . WEB_ROOT . "api\" method=\"post\" autocomplete=\"off\">\n";
     echo "<input type=\"hidden\" name=\"record[id]\" value=\"{$record["id"]}\" />\n";
     echo "<input type=\"hidden\" name=\"on_success\" value=\"{$onSuccessUri}\" />\n";
     echo "<input type=\"hidden\" name=\"on_failure\" value=\"{$onFailureUri}\" />\n";
     echo "<input type=\"hidden\" name=\"on_delete\" value=\"{$onDeleteUri}\" />\n";
     echo "<input type=\"hidden\" name=\"title\" value=\"Save record\" />\n";
-    echo "<input id=\"form-action\" type=\"hidden\" name=\"action\" value=\"update_{$table}\" />\n";
+    echo "<input id=\"form-action\" type=\"hidden\" name=\"action\" value=\"{$action}_{$table}\" />\n";
     echo "<table class=\"w-100\">\n";
     foreach ($record as $field => $value)
     {
