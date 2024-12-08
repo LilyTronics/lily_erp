@@ -78,7 +78,7 @@ class ModelApplicationSession extends ModelSession
                 $activeUser = null;
             }
         }
-        return $activeUser;
+        return $activeUser != null;
     }
 
 }
