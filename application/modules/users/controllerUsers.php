@@ -7,31 +7,29 @@ class ControllerUsers extends ControllerApplication
     {
         $table = new ModelDatabaseTableUser();
         $pageData = [
-            "sub_title"  => "Users",
-            "records"    => $table->getRecords(),
-            "record_uri" => "users/user/",
-            "item_name"  => "user"
+            "sub_title"      => "Users",
+            "records"        => $table->getRecords(),
+            "record_uri"     => "users/user/",
+            "item_name"      => "user",
+            "inputs"         => $table->inputs,
+            "table"          => $table->tableName,
+            "on_success_uri" => REQUEST_URI,
+            "on_failure_uri" => REQUEST_URI
         ];
         return $this->showView("Users", $pageData);
     }
 
     protected function showUser($parameters)
     {
-        $record = [];
-        $inputs = [];
-        $tableName = "";
         $deleteUri = "users";
-        $id = (isset($parameters["id"]) ? $parameters["id"] : null);
-        if ($id != null)
+        $id = (isset($parameters["id"]) ? $parameters["id"] : 0);
+        $table = new ModelDatabaseTableUser();
+        $inputs = $table->inputs;
+        $record = $table->getRecordById($id);
+        if ($id >0 )
         {
-            $table = new ModelDatabaseTableUser();
-            $record = $table->getRecordById($id);
-            $inputs = $table->inputs;
-            $tableName = $table->tableName;
-            if ($id > 0)
-            {
-                $inputs["password"] = [];
-            }
+            // Disable changing the password
+            $inputs["password"] = [];
             $activeUser = ModelApplicationSession::getData("user");
             if ($id == $activeUser["id"])
             {
@@ -47,8 +45,8 @@ class ControllerUsers extends ControllerApplication
         $pageData = [
             "sub_title"      => "User [{$id}]",
             "record"         => $record,
+            "table"          => $table->tableName,
             "inputs"         => $inputs,
-            "table"          => $tableName,
             "on_success_uri" => "users/user/{$id}",
             "on_failure_uri" => "users/user/{$id}",
             "on_delete_uri"  => $deleteUri
