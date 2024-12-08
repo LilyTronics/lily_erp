@@ -31,8 +31,6 @@ class ModelSetup
         $records = $user->getRecords("is_admin = 1 AND is_active = 1");
         if (count($records) == 0)
         {
-            # Delete table, when we instantiate the users table a table is created
-            $user->deleteTable();
             if (!$silent)
             {
                 DEBUG_LOG->writeMessage("No users in the user table");
@@ -90,16 +88,17 @@ class ModelSetup
         // Add administrator user
         $user = new ModelDatabaseTableUser();
         $record = [
+            "id"        => 0,
             "email"     => $data["admin_email"],
             "name"      => $data["admin_name"],
             "password"  => $user->hash($data["admin_password"]),
             "is_active" => 1,
             "is_admin"  => 1
         ];
-        $result["result"] = $user->insertRecord($record);
+        $result["result"] = $user->addRecord($record, $result);
         if (!$result["result"])
         {
-            $result["message"] = "Could not add the administrator to the database";
+            $result["message"] = "Could not add the administrator to the database.";
         }
         return $result;
     }
