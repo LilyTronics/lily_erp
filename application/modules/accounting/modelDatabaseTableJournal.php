@@ -17,6 +17,8 @@ class ModelDatabaseTableJournal extends ModelDatabaseTableBase {
         $this->inputs["debit"]       = ["type" => "text", "width" => "small"];
         $this->inputs["credit"]      = ["type" => "text", "width" => "small"];
 
+        $this->defaultOrder = "date DESC";
+
         parent::__construct(true);
     }
 
