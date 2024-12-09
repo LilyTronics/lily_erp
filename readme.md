@@ -13,3 +13,12 @@ Have ideas, questions or anything you like to share? Go to our [discussions page
 ## Roadmap
 Planned releases:
 * March 2025: First workable release
+
+## Braches
+All on going development (unstable and untested) is in the *development* branch.
+
+All stable releases (stable and tested) is in the *release* branch.
+
+Production servers must use the *release* branch.
+
+If you ran into a bug, make sure to test it on the *release* branch.
