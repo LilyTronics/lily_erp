@@ -17,7 +17,7 @@ Planned releases:
 ## Braches
 All on going development (unstable and untested) is in the *development* branch.
 
-All stable releases (stable and tested) is in the *release* branch.
+All releases (stable and tested) is in the *release* branch.
 
 Production servers must use the *release* branch.
 
