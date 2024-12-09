@@ -19,7 +19,7 @@ class ModelDatabaseTableAccount extends ModelDatabaseTableBase {
         $this->inputs["category"]     = ["type" => "select", "data" => $this->categories];
 
         $this->defaultOrder = "number";
-        $this->dataListFormat = "{name} ({number})";
+        $this->dataListFields = ["name", "number"];
 
         parent::__construct(true);
     }

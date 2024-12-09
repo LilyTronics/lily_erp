@@ -9,7 +9,7 @@ class ModelDatabaseTableBase extends ModelDatabaseTable
 
     public $defaultOrder = "";
     public $inputs = [];
-    public $dataListFormat = "";
+    public $dataListFields = [];
     protected $returnUri = "";  // TODO: where used?
 
     public function __construct($autoCreateTable=false, $defaultRecords=[])
@@ -110,27 +110,11 @@ class ModelDatabaseTableBase extends ModelDatabaseTable
             return [];
         }
         $list = [];
-        if ($this->dataListFormat != "")
+        if (count($this->dataListFields) == 2)
         {
-            $fields = [];
-            if (preg_match_all("/.*{([\w_]+)}.*{([\w_]+)}.*/i", $this->dataListFormat, $matches))
+            foreach ($records[1] as $record)
             {
-                if (count($matches) > 2)
-                {
-                    $fields = [$matches[1][0], $matches[2][0]];
-                }
-            }
-            if (count($fields) > 0)
-            {
-                foreach ($records[1] as $record)
-                {
-                    $value = $this->dataListFormat;
-                    foreach ($fields as $field)
-                    {
-                        $value = str_replace("{{$field}}", $record[$field], $value);
-                    }
-                    $list[] = $value;
-                }
+                $list[] = "{$record[$this->dataListFields[0]]} ({$record[$this->dataListFields[1]]})";
             }
         }
         return $list;
