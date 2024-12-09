@@ -80,4 +80,16 @@ class ModelDatabaseTableJournal extends ModelDatabaseTableBase {
         return $result;
     }
 
+    public function convertFieldValues($records)
+    {
+        // Convert account ID to representation
+        $account = new ModelDatabaseTableAccount();
+        for ($i = 0; $i < count($records); $i++)
+        {
+            $list = $account->listRecords($records[$i]["account_id"]);
+            $records[$i]["account_id"] = (isset($list[0]) ? $list[0] : $records[$i]["account_id"]);
+        }
+        return $records;
+    }
+
 }

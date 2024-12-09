@@ -97,12 +97,17 @@ class ModelDatabaseTableBase extends ModelDatabaseTable
             DEBUG_LOG->writeMessage($this->getError());
             return [];
         }
+        if (method_exists($this, "convertFieldValues"))
+        {
+            $records[1] = $this->convertFieldValues($records[1]);
+        }
         return $records[1];
     }
 
-    public function listRecords()
+    public function listRecords($id = 0)
     {
-        $records = $this->selectRecords();
+        $filter = ($id > 0 ? "id = $id" : "");
+        $records = $this->selectRecords($filter);
         if (!$records[0])
         {
             DEBUG_LOG->writeMessage("Error getting records for table: {$this->tableName}.");
