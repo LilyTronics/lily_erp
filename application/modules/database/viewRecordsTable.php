@@ -49,7 +49,7 @@ echo "<table class=\"table table-striped table-hover border\">\n";
 echo "<thead><tr>\n";
 foreach (array_keys($inputs) as $key)
 {
-    $label = ModelRecord::formatFieldName($key, true);
+    $label = ModelRecord::formatFieldName($key);
     echo "<th style=\"white-space:nowrap\">{$label}</th>\n";
 }
 echo "<th style=\"width:80px\"></th>\n";

@@ -17,7 +17,7 @@ if (count($accounts) > 0)
     echo "<thead><tr>\n";
     foreach ($keys as $key)
     {
-        $label = ModelRecord::formatFieldName($key, true);
+        $label = ModelRecord::formatFieldName($key);
         echo "<th";
         if ($key == "name")
         {

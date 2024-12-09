@@ -3,7 +3,7 @@
 class ModelRecord
 {
 
-    public static function formatFieldName($field, $ucFirst=false)
+    public static function formatFieldName($field)
     {
         if ($field == "debit_credit")
         {
@@ -11,11 +11,7 @@ class ModelRecord
         }
         else
         {
-            $name = str_replace("_", " ", $field);
-            if ($ucFirst)
-            {
-                $name = ucfirst($name);
-            }
+            $name = ucfirst(str_replace("_", " ", $field));
         }
         return $name;
     }
