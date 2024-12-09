@@ -12,7 +12,7 @@ class ModelDatabaseTableJournal extends ModelDatabaseTableBase {
         $this->fields[] = ["name" => "credit",      "type" => self::TYPE_DECIMAL, "required" => false];
 
         $this->inputs["date"]        = ["type" => "date"];
-        $this->inputs["account_id"]  = ["type" => "text"];
+        $this->inputs["account_id"]  = ["type" => "list", "data" => "account"];
         $this->inputs["description"] = ["type" => "text", "width" => "large"];
         $this->inputs["debit"]       = ["type" => "text", "width" => "small"];
         $this->inputs["credit"]      = ["type" => "text", "width" => "small"];

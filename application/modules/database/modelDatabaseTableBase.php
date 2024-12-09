@@ -9,6 +9,7 @@ class ModelDatabaseTableBase extends ModelDatabaseTable
 
     public $defaultOrder = "";
     public $inputs = [];
+    public $dataListFormat = "";
     protected $returnUri = "";  // TODO: where used?
 
     public function __construct($autoCreateTable=false, $defaultRecords=[])
@@ -97,6 +98,42 @@ class ModelDatabaseTableBase extends ModelDatabaseTable
             return [];
         }
         return $records[1];
+    }
+
+    public function listRecords()
+    {
+        $records = $this->selectRecords();
+        if (!$records[0])
+        {
+            DEBUG_LOG->writeMessage("Error getting records for table: {$this->tableName}.");
+            DEBUG_LOG->writeMessage($this->getError());
+            return [];
+        }
+        $list = [];
+        if ($this->dataListFormat != "")
+        {
+            $fields = [];
+            if (preg_match_all("/.*{([\w_]+)}.*{([\w_]+)}.*/i", $this->dataListFormat, $matches))
+            {
+                if (count($matches) > 2)
+                {
+                    $fields = [$matches[1][0], $matches[2][0]];
+                }
+            }
+            if (count($fields) > 0)
+            {
+                foreach ($records[1] as $record)
+                {
+                    $value = $this->dataListFormat;
+                    foreach ($fields as $field)
+                    {
+                        $value = str_replace("{{$field}}", $record[$field], $value);
+                    }
+                    $list[] = $value;
+                }
+            }
+        }
+        return $list;
     }
 
     public function addRecord($record, $result)

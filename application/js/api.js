@@ -3,10 +3,13 @@
 'use strict';
 
 
-function apiPost(data, dialog_title, callback)
+function apiPost(data, dialog_title, callback, params=null, showLoader=true)
 {
     let loader = new bootstrap.Modal('#modal-loader')
-    loader.show();
+    if (showLoader)
+    {
+        loader.show();
+    }
 
     let request = new Request(WEB_ROOT + 'api', {
         method: 'POST',
@@ -30,7 +33,7 @@ function apiPost(data, dialog_title, callback)
             }
             if (callback)
             {
-                callback(response);
+                callback(response, params);
             }
         })
         .catch ((error) => {
@@ -45,7 +48,10 @@ function apiPost(data, dialog_title, callback)
             }
         })
         .then(() => {
-            loader.hide();
+            if (showLoader)
+            {
+                loader.hide();
+            }
         });
 }
 
@@ -58,4 +64,48 @@ function escapeHtml(input)
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
+}
+
+function populateDataList(listName)
+{
+    let list_id = 'list_' + listName;
+    let elm = document.getElementById(list_id);
+    if (!elm)
+    {
+        // No element found
+        return;
+    }
+    if (elm.options.length > 0)
+    {
+        // List already populated
+        return;
+    }
+    let data = {};
+    data.action = list_id;
+    apiPost(data, 'Get records for ' + listName + ' list', processDataList, list_id, false);
+}
+
+
+function processDataList(response , list_id)
+{
+    let elm = document.getElementById(list_id);
+    if (!elm)
+    {
+        // No element found
+        return;
+    }
+    if (elm.options.length > 0)
+    {
+        // List already populated
+        return;
+    }
+    if (!response.result)
+    {
+        // Bad response
+        return;
+    }
+    if (response.records.length > 0)
+    {
+        response.records.forEach(record => elm.appendChild(new Option('', record)))
+    }
 }

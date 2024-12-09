@@ -77,6 +77,7 @@ class ControllerApi extends ControllerApplication
                 break;
 
             case (str_starts_with($action, "get_")):
+            case (str_starts_with($action, "list_")):
             case (str_starts_with($action, "add_")):
             case (str_starts_with($action, "update_")):
             case (str_starts_with($action, "delete_")):
@@ -118,6 +119,13 @@ class ControllerApi extends ControllerApplication
             case "get":
                 $log->writeMessage("Execute get records");
                 $result["records"] = $table->getRecords();
+                $result["result"] = true;
+                $result["message"] = "";
+                break;
+
+            case "list":
+                $log->writeMessage("Execute list records");
+                $result["records"] = $table->listRecords();
                 $result["result"] = true;
                 $result["message"] = "";
                 break;

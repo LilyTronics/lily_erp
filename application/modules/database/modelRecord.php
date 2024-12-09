@@ -39,13 +39,25 @@ class ModelRecord
         $type = (isset($input["type"]) ? $input["type"] : null);
         $data = (isset($input["data"]) ? $input["data"] : []);
         $width = (isset($input["width"]) ? $input["width"] : "default");
+        $isDataList = $type == "list" and $data != [];
 
         $output = "";
         switch ($type)
         {
             case "text":
             case "password":
-                $output = "<input type=\"{$type}\" class=\"{INPUT} max-width-{$width}\" name=\"record[{$field}]\" value=\"{$value}\" autocomplete=\"new-{$type}\" />";
+            case "list":
+                $output = "<input type=\"{$type}\" class=\"{INPUT} max-width-{$width}\" name=\"record[{$field}]\" ";
+                $output .= "value=\"{$value}\" autocomplete=\"new-{$type}\" ";
+                if ($isDataList)
+                {
+                    $output .= "list=\"list_{$data}\" onfocus=\"populateDataList('$data')\" ";
+                }
+                $output .= "/>";
+                if ($isDataList)
+                {
+                    $output .= "<datalist id=\"list_{$data}\"></datalist>";
+                }
                 break;
 
             case "select":
@@ -64,12 +76,14 @@ class ModelRecord
                 break;
 
             case "date":
-                $output = "<input type=\"{$type}\" class=\"{INPUT} w-auto\" name=\"record[{$field}]\" value=\"{$value}\" />";
+                $output = "<input type=\"{$type}\" class=\"{INPUT} w-auto\" name=\"record[{$field}]\" ";
+                $output .= "value=\"{$value}\" />";
                 break;
 
             default:
                 // Read only, no input box, but same size
-                $output = "<input type=\"text\" class=\"form-control-plaintext\" name=\"record[{$field}]\" value=\"{$value}\" readonly />";
+                $output = "<input type=\"text\" class=\"form-control-plaintext\" name=\"record[{$field}]\" ";
+                $output .= "value=\"{$value}\" readonly />";
         }
         return $output;
     }
