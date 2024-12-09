@@ -7,13 +7,17 @@ class ModelRecord
     {
         if ($field == "debit_credit")
         {
-            $name = "D/C";
+            $field = "D/C";
         }
         else
         {
-            $name = ucfirst(str_replace("_", " ", $field));
+            if (str_ends_with($field, "_id"))
+            {
+                $field = str_replace("_id", "", $field);
+            }
+            $field = ucfirst(str_replace("_", " ", $field));
         }
-        return $name;
+        return $field;
     }
 
     public static function formatValue($field, $value)

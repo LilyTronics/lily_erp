@@ -187,6 +187,35 @@ class ModelDatabaseTableBase extends ModelDatabaseTable
         }
     }
 
+    public function convertIdToFilter($query, $table)
+    {
+        // The query can be the following:
+        // integer representing the ID of a record                  : query = 3
+        // string containing an integer representing record ID      : query = '3'
+        // string containing a text representing fields of a record : query = 'field1 (field2)'
+        $filter = "id = -1";
+        if (is_numeric($query))
+        {
+            // Must be ID
+            $filter = "id = {$query}";
+        }
+        else if (is_string($query))
+        {
+            if (str_contains($query, " ("))
+            {
+                $parts = explode(" (", $query);
+                if (count($parts) == 2)
+                {
+                    $parts[1] = trim($parts[1], ")");
+                    $table->dataListFields;
+                    $filter = "{$table->dataListFields[0]} = '{$parts[0]}' OR ";
+                    $filter .= "{$table->dataListFields[1]} = '{$parts[1]}'";
+                }
+            }
+        }
+        return $filter;
+    }
+
     private function checkRecord(&$record, $result)
     {
         $result = $this->checkRequiredFields($record, $result);
@@ -214,9 +243,17 @@ class ModelDatabaseTableBase extends ModelDatabaseTable
                 $friendlyName = str_replace("_", " ", $fieldName);
                 $fieldType = $field["type"];
                 $fieldValue = (isset($record[$fieldName]) ? $record[$fieldName] : null);
+                // If the fields ends with _id it is a special field that can also
+                // contain an identifier in the form of a string
+                if (str_ends_with($fieldName, "_id") and is_string($fieldValue))
+                {
+                    // Handle as string if it is a string
+                    $friendlyName = str_replace("_id", "", $friendlyName);
+                    $fieldType = "VARCHAR";
+                }
                 switch (true)
                 {
-                    case ($fieldValue === null):
+                    case ($fieldValue === null or $fieldValue == ""):
                         $result["result"] = false;
                         $result["message"] = "The {$friendlyName} can not be empty.";
                         break;
@@ -231,10 +268,10 @@ class ModelDatabaseTableBase extends ModelDatabaseTable
                         break;
 
                     case ($fieldType == "DATE" or str_starts_with($fieldType, "VARCHAR")):
-                        if (!is_string($fieldValue) or $fieldValue == "")
+                        if (!is_string($fieldValue))
                         {
                             $result["result"] = false;
-                            $result["message"] = "The {$friendlyName} can not be empty.";
+                            $result["message"] = "The {$friendlyName} must be text.";
                         }
                         break;
 

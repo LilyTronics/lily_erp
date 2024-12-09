@@ -25,13 +25,18 @@ class ModelDatabaseTableJournal extends ModelDatabaseTableBase {
         $result["result"] = false;
         $result["message"] = "Field value check failed.";
 
+        // The account ID is a special field, can be integer (ID) or a string representing the account
+        // We use a special function to get the proper account
         $account = new ModelDatabaseTableAccount();
-        $accountRecord = $account->getRecordById($record["account_id"]);
-        if (!isset($accountRecord["id"]))
+        $filter = $this->convertIdToFilter($record["account_id"], $account);
+        $accountRecords = $account->getRecords($filter);
+        if (count($accountRecords) != 1)
         {
             $result["message"] = "The account does not exist.";
             return $result;
         }
+        // Record found replace with real ID
+        $record["account_id"] = $accountRecords[0]["id"];
         $debit = (isset($record["debit"]) ? $record["debit"] : "");
         $credit = (isset($record["credit"]) ? $record["credit"] : "");
         if ($debit == "" and $credit == "")
