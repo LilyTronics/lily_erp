@@ -17,11 +17,11 @@ class ControllerAccounting extends ControllerApplication
     {
         $table = new ModelDatabaseTableBankTransaction();
         $pageData = [
-            "sub_title"  => "Bank transactions",
-            "inputs"     => $table->inputs,
-            "records"    => $table->getRecords(),
-            "record_uri" => "accounting/bank/transaction/"
-
+            "sub_title"         => "Bank transactions",
+            "inputs"            => $table->inputs,
+            "records"           => $table->getRecords(),
+            "record_uri"        => "accounting/bank/transaction/",
+            "open_transactions" => $table->getRecords("state = 'open'")
         ];
         return $this->showView("Bank", $pageData);
     }

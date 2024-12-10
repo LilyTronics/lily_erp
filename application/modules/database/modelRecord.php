@@ -34,20 +34,28 @@ class ModelRecord
         return htmlentities($value);
     }
 
-    public static function createInputFor($field, $value, $input)
+    public static function createInputFor($field, $value, $input, $id="")
     {
         $type = (isset($input["type"]) ? $input["type"] : null);
         $data = (isset($input["data"]) ? $input["data"] : []);
         $width = (isset($input["width"]) ? $input["width"] : "default");
         $isDataList = $type == "list" and $data != [];
 
+        if ($id == "")
+        {
+            $id = "name=\"record[{$field}]\"";
+        }
+        else
+        {
+            $id = "id=\"{$id}\"";
+        }
         $output = "";
         switch ($type)
         {
             case "text":
             case "password":
             case "list":
-                $output = "<input type=\"{$type}\" class=\"{INPUT} max-width-{$width}\" name=\"record[{$field}]\" ";
+                $output = "<input type=\"{$type}\" class=\"{INPUT} max-width-{$width}\" {$id} ";
                 $output .= "value=\"{$value}\" autocomplete=\"new-{$type}\" ";
                 if ($isDataList)
                 {
@@ -61,7 +69,7 @@ class ModelRecord
                 break;
 
             case "select":
-                $output = "<select class=\"{INPUT} w-auto\" name=\"record[{$field}]\">\n";
+                $output = "<select class=\"{INPUT} w-auto\" {$id}>\n";
                 $output .= "<option></option>\n";
                 foreach ($data as $dataValue)
                 {
@@ -76,13 +84,13 @@ class ModelRecord
                 break;
 
             case "date":
-                $output = "<input type=\"{$type}\" class=\"{INPUT} w-auto\" name=\"record[{$field}]\" ";
+                $output = "<input type=\"{$type}\" class=\"{INPUT} w-auto\" {$id} ";
                 $output .= "value=\"{$value}\" />";
                 break;
 
             default:
                 // Read only, no input box, but same size
-                $output = "<input type=\"text\" class=\"form-control-plaintext\" name=\"record[{$field}]\" ";
+                $output = "<input type=\"text\" class=\"form-control-plaintext\" {$id} ";
                 $output .= "value=\"{$value}\" readonly />";
         }
         return $output;
