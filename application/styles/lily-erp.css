@@ -20,6 +20,9 @@ td a                    {display: block}
 .max-width-default      {max-width: 400px !important}
 .max-width-large        {max-width: 600px !important}
 
+/* Compact table */
+table.table-compact td  {padding:1px 3px}
+
 /* Uncategorized */
 .cursor-pointer         {cursor: pointer}
 
