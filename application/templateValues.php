@@ -17,6 +17,7 @@ $GLOBALS["TEMPLATE_VALUES"] = [
     "{ICON_CHECK_OK}"       => "<i class=\"fa-solid fa-circle-check text-success\"></i>",
     "{ICON_EXCLAMATION}"    => "<i class=\"fa-solid fa-circle-exclamation text-warning\"></i>",
     "{ICON_INFORMATION}"    => "<i class=\"fa-solid fa-circle-info text-info\"></i>",
+    "{ICON_PLUS}"           => "<i class=\"fa-solid fa-plus\"></i>",
     "{ICON_USER}"           => "<i class=\"fa-solid fa-user\"></i>",
     "{ICON_XMARK}"          => "<i class=\"fa-solid fa-xmark\"></i>",
 
