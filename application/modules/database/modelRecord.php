@@ -34,7 +34,7 @@ class ModelRecord
         return htmlentities($value);
     }
 
-    public static function createInputFor($field, $value, $input, $id="")
+    public static function createInputFor($field, $value, $input, $id="", $inputChange="")
     {
         $type = (isset($input["type"]) ? $input["type"] : null);
         $data = (isset($input["data"]) ? $input["data"] : []);
@@ -49,6 +49,10 @@ class ModelRecord
         {
             $id = "id=\"{$id}\"";
         }
+        if ($inputChange != "")
+        {
+            $inputChange = "oninput=\"{$inputChange}\" ";
+        }
         $output = "";
         switch ($type)
         {
@@ -61,7 +65,7 @@ class ModelRecord
                 {
                     $output .= "list=\"list_{$data}\" onfocus=\"populateDataList('$data')\" ";
                 }
-                $output .= "/>";
+                $output .= "{$inputChange}/>";
                 if ($isDataList)
                 {
                     $output .= "<datalist id=\"list_{$data}\"></datalist>";
@@ -69,7 +73,7 @@ class ModelRecord
                 break;
 
             case "select":
-                $output = "<select class=\"{INPUT} w-auto\" {$id}>\n";
+                $output = "<select class=\"{INPUT} w-auto\" {$id} {$inputChange}>\n";
                 $output .= "<option></option>\n";
                 foreach ($data as $dataValue)
                 {
@@ -85,7 +89,12 @@ class ModelRecord
 
             case "date":
                 $output = "<input type=\"{$type}\" class=\"{INPUT} w-auto\" {$id} ";
-                $output .= "value=\"{$value}\" />";
+                $output .= "value=\"{$value}\" {$inputChange}/>";
+                break;
+
+            case "readonly":
+                $output = "<input type=\"text\" class=\"{INPUT} max-width-{$width}\" {$id} ";
+                $output .= "value=\"{$value}\" autocomplete=\"new-{$type}\" readonly />";
                 break;
 
             default:

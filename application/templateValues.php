@@ -6,8 +6,10 @@ $GLOBALS["TEMPLATE_VALUES"] = [
     // Style classes
     "{CONTAINER}"           => "container-fluid p-3",
     "{BUTTON}"              => "btn px-3 py-1 theme-btn",
+    "{BUTTON_LIGHT}"        => "btn px-3 py-1 btn-light",
     "{BUTTON_RED}"          => "btn px-3 py-1 btn-danger",
     "{BUTTON_SMALL}"        => "btn px-2 py-1 theme-btn",
+    "{BUTTON_SMALL_LIGHT}"  => "btn px-2 py-1 btn-light",
     "{INPUT}"               => "form-control",
     "{BTN_SHOW_LOADER}"     => "data-bs-toggle=\"modal\" data-bs-target=\"#modal-loader\"",
     "{LNK_SHOW_LOADER}"     => "onclick=\"showLoader()\"",
