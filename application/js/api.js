@@ -5,10 +5,10 @@
 
 function apiPost(data, dialog_title, callback, params=null, showLoader=true)
 {
-    let loader = new bootstrap.Modal('#modal-loader')
+    let loader = null;
     if (showLoader)
     {
-        loader.show();
+        loader = showModalLoader();
     }
 
     let request = new Request(WEB_ROOT + 'api', {
@@ -48,7 +48,7 @@ function apiPost(data, dialog_title, callback, params=null, showLoader=true)
             }
         })
         .then(() => {
-            if (showLoader)
+            if (loader)
             {
                 loader.hide();
             }

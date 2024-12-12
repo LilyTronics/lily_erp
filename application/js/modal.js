@@ -3,9 +3,11 @@
 'use strict';
 
 
-function showLoader()
+function showModalLoader()
 {
-    new bootstrap.Modal('#modal-loader').show();
+    let loader = new bootstrap.Modal('#modal-loader');
+    loader.show();
+    return loader;
 }
 
 function showMessage(title, message)
