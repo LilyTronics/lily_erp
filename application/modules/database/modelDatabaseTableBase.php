@@ -134,8 +134,6 @@ class ModelDatabaseTableBase extends ModelDatabaseTable
             {
                 unset($record["id"]);
             }
-            DEBUG_LOG->writeMessage("Insert record");
-            DEBUG_LOG->writeDataArray($record);
             $result["message"] = "";
             $result["result"] = $this->insertRecord($record);
             if (!$result["result"])
