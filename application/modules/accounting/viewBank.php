@@ -19,9 +19,9 @@ if (count($records) > 0)
         echo "<li id=\"li-{$record["id"]}\" name=\"li-open\" class=\"list-group-item border my-1 cursor-pointer\" ";
         echo "onclick=\"showBookingForm({$record["id"]})\">\n";
         echo "<div class=\"d-flex\">\n";
-        echo "<div class=\"flex-shrink-0 me-2\">{$record["date"]}</div>\n";
-        echo "<div class=\"flex-fill mx-2\">{$record["description"]}</div>\n";
-        echo "<div class=\"flex-shrink-0 ms-2\">{$amount}</div>";
+        echo "<div class=\"flex-shrink-0 me-2\"><span id=\"date-{$record["id"]}\">{$record["date"]}</span></div>\n";
+        echo "<div class=\"flex-fill mx-2\"><span id=\"description-{$record["id"]}\">{$record["description"]}</span></div>\n";
+        echo "<div class=\"flex-shrink-0 ms-2\"><span id=\"amount-{$record["id"]}\">{$amount}</span></div>";
         echo "</div>\n";
         echo "<div class=\"small\">\n";
         echo "<table class=\"table-compact small m-1\">\n";
@@ -65,7 +65,7 @@ for ($i = 0; $i < 2; $i++)
             $inputChange = "calculateTotals()";
         }
         echo "<td>";
-        echo ModelRecord::createInputFor($key, "", $inputs[$key], "r{$i}-$key", $inputChange);
+        echo ModelRecord::createInputFor($key, "", $inputs[$key], "line{$i}-$key", $inputChange);
         echo "</td>\n";
     }
     echo "<td></td>\n";
@@ -83,6 +83,7 @@ echo "</td>\n";
 <td><button class="{BUTTON_SMALL_LIGHT}" title="add row" type="button" onclick='addRow()'>{ICON_PLUS}</button></td>
 </tr>
 </table>
+<input type="hidden" id="record-id" value="" />
 <p><button class="{BUTTON} mx-2" type="button" onclick="confirmBooking()">Confirm</button>
 <button class="{BUTTON_LIGHT}" type="button" onclick="cancelBooking()">Cancel</button></p>
 </div>
@@ -138,7 +139,40 @@ function cancelBooking()
 
 function confirmBooking()
 {
+    let table_data = {};
+    for (let elm of document.getElementById('booking-form').getElementsByTagName('input'))
+    {
+        if (elm.id.startsWith('line'))
+        {
+            let parts = elm.id.split('-');
+            if (parts.length == 2)
+            {
+                if (!table_data[parts[0]])
+                {
+                    table_data[parts[0]] = {};
+                }
+                table_data[parts[0]][parts[1]] = elm.value;
+            }
+        }
+    }
+    let data = {}
+    data.action = 'reconsile_bank_transaction';
+    data.record = {}
+    data.record.id = document.getElementById('record-id').value;
+    data.record.lines = [];
+    for (const booking in table_data)
+    {
+        data.record.lines.push(table_data[booking]);
+    }
+    apiPost(data, 'Reconsile', processResponse);
+}
 
+function processResponse(response)
+{
+    if (response.result)
+    {
+        window.location.reload();
+    }
 }
 
 function showForm()
@@ -147,6 +181,11 @@ function showForm()
     let elm = document.getElementById('li-' + transfer.clicked_id);
     elm.classList.add('theme-border-light');
     document.getElementById('booking-form').style.display = 'block';
+    document.getElementById('record-id').value = transfer.clicked_id;
+    let details = document.getElementById('date-' + transfer.clicked_id).textContent + ' - ';
+    details += document.getElementById('description-' + transfer.clicked_id).textContent + ' : ';
+    details += document.getElementById('amount-' + transfer.clicked_id).textContent;
+    document.getElementById('booking-details').textContent = details;
 }
 
 function hideBookingForm()
@@ -167,7 +206,7 @@ function hasData()
 {
     for (let elm of document.getElementById('booking-form').getElementsByTagName('input'))
     {
-        if (elm.value != '')
+        if (elm.id.startsWith('line') && elm.value != '')
         {
             return true;
         }
@@ -192,7 +231,7 @@ function addRow()
     for (let elm of cloned_row.getElementsByTagName('input'))
     {
         let old_id = elm.id.split('-')[0]
-        let new_id = 'r' + (parseInt(old_id.replace('r', '')) + 1);
+        let new_id = 'line' + (parseInt(old_id.replace('line', '')) + 1);
         elm.id = elm.id.replace(old_id, new_id);
         elm.value = '';
     }
@@ -225,7 +264,7 @@ function calculateTotals()
     let totalCredit = 0;
     for (let elm of document.getElementById('booking-form').getElementsByTagName('input'))
     {
-        if (elm.id.startsWith('r'))
+        if (elm.id.startsWith('line'))
         {
             if (elm.value != '' && !isNaN(elm.value))
             {
