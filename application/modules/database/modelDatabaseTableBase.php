@@ -10,7 +10,7 @@ class ModelDatabaseTableBase extends ModelDatabaseTable
     public $defaultOrder = "";
     public $inputs = [];
     public $dataListFields = [];
-    protected $returnUri = "";  // TODO: where used?
+
 
     public function __construct($autoCreateTable=false, $defaultRecords=[])
     {
