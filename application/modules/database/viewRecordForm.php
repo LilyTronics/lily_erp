@@ -91,7 +91,7 @@ else
 
 function deleteCallback(evt)
 {
-    showLoader();
+    showModalLoader();
     document.getElementById('form-action').value = "delete_<?php echo $table; ?>";
     document.getElementById("record-form").submit();
 }
