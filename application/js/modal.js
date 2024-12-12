@@ -17,7 +17,7 @@ function showModalMessage(title, message)
     new bootstrap.Modal('#modal-message').show();
 }
 
-function showConfirm(title, message, callback)
+function showModalConfirm(title, message, callback)
 {
     document.getElementById('modal-confirm-title').innerHTML = title;
     document.getElementById('modal-confirm-body').innerHTML = message;

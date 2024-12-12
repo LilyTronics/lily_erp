@@ -22,13 +22,13 @@
 <div id="modal-confirm" class="modal" data-bs-backdrop="static">
 <div class="modal-dialog" style="top:200px">
 <div class="modal-content">
-<div class="modal-header p-2 text-bg-danger">
+<div class="modal-header p-2 theme-bg-light">
 <span id="modal-confirm-title" class="modal-title"></span>
 </div>
 <div id="modal-confirm-body" class="modal-body"></div>
 <div class="modal-footer p-2">
 <button type="button" class="{BUTTON}" data-bs-dismiss="modal">No</button>
-<button id="modal-confirm-btn-yes" type="button" class="{BUTTON_RED}" data-bs-dismiss="modal">Yes</button>
+<button id="modal-confirm-btn-yes" type="button" class="{BUTTON}" data-bs-dismiss="modal">Yes</button>
 </div>
 </div>
 </div>

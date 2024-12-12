@@ -116,7 +116,7 @@ function showBookingForm(id)
     transfer.clicked_id = id;
     if (document.getElementById('booking-form').checkVisibility() && hasData())
     {
-        showConfirm('Reconsile', 'Cancel current booking?', showForm)
+        showModalConfirm('Reconsile', 'Cancel current booking?', showForm)
     }
     else
     {
@@ -128,7 +128,7 @@ function cancelBooking()
 {
     if (hasData())
     {
-        showConfirm('Reconsile', 'Cancel current booking?', hideBookingForm);
+        showModalConfirm('Reconsile', 'Cancel current booking?', hideBookingForm);
     }
     else
     {

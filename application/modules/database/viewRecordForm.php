@@ -77,7 +77,7 @@ else
     if ($onDeleteUri != "" && $onFailureUri != "" && $record["id"] > 0)
     {
         // Add with type=button, so it does not submit the form
-        echo "<button class=\"{BUTTON_RED} m-2\" type=\"button\" onclick=\"showConfirm('Delete', 'Delete {$table}?', deleteCallback)\">Delete</button>\n";
+        echo "<button class=\"{BUTTON_RED} m-2\" type=\"button\" onclick=\"showModalConfirm('Delete', 'Delete {$table}?', deleteCallback)\">Delete</button>\n";
     }
     echo "</p>\n";
     echo "</form>\n";
