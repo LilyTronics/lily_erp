@@ -10,7 +10,7 @@ function showModalLoader()
     return loader;
 }
 
-function showMessage(title, message)
+function showModalMessage(title, message)
 {
     document.getElementById('modal-message-title').innerHTML = title;
     document.getElementById('modal-message-body').innerHTML = message;

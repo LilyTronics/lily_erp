@@ -37,15 +37,7 @@ function apiPost(data, dialog_title, callback, params=null, showLoader=true)
             }
         })
         .catch ((error) => {
-
-            if (showMessage)
-            {
-                showMessage(dialog_title, escapeHtml(error.message));
-            }
-            else
-            {
-                console.log(error);
-            }
+            showModalMessage(dialog_title, escapeHtml(error.message));
         })
         .then(() => {
             if (loader)
