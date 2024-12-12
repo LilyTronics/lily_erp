@@ -152,6 +152,7 @@ class ControllerApplication extends ControllerBase
         $view->addStyleSheet("fontawesome/css/brands.min.css");
         $view->addStyleSheet("fontawesome/css/solid.min.css");
         $view->addJavaScriptFile("bootstrap.bundle.js");
+        $view->addJavaScriptFile("modal.js");
         $view->addJavaScriptFile("api.js");
         DEBUG_LOG->writeMessage("Output view");
         return $view->output();
