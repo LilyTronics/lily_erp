@@ -160,7 +160,6 @@ function hideBookingForm()
     {
         elm.value = '';
     }
-    console.log('hide');
     document.getElementById('booking-form').style.display = 'none';
 }
 
