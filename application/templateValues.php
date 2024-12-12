@@ -12,7 +12,7 @@ $GLOBALS["TEMPLATE_VALUES"] = [
     "{BUTTON_SMALL_LIGHT}"  => "btn px-2 py-1 btn-light",
     "{INPUT}"               => "form-control",
     "{BTN_SHOW_LOADER}"     => "data-bs-toggle=\"modal\" data-bs-target=\"#modal-loader\"",
-    "{LNK_SHOW_LOADER}"     => "onclick=\"showLoader()\"",
+    "{LNK_SHOW_LOADER}"     => "onclick=\"showModalLoader()\"",
 
     // Icons
     "{ICON_CHECK}"          => "<i class=\"fa-solid fa-check\"></i>",
