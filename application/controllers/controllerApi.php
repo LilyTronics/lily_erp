@@ -80,6 +80,7 @@ class ControllerApi extends ControllerApplication
             case (str_starts_with($action, "list_")):
             case (str_starts_with($action, "add_")):
             case (str_starts_with($action, "update_")):
+            case (str_starts_with($action, "reconsile_")):
             case (str_starts_with($action, "delete_")):
                 if (str_starts_with($action, "delete_"))
                 {
@@ -139,6 +140,11 @@ class ControllerApi extends ControllerApplication
             case "update":
                 $log->writeMessage("Execute update record");
                 $result = $table->modifyRecord($record, $result);
+                break;
+
+            case "reconsile":
+                $log->writeMessage("Execute reconsile");
+                $result = $table->reconsile($record);
                 break;
 
             case "delete":

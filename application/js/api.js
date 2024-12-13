@@ -5,10 +5,10 @@
 
 function apiPost(data, dialog_title, callback, params=null, showLoader=true)
 {
-    let loader = new bootstrap.Modal('#modal-loader')
+    let loader = null;
     if (showLoader)
     {
-        loader.show();
+        loader = showModalLoader();
     }
 
     let request = new Request(WEB_ROOT + 'api', {
@@ -37,18 +37,10 @@ function apiPost(data, dialog_title, callback, params=null, showLoader=true)
             }
         })
         .catch ((error) => {
-
-            if (showMessage)
-            {
-                showMessage(dialog_title, escapeHtml(error.message));
-            }
-            else
-            {
-                console.log(error);
-            }
+            showModalMessage(dialog_title, escapeHtml(error.message));
         })
         .then(() => {
-            if (showLoader)
+            if (loader)
             {
                 loader.hide();
             }

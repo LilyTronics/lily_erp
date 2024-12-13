@@ -14,7 +14,7 @@ Have ideas, questions or anything you like to share? Go to our [discussions page
 Planned releases:
 * March 2025: First workable release
 
-## Braches
+## Branches
 All on going development (unstable and untested) is in the *development* branch.
 
 All releases (stable and tested) is in the *release* branch.

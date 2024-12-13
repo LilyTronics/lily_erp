@@ -40,7 +40,7 @@ class ViewApplication extends HtmlPageView
         if (!$result)
         {
             $message = htmlspecialchars($message, ENT_QUOTES);
-            $output = "<script>showMessage('$title', '$message');</script>\n";
+            $output = "<script>showModalMessage('$title', '$message');</script>\n";
         }
         return $output;
     }

@@ -27,6 +27,8 @@ class ModelColorTheme
         $output .= ".theme-bg                                     {color:#fff!important;background-color:{$color}!important}\n";
         $output .= ".theme-bg-light                               {color:#fff!important;background-color:{$result["theme_bg_light"]}!important}\n";
         $output .= "\n";
+        $output .= ".theme-border-light                           {border-color:{$result["theme_bg_light"]}!important}\n";
+        $output .= "\n";
         $output .= ".theme-btn                                    {color:#fff!important;background-color:{$color}!important}\n";
         $output .= ".theme-btn:hover                              {color:#fff!important;background-color:{$result["theme_btn_hover"]}!important}\n";
         $output .= "\n";
