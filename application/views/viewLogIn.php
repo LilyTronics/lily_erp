@@ -1,7 +1,7 @@
 <div class="mx-auto log-in-form">
 <h3>Log in</h3>
 <form action="<?php echo WEB_ROOT; ?>api" method="post">
-<input type="hidden" name="on_success" value="" />
+<input type="hidden" name="on_success" value="<?php echo $this->getData("redirect", ""); ?>" />
 <input type="hidden" name="on_failure" value="log-in" />
 <input type="hidden" name="title" value="Log in" />
 <p>Email address:</p>

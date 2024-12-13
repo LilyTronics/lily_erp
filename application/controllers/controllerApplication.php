@@ -45,8 +45,13 @@ class ControllerApplication extends ControllerBase
         // Check session, only for level 2 or higher
         if (!$isSessionValid and $level >= 2)
         {
-            DEBUG_LOG->writeMessage("Redirect to: log-in");
-            $this->gotoLocation("log-in");
+            DEBUG_LOG->writeMessage("Redirect to: log-in from " . REQUEST_URI);
+            $requestUri = trim(REQUEST_URI, "/");
+            if ($requestUri != "")
+            {
+                $requestUri = "?redirect={$requestUri}";
+            }
+            $this->gotoLocation("log-in{$requestUri}");
             exit();
         }
 
@@ -74,7 +79,8 @@ class ControllerApplication extends ControllerBase
     protected function showLogIn($parameters)
     {
         $pageData = [
-            "sub_title" => "Log in"
+            "sub_title" => "Log in",
+            "redirect" => (isset($parameters["redirect"]) ? $parameters["redirect"] : "")
         ];
         return $this->showPage("viewLogIn", $pageData);
     }
