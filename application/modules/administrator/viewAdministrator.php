@@ -24,6 +24,7 @@ data unusable. Only change something if you know what you are doing.</p>
 <td>The database version cannot be changed.</td></tr>
 <tr><td>Landing page</td><td><select name="database_setting" id="landing_page" class="{INPUT}">
 <option <?php echo (getSetting($settings, "landing_page") == "dashboard" ? "selected" : ""); ?>>dashboard</option>
+<option <?php echo (getSetting($settings, "landing_page") == "web" ? "selected" : ""); ?>>web</option>
 </select></td>
 <td>The default landing page when navigating to the root of the web site.</td></tr>
 </table>
