@@ -55,6 +55,10 @@ class TestWebAccess(TestSuiteBase):
         if file_path.startswith("user-manual/") and file_path.endswith(".png"):
             expected_code = 200
 
+        # Static web page
+        if file_path.startswith("web/") and file_path.endswith(".html"):
+            expected_code = 200
+
         self.log.debug(f"Check access for file: {file_path}")
         r = self.http_request.do_get(file_path)
         self.log.debug(f"Request response code: {r.status_code}")
