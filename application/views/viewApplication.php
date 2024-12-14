@@ -34,12 +34,13 @@ class ViewApplication extends HtmlPageView
 
     private function insertShowModal($pageData) {
         $output = "";
-        $result = isset($pageData["result"]) ? $pageData["result"] : true;
-        $message = isset($pageData["message"]) ? $pageData["message"] : "Server error, try again later";
+        $result = isset($pageData["result"]) ? $pageData["result"] : null;
+        $message = isset($pageData["message"]) ? $pageData["message"] : "";
         $title = isset($pageData["title"]) ? $pageData["title"] : "Server message";
-        if (!$result)
+        if ($result === false or ($result === true && $message != ""))
         {
             $message = htmlspecialchars($message, ENT_QUOTES);
+            $message = str_replace("\n", "<br />", $message);
             $output = "<script>showModalMessage('$title', '$message');</script>\n";
         }
         return $output;
