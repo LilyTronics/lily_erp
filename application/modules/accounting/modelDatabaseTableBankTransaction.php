@@ -21,6 +21,8 @@ class ModelDatabaseTableBankTransaction extends ModelDatabaseTableBase {
             $this->inputs[$field["name"]] = [];
         }
 
+        $this->defaultOrder = "date DESC";
+
         parent::__construct(true);
     }
 
@@ -28,15 +30,14 @@ class ModelDatabaseTableBankTransaction extends ModelDatabaseTableBase {
     {
         $result = ["result" => false, "message" => "Unable to reconsile transaction."];
         // Check transaction record
-        $result["result"] = isset($record["id"]);
-        if (!$result["result"])
+        $id = (isset($record["id"]) ? $record["id"] : "");
+        if ($id == "")
         {
             $result["message"] = "The id field is required.";
             return $result;
         }
         $transaction = $this->getRecordById($record["id"]);
-        $result["result"] = isset($transaction["id"]);
-        if (!$result["result"])
+        if (!isset($transaction["id"]))
         {
             $result["message"] = "The bank transaction is not found.";
             return $result;
@@ -47,13 +48,12 @@ class ModelDatabaseTableBankTransaction extends ModelDatabaseTableBase {
             return $result;
         }
         // Check booking lines
-        $result["result"] = isset($record["lines"]);
-        if (!$result["result"])
+        $lines = (isset($record["lines"]) ? $record["lines"] : []);
+        if (count($lines) == 0)
         {
             $result["message"] = "The lines field is required.";
             return $result;
         }
-        $result["result"] = false;
         $journalEntries = [];
         $totalDebit = 0;
         $totalCredit = 0;
@@ -109,7 +109,8 @@ class ModelDatabaseTableBankTransaction extends ModelDatabaseTableBase {
                 "id" => 0,
                 "date" => $transaction["date"],
                 "account_id" => $account,
-                "description" => "bank:{$transaction["reference"]}"
+                "description" => "{$transaction["description"]}",
+                "linked_item" => "{$this->tableName}:{$transaction["id"]}"
             ];
             if ($debit != 0)
             {
