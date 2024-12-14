@@ -76,6 +76,10 @@ class ControllerApi extends ControllerApplication
                 $result = ModelBank::processUpload($result);
                 break;
 
+            case ($action == "get_bank_booking_prediction"):
+                $result = ModelBank::getBookingPrediction($record);
+                break;
+
             case (str_starts_with($action, "get_")):
             case (str_starts_with($action, "list_")):
             case (str_starts_with($action, "add_")):

@@ -177,6 +177,7 @@ function processResponse(response)
 
 function showForm()
 {
+    clearForm();
     clearBorders();
     let elm = document.getElementById('li-' + transfer.clicked_id);
     elm.classList.add('theme-border-light');
@@ -186,9 +187,53 @@ function showForm()
     details += document.getElementById('description-' + transfer.clicked_id).textContent + ' : ';
     details += document.getElementById('amount-' + transfer.clicked_id).textContent;
     document.getElementById('booking-details').textContent = details;
+    let data = {};
+    data.action = "get_bank_booking_prediction";
+    data.record = {};
+    data.record.id = transfer.clicked_id;
+    apiPost(data, "Get booking prediction", processBookingPrediction);
 }
 
-function hideBookingForm()
+function processBookingPrediction(response)
+{
+    if (response.result && response.records.length > 0)
+    {
+        let n_lines = response.records.length;
+        while (n_lines > 2)
+        {
+            addRow();
+            n_lines--;
+        }
+        let amount = Math.abs(Number(document.getElementById('amount-' + transfer.clicked_id).textContent));
+        for (let i = 0; i < response.records.length; i++)
+        {
+            let elm = document.getElementById('line' + i + '-account');
+            if (elm)
+            {
+                elm.value = response.records[i].account_id;
+            }
+            elm = document.getElementById('line' + i + '-debit');
+            if (elm)
+            {
+                if (response.records[i].debit != null)
+                {
+                    elm.value = (response.records[i].debit * amount).toFixed(2);
+                }
+            }
+            elm = document.getElementById('line' + i + '-credit');
+            if (elm)
+            {
+                if (response.records[i].credit != null)
+                {
+                    elm.value = (response.records[i].credit * amount).toFixed(2);
+                }
+            }
+        }
+        calculateTotals();
+    }
+}
+
+function clearForm()
 {
     let booking_table = document.getElementById('booking-lines');
     while (booking_table.rows.length > 4)
@@ -199,6 +244,11 @@ function hideBookingForm()
     {
         elm.value = '';
     }
+}
+
+function hideBookingForm()
+{
+    clearForm();
     document.getElementById('booking-form').style.display = 'none';
 }
 
