@@ -30,3 +30,7 @@ a.no-link-color:link    {color: inherit !important}
 a.no-link-color:visited {color: inherit !important}
 a.no-link-color:hover   {color: inherit !important}
 a.no-link-color:active  {color: inherit !important}
+
+
+/* Additions to the bootstrap classes */
+.modal-dialog           {top: 200px}
