@@ -35,6 +35,7 @@ function apiPost(data, dialog_title, callback, params=null, showLoader=true)
             throw error;
         })
         .then ((response) => {
+            bodyText = "";
             if (!response.result)
             {
                 throw new Error(response.message);
