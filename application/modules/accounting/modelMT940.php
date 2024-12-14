@@ -112,7 +112,7 @@ class ModelMT940
                 {
                     $transaction["transaction_type"] = $parts[$j + 1];
                 }
-                if ($parts[$j] == "IBAN")
+                if ($parts[$j] == "IBAN" or $parts[$j] == "BBAN")
                 {
                     $transaction["counter_account"] = $parts[$j + 1];
                 }
