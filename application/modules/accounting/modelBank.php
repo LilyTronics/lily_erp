@@ -20,20 +20,21 @@ class ModelBank
             $result["message"] = "Failed to read the file.";
             return $result;
         }
-        if (!self::processUploadData($content))
-        {
-            $result["message"] = "Error in the uploaded file.";
-            return $result;
-
-        }
-        $result["result"] = true;
-        $result["message"] = "";
-        return $result;
+        return self::processUploadData($content);
     }
 
     public static function processUploadData($data) {
+        $result = ["result" => false, "message" => "Could not process the transactions."];
         $transactions = ModelMT940::parseData($data);
+        if (count($transactions) == 0)
+        {
+            $result["message"] = "No transactions found in the file.";
+            return $result;
+        }
         $bank = new ModelDatabaseTableBankTransaction();
+        $countImported = 0;
+        $countTotal = count($transactions);
+        $notImported = "";
         foreach ($transactions as $transaction)
         {
             // Check if transaction already exists
@@ -43,11 +44,24 @@ class ModelBank
                 $transaction["state"] = "open";
                 if (!$bank->insertRecord($transaction))
                 {
-                    return false;
+                    $result["message"] = "Error importing transaction with reference: {$transaction["reference"]} ";
+                    $result["message"] .= $bank->getError() . ".";
+                    return $result;
                 }
+                $countImported++;
+            }
+            else
+            {
+                $notImported .= "{$transaction["date"]} - {$transaction["description"]}\n";
             }
         }
-        return true;
+        $result["result"] = true;
+        $result["message"] = "{$countImported} of {$countTotal} transactions were imported.";
+        if ($notImported != "")
+        {
+            $result["message"] .= " The following transactions already exist:\n" . $notImported;
+        }
+        return $result;
     }
 
 }
