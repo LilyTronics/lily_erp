@@ -1,6 +1,6 @@
 <!-- Modal loader -->
 <div id="modal-loader" class="modal" data-bs-backdrop="static">
-<div class="modal-dialog">
+<div class="modal-dialog" style="top:200px">
 <span class="loader"></span>
 </div>
 </div>
