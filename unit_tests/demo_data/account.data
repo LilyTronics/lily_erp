@@ -1,18 +1,65 @@
 // Demo data for the account table
-number  name                    debit_credit    category
+number        name                                debit_credit    category
 
-1000    Assets                  D               assets
+1000          Assets                              D               assets
 
-2000    Liabilities             C               liabilities
+  1100        Cash and bank                       D               assets
+    1110      Bank                                D               assets
 
-3000    Equity                  C               equity
+  1200        Receivables                         D               assets
+    1210      Account receivables                 D               assets
+      1211    Account receivables goods           D               assets
+      1212    Account receivables services        D               assets
+    1250      Reclaimable VAT                     D               assets
+      1251    Reclaimable VAT low                 D               assets
+      1252    Reclaimable VAT high                D               assets
+    1260      Payed and received VAT              D               assets
 
-4000    Revenues                C               income
+  1400        Inventories                         D               assets
+    1410      Inventory components                D               assets
+    1440      Inventory semi finished products    D               assets
+    1470      Inventory end products              D               assets
+    1490      Inventory OEM products              D               assets
 
-5000    Cost of goods sold      D               expenses
 
-6000    Expenses                D               expenses
+2000          Liabilities                         C               liabilities
 
-7000    Non-operating income    C               income
+  2100        Payables                            C               liabilities
+    2110      Account payables                    C               liabilities
+     2111     Account payables goods              C               liabilities
+     2112     Account payables services           C               liabilities
 
-8000    Non-operating expenses  D               expenses
+    2150      VAT to be paid                      C               liabilities
+      2151    VAT to be paid low                  C               liabilities
+      2152    VAT to be paid high                 C               liabilities
+
+3000          Equity                              C               equity
+
+  3100        Owners equity                       C               equity
+    3110      Private equity                      C               equity
+
+
+4000          Revenues                            C               income
+
+
+5000          Cost of goods sold                  D               expenses
+
+
+6000          Expenses                            D               expenses
+
+  6100        General expenses                    D               expenses
+    6110      Financial expenses                  D               expenses
+      6111    Bank expenses                       D               expenses
+      6112    Accounting expenses                 D               expenses
+    6120      Telecom expenses                    D               expenses
+      6121    Internet                            D               expenses
+      6122    Phone                               D               expenses
+      6123    Web hosting                         D               expenses
+
+  6900        Development costs                   D               expenses
+    6910      Development tools                   D               expenses
+    6920      Development materials               D               expenses
+
+7000          Non-operating income                C               income
+
+8000          Non-operating expenses              D               expenses
