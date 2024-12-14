@@ -11,6 +11,7 @@ function apiPost(data, dialog_title, callback, params=null, showLoader=true)
         loader = showModalLoader();
     }
 
+    let bodyText = '';
     let request = new Request(WEB_ROOT + 'api', {
         method: 'POST',
         body: JSON.stringify(data),
@@ -19,12 +20,19 @@ function apiPost(data, dialog_title, callback, params=null, showLoader=true)
         .then ((response) => {
             if (response.status === 200)
             {
-                return response.json();
+                return response.text();
             }
             else
             {
                 throw new Error('invalid response status: ' + response.status);
             }
+        })
+        .then ((text) => {
+            bodyText = text;
+            return JSON.parse(bodyText);
+        })
+        .catch ((error) => {
+            throw error;
         })
         .then ((response) => {
             if (!response.result)
@@ -37,7 +45,7 @@ function apiPost(data, dialog_title, callback, params=null, showLoader=true)
             }
         })
         .catch ((error) => {
-            showModalMessage(dialog_title, escapeHtml(error.message));
+            showModalMessage(dialog_title, escapeHtml(error.message) + bodyText);
         })
         .then(() => {
             if (loader)
