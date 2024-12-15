@@ -8,15 +8,15 @@ class ModelDatabaseTableAccount extends ModelDatabaseTableBase {
     public function __construct() {
         $this->tableName = "account";
 
-        $this->fields[] = ["name" => "number",       "type" => "VARCHAR(200)", "required" => true];
-        $this->fields[] = ["name" => "name",         "type" => "VARCHAR(200)", "required" => true];
-        $this->fields[] = ["name" => "debit_credit", "type" => "VARCHAR(1)"  , "required" => true];
-        $this->fields[] = ["name" => "category",     "type" => "VARCHAR(200)", "required" => true];
+        $this->fields[] = $this->createField("number",       "VARCHAR(200)", true);
+        $this->fields[] = $this->createField("name",         "VARCHAR(200)", true);
+        $this->fields[] = $this->createField("debit_credit", "VARCHAR(1)"  , true);
+        $this->fields[] = $this->createField("category",     "VARCHAR(200)", true);
 
-        $this->inputs["number"]       = ["type" => "text", "width" => "small"];
-        $this->inputs["name"]         = ["type" => "text"];
-        $this->inputs["debit_credit"] = ["type" => "select", "data" => ["D", "C"]];
-        $this->inputs["category"]     = ["type" => "select", "data" => $this->categories];
+        $this->inputs["number"]       = $this->createInput("text", "small");
+        $this->inputs["name"]         = $this->createInput("text");
+        $this->inputs["debit_credit"] = $this->createInput("select", data:["D", "C"]);
+        $this->inputs["category"]     = $this->createInput("select", data:$this->categories);
 
         $this->defaultOrder = "number";
         $this->dataListFields = ["name", "number"];

@@ -30,23 +30,24 @@ class ModelDatabaseTableUser extends ModelDatabaseTableBase {
 
     public function __construct() {
         $this->tableName = "user";
-        $this->fields[] = [ "name" => "email",         "type" => "VARCHAR(200)", "required" => true  ];
-        $this->fields[] = [ "name" => "name",          "type" => "VARCHAR(200)", "required" => true  ];
-        $this->fields[] = [ "name" => "password",      "type" => "VARCHAR(200)", "required" => true  ];
-        $this->fields[] = [ "name" => "is_active",     "type" => "INT",          "required" => true  ];
-        $this->fields[] = [ "name" => "is_admin",      "type" => "INT",          "required" => false ];
-        $this->fields[] = [ "name" => "access_levels", "type" => "VARCHAR(200)", "required" => false ];
-        $this->fields[] = [ "name" => "last_log_in",   "type" => "INT",          "required" => false ];
-        $this->fields[] = [ "name" => "log_in_fail",   "type" => "INT",          "required" => false ];
 
-        $this->inputs["email"] = ["type" => "text"];
-        $this->inputs["name"] =  ["type" => "text"];
-        $this->inputs["password"] = ["type" => "password"];
-        $this->inputs["is_active"] = ["type" => "select", "data" => [0, 1] ];
-        $this->inputs["is_admin"] = ["type" => "select", "data" => [0, 1] ];
-        $this->inputs["access_levels"] = [];
-        $this->inputs["last_log_in"] = [];
-        $this->inputs["log_in_fail"] = [];
+        $this->fields[] = $this->createField("email",         "VARCHAR(200)", true );
+        $this->fields[] = $this->createField("name",          "VARCHAR(200)", true );
+        $this->fields[] = $this->createField("password",      "VARCHAR(200)", true );
+        $this->fields[] = $this->createField("is_active",     "INT",          true );
+        $this->fields[] = $this->createField("is_admin",      "INT",          false);
+        $this->fields[] = $this->createField("access_levels", "VARCHAR(200)", false);
+        $this->fields[] = $this->createField("last_log_in",   "INT",          false);
+        $this->fields[] = $this->createField("log_in_fail",   "INT",          false);
+
+        $this->inputs["email"]         = $this->createInput("text");
+        $this->inputs["name"]          = $this->createInput("text");
+        $this->inputs["password"]      = $this->createInput("password");
+        $this->inputs["is_active"]     = $this->createInput("select", data:[0, 1]);
+        $this->inputs["is_admin"]      = $this->createInput("select", data:[0, 1]);
+        $this->inputs["access_levels"] = $this->createInput("text");
+        $this->inputs["last_log_in"]   = [];
+        $this->inputs["log_in_fail"]   = [];
 
         parent::__construct(true);
     }

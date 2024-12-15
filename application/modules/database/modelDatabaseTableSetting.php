@@ -7,11 +7,11 @@ class ModelDatabaseTableSetting extends ModelDatabaseTableBase
     {
         $this->tableName = "setting";
 
-        $this->fields[] = [ "name" => "setting_name",  "type" => "VARCHAR(200)", "required" => true ];
-        $this->fields[] = [ "name" => "setting_value", "type" => "VARCHAR(200)", "required" => true ];
+        $this->fields[] = $this->createField("setting_name",  "VARCHAR(200)", true);
+        $this->fields[] = $this->createField("setting_value", "VARCHAR(200)", true);
 
-        $this->inputs["setting_name"] = [];
-        $this->inputs["setting_value"] = ["type" => "text"];
+        $this->inputs["setting_name"]  = [];
+        $this->inputs["setting_value"] = $this->createInput("text");
 
         $defaultRecords = [
             [ "setting_name" => "database_version", "setting_value" => DATABASE_VERSION     ],

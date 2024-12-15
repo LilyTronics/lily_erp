@@ -5,21 +5,27 @@ class ModelDatabaseTableBankTransaction extends ModelDatabaseTableBase {
     public function __construct() {
         $this->tableName = "bank_transaction";
 
-        $this->fields[] = ["name" => "reference",        "type" => "VARCHAR(200)", "required" => true];
-        $this->fields[] = ["name" => "own_account",      "type" => "VARCHAR(200)", "required" => true];
-        $this->fields[] = ["name" => "date",             "type" => "DATE",         "required" => true];
-        $this->fields[] = ["name" => "debit_credit",     "type" => "VARCHAR(1)",   "required" => true];
-        $this->fields[] = ["name" => "amount",           "type" => TYPE_DECIMAL,   "required" => true];
-        $this->fields[] = ["name" => "transaction_type", "type" => "VARCHAR(200)", "required" => true];
-        $this->fields[] = ["name" => "counter_account",  "type" => "VARCHAR(200)", "required" => true];
-        $this->fields[] = ["name" => "counter_name",     "type" => "VARCHAR(200)", "required" => true];
-        $this->fields[] = ["name" => "description",      "type" => "VARCHAR(200)", "required" => true];
-        $this->fields[] = ["name" => "state",            "type" => "VARCHAR(200)", "required" => true];
+        $this->fields[] = $this->createField("reference",        "VARCHAR(200)", true);
+        $this->fields[] = $this->createField("own_account",      "VARCHAR(200)", true);
+        $this->fields[] = $this->createField("date",             "DATE",         true);
+        $this->fields[] = $this->createField("debit_credit",     "VARCHAR(1)",   true);
+        $this->fields[] = $this->createField("amount",           TYPE_DECIMAL,   true);
+        $this->fields[] = $this->createField("transaction_type", "VARCHAR(200)", true);
+        $this->fields[] = $this->createField("counter_account",  "VARCHAR(200)", true);
+        $this->fields[] = $this->createField("counter_name",     "VARCHAR(200)", true);
+        $this->fields[] = $this->createField("description",      "VARCHAR(200)", true);
+        $this->fields[] = $this->createField("state",            "VARCHAR(200)", true);
 
-        foreach ($this->fields as $field)
-        {
-            $this->inputs[$field["name"]] = [];
-        }
+        $this->inputs["reference"]        = $this->createInput("text");
+        $this->inputs["own_account"]      = $this->createInput("text");
+        $this->inputs["date"]             = $this->createInput("date");
+        $this->inputs["debit_credit"]     = $this->createInput("select", data:["D", "C"]);
+        $this->inputs["amount"]           = $this->createInput("text", "small");
+        $this->inputs["transaction_type"] = $this->createInput("text");
+        $this->inputs["counter_account"]  = $this->createInput("text");
+        $this->inputs["counter_name"]     = $this->createInput("text");
+        $this->inputs["description"]      = $this->createInput("text");
+        $this->inputs["state"]            = $this->createInput("select", data:["open", "closed"]);
 
         $this->defaultOrder = "date DESC";
 

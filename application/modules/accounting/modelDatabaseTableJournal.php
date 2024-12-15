@@ -5,19 +5,19 @@ class ModelDatabaseTableJournal extends ModelDatabaseTableBase {
     public function __construct() {
         $this->tableName = "journal";
 
-        $this->fields[] = ["name" => "date",        "type" => "DATE",         "required" => true];
-        $this->fields[] = ["name" => "account_id",  "type" => "INT",          "required" => true];
-        $this->fields[] = ["name" => "description", "type" => "VARCHAR(200)", "required" => true];
-        $this->fields[] = ["name" => "debit",       "type" => TYPE_DECIMAL,   "required" => false];
-        $this->fields[] = ["name" => "credit",      "type" => TYPE_DECIMAL,   "required" => false];
-        $this->fields[] = ["name" => "linked_item", "type" => "VARCHAR(200)", "required" => false];
+        $this->fields[] = $this->createField("date",        "DATE",         true);
+        $this->fields[] = $this->createField("account_id",  "INT",          true);
+        $this->fields[] = $this->createField("description", "VARCHAR(200)", true);
+        $this->fields[] = $this->createField("debit",       TYPE_DECIMAL,   false);
+        $this->fields[] = $this->createField("credit",      TYPE_DECIMAL,   false);
+        $this->fields[] = $this->createField("linked_item", "VARCHAR(200)", false);
 
-        $this->inputs["date"]        = ["type" => "date"];
-        $this->inputs["account_id"]  = ["type" => "list", "data" => "account"];
-        $this->inputs["description"] = ["type" => "text", "width" => "large"];
-        $this->inputs["debit"]       = ["type" => "text", "width" => "small"];
-        $this->inputs["credit"]      = ["type" => "text", "width" => "small"];
-        $this->inputs["linked_item"] = ["type" => "text"];
+        $this->inputs["date"]        = $this->createInput("date");
+        $this->inputs["account_id"]  = $this->createInput("list", data:"account");
+        $this->inputs["description"] = $this->createInput("text", "large");
+        $this->inputs["debit"]       = $this->createInput("text", "small");
+        $this->inputs["credit"]      = $this->createInput("text", "small");
+        $this->inputs["linked_item"] = $this->createInput("text");
 
         $this->defaultOrder = "date DESC";
 
