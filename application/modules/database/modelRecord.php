@@ -27,9 +27,10 @@ class ModelRecord
         {
             if (!is_string($value))
             {
-                $value = number_format($value, 5);
+                $value = number_format($value, 6);
             }
-            $value = preg_replace("/(\.\d{2}[^0]*)(0*)$/", "$1", $value);
+            // Must be same regular expression as in helpers.js
+            $value = preg_replace("/(\.\d{1}\d+?(?=0))(0*)$/", "$1", $value);
         }
         return htmlentities($value);
     }
