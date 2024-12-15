@@ -34,8 +34,10 @@ class ControllerAccounting extends ControllerApplication
             "sub_title"      => "Bank transaction [{$id}]",
             "record"         => $table->getRecordById($id),
             "table"          => $table->tableName,
-            "on_delete_uri"  => "accounting/bank",
-            "on_failure_uri" => "accounting/bank/transaction/{$id}"
+            "inputs"         => $table->inputs,
+            "on_success_uri" => "accounting/bank/transaction/{$id}",
+            "on_failure_uri" => "accounting/bank/transaction/{$id}",
+            "on_delete_uri"  => "accounting/bank"
         ];
         return $this->showView("BankTransaction", $pageData);
     }
