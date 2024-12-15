@@ -13,6 +13,13 @@ define("DATABASE_VERSION",      "0.1");
 define("DEFAULT_LANDING_PAGE",  "dashboard");
 define("DEFAULT_COLOR",         "#0066aa");
 
+// So we use the same precision every where for the amounts of money
+// 18,6: max amount: 999 999 999 999.999 999 (up to 1 trillion)
+define("TYPE_DECIMAL", "DECIMAL(18,6)");
+// Decimal precision for calculations
+define("DECIMAL_PRECISION", 10);
+
+
 define("DEBUG_LOG",             new ModelSystemLogger("debug"));
 
 DEBUG_LOG->writeMessage("+----------------------------------------------------------------------+");

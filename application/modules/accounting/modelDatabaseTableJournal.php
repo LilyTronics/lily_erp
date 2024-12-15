@@ -5,12 +5,12 @@ class ModelDatabaseTableJournal extends ModelDatabaseTableBase {
     public function __construct() {
         $this->tableName = "journal";
 
-        $this->fields[] = ["name" => "date",        "type" => "DATE",             "required" => true];
-        $this->fields[] = ["name" => "account_id",  "type" => "INT",              "required" => true];
-        $this->fields[] = ["name" => "description", "type" => "VARCHAR(200)",     "required" => true];
-        $this->fields[] = ["name" => "debit",       "type" => self::TYPE_DECIMAL, "required" => false];
-        $this->fields[] = ["name" => "credit",      "type" => self::TYPE_DECIMAL, "required" => false];
-        $this->fields[] = ["name" => "linked_item", "type" => "VARCHAR(200)",     "required" => false];
+        $this->fields[] = ["name" => "date",        "type" => "DATE",         "required" => true];
+        $this->fields[] = ["name" => "account_id",  "type" => "INT",          "required" => true];
+        $this->fields[] = ["name" => "description", "type" => "VARCHAR(200)", "required" => true];
+        $this->fields[] = ["name" => "debit",       "type" => TYPE_DECIMAL,   "required" => false];
+        $this->fields[] = ["name" => "credit",      "type" => TYPE_DECIMAL,   "required" => false];
+        $this->fields[] = ["name" => "linked_item", "type" => "VARCHAR(200)", "required" => false];
 
         $this->inputs["date"]        = ["type" => "date"];
         $this->inputs["account_id"]  = ["type" => "list", "data" => "account"];

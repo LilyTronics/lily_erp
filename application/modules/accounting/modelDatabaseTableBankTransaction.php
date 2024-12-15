@@ -5,16 +5,16 @@ class ModelDatabaseTableBankTransaction extends ModelDatabaseTableBase {
     public function __construct() {
         $this->tableName = "bank_transaction";
 
-        $this->fields[] = ["name" => "reference",        "type" => "VARCHAR(200)",     "required" => true];
-        $this->fields[] = ["name" => "own_account",      "type" => "VARCHAR(200)",     "required" => true];
-        $this->fields[] = ["name" => "date",             "type" => "DATE",             "required" => true];
-        $this->fields[] = ["name" => "debit_credit",     "type" => "VARCHAR(1)",       "required" => true];
-        $this->fields[] = ["name" => "amount",           "type" => self::TYPE_DECIMAL, "required" => true];
-        $this->fields[] = ["name" => "transaction_type", "type" => "VARCHAR(200)",     "required" => true];
-        $this->fields[] = ["name" => "counter_account",  "type" => "VARCHAR(200)",     "required" => true];
-        $this->fields[] = ["name" => "counter_name",     "type" => "VARCHAR(200)",     "required" => true];
-        $this->fields[] = ["name" => "description",      "type" => "VARCHAR(200)",     "required" => true];
-        $this->fields[] = ["name" => "state",            "type" => "VARCHAR(200)",     "required" => true];
+        $this->fields[] = ["name" => "reference",        "type" => "VARCHAR(200)", "required" => true];
+        $this->fields[] = ["name" => "own_account",      "type" => "VARCHAR(200)", "required" => true];
+        $this->fields[] = ["name" => "date",             "type" => "DATE",         "required" => true];
+        $this->fields[] = ["name" => "debit_credit",     "type" => "VARCHAR(1)",   "required" => true];
+        $this->fields[] = ["name" => "amount",           "type" => TYPE_DECIMAL,   "required" => true];
+        $this->fields[] = ["name" => "transaction_type", "type" => "VARCHAR(200)", "required" => true];
+        $this->fields[] = ["name" => "counter_account",  "type" => "VARCHAR(200)", "required" => true];
+        $this->fields[] = ["name" => "counter_name",     "type" => "VARCHAR(200)", "required" => true];
+        $this->fields[] = ["name" => "description",      "type" => "VARCHAR(200)", "required" => true];
+        $this->fields[] = ["name" => "state",            "type" => "VARCHAR(200)", "required" => true];
 
         foreach ($this->fields as $field)
         {
@@ -122,12 +122,12 @@ class ModelDatabaseTableBankTransaction extends ModelDatabaseTableBase {
             }
             $journalEntries[] = $journalEntry;
         }
-        if ($totalCredit != $totalDebit)
+        if (round($totalCredit, DECIMAL_PRECISION) != round($totalDebit, DECIMAL_PRECISION))
         {
             $result["message"] = "The total debit must be equal to the total credit.";
             return $result;
         }
-        if ($totalDebit != $transaction["amount"])
+        if (round($totalDebit, DECIMAL_PRECISION) != round($transaction["amount"], DECIMAL_PRECISION))
         {
             $result["message"] = "The total amount of the transaction must be booked.";
             return $result;
