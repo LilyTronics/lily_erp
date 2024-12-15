@@ -217,7 +217,7 @@ function processBookingPrediction(response)
             {
                 if (response.records[i].debit != null)
                 {
-                    elm.value = (response.records[i].debit * amount).toFixed(2);
+                    elm.value = formatAmount(response.records[i].debit * amount, 2);
                 }
             }
             elm = document.getElementById('line' + i + '-credit');
@@ -225,7 +225,7 @@ function processBookingPrediction(response)
             {
                 if (response.records[i].credit != null)
                 {
-                    elm.value = (response.records[i].credit * amount).toFixed(2);
+                    elm.value = formatAmount(response.records[i].credit * amount, 2)
                 }
             }
         }
@@ -329,8 +329,8 @@ function calculateTotals()
             }
         }
     }
-    document.getElementById('total-debit').value = totalDebit;
-    document.getElementById('total-credit').value = totalCredit;
+    document.getElementById('total-debit').value = formatAmount(totalDebit);
+    document.getElementById('total-credit').value = formatAmount(totalCredit);
 }
 
 </script>
