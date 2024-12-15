@@ -57,16 +57,6 @@ function apiPost(data, dialog_title, callback, params=null, showLoader=true)
 }
 
 
-function escapeHtml(input)
-{
-    return input
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}
-
 function populateDataList(listName)
 {
     let list_id = 'list_' + listName;
