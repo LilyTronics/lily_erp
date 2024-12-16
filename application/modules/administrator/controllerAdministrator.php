@@ -76,6 +76,17 @@ class ControllerAdministrator extends ControllerApplication
             $pageData["sub_title"]     = "Record [{$id}] from {$table}";
             $pageData["record"]        = ModelAdministrator::getRecord($table, $id);
             $pageData["on_delete_uri"] = "/administrator/database-table/{$table}";
+            if ($table == "user")
+            {
+                $pageData["inputs"]["password"] = [];
+                $activeUser = ModelApplicationSession::getData("user", null);
+                if ($activeUser["id"] == $pageData["record"]["id"])
+                {
+                    $pageData["inputs"]["is_active"] = [];
+                    $pageData["inputs"]["is_admin"] = [];
+                    $pageData["inputs"]["access_levels"] = [];
+                }
+            }
         }
         return $this->showView("Database", $pageData);
     }
