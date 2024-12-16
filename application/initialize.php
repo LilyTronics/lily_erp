@@ -24,9 +24,12 @@ define("DECIMAL_PRECISION", 10);
 $_AUTOLOADER_SEARCH_PATHS[] = APP_MODULES_PATH;
 
 // Set the time zone
-$setting = new ModelDatabaseTableSetting();
-$settings = $setting->getSettings();
-date_default_timezone_set(isset($settings["time_zone"]) ? $settings["time_zone"] : DEFAULT_TIME_ZONE);
+if (ModelSetup::checkConfiguration(true))
+{
+    $setting = new ModelDatabaseTableSetting();
+    $settings = $setting->getSettings();
+    date_default_timezone_set(isset($settings["time_zone"]) ? $settings["time_zone"] : DEFAULT_TIME_ZONE);
+}
 
 // Start debug log
 define("DEBUG_LOG", new ModelSystemLogger("debug"));
