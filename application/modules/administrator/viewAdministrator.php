@@ -22,6 +22,22 @@ data unusable. Only change something if you know what you are doing.</p>
 <table class="table table-borderless">
 <tr><td>Database version</td><td><?php echo getSetting($settings, "database_version"); ?></td>
 <td>The database version cannot be changed.</td></tr>
+<tr><td>Time zone</td><td><select name="database_setting" id="time_zone" class="{INPUT}">
+<?php
+
+foreach (DateTimeZone::listIdentifiers() as $time_zone)
+{
+    echo "<option";
+    if (getSetting($settings, "time_zone") == $time_zone)
+    {
+        echo " selected";
+    }
+    echo ">{$time_zone}</option>\n";
+}
+
+?>
+</select></td>
+<td>The time zone used for all dates and times.</td></tr>
 <tr><td>Landing page</td><td><select name="database_setting" id="landing_page" class="{INPUT}">
 <option <?php echo (getSetting($settings, "landing_page") == "dashboard" ? "selected" : ""); ?>>dashboard</option>
 <option <?php echo (getSetting($settings, "landing_page") == "web" ? "selected" : ""); ?>>web</option>

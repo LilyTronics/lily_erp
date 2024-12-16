@@ -1,7 +1,5 @@
 <?php
 
-date_default_timezone_set("Europe/Amsterdam");
-
 // Define your domain name here to make SSL work properly
 define("DOMAIN", "erp.lilytronics.nl");
 

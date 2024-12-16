@@ -15,6 +15,7 @@ class ModelDatabaseTableSetting extends ModelDatabaseTableBase
 
         $defaultRecords = [
             [ "setting_name" => "database_version", "setting_value" => DATABASE_VERSION     ],
+            [ "setting_name" => "time_zone",        "setting_value" => DEFAULT_TIME_ZONE    ],
             [ "setting_name" => "landing_page",     "setting_value" => DEFAULT_LANDING_PAGE ],
             [ "setting_name" => "theme_color",      "setting_value" => DEFAULT_COLOR        ]
         ];
