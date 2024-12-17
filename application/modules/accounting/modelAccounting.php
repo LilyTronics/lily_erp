@@ -80,20 +80,42 @@ class ModelAccounting
         $records = $table->getRecords("state = 'open'");
         if (count($records) == 0)
         {
-            $messages[] = [
-                "icon"    => "{ICON_CHECK_OK}",
-                "message" => "No open bank transactions",
-                "link"    => "accounting/bank"
-            ];
+            $icon = "{ICON_CHECK_OK}";
+            $message = "No open bank transactions";
         }
         else
         {
-            $messages[] = [
-                "icon"    => "{ICON_EXCLAMATION}",
-                "message" => count($records) . " bank transactions require attention",
-                "link"    => "accounting/bank"
-            ];
+            $icon = "{ICON_EXCLAMATION}";
+            $message = count($records) . " bank transactions require attention";
         }
+        $messages[] = [
+            "icon"    => $icon,
+            "message" => $message,
+            "link"    => "accounting/bank"
+        ];
+        // Check balance
+        $assets = $this->calculateTotalForAccounts("category = 'assets'");
+        $liabilities = $this->calculateTotalForAccounts("category = 'liabilities'");
+        $equity = $this->calculateTotalForAccounts("category = 'equity'");
+        $income = $this->calculateTotalForAccounts("category = 'income'");
+        $costs = $this->calculateTotalForAccounts("category = 'expenses'");
+        // Balance must be 0
+        $balance = round($assets - $liabilities - $equity - $income + $costs, DECIMAL_PRECISION);
+        if ($balance != 0)
+        {
+            $icon = "{ICON_EXCLAMATION}";
+            $message = "Your balance sheet needs attention";
+        }
+        else
+        {
+            $icon = "{ICON_CHECK_OK}";
+            $message = "Your balance sheet looks good";
+        }
+        $messages[] = [
+            "icon"    => $icon,
+            "message" => $message,
+            "link"    => "accounting"
+        ];
         return $messages;
     }
 
