@@ -6,7 +6,10 @@ class ControllerAccounting extends ControllerApplication
     protected function showAccounting($parameters)
     {
         $pageData =[
-            "sub_title" => "Accounting"
+            "sub_title"   => "Accounting",
+            "assets"      => ModelAccounting::getAccountsForBalance("assets"),
+            "liabilities" => ModelAccounting::getAccountsForBalance("liabilities"),
+            "equity"      => ModelAccounting::getAccountsForBalance("equity")
         ];
         return $this->showView("Accounting", $pageData);
     }

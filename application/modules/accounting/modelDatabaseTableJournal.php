@@ -90,8 +90,11 @@ class ModelDatabaseTableJournal extends ModelDatabaseTableBase {
         $account = new ModelDatabaseTableAccount();
         for ($i = 0; $i < count($records); $i++)
         {
-            $list = $account->listRecords($records[$i]["account_id"]);
-            $records[$i]["account_id"] = (isset($list[0]) ? $list[0] : $records[$i]["account_id"]);
+            if (isset($records[$i]["account_id"]))
+            {
+                $list = $account->listRecords($records[$i]["account_id"]);
+                $records[$i]["account_id"] = (isset($list[0]) ? $list[0] : $records[$i]["account_id"]);
+            }
         }
         return $records;
     }

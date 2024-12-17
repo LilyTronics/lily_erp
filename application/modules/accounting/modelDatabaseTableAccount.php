@@ -63,4 +63,18 @@ class ModelDatabaseTableAccount extends ModelDatabaseTableBase {
         return $result;
     }
 
+    public function getMainAccountsFor($category)
+    {
+        $maxLength = $this->getMaxNumberLength();
+        $include = str_pad("__", $maxLength, "0", STR_PAD_RIGHT);
+        $exclude = str_pad("_",  $maxLength, "0", STR_PAD_RIGHT);
+        $records = $this->getRecords("number LIKE '{$include}' AND number NOT LIKE '{$exclude}' AND category = '$category'");
+        return $records;
+    }
+
+    private function getMaxNumberLength()
+    {
+        $records = $this->getRecords(fields:["MAX(LENGTH(number)) as max_length"]);
+        return (isset($records[0]["max_length"]) ? $records[0]["max_length"] : 0);
+    }
 }
