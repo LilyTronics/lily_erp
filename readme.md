@@ -35,6 +35,19 @@ Documentation available on [Read the Docs](https://lily-erp.readthedocs.io/en/la
 ## Interaction
 Have ideas, questions or anything you like to share? Go to our [discussions page](https://github.com/LilyTronics/lily_erp/discussions).
 
+## Cloning
+The repository using a sub module in php_framework. To clone with sub module use:
+
+```
+git clone --recurse-submodules https://github.com/LilyTronics/lily_erp.git
+```
+
+In case you alread cloned the repository and want to clone the submodules use:
+
+```
+git submodule update --init --recursive
+```
+
 ## Branches
 All on going development (unstable and untested) is in the *development* branch.
 
