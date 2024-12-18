@@ -2,47 +2,41 @@
 Test the account table.
 """
 
-from unit_tests.lib.database import Database
-from unit_tests.lib.test_suite_base import TestSuiteBase
+from unit_tests.lib.test_table import TestTable
 
 
-class TestAccount(TestSuiteBase):
+class TestAccount(TestTable):
 
     table_name = "account"
-    table_fields = []
-
-    record_test_values = {
-        "number": ("", ),
-        "name": ("", ),
-        "debit_credit": ("", ),
-        "category": ("", )
+    record_test_data = {
+        "id": {
+            "is_required": True,
+            "add_test_value": 0
+        },
+        "number" : {
+            "is_required": True,
+            "add_test_value": "1000"
+        },
+        "name" : {
+            "is_required": True,
+            "add_test_value": "Assets"
+        },
+        "debit_credit": {
+            "is_required": True,
+            "add_test_value": "D"
+        },
+        "category" : {
+            "is_required": True,
+            "add_test_value": "assets"
+        }
     }
 
-    def test_get(self):
-        result = self.get_records()
-        self.fail_if(len(result["records"]) != 0,
-                     f"number of records {len(result["records"])} incorrect, expected 0")
 
     def test_table_fields(self):
-        self.table_fields = Database.get_table_columns(self.table_name)
-        self.fail_if("id" not in self.table_fields, "The ID field is missing")
-        for table_field in self.table_fields:
-            if table_field == "id":
-                continue
-            self.fail_if(table_field not in self.record_test_values,
-                         f"The field '{table_field}' should not be in the table")
-        for key in self.record_test_values:
-            self.fail_if(key not in self.table_fields, f"The field '{key}' is not in the table")
+        return super().test_table_fields()
 
-    # def test_empty_fields(self):
-    #     print(self.table_fields)
-    #     record_data = {}
-    #     response = self.add_record(record_data)
-    #     print(response)
-
-    # def test_get_again(self):
-    #     result = self.get_records()
-    #     print(result)
+    def test_add_record_missing_fields(self):
+        return super().test_add_record_missing_fields()
 
 
 if __name__ == "__main__":
