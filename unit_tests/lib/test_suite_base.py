@@ -14,31 +14,34 @@ class TestSuiteBase(TestSuite):
     http_request = None
     table_name = ""
 
+    # Setup override
     def setup(self, drop_user=False):
         self.http_request = HttpRequest()
         Database.clear_all(drop_user)
         if not drop_user:
             Database.create_default_user()
 
+    ##########
+    # Public #
+    ##########
+
     def get_web_page(self, uri=""):
         response = self.http_request.do_get(uri)
         self.fail_if(response.status_code != 200, f"Invalid response status code: {response.status_code}")
         return WebPage(response.text)
 
-    def get_records(self):
-        response = self.http_request.get_records(self.table_name)
-        self.fail_if(not response["result"], response["message"])
-        self.fail_if("records" not in response, "No records in the response")
-        return response
 
-    def add_record(self, record):
-        response = self.http_request.add_record(self.table_name, record)
-        self.fail_if(not response["result"], response["message"])
-        return response
+    #############################
+    # Test cases for this class #
+    #############################
 
     def test_http_request(self):
         response = self.http_request.do_get()
         self.fail_if(response.status_code != 200, f"Invalid response status code: {response.status_code}")
+
+    def test_get_web_page(self):
+        web_page = self.get_web_page()
+        print(web_page)
 
 
 if __name__ == "__main__":
