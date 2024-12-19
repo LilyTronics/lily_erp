@@ -21,7 +21,6 @@ def create_configuration():
             "admin_repeat_password": TestSettings.admin_password
         }
     }
-
     http = HttpRequest()
     return http.do_api_call(post_data)
 
