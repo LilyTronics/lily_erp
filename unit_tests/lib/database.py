@@ -52,10 +52,6 @@ class Database:
         cls._connection.commit()
 
     @classmethod
-    def get_records(cls, table_name):
-        return cls._execute_query(f"SELECT * FROM {table_name}")
-
-    @classmethod
     def get_table_columns(cls, table_name):
         return list(map(lambda x: x["Field"], cls._execute_query(f"SHOW COLUMNS FROM {table_name}")))
 
@@ -64,5 +60,4 @@ if __name__ == "__main__":
 
     Database.clear_all()
     Database.create_default_user()
-    print(Database.get_records("user"))
     print(Database.get_table_columns("user"))
