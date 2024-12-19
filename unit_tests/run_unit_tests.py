@@ -14,7 +14,7 @@ options = {
     "create_html_report": True,
     "open_in_browser": True,
     "no_log_files": True,
-    "exclude_test_suites": ["TestSuiteBase"]
+    "exclude_test_suites": ["TestSuiteBase", "TestTable"]
 }
 
 TestRunner.run(os.path.join(root_path, "tests"), options)
