@@ -14,3 +14,6 @@
 
 # Color theme is generated
 /application/styles/color-theme.css
+
+# Static web page folder, is filled with user pages
+/web/*
