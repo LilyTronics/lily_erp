@@ -27,7 +27,7 @@ $_AUTOLOADER_SEARCH_PATHS[] = APP_MODULES_PATH;
 if (ModelSetup::checkConfiguration(true))
 {
     $setting = new ModelDatabaseTableSetting();
-    $settings = $setting->getSettings();
+    $settings = $setting->getSettings("administrator");
     date_default_timezone_set(isset($settings["time_zone"]) ? $settings["time_zone"] : DEFAULT_TIME_ZONE);
 }
 

@@ -8,7 +8,7 @@ class ControllerAdministrator extends ControllerApplication
         $table = new ModelDatabaseTableSetting();
         $pageData = [
             "sub_title" => "Application settings",
-            "settings"  => $table->getSettings()
+            "settings"  => $table->getSettings("administrator")
         ];
         return $this->showView("Administrator", $pageData);
     }

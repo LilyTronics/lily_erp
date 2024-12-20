@@ -7,6 +7,7 @@ class ModelDatabaseTableSetting extends ModelDatabaseTableBase
     {
         $this->tableName = "setting";
 
+        $this->fields[] = $this->createField("module_name",   "VARCHAR(200)", true);
         $this->fields[] = $this->createField("setting_name",  "VARCHAR(200)", true);
         $this->fields[] = $this->createField("setting_value", "VARCHAR(200)", true);
 
@@ -14,19 +15,19 @@ class ModelDatabaseTableSetting extends ModelDatabaseTableBase
         $this->inputs["setting_value"] = $this->createInput("text");
 
         $defaultRecords = [
-            [ "setting_name" => "database_version", "setting_value" => DATABASE_VERSION     ],
-            [ "setting_name" => "time_zone",        "setting_value" => DEFAULT_TIME_ZONE    ],
-            [ "setting_name" => "landing_page",     "setting_value" => DEFAULT_LANDING_PAGE ],
-            [ "setting_name" => "theme_color",      "setting_value" => DEFAULT_COLOR        ]
+            [ "module_name" => "administrator", "setting_name" => "database_version", "setting_value" => DATABASE_VERSION     ],
+            [ "module_name" => "administrator", "setting_name" => "time_zone",        "setting_value" => DEFAULT_TIME_ZONE    ],
+            [ "module_name" => "administrator", "setting_name" => "landing_page",     "setting_value" => DEFAULT_LANDING_PAGE ],
+            [ "module_name" => "administrator", "setting_name" => "theme_color",      "setting_value" => DEFAULT_COLOR        ]
         ];
 
         parent::__construct(true, $defaultRecords);
     }
 
-    public function getSettings()
+    public function getSettings($moduleName)
     {
         $settings = [];
-        $records = $this->getRecords();
+        $records = $this->getRecords("module_name = '$moduleName'");
         foreach ($records as $record)
         {
             $settings[$record["setting_name"]] = $record["setting_value"];

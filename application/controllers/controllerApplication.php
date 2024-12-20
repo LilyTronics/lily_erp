@@ -67,7 +67,7 @@ class ControllerApplication extends ControllerBase
     protected function showLandingPage($parameters)
     {
         $table = new ModelDatabaseTableSetting();
-        $settings = $table->getSettings();
+        $settings = $table->getSettings("administrator");
         if (isset($settings["landing_page"])) {
             $this->gotoLocation($settings["landing_page"]);
         }

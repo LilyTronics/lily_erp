@@ -10,7 +10,7 @@ class ModelColorTheme
         if (ModelSetup::checkConfiguration(true))
         {
             $table = new ModelDatabaseTableSetting();
-            $settings = $table->getSettings();
+            $settings = $table->getSettings("administrator");
             $color = (isset($settings["theme_color"]) ? $settings["theme_color"] : $color);
         }
 
